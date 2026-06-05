@@ -142,7 +142,11 @@
     .how-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
     .phase { background: var(--navy2); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 32px; transition: border-color .3s, box-shadow .3s; position: relative; overflow: hidden; }
     .phase:hover { border-color: var(--border2); box-shadow: 0 8px 32px rgba(123,97,255,.12); }
-    .lab-phase { background: linear-gradient(135deg, rgba(123,97,255,.1), rgba(0,194,255,.055)); border-color: rgba(0,194,255,.22); }
+    .founder-lab { background: rgba(255,255,255,.025); border: 1px solid rgba(255,255,255,.07); border-radius: var(--r); padding: 20px 22px; position: relative; overflow: hidden; }
+    .founder-lab::before { content: ""; position: absolute; top: 18px; bottom: 18px; left: 0; width: 2px; background: rgba(123,97,255,.45); }
+    .founder-lab-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 10.5px; font-weight: 700; letter-spacing: .9px; text-transform: uppercase; color: var(--muted); background: rgba(123,97,255,.07); border: 1px solid rgba(123,97,255,.14); border-radius: 100px; padding: 4px 9px; margin-bottom: 10px; }
+    .founder-lab h3 { font-size: 15.5px; font-weight: 600; color: var(--white); margin-bottom: 5px; }
+    .founder-lab p { font-size: 13px; color: var(--muted); line-height: 1.6; }
     .phase::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--grad); }
     .phases { display: flex; flex-direction: column; gap: 20px; }
     .phase-num { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 12px; }
@@ -406,12 +410,6 @@
         <h2>Setup. Then <span class="g">Zeni runs it.</span></h2>
         <p class="sub" style="margin-bottom:28px">From idea to setup to a running business — without hiring anyone.</p>
         <div class="phases">
-          <div class="phase lab-phase">
-            <div class="phase-num">Optional — Founder Lab</div>
-            <h3>Not sure what to build yet?</h3>
-            <p>Start in Zeni Founder Lab. Zeni helps you shape the idea, pressure-test demand, compare models, and decide whether it is ready for setup.</p>
-            <div class="phase-tags"><span class="ptag">Shape the idea</span><span class="ptag">Test demand</span><span class="ptag">Compare models</span><span class="ptag">Decide before setup</span></div>
-          </div>
           <div class="phase">
             <div class="phase-num">Phase 1 — Setup</div>
             <h3>Zeni walks you through getting your business ready</h3>
@@ -423,6 +421,11 @@
             <h3>Your AI assistant runs your business daily</h3>
             <p>Once setup is done, Zeni keeps your business running through WhatsApp. It tracks your money, reminds you of what matters, answers your questions, and tells you what to do next — every single day, automatically.</p>
             <div class="phase-tags"><span class="ptag">WhatsApp — no new app</span><span class="ptag">Daily briefings</span><span class="ptag">Always on</span></div>
+          </div>
+          <div class="founder-lab">
+            <div class="founder-lab-badge">Optional — Founder Lab</div>
+            <h3>Not sure what to build yet?</h3>
+            <p>Start here before setup. Zeni helps you shape the idea, pressure-test demand, compare models, and decide whether it is ready for setup.</p>
           </div>
         </div>
       </div>
