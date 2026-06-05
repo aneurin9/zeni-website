@@ -25,7 +25,7 @@
       --ff:     "Inter", sans-serif;
       --r:      12px; --r-lg: 20px; --max: 1140px;
     }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; scroll-padding-top: 92px; }
     body { background: var(--navy); color: var(--white); font-family: var(--ff); font-size: 16px; line-height: 1.6; overflow-x: hidden; }
     body::before {
       content: ""; position: fixed; inset: 0; z-index: 0; pointer-events: none;
@@ -39,13 +39,19 @@
 
     /* NAV */
     nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; padding: 14px 0; backdrop-filter: blur(24px) saturate(1.5); background: rgba(10,15,44,.85); border-bottom: 1px solid var(--border); transition: border-color .3s; }
-    .nav-inner { max-width: var(--max); margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; }
+    .nav-inner { max-width: var(--max); margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; position: relative; }
     .logo { font-size: 22px; font-weight: 800; text-decoration: none; letter-spacing: -.4px; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
     .nav-links { display: flex; align-items: center; gap: 26px; list-style: none; }
     .nav-links a { color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 400; transition: color .2s; }
     .nav-links a:hover { color: var(--white); }
     .nav-btn { background: var(--grad) !important; color: #fff !important; font-weight: 600 !important; padding: 9px 20px; border-radius: 8px; font-size: 13.5px !important; box-shadow: 0 4px 18px rgba(123,97,255,.28); transition: opacity .2s, transform .2s !important; }
     .nav-btn:hover { opacity: .85; transform: translateY(-1px); }
+    .mobile-menu-btn { display: none; width: 42px; height: 42px; border: 1px solid var(--border2); border-radius: 10px; background: rgba(255,255,255,.04); color: var(--white); cursor: pointer; align-items: center; justify-content: center; flex-direction: column; gap: 5px; }
+    .mobile-menu-btn span { width: 18px; height: 2px; border-radius: 2px; background: var(--white); transition: transform .22s, opacity .22s; }
+    nav.open .mobile-menu-btn span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    nav.open .mobile-menu-btn span:nth-child(2) { opacity: 0; }
+    nav.open .mobile-menu-btn span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    section[id] { scroll-margin-top: 92px; }
 
     /* HERO */
     .hero { padding: 136px 0 72px; position: relative; overflow: hidden; }
@@ -136,6 +142,7 @@
     .how-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
     .phase { background: var(--navy2); border: 1px solid var(--border); border-radius: var(--r-lg); padding: 32px; transition: border-color .3s, box-shadow .3s; position: relative; overflow: hidden; }
     .phase:hover { border-color: var(--border2); box-shadow: 0 8px 32px rgba(123,97,255,.12); }
+    .lab-phase { background: linear-gradient(135deg, rgba(123,97,255,.1), rgba(0,194,255,.055)); border-color: rgba(0,194,255,.22); }
     .phase::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--grad); }
     .phases { display: flex; flex-direction: column; gap: 20px; }
     .phase-num { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 12px; }
@@ -260,19 +267,38 @@
 
     /* RESPONSIVE */
     @media (max-width: 900px) {
-      .hero-inner, .how-inner, .showcase-inner { grid-template-columns: 1fr; }
-      .phone-outer { display: none; }
+      html { scroll-padding-top: 82px; }
+      section[id] { scroll-margin-top: 82px; }
+      .hero { padding: 112px 0 60px; }
+      .hero-inner, .how-inner, .showcase-inner { grid-template-columns: 1fr; gap: 42px; }
+      .hero-sub { max-width: 100%; }
+      .phone-outer { display: flex; margin-top: 8px; }
+      .phone { width: min(300px, calc(100vw - 56px)); border-radius: 32px; }
+      .pbody { min-height: 380px; }
       .prob-grid { grid-template-columns: repeat(2,1fr); }
       .handles-grid { grid-template-columns: 1fr 1fr; }
       .feat-grid { grid-template-columns: repeat(2,1fr); }
       .price-grid { grid-template-columns: 1fr; }
       .core-pillars { grid-template-columns: 1fr; }
       .pro-items { grid-template-columns: 1fr; }
-      .big-phone { display: none; }
-      .nav-links { display: none; }
+      .big-phone { display: block; width: min(320px, calc(100vw - 56px)); border-radius: 32px; }
+      .big-phone .pbody { min-height: 430px; }
+      .mobile-menu-btn { display: flex; }
+      .nav-links { position: absolute; top: calc(100% + 12px); left: 24px; right: 24px; display: flex; flex-direction: column; align-items: stretch; gap: 2px; padding: 12px; border: 1px solid var(--border2); border-radius: 14px; background: rgba(10,15,44,.98); box-shadow: 0 20px 50px rgba(0,0,0,.35); opacity: 0; transform: translateY(-8px); pointer-events: none; max-height: 0; overflow: hidden; transition: opacity .22s, transform .22s, max-height .22s; }
+      nav.open .nav-links { opacity: 1; transform: none; pointer-events: auto; max-height: 420px; }
+      .nav-links li { width: 100%; }
+      .nav-links a { display: block; padding: 11px 12px; border-radius: 9px; }
+      .nav-links a:hover { background: rgba(255,255,255,.04); }
+      .nav-links .nav-btn { text-align: center; margin-top: 4px; }
     }
     @media (max-width: 580px) {
+      .wrap, .nav-inner { padding: 0 18px; }
       .prob-grid, .handles-grid, .feat-grid { grid-template-columns: 1fr; }
+      .core-card { padding: 34px 22px; }
+      .pro-header { padding: 22px; flex-direction: column; align-items: flex-start; }
+      .pro-body-inner { padding: 0 22px 28px; }
+      .phone { width: min(292px, calc(100vw - 36px)); }
+      .big-phone { width: min(300px, calc(100vw - 36px)); }
     }
   </style>
 </head>
@@ -288,6 +314,9 @@
       <li><a href="#faq">FAQ</a></li>
       <li><a href="https://ca.aneurinadvisory.com" class="nav-btn">Get started →</a></li>
     </ul>
+    <button class="mobile-menu-btn" id="mobile-menu-btn" type="button" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
 
@@ -339,10 +368,10 @@
       <p class="sub">Before you can make your first sale, there's a list of expensive, time-consuming barriers standing between you and the business you want to build.</p>
     </div>
     <div class="prob-grid fi" style="transition-delay:.1s">
-      <div class="prob-card"><div class="pi">⚖️</div><h4>Business Lawyer</h4><p>Registering your business, U.S. entity setup, contracts</p><div class="cost">$2,000 – $5,000+</div></div>
-      <div class="prob-card"><div class="pi">🧾</div><h4>Accountant</h4><p>Tax advice, GST/HST questions, tracking your finances</p><div class="cost">$200 – $400/hr</div></div>
-      <div class="prob-card"><div class="pi">👨‍💼</div><h4>Business Consultant</h4><p>How to structure it, what to do first, where to sell</p><div class="cost">$150 – $350/session</div></div>
-      <div class="prob-card"><div class="pi">📚</div><h4>Courses &amp; Guides</h4><p>Theory content while you try to figure it out alone</p><div class="cost">$500 – $2,000+</div></div>
+      <div class="prob-card"><div class="pi">⚖️</div><h4>Business Lawyer</h4><p>Registering your business, U.S. entity setup, contracts</p><div class="cost">CAD $2,000 – $5,000+</div></div>
+      <div class="prob-card"><div class="pi">🧾</div><h4>Accountant</h4><p>Tax advice, GST/HST questions, tracking your finances</p><div class="cost">CAD $200 – $400/hr</div></div>
+      <div class="prob-card"><div class="pi">👨‍💼</div><h4>Business Consultant</h4><p>How to structure it, what to do first, where to sell</p><div class="cost">CAD $150 – $350/session</div></div>
+      <div class="prob-card"><div class="pi">📚</div><h4>Courses &amp; Guides</h4><p>Theory content while you try to figure it out alone</p><div class="cost">CAD $500 – $2,000+</div></div>
     </div>
     <div class="prob-bottom fi" style="transition-delay:.2s">
       <p><strong>And even after spending all of that — most businesses still don't have anyone watching the day-to-day.</strong> Deadlines get missed. Things fall through the cracks. The founder ends up doing everything themselves.</p>
@@ -375,8 +404,14 @@
       <div class="fi">
         <div class="lbl">How it works</div>
         <h2>Setup. Then <span class="g">Zeni runs it.</span></h2>
-        <p class="sub" style="margin-bottom:28px">Two phases. From zero to a running business — without hiring anyone.</p>
+        <p class="sub" style="margin-bottom:28px">From idea to setup to a running business — without hiring anyone.</p>
         <div class="phases">
+          <div class="phase lab-phase">
+            <div class="phase-num">Optional — Founder Lab</div>
+            <h3>Not sure what to build yet?</h3>
+            <p>Start in Zeni Founder Lab. Zeni helps you shape the idea, pressure-test demand, compare models, and decide whether it is ready for setup.</p>
+            <div class="phase-tags"><span class="ptag">Shape the idea</span><span class="ptag">Test demand</span><span class="ptag">Compare models</span><span class="ptag">Decide before setup</span></div>
+          </div>
           <div class="phase">
             <div class="phase-num">Phase 1 — Setup</div>
             <h3>Zeni walks you through getting your business ready</h3>
@@ -420,7 +455,7 @@
         <h2>Everything through <span class="g">WhatsApp.</span></h2>
         <p class="sub">The app already on your phone. No passwords. No dashboards. No learning curve. Just message Zeni like you'd message anyone.</p>
         <div class="show-items">
-          <div class="show-item"><div class="show-dot">🧾</div><div><h5>"Write an invoice for Sophie, $1,200"</h5><p>A professional invoice created instantly. Zeni logs it and reminds you if it goes unpaid.</p></div></div>
+          <div class="show-item"><div class="show-dot">🧾</div><div><h5>"Write an invoice for Sophie, CAD $1,200"</h5><p>A professional invoice created instantly. Zeni logs it and reminds you if it goes unpaid.</p></div></div>
           <div class="show-item"><div class="show-dot">📊</div><div><h5>"How much did I make this month?"</h5><p>Revenue, expenses, net — broken down by client and currency, in seconds.</p></div></div>
           <div class="show-item"><div class="show-dot">🔔</div><div><h5>"Remind me to reorder stock on Friday"</h5><p>Done. Zeni messages you at exactly the right time. Every time.</p></div></div>
           <div class="show-item"><div class="show-dot">📄</div><div><h5>"Draft a service agreement for my new client"</h5><p>A professional contract, ready to send, in under 30 seconds.</p></div></div>
@@ -486,7 +521,7 @@
 
     <div class="core-card fi">
       <div class="core-name">Zeni Core</div>
-      <div class="core-price"><span class="core-amt">$149</span><span class="core-mo">/month</span></div>
+      <div class="core-price"><span class="core-amt">CAD $299</span><span class="core-mo">/month</span></div>
       <p class="core-tagline">Setup + your AI business operator — running every day through WhatsApp.</p>
       <p class="core-sub">Start here. Zeni walks you through setup, then runs your business for you. Everything you need from day one.</p>
       <a href="https://ca.aneurinadvisory.com" class="core-cta">Get started with Zeni →</a>
@@ -502,21 +537,21 @@
       <div class="pro-header" id="pro-toggle">
         <div class="pro-header-left">
           <div>
-            <div class="pro-badge">Upgrade — Zeni Pro</div>
+            <div class="pro-badge">Upgrade — Zeni Premium</div>
             <h4>Ready to hand off the back-office completely?</h4>
             <p>Taxes, filings, renewals, and compliance — all managed for you.</p>
           </div>
         </div>
         <div style="display:flex;align-items:center;gap:16px;flex-shrink:0">
-          <div class="pro-price-inline">$350<span style="font-size:13px;color:var(--muted);font-weight:400">/mo</span></div>
+          <div class="pro-price-inline">CAD $450<span style="font-size:13px;color:var(--muted);font-weight:400">/mo</span></div>
           <div class="pro-chevron">&#8964;</div>
         </div>
       </div>
       <div class="pro-body">
         <div class="pro-body-inner">
-          <p class="pro-desc">Most people start on Core and upgrade to Pro once their business is running and they want to stop thinking about the back-office entirely. Pro adds <strong>managed compliance</strong> — your taxes, filings, renewals, and compliance handled for you every year. You just sell.</p>
+          <p class="pro-desc">Most people start on Core and upgrade to Premium once their business is running and they want to stop thinking about the back-office entirely. Premium adds <strong>managed compliance</strong> — your taxes, filings, renewals, and compliance handled for you every year. You just sell.</p>
           <div class="pro-human-note">
-            <strong>Handled by our team, not AI.</strong> The compliance work in Pro — tax preparation, annual filings, business renewals — is done by a human specialist. Zeni monitors and tracks everything, but the actual filings are handled by a person who knows your setup.
+            <strong>Handled by our team, not AI.</strong> The compliance work in Premium — tax preparation, annual filings, business renewals — is done by a human specialist. Zeni monitors and tracks everything, but the actual filings are handled by a person who knows your setup.
           </div>
           <div class="pro-items">
             <div class="pro-item">Annual tax preparation and filing (Canada + U.S.)</div>
@@ -526,7 +561,7 @@
             <div class="pro-item">Cross-border compliance for both entities</div>
             <div class="pro-item">Priority support from the Aneurin Advisory team</div>
           </div>
-          <a href="https://ca.aneurinadvisory.com" class="pro-cta">Get Zeni Pro — $350/month →</a>
+          <a href="https://ca.aneurinadvisory.com" class="pro-cta">Get Zeni Premium — CAD $450/month →</a>
         </div>
       </div>
     </div>
@@ -546,7 +581,7 @@
         <div class="fi-item"><div class="fi-q">Do I need to download a new app?<div class="fi-ic">+</div></div><div class="fi-a"><div class="fi-ai">No. Zeni works entirely through WhatsApp — the app already on your phone. There's nothing to install, no login to remember, and no dashboard to learn. You message Zeni just like you'd message anyone.</div></div></div>
         <div class="fi-item"><div class="fi-q">What kind of businesses is Zeni for?<div class="fi-ic">+</div></div><div class="fi-a"><div class="fi-ai">Zeni is built for service-based businesses (freelancers, coaches, consultants, agencies) and ecommerce businesses (online stores, product sellers, Amazon sellers). If you want to sell in Canada, the U.S., or both — Zeni is built for your situation.</div></div></div>
         <div class="fi-item"><div class="fi-q">Can Zeni help me sell in both Canada and the U.S.?<div class="fi-ic">+</div></div><div class="fi-a"><div class="fi-ai">Yes — this is exactly what Zeni is designed for. Setup covers both countries — your Canadian business structure and a U.S. entity if needed. After that, Zeni tracks your CAD and USD revenue separately, monitors your tax thresholds, and keeps you compliant on both sides of the border.</div></div></div>
-        <div class="fi-item"><div class="fi-q">What's the difference between Core and Pro?<div class="fi-ic">+</div></div><div class="fi-a"><div class="fi-ai">Core gives you everything you need to start and run your business — guided setup and the full Zeni AI assistant running daily. Most people start here. Pro is an upgrade for when you want the compliance side fully off your plate: taxes prepared and filed, business renewals managed, compliance handled. Pro work is done by our team, not AI.</div></div></div>
+        <div class="fi-item"><div class="fi-q">What's the difference between Core and Premium?<div class="fi-ic">+</div></div><div class="fi-a"><div class="fi-ai">Core gives you everything you need to start and run your business — guided setup and the full Zeni AI assistant running daily. Most people start here. Premium is an upgrade for when you want the compliance side fully off your plate: taxes prepared and filed, business renewals managed, compliance handled. Premium work is done by our team, not AI.</div></div></div>
         <div class="fi-item"><div class="fi-q">What if I already have a business?<div class="fi-ic">+</div></div><div class="fi-a"><div class="fi-ai">No problem. The setup phase gets Zeni configured to your existing business — your entities, clients, filing dates, and financial history. You don't need to start from zero.</div></div></div>
       </div>
     </div>
@@ -562,7 +597,7 @@
       <h2 style="margin-bottom:16px">Your business, <span class="g">intelligently run.</span></h2>
       <p class="sub">Stop letting complexity be the reason your business hasn't started — or the reason it isn't running as smoothly as it should. Zeni handles everything. You just sell.</p>
       <div class="cta-btns">
-        <a href="https://ca.aneurinadvisory.com" class="btn-grad">Get started with Zeni — $149/month</a>
+        <a href="https://ca.aneurinadvisory.com" class="btn-grad">Get started with Zeni — CAD $299/month</a>
         <a href="mailto:support@aneurinadvisory.com" class="btn-ghost">Questions? Email us →</a>
       </div>
     </div>
@@ -633,7 +668,7 @@ const HMSG = [
 ];
 
 const SMSG = [
-  { t:'u', h:'write an invoice for Sophie Laurent — $1,200 CAD, brand consulting, due June 30', time:'10:22 AM', d:600 },
+  { t:'u', h:'write an invoice for Sophie Laurent — CAD $1,200, brand consulting, due June 30', time:'10:22 AM', d:600 },
   { t:'z', h:'✅ <strong>Invoice created — INV-0012</strong><br>Sophie Laurent · CAD $1,200 · Due Jun 30<br><br>Logged as outstanding. I\'ll remind you if she hasn\'t paid by the 30th. 👍', time:'10:22 AM', d:1900 },
   { t:'u', h:'nice. how much did i make this month?', time:'10:23 AM', d:3600 },
   { t:'z', h:'<strong>June so far 💰</strong><br>Revenue: CAD $3,600 + USD $890<br>Expenses: CAD $520<br>Net: CAD $3,080 + USD $890<br><br>Up 22% from May. You\'re on track. 🎉', time:'10:23 AM', d:4900 },
@@ -665,9 +700,50 @@ const obs = new IntersectionObserver(entries => {
 }, { threshold: 0.08 });
 document.querySelectorAll('.fi:not(.show)').forEach(el => obs.observe(el));
 
+// MOBILE MENU + RELIABLE ANCHOR SCROLL
+const navEl = document.getElementById('nav');
+const menuBtn = document.getElementById('mobile-menu-btn');
+
+function closeMobileMenu() {
+  navEl.classList.remove('open');
+  if (menuBtn) menuBtn.setAttribute('aria-expanded', 'false');
+}
+
+if (menuBtn) {
+  menuBtn.addEventListener('click', () => {
+    const isOpen = navEl.classList.toggle('open');
+    menuBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+}
+
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener('click', event => {
+    const href = link.getAttribute('href');
+    if (href === '#') {
+      event.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      closeMobileMenu();
+      return;
+    }
+
+    const target = document.querySelector(href);
+    if (!target) return;
+
+    event.preventDefault();
+    const offset = navEl.offsetHeight + 18;
+    const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+    window.scrollTo({ top, behavior: 'smooth' });
+    closeMobileMenu();
+  });
+});
+
+window.addEventListener('resize', () => {
+  if (window.innerWidth > 900) closeMobileMenu();
+}, { passive: true });
+
 // NAV SCROLL
 window.addEventListener('scroll', () => {
-  document.getElementById('nav').style.borderBottomColor = window.scrollY > 50 ? 'rgba(123,97,255,0.2)' : 'rgba(123,97,255,0.14)';
+  navEl.style.borderBottomColor = window.scrollY > 50 ? 'rgba(123,97,255,0.2)' : 'rgba(123,97,255,0.14)';
 }, { passive: true });
 </script>
 </body>
