@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<script async src="https://js.stripe.com/v3/pricing-table.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -314,7 +315,12 @@
 </head>
 <body>
 
-<nav id="nav">
+<div id="stripe-modal" role="dialog" aria-modal="true" style="display:none;position:fixed;inset:0;z-index:500;background:rgba(10,15,44,.95);backdrop-filter:blur(16px);overflow-y:auto;">
+  <div style="max-width:960px;margin:0 auto;padding:64px 20px 48px;position:relative;">
+    <button id="stripe-close" aria-label="Close" style="position:fixed;top:18px;right:20px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);color:#EAEAF0;width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:18px;line-height:1;font-family:inherit;z-index:501;">✕</button>
+    <stripe-pricing-table pricing-table-id="prctbl_1Tg2hvD07QICv7iOzBMgbmm6" publishable-key="pk_live_51SZSzkD07QICv7iO89rJjJPgDC2SFjpeJDNouSImMKju5pJxkub45ot6ARsfAopVPx5o8XmsIGB3GZtSmygYPzGi00wS3vDVNk"></stripe-pricing-table>
+  </div>
+</div><nav id="nav">
   <div class="nav-inner">
     <a href="#" class="logo">Zeni</a>
     <ul class="nav-links">
@@ -322,7 +328,7 @@
       <li><a href="#handles">What Zeni does</a></li>
       <li><a href="#pricing">Pricing</a></li>
       <li><a href="#faq">FAQ</a></li>
-      <li><a href="https://ca.aneurinadvisory.com" class="nav-btn">Get started →</a></li>
+      <li><a href="#" class="nav-btn stripe-cta">Get started →</a></li>
     </ul>
     <button class="mobile-menu-btn" id="mobile-menu-btn" type="button" aria-label="Open menu" aria-expanded="false">
       <span></span><span></span><span></span>
@@ -340,7 +346,7 @@
         <h1>Own an online business that sells in <span class="g">Canada and the U.S.</span> — without the complexity.</h1>
         <p class="hero-sub">Getting your business properly structured in Canada and the U.S. used to take months and thousands of dollars. Zeni walks you through setup, then runs your business every day through WhatsApp. No team. No complexity. No prior experience needed.</p>
         <div class="hero-actions">
-          <a href="https://ca.aneurinadvisory.com" class="btn-grad">
+          <a href="#" class="btn-grad stripe-cta">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="flex-shrink:0"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM11.998 0C5.372 0 0 5.372 0 12c0 2.121.554 4.11 1.523 5.838L0 24l6.342-1.496A11.945 11.945 0 0011.998 24C18.626 24 24 18.628 24 12S18.626 0 11.998 0zm.002 21.818a9.81 9.81 0 01-5.002-1.368l-.358-.214-3.765.888.939-3.65-.234-.375a9.818 9.818 0 01-1.506-5.28c0-5.423 4.407-9.83 9.83-9.83 2.625 0 5.1 1.025 6.96 2.883a9.789 9.789 0 012.877 6.952c0 5.424-4.408 9.994-9.741 9.994z"/></svg>
             Get started with Zeni
           </a>
@@ -533,7 +539,7 @@
       <div class="core-price"><span class="core-amt">$299</span><span class="price-currency">CAD</span><span class="core-mo">/month</span></div>
       <p class="core-tagline">Setup + your AI business operator — running every day through WhatsApp.</p>
       <p class="core-sub">Start here. Zeni walks you through setup, then runs your business for you. Everything you need from day one.</p>
-      <a href="https://ca.aneurinadvisory.com" class="core-cta">Get started with Zeni →</a>
+      <a href="#" class="core-cta stripe-cta">Get started with Zeni →</a>
       <div class="core-pillars">
         <div class="cp"><div class="cp-icon">🏗️</div><div class="cp-title">Guided Setup</div><div class="cp-desc">Zeni walks you through every step to get structured in Canada and/or the U.S.</div></div>
         <div class="cp"><div class="cp-icon">📱</div><div class="cp-title">Daily Operations</div><div class="cp-desc">Finances, tasks, reminders, documents — handled through WhatsApp every day.</div></div>
@@ -570,7 +576,7 @@
             <div class="pro-item">Cross-border compliance for both entities</div>
             <div class="pro-item">Priority support from the Aneurin Advisory team</div>
           </div>
-          <a href="https://ca.aneurinadvisory.com" class="pro-cta">Get Zeni Premium — $450 CAD/month →</a>
+          <a href="#" class="pro-cta stripe-cta">Get Zeni Premium — $450 CAD/month →</a>
         </div>
       </div>
     </div>
@@ -606,7 +612,7 @@
       <h2 style="margin-bottom:16px">Your business, <span class="g">intelligently run.</span></h2>
       <p class="sub">Stop letting complexity be the reason your business hasn't started — or the reason it isn't running as smoothly as it should. Zeni handles everything. You just sell.</p>
       <div class="cta-btns">
-        <a href="https://ca.aneurinadvisory.com" class="btn-grad">Get started with Zeni — $299 CAD/month</a>
+        <a href="#" class="btn-grad stripe-cta">Get started with Zeni — $299 CAD/month</a>
         <a href="mailto:support@aneurinadvisory.com" class="btn-ghost">Questions? Email us →</a>
       </div>
     </div>
