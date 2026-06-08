@@ -59,11 +59,7 @@
     .toc li { font-size: 13px; color: var(--muted); margin-bottom: 6px; }
     .toc a { color: var(--muted); }
     .toc a:hover { color: var(--purple); }
-    .processor-table { width: 100%; border-collapse: collapse; margin: 18px 0; }
-    .processor-table th, .processor-table td { text-align: left; padding: 10px 14px; font-size: 13.5px; border-bottom: 1px solid var(--border); }
-    .processor-table th { color: var(--white); font-weight: 600; font-size: 12px; letter-spacing: .5px; text-transform: uppercase; background: rgba(123,97,255,.06); }
-    .processor-table td { color: var(--muted); }
-    .processor-table td:first-child { color: var(--white); font-weight: 500; }
+
     footer { border-top: 1px solid var(--border); padding: 32px 0; margin-top: 40px; }
     .footer-inner { max-width: 800px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
     .footer-inner p { font-size: 13px; color: var(--muted); margin: 0; }
@@ -202,59 +198,29 @@
 
     <section id="p5">
       <h2><span>Section 5</span>Third-Party Data Processors</h2>
-      <p>We share data with the following third-party service providers. Each processes data only as necessary to provide their specific service and is subject to confidentiality and data processing obligations. By using Zeni, you consent to your data being processed by these parties subject to their respective privacy policies.</p>
+      <p>Your data is stored securely and used solely to provide Zeni's business operator features. AI responses are generated through OpenAI's API, which processes data in the United States under OpenAI's privacy policy and enterprise data protection terms. OpenAI's current API terms do not permit using API inputs to train their models, though this is subject to OpenAI's own policies. No client data is sold or shared with any third party for marketing purposes.</p>
+      <p>Payment processing is handled by Stripe. Message delivery runs through WhatsApp (Meta Platforms). All other infrastructure operates within the United States.</p>
+      <p>We may disclose personal information to professional advisors under confidentiality obligations, and to law enforcement or regulatory authorities where required by law or valid legal process.</p>
 
-      <table class="processor-table">
-        <thead>
-          <tr>
-            <th>Processor</th>
-            <th>Purpose</th>
-            <th>Data Shared</th>
-            <th>Location</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>OpenAI, LP</td>
-            <td>AI response generation, voice transcription</td>
-            <td>Conversation content, voice audio</td>
-            <td>United States</td>
-          </tr>
-          <tr>
-            <td>Supabase, Inc.</td>
-            <td>Database storage and hosting</td>
-            <td>All user and business data</td>
-            <td>United States (us-east-1)</td>
-          </tr>
-          <tr>
-            <td>Meta Platforms (WhatsApp)</td>
-            <td>Message delivery infrastructure</td>
-            <td>Message content, media</td>
-            <td>United States</td>
-          </tr>
-          <tr>
-            <td>Stripe, Inc.</td>
-            <td>Payment processing</td>
-            <td>Payment details, billing info</td>
-            <td>United States</td>
-          </tr>
-          <tr>
-            <td>Vercel, Inc.</td>
-            <td>Application hosting and infrastructure</td>
-            <td>Request metadata, logs</td>
-            <td>United States (Washington D.C.)</td>
-          </tr>
-          <tr>
-            <td>ExchangeRate-API</td>
-            <td>Live currency conversion rates</td>
-            <td>No personal data — rate queries only</td>
-            <td>United States</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <p>We may disclose personal information to professional advisors (attorneys, accountants) under confidentiality obligations, and to law enforcement or regulatory authorities where required by law or valid legal process.</p>
-    </section>
+      <details style="margin-top:20px;background:rgba(123,97,255,.04);border:1px solid var(--border);border-radius:8px;padding:16px 20px;">
+        <summary style="font-size:13px;font-weight:600;color:var(--muted);cursor:pointer;letter-spacing:.3px;">Full processor list (PIPEDA disclosure)</summary>
+        <table style="width:100%;border-collapse:collapse;margin-top:16px;">
+          <thead>
+            <tr>
+              <th style="text-align:left;padding:8px 12px;font-size:12px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--border);">Processor</th>
+              <th style="text-align:left;padding:8px 12px;font-size:12px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--border);">Purpose</th>
+              <th style="text-align:left;padding:8px 12px;font-size:12px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--border);">Location</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td style="padding:8px 12px;font-size:13px;color:var(--white);border-bottom:1px solid var(--border);">OpenAI, LP</td><td style="padding:8px 12px;font-size:13px;color:var(--muted);border-bottom:1px solid var(--border);">AI response generation, voice transcription</td><td style="padding:8px 12px;font-size:13px;color:var(--muted);border-bottom:1px solid var(--border);">United States</td></tr>
+            <tr><td style="padding:8px 12px;font-size:13px;color:var(--white);border-bottom:1px solid var(--border);">Supabase, Inc.</td><td style="padding:8px 12px;font-size:13px;color:var(--muted);border-bottom:1px solid var(--border);">Database storage and hosting</td><td style="padding:8px 12px;font-size:13px;color:var(--muted);border-bottom:1px solid var(--border);">United States</td></tr>
+            <tr><td style="padding:8px 12px;font-size:13px;color:var(--white);border-bottom:1px solid var(--border);">Meta Platforms (WhatsApp)</td><td style="padding:8px 12px;font-size:13px;color:var(--muted);border-bottom:1px solid var(--border);">Message delivery infrastructure</td><td style="padding:8px 12px;font-size:13px;color:var(--muted);border-bottom:1px solid var(--border);">United States</td></tr>
+            <tr><td style="padding:8px 12px;font-size:13px;color:var(--white);border-bottom:1px solid var(--border);">Stripe, Inc.</td><td style="padding:8px 12px;font-size:13px;color:var(--muted);border-bottom:1px solid var(--border);">Payment processing</td><td style="padding:8px 12px;font-size:13px;color:var(--muted);border-bottom:1px solid var(--border);">United States</td></tr>
+            <tr><td style="padding:8px 12px;font-size:13px;color:var(--white);border-bottom:1px solid var(--border);">Vercel, Inc.</td><td style="padding:8px 12px;font-size:13px;color:var(--muted);border-bottom:1px solid var(--border);">Application hosting</td><td style="padding:8px 12px;font-size:13px;color:var(--muted);border-bottom:1px solid var(--border);">United States</td></tr>
+          </tbody>
+        </table>
+      </details>
 
     <section id="p6">
       <h2><span>Section 6</span>Data Storage and Cross-Border Transfers</h2>
@@ -316,7 +282,7 @@
 
     <section id="p12">
       <h2><span>Section 12</span>Changes to This Policy</h2>
-      <p>We may update this Privacy Policy from time to time. Material changes will be communicated via WhatsApp or email to active users with at least 14 days' notice before the change takes effect. The "Last Updated" date at the top of this policy reflects the most recent revision. Your continued use of the Service following the effective date of any change constitutes your acceptance of the updated policy.</p>
+      <p>We may update this Privacy Policy from time to time. The updated version will be posted here with a revised "Last Updated" date. Your continued use of the Service following the effective date of any change constitutes your acceptance of the updated policy.</p>
     </section>
 
     <section id="p13">
