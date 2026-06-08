@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to Zeni — Aneurin Advisory</title>
+  <meta name="description" content="You're all set. Here's everything you need to get started with Zeni.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy:   #0A0F2C;
+      --navy2:  #0D1236;
+      --navy3:  #121840;
+      --purple: #7B61FF;
+      --blue:   #00C2FF;
+      --white:  #EAEAF0;
+      --muted:  #8892B8;
+      --border: rgba(123,97,255,0.14);
+      --border2: rgba(123,97,255,0.28);
+      --grad:   linear-gradient(135deg, #7B61FF 0%, #00C2FF 100%);
+      --ff:     "Inter", sans-serif;
+      --r:      12px;
+      --r-lg:   20px;
+      --max:    680px;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--navy);
+      color: var(--white);
+      font-family: var(--ff);
+      font-size: 16px;
+      line-height: 1.6;
+      min-height: 100vh;
+      padding: 48px 24px 80px;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-image:
+        radial-gradient(circle, rgba(123,97,255,0.055) 1px, transparent 1px),
+        radial-gradient(circle, rgba(0,194,255,0.03) 1px, transparent 1px);
+      background-size: 48px 48px, 80px 80px;
+      background-position: 0 0, 24px 24px;
+    }
+    .wrap { max-width: var(--max); margin: 0 auto; position: relative; z-index: 1; }
+    .g { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+    /* HEADER */
+    .logo { font-size: 24px; font-weight: 800; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 4px; }
+    .logo-sub { font-size: 13px; color: var(--muted); margin-bottom: 40px; }
+
+    /* CONFIRMATION */
+    .confirm {
+      background: rgba(123,97,255,0.08);
+      border: 1px solid rgba(123,97,255,0.25);
+      border-radius: var(--r-lg);
+      padding: 32px;
+      margin-bottom: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+    .confirm::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--grad);
+    }
+    .confirm-title { font-size: 26px; font-weight: 800; margin-bottom: 8px; }
+    .confirm-sub { font-size: 15px; color: var(--muted); line-height: 1.65; }
+
+    /* PRICING */
+    .pricing-block {
+      background: var(--navy2);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 20px 24px;
+      margin-bottom: 36px;
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .price-item { flex: 1; min-width: 200px; }
+    .price-label { font-size: 11px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
+    .price-row { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+    .price-old { font-size: 15px; color: var(--muted); text-decoration: line-through; }
+    .price-new { font-size: 24px; font-weight: 800; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .price-mo { font-size: 14px; color: var(--muted); }
+    .price-locked { font-size: 12px; color: var(--muted); margin-top: 4px; }
+    .price-locked span { color: #34D399; font-weight: 600; }
+    .pricing-divider { width: 1px; background: var(--border); flex-shrink: 0; }
+
+    /* SECTIONS */
+    .section { margin-bottom: 36px; }
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      background: var(--grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .section-label::before { content: ""; width: 16px; height: 1.5px; background: var(--grad); flex-shrink: 0; }
+    h2 { font-size: 20px; font-weight: 700; color: var(--white); margin-bottom: 12px; }
+
+    /* STEPS */
+    .steps { display: flex; flex-direction: column; gap: 12px; }
+    .step {
+      background: var(--navy2);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 18px 20px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .step-num {
+      width: 30px; height: 30px;
+      border-radius: 50%;
+      background: var(--grad);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 700; color: #fff;
+      flex-shrink: 0;
+    }
+    .step-title { font-size: 15px; font-weight: 600; color: var(--white); margin-bottom: 3px; }
+    .step-body { font-size: 14px; color: var(--muted); line-height: 1.65; }
+    .step-body strong { color: var(--white); font-weight: 500; }
+    .step-body a { color: var(--purple); text-decoration: none; }
+
+    /* WARNING */
+    .warn {
+      background: rgba(255,200,0,0.05);
+      border: 1px solid rgba(255,200,0,0.18);
+      border-radius: var(--r);
+      padding: 16px 18px;
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.65;
+      margin-top: 12px;
+    }
+    .warn strong { color: var(--white); font-weight: 500; }
+
+    /* WHATSAPP MOCKUP */
+    .phone-wrap {
+      display: flex;
+      justify-content: center;
+      margin: 20px 0;
+    }
+    .phone {
+      width: 100%;
+      max-width: 340px;
+      background: #111b21;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.07);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.5);
+    }
+    .pbar {
+      background: #1f2c34;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .pav {
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      background: var(--grad);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; font-weight: 800; color: #fff;
+      flex-shrink: 0;
+    }
+    .pnm { font-weight: 600; font-size: 13px; color: #e9edef; }
+    .pst { font-size: 10.5px; color: #8696a0; }
+    .pbody { background: #0b141a; padding: 12px; }
+    .bubble {
+      background: #1f2c34;
+      border-radius: 0 12px 12px 12px;
+      padding: 10px 13px;
+      font-size: 12.5px;
+      color: #e9edef;
+      line-height: 1.55;
+      margin-bottom: 8px;
+    }
+    .menu-sheet {
+      background: #1a2730;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-top: 4px;
+    }
+    .menu-header {
+      background: #2a3942;
+      padding: 10px 14px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #8696a0;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .menu-item {
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      cursor: pointer;
+    }
+    .menu-item:last-child { border-bottom: none; }
+    .menu-item-title { font-size: 13px; font-weight: 600; color: #e9edef; margin-bottom: 2px; }
+    .menu-item-sub { font-size: 11.5px; color: #8696a0; }
+    .menu-tap { text-align: center; padding: 10px; font-size: 11px; color: #8696a0; background: #111b21; }
+
+    /* MENU EXPLANATIONS */
+    .menu-cards { display: flex; flex-direction: column; gap: 10px; margin-top: 14px; }
+    .menu-card {
+      background: var(--navy2);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 16px 18px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .menu-icon {
+      font-size: 18px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .menu-card-title { font-size: 14px; font-weight: 600; color: var(--white); margin-bottom: 3px; }
+    .menu-card-body { font-size: 13.5px; color: var(--muted); line-height: 1.6; }
+
+    /* BILLING */
+    .billing-card {
+      background: var(--navy2);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 24px;
+    }
+    .billing-card p { font-size: 14px; color: var(--muted); line-height: 1.65; margin-bottom: 16px; }
+    .billing-card p strong { color: var(--white); font-weight: 500; }
+    .portal-btn {
+      display: inline-block;
+      padding: 12px 24px;
+      background: var(--grad);
+      color: #fff;
+      font-weight: 700;
+      font-size: 14px;
+      border-radius: 9px;
+      text-decoration: none;
+      transition: opacity .2s;
+      margin-bottom: 14px;
+    }
+    .portal-btn:hover { opacity: .85; }
+    .billing-note { font-size: 13px; color: var(--muted); line-height: 1.6; }
+    .billing-note strong { color: var(--white); font-weight: 500; }
+
+    /* SUPPORT */
+    .support-cards { display: flex; gap: 12px; flex-wrap: wrap; }
+    .support-card {
+      flex: 1;
+      min-width: 200px;
+      background: var(--navy2);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 20px;
+    }
+    .support-card-icon { font-size: 20px; margin-bottom: 10px; }
+    .support-card-title { font-size: 14px; font-weight: 600; color: var(--white); margin-bottom: 4px; }
+    .support-card-body { font-size: 13px; color: var(--muted); line-height: 1.6; }
+    .support-card-body a { color: var(--purple); text-decoration: none; }
+    .support-note {
+      margin-top: 14px;
+      font-size: 13.5px;
+      color: var(--muted);
+      line-height: 1.7;
+      padding: 16px 18px;
+      background: rgba(123,97,255,0.05);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+    }
+
+    /* FOOTER */
+    .footer { margin-top: 56px; padding-top: 24px; border-top: 1px solid var(--border); text-align: center; font-size: 13px; color: var(--muted); }
+    .footer a { color: var(--muted); text-decoration: none; }
+    .footer a:hover { color: var(--white); }
+
+    @media (max-width: 560px) {
+      body { padding: 36px 18px 64px; }
+      .confirm { padding: 24px 20px; }
+      .pricing-block { flex-direction: column; gap: 16px; }
+      .pricing-divider { width: 100%; height: 1px; }
+      .support-cards { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HEADER -->
+  <div class="logo">Zeni</div>
+  <div class="logo-sub">by Aneurin Advisory</div>
+
+  <!-- CONFIRMATION -->
+  <div class="confirm">
+    <div class="confirm-title">✅ You're all set.</div>
+    <div class="confirm-sub">Your subscription is active. Everything below is what you need to get started — read it once and you'll be good to go.</div>
+  </div>
+
+  <!-- PRICING -->
+  <div class="pricing-block">
+    <div class="price-item">
+      <div class="price-label">Zeni Core</div>
+      <div class="price-row">
+        <span class="price-old">$299</span>
+        <span class="price-new">$149</span>
+        <span class="price-mo">CAD/mo</span>
+      </div>
+      <div class="price-locked"><span>Locked in permanently.</span> Your rate never increases.</div>
+    </div>
+    <div class="pricing-divider"></div>
+    <div class="price-item">
+      <div class="price-label">Zeni Premium</div>
+      <div class="price-row">
+        <span class="price-old">$450</span>
+        <span class="price-new">$350</span>
+        <span class="price-mo">CAD/mo</span>
+      </div>
+      <div class="price-locked"><span>Locked in permanently.</span> If you upgrade, this is your rate.</div>
+    </div>
+  </div>
+
+  <!-- GETTING STARTED -->
+  <div class="section">
+    <div class="section-label">Getting started</div>
+    <h2>How to access Zeni</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div>
+          <div class="step-title">Save Zeni's number</div>
+          <div class="step-body">Add <strong>+1 868-316-6361</strong> to your contacts. Name it "Zeni" or anything you like.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div>
+          <div class="step-title">Send your first message</div>
+          <div class="step-body">Open WhatsApp and send any message to that number — <strong>from the same number you entered at checkout.</strong> Zeni will respond immediately with a menu to get you started.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="warn">
+      <strong>Important:</strong> Zeni identifies you by your WhatsApp number. If you message from a different number than the one you provided at checkout, Zeni won't recognise your account. If that happens, message us at <strong>+1 437-217-0057</strong> and we'll sort it out right away — we'll send the Zeni contact directly to your WhatsApp.
+    </div>
+  </div>
+
+  <!-- FIRST MESSAGE MOCKUP -->
+  <div class="section">
+    <div class="section-label">Your first message</div>
+    <h2>What you'll see</h2>
+    <p style="font-size:14px;color:var(--muted);margin-bottom:16px;line-height:1.65;">When you send your first message, Zeni will respond with this menu. Here's what each option means so you know exactly which one applies to you.</p>
+
+    <div class="phone-wrap">
+      <div class="phone">
+        <div class="pbar">
+          <div class="pav">Z</div>
+          <div>
+            <div class="pnm">Zeni</div>
+            <div class="pst">online</div>
+          </div>
+        </div>
+        <div class="pbody">
+          <div class="bubble">
+            Hi! I'm Zeni — your AI business operator.<br><br>
+            To get started, tell me a bit about where you're at:
+          </div>
+          <div class="menu-sheet">
+            <div class="menu-header">Get started</div>
+            <div class="menu-item">
+              <div class="menu-item-title">Start a new business</div>
+              <div class="menu-item-sub">Build from scratch with Zeni</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-title">Grow my existing business</div>
+              <div class="menu-item-sub">Set up Zeni around your business</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-title">Explore a business idea</div>
+              <div class="menu-item-sub">Use Zeni Founder Lab</div>
+            </div>
+            <div class="menu-item">
+              <div class="menu-item-title">See how Zeni works</div>
+              <div class="menu-item-sub">See what Zeni can do</div>
+            </div>
+          </div>
+          <div class="menu-tap">Tap an item to select it</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-cards">
+      <div class="menu-card">
+        <div class="menu-icon">🏗️</div>
+        <div>
+          <div class="menu-card-title">Start a new business</div>
+          <div class="menu-card-body">You have an idea and want to build it properly. Zeni walks you through structuring and registering your business in Canada and/or the U.S., step by step. No prior knowledge needed — Zeni tells you exactly what to do at every stage.</div>
+        </div>
+      </div>
+      <div class="menu-card">
+        <div class="menu-icon">📈</div>
+        <div>
+          <div class="menu-card-title">Grow my existing business</div>
+          <div class="menu-card-body">You're already running a business and want Zeni set up around it. Zeni learns your current setup, gets your information organised, and starts running your day-to-day operations from there.</div>
+        </div>
+      </div>
+      <div class="menu-card">
+        <div class="menu-icon">💡</div>
+        <div>
+          <div class="menu-card-title">Explore a business idea</div>
+          <div class="menu-card-body">Not sure exactly what you want to build yet? Zeni Founder Lab helps you shape, pressure-test, and validate your idea before committing to setup. A good starting point if you're still deciding on direction.</div>
+        </div>
+      </div>
+      <div class="menu-card">
+        <div class="menu-icon">🎯</div>
+        <div>
+          <div class="menu-card-title">See how Zeni works</div>
+          <div class="menu-card-body">A guided tour of everything Zeni does once you're set up — daily briefings, finances, deadlines, documents, planning, and more. Worth going through even if you're mid-setup. It shows you exactly where you're headed and what to expect once Zeni is fully running your business.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BILLING -->
+  <div class="section">
+    <div class="section-label">Billing & subscription</div>
+    <h2>Managing your account</h2>
+    <div class="billing-card">
+      <p>Your billing, invoices, payment method, and subscription are all managed through the Stripe customer portal. <strong>Bookmark this link</strong> — you'll need it if you ever want to update your card, download an invoice, or make changes to your plan.</p>
+      <a href="https://billing.stripe.com/p/login/5kQ7sK4eAbbgbrpf421ck00" target="_blank" class="portal-btn">Manage my subscription →</a>
+      <div class="billing-note">
+        You'll be asked to enter your email address — use the same email you signed up with and Stripe will show you your account. You can also message Zeni <strong>"manage my billing"</strong> at any time and Zeni will send you the link directly.
+      </div>
+    </div>
+  </div>
+
+  <!-- SUPPORT -->
+  <div class="section">
+    <div class="section-label">Support</div>
+    <h2>We're here if you need us</h2>
+    <div class="support-cards">
+      <div class="support-card">
+        <div class="support-card-icon">💬</div>
+        <div class="support-card-title">WhatsApp — fastest</div>
+        <div class="support-card-body">
+          Message us directly at<br>
+          <a href="https://wa.me/14372170057"><strong>+1 437-217-0057</strong></a><br><br>
+          For anything urgent — account access issues, setup questions, anything that's blocking you. We respond fast.
+        </div>
+      </div>
+      <div class="support-card">
+        <div class="support-card-icon">✉️</div>
+        <div class="support-card-title">Email — non-urgent</div>
+        <div class="support-card-body">
+          <a href="mailto:support@aneurinadvisory.com"><strong>support@aneurinadvisory.com</strong></a><br><br>
+          For general questions, feedback, or anything that doesn't need an immediate response.
+        </div>
+      </div>
+    </div>
+    <div class="support-note">
+      Zeni is currently serving a small group of clients. That means direct, personal support — not a ticket queue. If something isn't working, reach out and we'll fix it.
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <p>Zeni &nbsp;·&nbsp; by <a href="https://ca.aneurinadvisory.com">Aneurin Advisory</a> &nbsp;·&nbsp; <a href="mailto:support@aneurinadvisory.com">support@aneurinadvisory.com</a></p>
+    <p style="margin-top:8px;"><a href="/privacy">Privacy</a> &nbsp;·&nbsp; <a href="/terms">Terms of Service</a></p>
+  </div>
+
+</div>
+</body>
+</html>
