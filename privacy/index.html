@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy — Zeni by Aneurin Advisory</title>
+  <meta name="description" content="Privacy Policy for the Zeni AI business operator platform. How we collect, use, and protect your data.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy:   #0A0F2C;
+      --navy2:  #0D1236;
+      --purple: #7B61FF;
+      --blue:   #00C2FF;
+      --white:  #EAEAF0;
+      --muted:  #8892B8;
+      --border: rgba(123,97,255,0.14);
+      --grad:   linear-gradient(135deg, #7B61FF 0%, #00C2FF 100%);
+      --ff:     "Inter", sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--navy); color: var(--white); font-family: var(--ff); font-size: 16px; line-height: 1.7; overflow-x: hidden; }
+    body::before {
+      content: ""; position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background-image: radial-gradient(circle, rgba(123,97,255,0.04) 1px, transparent 1px);
+      background-size: 48px 48px;
+    }
+    .wrap { max-width: 800px; margin: 0 auto; padding: 0 24px; position: relative; }
+    nav { padding: 18px 0; border-bottom: 1px solid var(--border); background: rgba(10,15,44,.92); backdrop-filter: blur(20px); position: sticky; top: 0; z-index: 100; }
+    .nav-inner { max-width: 800px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; }
+    .logo { font-size: 20px; font-weight: 800; text-decoration: none; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .back-link { font-size: 13.5px; color: var(--muted); text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color .2s; }
+    .back-link:hover { color: var(--white); }
+    .doc-header { padding: 52px 0 40px; border-bottom: 1px solid var(--border); margin-bottom: 40px; }
+    .doc-header .label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 12px; }
+    .doc-header h1 { font-size: clamp(26px, 4vw, 38px); font-weight: 800; letter-spacing: -0.8px; color: var(--white); margin-bottom: 14px; }
+    .doc-header .meta { font-size: 14px; color: var(--muted); }
+    .info-box { background: rgba(0,194,255,.06); border: 1.5px solid rgba(0,194,255,.2); border-radius: 12px; padding: 22px 24px; margin-bottom: 36px; }
+    .info-box p { font-size: 14px; color: var(--white); line-height: 1.65; }
+    .info-box p + p { margin-top: 8px; color: var(--muted); font-size: 13.5px; }
+    .doc-content { padding-bottom: 80px; }
+    section { margin-bottom: 44px; }
+    h2 { font-size: 18px; font-weight: 700; color: var(--white); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+    h2 span { font-size: 12px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; display: block; margin-bottom: 5px; }
+    h3 { font-size: 15px; font-weight: 600; color: var(--white); margin: 20px 0 8px; }
+    p { font-size: 14.5px; color: var(--muted); margin-bottom: 14px; line-height: 1.72; }
+    p strong { color: var(--white); font-weight: 600; }
+    ul, ol { padding-left: 20px; margin-bottom: 14px; }
+    li { font-size: 14.5px; color: var(--muted); margin-bottom: 7px; line-height: 1.65; }
+    li strong { color: var(--white); }
+    a { color: var(--purple); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .toc { background: var(--navy2); border: 1px solid var(--border); border-radius: 12px; padding: 24px 26px; margin-bottom: 44px; }
+    .toc h4 { font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
+    .toc ol { padding-left: 18px; }
+    .toc li { font-size: 13px; color: var(--muted); margin-bottom: 6px; }
+    .toc a { color: var(--muted); }
+    .toc a:hover { color: var(--purple); }
+    .processor-table { width: 100%; border-collapse: collapse; margin: 18px 0; }
+    .processor-table th, .processor-table td { text-align: left; padding: 10px 14px; font-size: 13.5px; border-bottom: 1px solid var(--border); }
+    .processor-table th { color: var(--white); font-weight: 600; font-size: 12px; letter-spacing: .5px; text-transform: uppercase; background: rgba(123,97,255,.06); }
+    .processor-table td { color: var(--muted); }
+    .processor-table td:first-child { color: var(--white); font-weight: 500; }
+    footer { border-top: 1px solid var(--border); padding: 32px 0; margin-top: 40px; }
+    .footer-inner { max-width: 800px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    .footer-inner p { font-size: 13px; color: var(--muted); margin: 0; }
+    .footer-links { display: flex; gap: 20px; list-style: none; }
+    .footer-links a { font-size: 13px; color: var(--muted); text-decoration: none; }
+    .footer-links a:hover { color: var(--white); }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">Zeni</a>
+    <a href="/" class="back-link">← Back to Zeni</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <header class="doc-header">
+    <div class="label">Legal</div>
+    <h1>Privacy Policy</h1>
+    <p class="meta">Last updated: June 2026 &nbsp;·&nbsp; Effective upon acceptance</p>
+  </header>
+
+  <div class="info-box">
+    <p><strong>Your privacy matters.</strong> This policy explains exactly what data Zeni collects, why, who it is shared with, and your rights over it.</p>
+    <p>The Zeni Service is operated by Every Ingredient Gourmet Spices LLC (Aneurin Advisory). Your data is processed in the United States on infrastructure located there. Canadian users: this policy is designed to comply with the Personal Information Protection and Electronic Documents Act (PIPEDA) and applicable provincial privacy legislation.</p>
+  </div>
+
+  <nav class="toc">
+    <h4>Contents</h4>
+    <ol>
+      <li><a href="#p1">Who We Are</a></li>
+      <li><a href="#p2">Information We Collect</a></li>
+      <li><a href="#p3">How We Use Your Information</a></li>
+      <li><a href="#p4">Legal Basis for Processing</a></li>
+      <li><a href="#p5">Third-Party Data Processors</a></li>
+      <li><a href="#p6">Data Storage and Cross-Border Transfers</a></li>
+      <li><a href="#p7">Data Retention</a></li>
+      <li><a href="#p8">AI Processing Disclosure</a></li>
+      <li><a href="#p9">Your Rights</a></li>
+      <li><a href="#p10">Cookies and Analytics</a></li>
+      <li><a href="#p11">Children's Privacy</a></li>
+      <li><a href="#p12">Changes to This Policy</a></li>
+      <li><a href="#p13">Contact and Complaints</a></li>
+    </ol>
+  </nav>
+
+  <div class="doc-content">
+
+    <section id="p1">
+      <h2><span>Section 1</span>Who We Are</h2>
+      <p>The data controller for all personal information collected through the Zeni Service is:</p>
+      <p><strong>Every Ingredient Gourmet Spices LLC</strong><br>
+      Operating as: Aneurin Advisory / Zeni<br>
+      Website: <a href="https://ca.aneurinadvisory.com">ca.aneurinadvisory.com</a><br>
+      Contact: <a href="mailto:support@aneurinadvisory.com">support@aneurinadvisory.com</a></p>
+    </section>
+
+    <section id="p2">
+      <h2><span>Section 2</span>Information We Collect</h2>
+      <p>We collect the following categories of information when you use Zeni:</p>
+
+      <h3>Account Information</h3>
+      <ul>
+        <li>Your WhatsApp phone number (used as your primary identifier)</li>
+        <li>Your name, as provided during onboarding</li>
+        <li>Your business name and structure (service vs. ecommerce, etc.)</li>
+        <li>Canadian province or territory</li>
+        <li>Email address (if provided)</li>
+        <li>Account status and subscription tier</li>
+      </ul>
+
+      <h3>Business Data You Provide</h3>
+      <ul>
+        <li>Financial data: income amounts, expenses, invoice details, transaction records, CAD and USD figures</li>
+        <li>Client and contact information you enter into Zeni (names, emails, company names)</li>
+        <li>Business registration details: corporation name, BN, GST/HST number, EIN, entity structure</li>
+        <li>Banking and payment preferences (platform names only — not account credentials or card numbers)</li>
+        <li>Business goals, plans, and strategic information you share</li>
+        <li>Tasks, reminders, and scheduling information</li>
+        <li>Documents you request Zeni to generate</li>
+        <li>Notes and open loop items</li>
+        <li>Shipment tracking information</li>
+      </ul>
+
+      <h3>Conversation Data</h3>
+      <ul>
+        <li>The full text content of your conversations with Zeni through WhatsApp</li>
+        <li>Voice notes you send (transcribed by OpenAI's Whisper API)</li>
+        <li>Images and PDFs you send for processing (receipts, documents)</li>
+        <li>Interactive selections (button taps, list selections)</li>
+        <li>Timestamps and session metadata</li>
+      </ul>
+
+      <h3>Technical Data</h3>
+      <ul>
+        <li>WhatsApp message IDs and delivery metadata</li>
+        <li>API usage logs for rate limiting and service integrity</li>
+        <li>Error logs and diagnostic information</li>
+      </ul>
+
+      <h3>Payment Data</h3>
+      <p>Payment processing is handled directly by Stripe. We do not store full card numbers, CVV codes, or complete payment credentials. We receive confirmation of payment status, subscription tier, and billing dates from Stripe.</p>
+
+      <h3>Information We Do Not Collect</h3>
+      <p>We do not collect: physical addresses (unless you voluntarily provide one); government identification numbers beyond what you choose to enter for your business setup; biometric data; protected health information; or any data from individuals who have not affirmatively engaged with the Zeni Service.</p>
+    </section>
+
+    <section id="p3">
+      <h2><span>Section 3</span>How We Use Your Information</h2>
+      <p>We use the information we collect for the following purposes:</p>
+      <ul>
+        <li><strong>Service delivery:</strong> Processing your messages, generating AI responses, maintaining your financial records, sending reminders and briefings, and operating all features of the Zeni platform</li>
+        <li><strong>Account management:</strong> Managing your subscription, processing payments, and communicating with you about your account</li>
+        <li><strong>AI personalization:</strong> Building and maintaining your business context so Zeni can provide relevant, specific responses rather than generic outputs</li>
+        <li><strong>Compliance and legal obligations:</strong> Meeting applicable legal requirements, responding to lawful requests from authorities, and enforcing our Terms of Service</li>
+        <li><strong>Service improvement:</strong> Using anonymized, aggregated, non-identifiable usage patterns to improve the Service. We do not use identifiable personal data for model training</li>
+        <li><strong>Security:</strong> Detecting and preventing fraud, abuse, and unauthorized access</li>
+        <li><strong>Pro tier services:</strong> Coordinating tax filing and compliance services for Pro subscribers, which requires sharing relevant business and financial data with human specialists working under confidentiality obligations</li>
+      </ul>
+      <p>We do not sell your personal information to third parties. We do not use your personal information for advertising targeting by third parties.</p>
+    </section>
+
+    <section id="p4">
+      <h2><span>Section 4</span>Legal Basis for Processing</h2>
+      <p>We process your personal information on the following legal bases:</p>
+      <ul>
+        <li><strong>Contractual necessity:</strong> Processing required to deliver the Service you have subscribed to, including all core features of Zeni</li>
+        <li><strong>Legitimate interests:</strong> Service security, fraud prevention, aggregate analytics, and service improvement</li>
+        <li><strong>Consent:</strong> For optional features or data uses where we have requested and received your consent</li>
+        <li><strong>Legal obligation:</strong> Where required to comply with applicable law</li>
+      </ul>
+      <p>Under PIPEDA, we collect only the personal information reasonably required for the identified purposes and will not use or disclose that information for purposes other than those for which it was collected without your consent or as required by law.</p>
+    </section>
+
+    <section id="p5">
+      <h2><span>Section 5</span>Third-Party Data Processors</h2>
+      <p>We share data with the following third-party service providers. Each processes data only as necessary to provide their specific service and is subject to confidentiality and data processing obligations. By using Zeni, you consent to your data being processed by these parties subject to their respective privacy policies.</p>
+
+      <table class="processor-table">
+        <thead>
+          <tr>
+            <th>Processor</th>
+            <th>Purpose</th>
+            <th>Data Shared</th>
+            <th>Location</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>OpenAI, LP</td>
+            <td>AI response generation, voice transcription</td>
+            <td>Conversation content, voice audio</td>
+            <td>United States</td>
+          </tr>
+          <tr>
+            <td>Supabase, Inc.</td>
+            <td>Database storage and hosting</td>
+            <td>All user and business data</td>
+            <td>United States (us-east-1)</td>
+          </tr>
+          <tr>
+            <td>Meta Platforms (WhatsApp)</td>
+            <td>Message delivery infrastructure</td>
+            <td>Message content, media</td>
+            <td>United States</td>
+          </tr>
+          <tr>
+            <td>Stripe, Inc.</td>
+            <td>Payment processing</td>
+            <td>Payment details, billing info</td>
+            <td>United States</td>
+          </tr>
+          <tr>
+            <td>Vercel, Inc.</td>
+            <td>Application hosting and infrastructure</td>
+            <td>Request metadata, logs</td>
+            <td>United States (Washington D.C.)</td>
+          </tr>
+          <tr>
+            <td>ExchangeRate-API</td>
+            <td>Live currency conversion rates</td>
+            <td>No personal data — rate queries only</td>
+            <td>United States</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>We may disclose personal information to professional advisors (attorneys, accountants) under confidentiality obligations, and to law enforcement or regulatory authorities where required by law or valid legal process.</p>
+    </section>
+
+    <section id="p6">
+      <h2><span>Section 6</span>Data Storage and Cross-Border Transfers</h2>
+      <p>Your data is stored on Supabase infrastructure located in the eastern United States. By using Zeni, you acknowledge and consent to your personal information being transferred to and processed in the United States, where data protection laws may differ from those in Canada or your home jurisdiction.</p>
+      <p>We implement contractual safeguards with our processors to ensure your data receives an appropriate level of protection regardless of where it is processed.</p>
+    </section>
+
+    <section id="p7">
+      <h2><span>Section 7</span>Data Retention</h2>
+      <p>We retain your personal information for as long as your subscription is active and for a period of 30 days following cancellation or termination of your account, after which your data may be permanently deleted from our systems.</p>
+      <p>We may retain certain records for longer periods where required by law (for example, financial records required for tax compliance purposes), where necessary to resolve ongoing disputes, or to enforce our agreements. Anonymized, aggregated data that cannot identify you may be retained indefinitely for analytical purposes.</p>
+      <p>You may request deletion of your account and associated data at any time (see Section 9). Note that data transmitted to and stored by third-party processors such as OpenAI and Meta is subject to their own retention policies.</p>
+    </section>
+
+    <section id="p8">
+      <h2><span>Section 8</span>AI Processing Disclosure</h2>
+      <p>Zeni's responses are generated by OpenAI's large language model AI. Your conversation content, including business information you share, is transmitted to OpenAI's API for processing.</p>
+      <p><strong>What this means for your data:</strong> The business information, financial data, and context you share with Zeni is used to generate relevant, personalized AI responses. This data is transmitted to OpenAI's servers in the United States for processing. OpenAI's current API terms prohibit using API inputs and outputs to train OpenAI's models; however, this is subject to OpenAI's terms which may change.</p>
+      <p>Voice notes you send are transcribed using OpenAI's Whisper API, which receives the audio file content. Images and PDFs are processed by OpenAI's vision API.</p>
+      <p>We encourage you to review OpenAI's privacy policy at <a href="https://openai.com/privacy" target="_blank">openai.com/privacy</a> and API usage policies for full details of how OpenAI handles data submitted via API.</p>
+      <p>AI-generated outputs may be inaccurate. See the Terms of Service Section 4 for important disclaimers about AI limitations.</p>
+    </section>
+
+    <section id="p9">
+      <h2><span>Section 9</span>Your Rights</h2>
+      <p>Subject to applicable law, you have the following rights regarding your personal information:</p>
+
+      <h3>Access</h3>
+      <p>You may request a copy of the personal information we hold about you. We will respond within 30 days.</p>
+
+      <h3>Correction</h3>
+      <p>If any personal information we hold is inaccurate or incomplete, you may request that it be corrected.</p>
+
+      <h3>Deletion</h3>
+      <p>You may request deletion of your personal information. We will delete your data within 30 days of a verified request, subject to legal retention obligations. Note that deletion of your data will result in termination of your Service access, as the Service cannot function without your data.</p>
+
+      <h3>Portability</h3>
+      <p>You may request an export of your business data (financial records, contact lists, documents) in a machine-readable format where technically feasible.</p>
+
+      <h3>Withdrawal of Consent</h3>
+      <p>Where we process data on the basis of consent, you may withdraw that consent at any time. Withdrawal does not affect processing already carried out.</p>
+
+      <h3>Complaints</h3>
+      <p>Canadian users have the right to lodge a complaint with the Office of the Privacy Commissioner of Canada (OPC) at <a href="https://www.priv.gc.ca" target="_blank">www.priv.gc.ca</a> if they believe their privacy rights have been violated. We encourage you to contact us directly first so we can attempt to resolve the matter.</p>
+
+      <h3>How to Exercise Your Rights</h3>
+      <p>To exercise any of these rights, contact us at <a href="mailto:support@aneurinadvisory.com">support@aneurinadvisory.com</a> with the subject line "Privacy Request." We may require verification of your identity before processing a request.</p>
+    </section>
+
+    <section id="p10">
+      <h2><span>Section 10</span>Website and Cookies</h2>
+      <p>The Zeni marketing website (zeni.aneurinadvisory.com) is a static page that does not use persistent tracking cookies, does not deploy third-party advertising trackers, and does not use analytics tools that collect personally identifiable information. Basic server logs (IP address, referrer, browser type) may be retained by Vercel infrastructure for security and performance purposes.</p>
+    </section>
+
+    <section id="p11">
+      <h2><span>Section 11</span>Children's Privacy</h2>
+      <p>The Zeni Service is intended for business use by adults aged 18 and older. We do not knowingly collect personal information from individuals under the age of 18. If we become aware that we have collected information from a minor, we will delete it promptly. If you believe we have inadvertently collected such information, please contact us immediately.</p>
+    </section>
+
+    <section id="p12">
+      <h2><span>Section 12</span>Changes to This Policy</h2>
+      <p>We may update this Privacy Policy from time to time. Material changes will be communicated via WhatsApp or email to active users with at least 14 days' notice before the change takes effect. The "Last Updated" date at the top of this policy reflects the most recent revision. Your continued use of the Service following the effective date of any change constitutes your acceptance of the updated policy.</p>
+    </section>
+
+    <section id="p13">
+      <h2><span>Section 13</span>Contact and Privacy Enquiries</h2>
+      <p>For any questions, concerns, or requests related to this Privacy Policy or your personal information, contact:</p>
+      <p><strong>Privacy Contact</strong><br>
+      Every Ingredient Gourmet Spices LLC / Aneurin Advisory<br>
+      Email: <a href="mailto:support@aneurinadvisory.com">support@aneurinadvisory.com</a><br>
+      Website: <a href="https://ca.aneurinadvisory.com">ca.aneurinadvisory.com</a></p>
+      <p>We will respond to privacy enquiries within 30 days. If we require more time due to complexity, we will notify you of the extension and reason within the initial 30-day period.</p>
+      <p>For unresolved privacy concerns, Canadian users may contact the Office of the Privacy Commissioner of Canada: 30 Victoria Street, Gatineau, Quebec K1A 1H3 · 1-800-282-1376 · <a href="https://www.priv.gc.ca" target="_blank">www.priv.gc.ca</a></p>
+    </section>
+
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <a href="/" style="font-size:17px;font-weight:800;text-decoration:none;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Zeni</a>
+    <p>© 2026 Every Ingredient Gourmet Spices LLC · Aneurin Advisory</p>
+    <ul class="footer-links">
+      <li><a href="/privacy">Privacy Policy</a></li>
+      <li><a href="/terms">Terms of Service</a></li>
+      <li><a href="mailto:support@aneurinadvisory.com">Contact</a></li>
+    </ul>
+  </div>
+</footer>
+
+</body>
+</html>
