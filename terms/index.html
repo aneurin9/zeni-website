@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terms of Service — Zeni by Aneurin Advisory</title>
+  <meta name="description" content="Terms of Service governing your use of the Zeni AI business operator platform.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy:   #0A0F2C;
+      --navy2:  #0D1236;
+      --purple: #7B61FF;
+      --blue:   #00C2FF;
+      --white:  #EAEAF0;
+      --muted:  #8892B8;
+      --border: rgba(123,97,255,0.14);
+      --grad:   linear-gradient(135deg, #7B61FF 0%, #00C2FF 100%);
+      --ff:     "Inter", sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--navy); color: var(--white); font-family: var(--ff); font-size: 16px; line-height: 1.7; overflow-x: hidden; }
+    body::before {
+      content: ""; position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background-image: radial-gradient(circle, rgba(123,97,255,0.04) 1px, transparent 1px);
+      background-size: 48px 48px;
+    }
+    .wrap { max-width: 800px; margin: 0 auto; padding: 0 24px; position: relative; }
+
+    /* NAV */
+    nav { padding: 18px 0; border-bottom: 1px solid var(--border); background: rgba(10,15,44,.92); backdrop-filter: blur(20px); position: sticky; top: 0; z-index: 100; }
+    .nav-inner { max-width: 800px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; }
+    .logo { font-size: 20px; font-weight: 800; text-decoration: none; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .back-link { font-size: 13.5px; color: var(--muted); text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color .2s; }
+    .back-link:hover { color: var(--white); }
+
+    /* HEADER */
+    .doc-header { padding: 52px 0 40px; border-bottom: 1px solid var(--border); margin-bottom: 40px; }
+    .doc-header .label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 12px; }
+    .doc-header h1 { font-size: clamp(26px, 4vw, 38px); font-weight: 800; letter-spacing: -0.8px; color: var(--white); margin-bottom: 14px; }
+    .doc-header .meta { font-size: 14px; color: var(--muted); }
+
+    /* WARNING BOX */
+    .warning-box { background: rgba(123,97,255,.08); border: 1.5px solid rgba(123,97,255,.35); border-radius: 12px; padding: 22px 24px; margin-bottom: 36px; }
+    .warning-box p { font-size: 13.5px; color: var(--white); line-height: 1.65; font-weight: 500; }
+    .warning-box p + p { margin-top: 8px; }
+
+    /* CRITICAL BOX */
+    .critical-box { background: rgba(255,80,80,.07); border: 1.5px solid rgba(255,80,80,.3); border-radius: 12px; padding: 22px 24px; margin: 28px 0; }
+    .critical-box .critical-label { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #ff6b6b; margin-bottom: 10px; }
+    .critical-box p { font-size: 14px; color: var(--white); line-height: 1.65; }
+
+    /* CONTENT */
+    .doc-content { padding-bottom: 80px; }
+    section { margin-bottom: 44px; }
+    h2 { font-size: 18px; font-weight: 700; color: var(--white); margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+    h2 span { font-size: 12px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; display: block; margin-bottom: 5px; }
+    h3 { font-size: 15px; font-weight: 600; color: var(--white); margin: 20px 0 8px; }
+    p { font-size: 14.5px; color: var(--muted); margin-bottom: 14px; line-height: 1.72; }
+    p strong { color: var(--white); font-weight: 600; }
+    ul, ol { padding-left: 20px; margin-bottom: 14px; }
+    li { font-size: 14.5px; color: var(--muted); margin-bottom: 7px; line-height: 1.65; }
+    li strong { color: var(--white); }
+    a { color: var(--purple); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .definition { font-style: italic; }
+
+    /* TOC */
+    .toc { background: var(--navy2); border: 1px solid var(--border); border-radius: 12px; padding: 24px 26px; margin-bottom: 44px; }
+    .toc h4 { font-size: 12px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
+    .toc ol { padding-left: 18px; column-count: 2; column-gap: 24px; }
+    .toc li { font-size: 13px; color: var(--muted); margin-bottom: 6px; }
+    .toc a { color: var(--muted); }
+    .toc a:hover { color: var(--purple); }
+
+    /* FOOTER */
+    footer { border-top: 1px solid var(--border); padding: 32px 0; margin-top: 40px; }
+    .footer-inner { max-width: 800px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+    .footer-inner p { font-size: 13px; color: var(--muted); margin: 0; }
+    .footer-links { display: flex; gap: 20px; list-style: none; }
+    .footer-links a { font-size: 13px; color: var(--muted); text-decoration: none; }
+    .footer-links a:hover { color: var(--white); }
+
+    @media (max-width: 600px) {
+      .toc ol { column-count: 1; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="logo">Zeni</a>
+    <a href="/" class="back-link">← Back to Zeni</a>
+  </div>
+</nav>
+
+<div class="wrap">
+  <header class="doc-header">
+    <div class="label">Legal</div>
+    <h1>Terms of Service</h1>
+    <p class="meta">Last updated: June 2026 &nbsp;·&nbsp; Effective upon acceptance</p>
+  </header>
+
+  <div class="info-box">
+    <p style="font-size:15px;color:var(--white);font-weight:600;margin-bottom:10px;">A few things worth knowing before you start.</p>
+    <p style="font-size:14px;color:var(--muted);margin-bottom:8px;">This agreement is between you and Every Ingredient Gourmet Spices LLC — the company that operates Zeni through its Aneurin Advisory division. It covers how the Service works, what we are responsible for, and how disputes are handled.</p>
+    <p style="font-size:14px;color:var(--muted);margin:0;">Three sections in particular are worth a read: <a href="#s3">Section 3</a> (Zeni is not a lawyer, accountant, or financial advisor), <a href="#s12">Section 12</a> (our liability is limited), and <a href="#s14">Section 14</a> (disputes are resolved through individual arbitration, not class actions or court). By using Zeni, you agree to these terms in full.</p>
+  </div>
+
+  <nav class="toc">
+    <h4>Contents</h4>
+    <ol>
+      <li><a href="#s1">Parties and Agreement</a></li>
+      <li><a href="#s2">Description of Services</a></li>
+      <li><a href="#s3">Not Professional Advice</a></li>
+      <li><a href="#s4">AI Limitations</a></li>
+      <li><a href="#s5">Third-Party Dependencies</a></li>
+      <li><a href="#s6">Subscriptions and Payment</a></li>
+      <li><a href="#s7">Cancellation and Refunds</a></li>
+      <li><a href="#s8">Pro Tier Terms</a></li>
+      <li><a href="#s9">User Obligations</a></li>
+      <li><a href="#s10">Intellectual Property</a></li>
+      <li><a href="#s11">Disclaimer of Warranties</a></li>
+      <li><a href="#s12">Limitation of Liability</a></li>
+      <li><a href="#s13">Indemnification</a></li>
+      <li><a href="#s14">Arbitration and Class Action Waiver</a></li>
+      <li><a href="#s15">Governing Law and Jurisdiction</a></li>
+      <li><a href="#s16">Time Limitation on Claims</a></li>
+      <li><a href="#s17">General Provisions</a></li>
+    </ol>
+  </nav>
+
+  <div class="doc-content">
+
+    <!-- SECTION 1 -->
+    <section id="s1">
+      <h2><span>Section 1</span>Parties and Agreement</h2>
+      <p>These Terms of Service (<strong>"Terms"</strong> or <strong>"Agreement"</strong>) constitute a legally binding contract between <strong>Every Ingredient Gourmet Spices LLC</strong>, a limited liability company organized under the laws of the State of Wyoming, United States of America, operating its Zeni platform through its Aneurin Advisory division (<strong>"Company"</strong>, <strong>"we"</strong>, <strong>"our"</strong>, or <strong>"us"</strong>), and you (<strong>"User"</strong>, <strong>"you"</strong>, or <strong>"your"</strong>), individually.</p>
+      <p>The Zeni platform and all related services, including the AI business operator interface, the guided setup system, the Aneurin Advisory brand, and all associated features are wholly owned by and operated under Every Ingredient Gourmet Spices LLC. References to "Zeni," "Aneurin Advisory," or the "Service" throughout these Terms refer to services operated under that entity.</p>
+      <p>You represent that you are at least 18 years of age, have the legal authority to enter into a binding agreement, and are accessing the Service for legitimate commercial or business purposes. If you are accepting these Terms on behalf of a business entity, you represent that you have the authority to bind that entity to these Terms.</p>
+      <p>The Service is intended for use by business owners, entrepreneurs, and commercial operators. It is not a consumer product and applicable consumer protection statutes governing personal or household use do not apply to this commercial service agreement.</p>
+    </section>
+
+    <!-- SECTION 2 -->
+    <section id="s2">
+      <h2><span>Section 2</span>Description of Services</h2>
+      <p>Zeni is an AI-powered business operations platform delivered through the WhatsApp messaging interface. The Service includes, without limitation: guided business setup assistance, daily operational briefings, financial logging and tracking, invoice management, document and draft generation, task and reminder management, compliance deadline tracking, business vault storage, and AI-generated business guidance.</p>
+      <p>Zeni is a software tool. It is an AI assistant, not a licensed professional, an employee, an agent, or a fiduciary. The Company provides access to the software platform and underlying AI capabilities; it does not provide professional services of any kind unless explicitly described otherwise in the Pro Tier addendum in Section 8.</p>
+      <p>The Service is provided as-is and the Company reserves the right to modify, update, limit, suspend, or discontinue any feature or the entire Service at any time without prior notice, subject to the refund provisions in Section 7.</p>
+      <p>The Service operates through Meta Platforms' WhatsApp Business API, which is a third-party platform outside the Company's control. See Section 5 for important disclosures about this dependency.</p>
+    </section>
+
+    <!-- SECTION 3 — MOST IMPORTANT -->
+    <section id="s3">
+      <h2><span>Section 3</span>Not Professional Advice — Critical Disclaimer</h2>
+
+      <div class="critical-box">
+        <div class="critical-label">⚠ Read This Section Carefully</div>
+        <p><strong>Nothing produced by Zeni constitutes legal advice, tax advice, accounting advice, financial advice, investment advice, immigration advice, or any other form of licensed professional advice.</strong> Zeni is a software tool. No attorney-client, accountant-client, or advisor-client relationship is created by your use of this Service.</p>
+      </div>
+
+      <p>The Company and its Zeni platform are not licensed legal practitioners, certified public accountants, registered tax preparers, licensed financial advisors, or licensed professionals of any kind in any jurisdiction, including Canada, the United States, or Trinidad and Tobago.</p>
+
+      <h3>Business Registration and Entity Formation</h3>
+      <p>Zeni may provide information about business registration processes, corporate structures, U.S. entity formation, and related topics. <strong>This information is strictly educational and general in nature. It is not legal advice and must not be treated as such.</strong> The laws governing entity formation, registration, and structure vary significantly by jurisdiction and individual circumstance. You must retain a licensed attorney or qualified registered agent before making any decision about your business structure, entity type, or formation jurisdiction.</p>
+
+      <h3>Tax and Compliance Information</h3>
+      <p>Zeni may monitor GST/HST thresholds, flag compliance deadlines, and provide information about tax-related matters. <strong>All such information is approximate, general, and informational only. It does not constitute tax advice.</strong> Tax laws change frequently. The Company makes no representation that Zeni's outputs are current, accurate, or applicable to your specific tax situation. You must consult a licensed accountant, CPA, or tax professional for all tax decisions. Any reliance on Zeni's tax-related outputs without independent professional verification is entirely at your own risk.</p>
+
+      <h3>Generated Documents</h3>
+      <p>Zeni may generate contracts, service agreements, non-disclosure agreements, proposals, invoices, and other documents. <strong>All generated documents are AI-produced drafts only. They have not been reviewed by a licensed attorney. They may not be legally enforceable, may contain errors, may be missing provisions required by applicable law, and may not be appropriate for your specific situation.</strong> No generated document should be executed or relied upon without review by a qualified attorney in the relevant jurisdiction.</p>
+
+      <h3>Financial Analysis and Projections</h3>
+      <p>Zeni may analyze your financial data and produce summaries, projections, or commentary. <strong>This is not financial advice. All figures are based on data you have entered and are subject to the limitations of AI processing.</strong> You must verify all financial outputs independently before making any business, investment, or financial decision.</p>
+
+      <h3>Your Responsibility</h3>
+      <p>You acknowledge and agree that: (a) you will consult qualified licensed professionals before making any legal, tax, financial, or regulatory decision; (b) you will independently verify all information and outputs from Zeni; (c) you assume full responsibility for any decision made in reliance on Zeni's outputs; and (d) the Company is not liable for any loss, damage, penalty, fine, or consequence arising from your reliance on Zeni's outputs without independent professional verification.</p>
+    </section>
+
+    <!-- SECTION 4 -->
+    <section id="s4">
+      <h2><span>Section 4</span>AI Limitations and Accuracy Disclaimer</h2>
+      <p>Zeni is powered by large language model AI technology provided by OpenAI. AI systems have inherent limitations that you must understand and accept before using the Service.</p>
+      <p><strong>AI outputs may be inaccurate, incomplete, outdated, or entirely incorrect.</strong> This is a known limitation of all current AI systems. The AI may produce confident-sounding outputs that are factually wrong. It may hallucinate data, misunderstand context, apply incorrect rules, miss relevant information, or provide guidance that is inappropriate for your specific situation.</p>
+      <p>You agree that: (a) all AI-generated outputs are subject to error; (b) you will independently verify any material information before acting on it; (c) you will not rely solely on Zeni's outputs for decisions with material financial, legal, or operational consequences; and (d) the Company provides no warranty of any kind regarding the accuracy, completeness, or fitness for purpose of any AI-generated content.</p>
+      <p>The AI models underlying Zeni are periodically updated by OpenAI. The Company does not guarantee that AI behavior, outputs, or capabilities will remain consistent over time.</p>
+    </section>
+
+    <!-- SECTION 5 -->
+    <section id="s5">
+      <h2><span>Section 5</span>Third-Party Dependencies</h2>
+      <p>The Service relies on third-party platforms and services that are entirely outside the Company's control. The Company does not own, operate, control, or endorse these platforms. Their availability, performance, and terms may change without notice.</p>
+
+      <h3>WhatsApp / Meta Platforms</h3>
+      <p>The entirety of the Zeni interface is delivered through WhatsApp, which is owned and operated by Meta Platforms, Inc. <strong>The Company has no control over the WhatsApp platform.</strong> Meta may suspend, restrict, modify, or terminate the WhatsApp Business API at any time, with or without notice, for any reason. In such an event, the Zeni Service may be unavailable in whole or in part. <strong>The Company is not liable for any interruption, degradation, suspension, or termination of the Service caused by Meta or WhatsApp</strong>, and such events do not entitle you to a refund except as expressly provided in Section 7. Your use of WhatsApp is also subject to Meta's own Terms of Service and Privacy Policy.</p>
+
+      <h3>OpenAI</h3>
+      <p>AI intelligence is provided by OpenAI, LP. OpenAI's models process message content to generate responses. Your conversation data may be transmitted to OpenAI's servers in accordance with OpenAI's API terms. The Company is not responsible for OpenAI's data handling, service availability, or model behavior changes.</p>
+
+      <h3>Supabase</h3>
+      <p>User data is stored on Supabase infrastructure, hosted on servers located in the United States. By using the Service, you consent to your data being stored in the United States.</p>
+
+      <h3>Stripe</h3>
+      <p>Payment processing is handled by Stripe, Inc. Your payment information is collected and processed directly by Stripe subject to Stripe's terms and privacy policy. The Company does not store full payment card details.</p>
+
+      <h3>Other Third Parties</h3>
+      <p>The Service may integrate with or reference third-party services including Bizee (entity formation), Mercury (banking), Wise (international transfers), Amazon (marketplace), and others. These integrations are informational or referral in nature. The Company does not warrant, endorse, or assume responsibility for any third-party service.</p>
+    </section>
+
+    <!-- SECTION 6 -->
+    <section id="s6">
+      <h2><span>Section 6</span>Subscriptions and Payment</h2>
+      <p>The Service is offered on a monthly subscription basis at the pricing published on the Zeni website at the time of your purchase. Prices are in Canadian Dollars (CAD) unless otherwise stated. The Company reserves the right to change pricing with 30 days' written notice to active subscribers.</p>
+      <p>Subscriptions automatically renew each month. You authorize the Company to charge your payment method on file at the start of each billing cycle. You are responsible for ensuring your payment method remains valid. Failed payments may result in immediate suspension of access.</p>
+      <p>All subscription fees are exclusive of applicable taxes. You are solely responsible for all taxes, levies, or duties associated with your subscription in your jurisdiction.</p>
+      <p>The guided business setup service is included in the subscription at no additional charge. Completion of setup does not trigger a separate fee.</p>
+    </section>
+
+    <!-- SECTION 7 -->
+    <section id="s7">
+      <h2><span>Section 7</span>Cancellation and Refund Policy</h2>
+      <p>You may cancel your subscription at any time by contacting <a href="mailto:support@aneurinadvisory.com">support@aneurinadvisory.com</a>. Cancellation takes effect at the end of the current billing period. No partial refunds are issued for the remainder of a billing period.</p>
+      <p><strong>All fees paid are non-refundable</strong>, except in the following limited circumstances: (a) the Service was completely unavailable for more than 72 consecutive hours due to a cause within the Company's direct control (not including third-party outages such as WhatsApp, Supabase, or OpenAI), in which case a pro-rated credit may be issued at the Company's discretion; or (b) applicable law in your jurisdiction mandates a refund under circumstances the Company cannot legally disclaim.</p>
+      <p>Upon cancellation, your data will be retained for 30 days after the end of your final billing period, after which it may be permanently deleted. You are responsible for exporting any data you wish to retain prior to cancellation.</p>
+    </section>
+
+    <!-- SECTION 8 -->
+    <section id="s8">
+      <h2><span>Section 8</span>Zeni Pro Tier — Specific Terms and Limitations</h2>
+      <p>The Zeni Pro tier includes human-assisted compliance services in addition to the AI platform. The following terms apply specifically to Pro tier subscribers and supplement the rest of this Agreement.</p>
+
+      <h3>Scope of Human-Assisted Services</h3>
+      <p>Pro tier services include coordination and facilitation of the following, as applicable to your business structure: annual corporate tax return coordination (T2 for Canadian corporations), U.S. federal and applicable state informational filing coordination for pass-through entities, GST/HST return preparation and filing coordination, business registration renewal management, and coordination of registered agent services. Services are limited to the entities and jurisdictions disclosed by you during onboarding. Complexity outside standard structures may require additional fees or referral to external professionals.</p>
+
+      <h3>What Is Not Included</h3>
+      <p>Pro tier services do not include: personal income tax returns; multi-jurisdictional filings beyond those disclosed at onboarding; litigation support of any kind; audit defense; payroll tax filings; estate or succession planning; customs brokerage; financial audits; or any service not explicitly listed above. The Company reserves the right to decline or terminate Pro services for filings of unusual complexity.</p>
+
+      <h3>Turnaround and Deadlines</h3>
+      <p>The Company will use commercially reasonable efforts to meet applicable filing deadlines. However, timely completion requires your timely provision of all requested information and documentation. <strong>The Company is not responsible for missed deadlines caused by your failure to provide required information on time, by delays attributable to third-party agencies (including the CRA, IRS, or state agencies), or by force majeure events.</strong> You remain responsible for filing extensions where necessary.</p>
+
+      <h3>Limitation of Liability for Pro Services</h3>
+      <p>In the event of an error or omission attributable to the Company's human team in a Pro filing, the Company's total liability is limited to the amount necessary to correct the filing (penalties and interest attributable solely to the error), up to a maximum of three (3) months of Pro subscription fees paid by you. <strong>The Company is not liable for penalties, interest, or assessments arising from information you provided that was inaccurate, incomplete, or delayed.</strong></p>
+
+      <h3>No Representation of Specific Tax Outcome</h3>
+      <p>The Company makes no representation, warranty, or guarantee regarding the outcome of any tax filing, including the amount of any refund, assessment, or liability. Tax outcomes depend on facts and laws entirely outside the Company's control.</p>
+    </section>
+
+    <!-- SECTION 9 -->
+    <section id="s9">
+      <h2><span>Section 9</span>User Obligations and Prohibited Conduct</h2>
+      <p>You agree to: (a) provide accurate, complete, and current information; (b) use the Service only for lawful commercial purposes; (c) maintain the confidentiality of your account; (d) promptly notify the Company of any unauthorized access; and (e) comply with all applicable laws in connection with your use of the Service.</p>
+      <p>You agree not to: (a) use the Service for any illegal purpose; (b) attempt to reverse engineer, decompile, or extract the underlying AI models or codebase; (c) resell, sublicense, or provide access to the Service to third parties; (d) use automated tools to scrape, extract, or harvest data from the Service; (e) use the Service to store, process, or transmit data that infringes third-party rights; (f) attempt to circumvent any usage limits, rate limits, or access controls; or (g) use the Service in a manner that places unreasonable load on the Company's infrastructure.</p>
+      <p>Violation of these obligations may result in immediate suspension or termination without refund.</p>
+    </section>
+
+    <!-- SECTION 10 -->
+    <section id="s10">
+      <h2><span>Section 10</span>Intellectual Property</h2>
+      <p>The Zeni platform, including all software, AI models, prompts, interfaces, design, trademarks, and proprietary content, is owned by Every Ingredient Gourmet Spices LLC and protected by applicable intellectual property laws. Nothing in these Terms grants you any ownership interest in the Service or its underlying technology.</p>
+      <p>You retain ownership of all business data you input into the Service. By using the Service, you grant the Company a limited, non-exclusive license to process, store, and use your data solely for the purpose of delivering the Service to you.</p>
+      <p>The Company may use anonymized, aggregated, non-identifiable data derived from usage patterns to improve the Service. No personally identifiable information will be used for this purpose.</p>
+      <p>AI-generated outputs produced by the Service in response to your inputs are provided to you for your business use. The Company does not claim copyright over outputs generated specifically for you.</p>
+    </section>
+
+    <!-- SECTION 11 -->
+    <section id="s11">
+      <h2><span>Section 11</span>Disclaimer of Warranties</h2>
+      <div class="critical-box">
+        <div class="critical-label">Disclaimer</div>
+        <p><strong>THE SERVICE IS PROVIDED "AS IS" AND "AS AVAILABLE" WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED. THE COMPANY EXPRESSLY DISCLAIMS ALL WARRANTIES, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, ACCURACY, COMPLETENESS, NON-INFRINGEMENT, AND UNINTERRUPTED AVAILABILITY. THE COMPANY DOES NOT WARRANT THAT THE SERVICE WILL BE ERROR-FREE, THAT AI-GENERATED OUTPUTS WILL BE ACCURATE OR APPROPRIATE, OR THAT ANY INFORMATION PROVIDED WILL BE CURRENT OR APPLICABLE TO YOUR SPECIFIC CIRCUMSTANCES. YOUR USE OF THE SERVICE IS ENTIRELY AT YOUR OWN RISK.</strong></p>
+      </div>
+      <p>Some jurisdictions do not allow the exclusion of implied warranties. To the extent such exclusions are unenforceable in your jurisdiction, such warranties are limited in duration to ninety (90) days from your first use of the Service.</p>
+    </section>
+
+    <!-- SECTION 12 -->
+    <section id="s12">
+      <h2><span>Section 12</span>Limitation of Liability</h2>
+      <div class="critical-box">
+        <div class="critical-label">Critical Limitation</div>
+        <p><strong>TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL EVERY INGREDIENT GOURMET SPICES LLC, ITS MEMBERS, MANAGERS, OFFICERS, EMPLOYEES, CONTRACTORS, OR AFFILIATES (INCLUDING ANEURIN ADVISORY) BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, EXEMPLARY, OR PUNITIVE DAMAGES, INCLUDING BUT NOT LIMITED TO LOSS OF PROFITS, LOSS OF REVENUE, LOSS OF DATA, LOST BUSINESS OPPORTUNITIES, TAX PENALTIES OR INTEREST, REGULATORY FINES, OR ANY OTHER PECUNIARY OR NON-PECUNIARY LOSS ARISING OUT OF OR IN CONNECTION WITH YOUR USE OF THE SERVICE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.</strong></p>
+      </div>
+      <p><strong>The Company's total aggregate liability to you for any and all claims arising out of or relating to these Terms or the Service is strictly limited to the lesser of: (a) the total subscription fees you paid to the Company in the three (3) calendar months immediately preceding the event giving rise to the claim; or (b) five hundred United States dollars (USD $500).</strong></p>
+      <p>This limitation applies regardless of the legal theory under which the claim is brought — contract, tort, negligence, strict liability, statute, or otherwise — and applies even if the Company has been advised of the possibility of such damages and even if the limited remedy fails of its essential purpose.</p>
+      <p>The Company is not liable for any failure or delay in the performance of its obligations caused by events outside its reasonable control, including but not limited to Meta/WhatsApp service interruptions, OpenAI API outages, internet disruptions, natural disasters, regulatory actions, or force majeure events.</p>
+    </section>
+
+    <!-- SECTION 13 -->
+    <section id="s13">
+      <h2><span>Section 13</span>Indemnification</h2>
+      <p>You agree to defend, indemnify, and hold harmless Every Ingredient Gourmet Spices LLC, its members, managers, officers, employees, contractors, and affiliates from and against any and all claims, damages, losses, liabilities, costs, and expenses (including reasonable attorneys' fees) arising out of or relating to: (a) your use of the Service in violation of these Terms; (b) any business decision you make in reliance on Zeni's outputs; (c) your violation of any applicable law; (d) any inaccurate or incomplete information you provide; (e) any claim by a third party arising from documents, communications, or actions taken by you using Zeni-generated content; or (f) your infringement of any third-party rights.</p>
+      <p>The Company reserves the right to assume exclusive control of the defense of any matter subject to your indemnification, at your expense, and you agree to cooperate fully with such defense.</p>
+    </section>
+
+    <!-- SECTION 14 — ARBITRATION -->
+    <section id="s14">
+      <h2><span>Section 14</span>Mandatory Binding Arbitration and Class Action Waiver</h2>
+
+      <div class="critical-box">
+        <div class="critical-label">⚠ Please Read This Section Carefully — It Affects Your Legal Rights</div>
+        <p><strong>This section requires you to resolve most disputes with the Company through final and binding arbitration on an individual basis rather than in court, and waives your right to participate in a class action or class-wide arbitration. By accepting these Terms you are waiving your right to a jury trial.</strong></p>
+      </div>
+
+      <h3>Agreement to Arbitrate</h3>
+      <p>Except as expressly provided below, <strong>all disputes, claims, controversies, or disagreements of any kind</strong> between you and the Company arising out of or relating to these Terms, the Service, your subscription, any AI-generated content, any breach of these Terms, or the relationship between the parties (collectively, <strong>"Disputes"</strong>), <strong>shall be resolved exclusively by final, binding individual arbitration</strong> administered by the American Arbitration Association (<strong>"AAA"</strong>) under its Commercial Arbitration Rules, which are available at <a href="https://www.adr.org" target="_blank">www.adr.org</a>. The arbitrator's award shall be final and binding and may be entered as a judgment in any court of competent jurisdiction.</p>
+
+      <h3>Arbitration Procedure</h3>
+      <p>Arbitration shall be conducted: (a) in the English language; (b) online via written submissions or video conference unless both parties agree otherwise; (c) seated in the State of Wyoming, United States of America; (d) by a single neutral arbitrator appointed per AAA rules. The arbitrator shall have authority to award any remedy available at law or in equity on an individual basis, subject to the limitations in Section 12. The arbitrator's decision shall include written findings of fact and conclusions of law. Either party may seek enforcement of the award in any court of competent jurisdiction.</p>
+
+      <h3>Costs and Fees</h3>
+      <p>Each party shall bear its own attorneys' fees and costs in arbitration. If the arbitrator determines that a claim was brought in bad faith, was frivolous, or lacked any objectively reasonable legal or factual basis, the arbitrator may award the prevailing party its reasonable attorneys' fees and costs associated with the arbitration.</p>
+
+      <h3>Class Action Waiver</h3>
+      <p><strong>YOU AND THE COMPANY EACH AGREE THAT ALL DISPUTES SHALL BE RESOLVED ONLY ON AN INDIVIDUAL BASIS AND NOT AS PART OF OR AS A REPRESENTATIVE MEMBER OF A CLASS, COLLECTIVE, CONSOLIDATED, OR REPRESENTATIVE ACTION.</strong> The arbitrator has no authority to consolidate claims of multiple users or to otherwise preside over any representative proceeding. If this class action waiver is found unenforceable for any reason, the entire arbitration provision shall be null and void as to that proceeding, which shall then be resolved in court subject to Section 15.</p>
+
+      <h3>Exceptions to Arbitration</h3>
+      <p>The following are not subject to arbitration and may be pursued in court: (a) claims you bring in a small claims court of competent jurisdiction, provided the claim remains in small claims court and proceeds only on an individual basis; and (b) claims by either party for injunctive or other equitable relief to protect intellectual property rights or to prevent imminent harm. You must commence any such court action within the limitation period set out in Section 16.</p>
+
+      <h3>Pre-Arbitration Notice</h3>
+      <p>Before initiating arbitration, you must send written notice to <a href="mailto:support@aneurinadvisory.com">support@aneurinadvisory.com</a> describing the nature of the Dispute and the relief sought. The parties agree to make a good-faith effort to resolve the Dispute informally for a period of thirty (30) days after notice. If the Dispute is not resolved within that period, either party may initiate arbitration.</p>
+
+      <h3>Severability</h3>
+      <p>If any part of this arbitration agreement is found to be unenforceable (other than the class action waiver, which operates as described above), that part shall be severed and the remainder of this section shall remain in full force and effect.</p>
+    </section>
+
+    <!-- SECTION 15 -->
+    <section id="s15">
+      <h2><span>Section 15</span>Governing Law and Jurisdiction</h2>
+      <p>These Terms and any Dispute arising out of or relating to the Service shall be governed by and construed in accordance with the laws of the State of Wyoming, United States of America, without regard to its conflict of law principles.</p>
+      <p>For any Disputes not subject to arbitration under Section 14, you irrevocably consent to the exclusive personal jurisdiction of the state and federal courts located in Wyoming, United States of America, and waive any objection to such venue. You agree that you will not bring any non-arbitrable claim against the Company in any other court.</p>
+      <p>The application of the United Nations Convention on Contracts for the International Sale of Goods is expressly excluded. Canadian provincial or territorial consumer protection legislation shall apply only to the extent mandated by applicable law that cannot be lawfully disclaimed in a commercial service agreement.</p>
+      <p>Nothing in this section limits the Company's right to seek injunctive or other emergency relief in any jurisdiction to protect its intellectual property or to prevent ongoing harm.</p>
+    </section>
+
+    <!-- SECTION 16 -->
+    <section id="s16">
+      <h2><span>Section 16</span>Time Limitation on Claims</h2>
+      <p><strong>TO THE MAXIMUM EXTENT PERMITTED BY LAW, ANY CLAIM OR CAUSE OF ACTION ARISING OUT OF OR RELATED TO THESE TERMS OR THE SERVICE MUST BE COMMENCED WITHIN SIX (6) MONTHS AFTER THE CLAIM OR CAUSE OF ACTION ACCRUED. CLAIMS NOT BROUGHT WITHIN THIS PERIOD ARE PERMANENTLY BARRED, REGARDLESS OF ANY STATUTE OF LIMITATIONS OR OTHER LAW TO THE CONTRARY.</strong></p>
+      <p>This six-month limitation applies to all claims regardless of legal theory, including contract, tort, statute, or otherwise. You expressly agree that this limitation period is a material part of the bargain between the parties and that the Company's pricing reflects this provision.</p>
+    </section>
+
+    <!-- SECTION 17 -->
+    <section id="s17">
+      <h2><span>Section 17</span>General Provisions</h2>
+
+      <h3>Entire Agreement</h3>
+      <p>These Terms, together with the Privacy Policy and any Pro-specific addenda, constitute the entire agreement between you and the Company regarding the Service and supersede all prior agreements, representations, or understandings, whether written or oral.</p>
+
+      <h3>Modifications</h3>
+      <p>The Company may update these Terms at any time. Material changes will be communicated via WhatsApp message or email to the contact on file with at least 14 days' notice before the changes take effect. Your continued use of the Service after the effective date of any change constitutes your acceptance of the updated Terms. If you do not accept updated Terms, you must cancel your subscription before the effective date.</p>
+
+      <h3>Severability</h3>
+      <p>If any provision of these Terms is found to be invalid, illegal, or unenforceable by a court or arbitrator, that provision shall be enforced to the maximum extent permissible, and the remaining provisions shall remain in full force and effect.</p>
+
+      <h3>No Waiver</h3>
+      <p>The Company's failure to enforce any right or provision of these Terms shall not constitute a waiver of that right or provision. A waiver of any specific breach shall not be construed as a waiver of any subsequent breach.</p>
+
+      <h3>Assignment</h3>
+      <p>You may not assign or transfer your rights or obligations under these Terms without the Company's prior written consent. The Company may freely assign its rights and obligations under these Terms, including in connection with a merger, acquisition, or sale of assets, without notice to you.</p>
+
+      <h3>No Third-Party Beneficiaries</h3>
+      <p>These Terms do not create any third-party beneficiary rights. Only the parties to this Agreement may enforce its terms.</p>
+
+      <h3>Relationship of Parties</h3>
+      <p>You and the Company are independent contracting parties. Nothing in these Terms creates any partnership, joint venture, employment, or agency relationship between you and the Company.</p>
+
+      <h3>Contact</h3>
+      <p>For questions about these Terms, contact: <a href="mailto:support@aneurinadvisory.com">support@aneurinadvisory.com</a></p>
+      <p>Aneurin Advisory / Every Ingredient Gourmet Spices LLC<br>
+      <a href="https://ca.aneurinadvisory.com">ca.aneurinadvisory.com</a></p>
+    </section>
+
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <a href="/" style="font-size:17px;font-weight:800;text-decoration:none;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Zeni</a>
+    <p>© 2026 Every Ingredient Gourmet Spices LLC · Aneurin Advisory</p>
+    <ul class="footer-links">
+      <li><a href="/privacy">Privacy Policy</a></li>
+      <li><a href="/terms">Terms of Service</a></li>
+      <li><a href="mailto:support@aneurinadvisory.com">Contact</a></li>
+    </ul>
+  </div>
+</footer>
+
+</body>
+</html>
