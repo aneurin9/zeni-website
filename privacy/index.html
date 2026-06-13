@@ -60,7 +60,6 @@
     .toc li { font-size: 13px; color: var(--muted); margin-bottom: 6px; }
     .toc a { color: var(--muted); }
     .toc a:hover { color: var(--purple); }
-
     footer { border-top: 1px solid var(--border); padding: 32px 0; margin-top: 40px; }
     .footer-inner { max-width: 800px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
     .footer-inner p { font-size: 13px; color: var(--muted); margin: 0; }
@@ -87,7 +86,7 @@
 
   <div class="info-box">
     <p><strong>Your privacy matters.</strong> This policy explains exactly what data Zeni collects, why, who it is shared with, and your rights over it.</p>
-    <p>The Zeni Service is operated by Every Ingredient Gourmet Spices LLC (Aneurin Advisory). Your data is processed in the United States on infrastructure located there. Canadian users: this policy is designed to comply with the Personal Information Protection and Electronic Documents Act (PIPEDA) and applicable provincial privacy legislation.</p>
+    <p>The Zeni Service is operated by Every Ingredient Gourmet Spices LLC (Aneurin Advisory). Your data is processed in the United States on infrastructure located there. The Service currently operates in the Canadian provinces of Ontario, British Columbia, and Alberta. This policy is designed to comply with the federal <em>Personal Information Protection and Electronic Documents Act</em> (PIPEDA). British Columbia and Alberta have enacted their own private sector privacy legislation — BC’s <em>Personal Information Protection Act</em> (SBC 2003, c. 63) and Alberta’s <em>Personal Information Protection Act</em> (SA 2003, c. P-6.5) — which applies in those provinces alongside federal law. This policy is designed to comply with all three applicable frameworks. Ontario is covered by PIPEDA at the federal level for private sector commercial activities.</p>
   </div>
 
   <div class="toc">
@@ -103,7 +102,7 @@
       <li><a href="#p8">AI Processing Disclosure</a></li>
       <li><a href="#p9">Your Rights</a></li>
       <li><a href="#p10">Cookies and Analytics</a></li>
-      <li><a href="#p11">Children's Privacy</a></li>
+      <li><a href="#p11">Children’s Privacy</a></li>
       <li><a href="#p12">Changes to This Policy</a></li>
       <li><a href="#p13">Contact and Complaints</a></li>
     </ol>
@@ -118,6 +117,7 @@
       Operating as: Aneurin Advisory / Zeni<br>
       Website: <a href="https://ca.aneurinadvisory.com">ca.aneurinadvisory.com</a><br>
       Contact: <a href="mailto:support@aneurinadvisory.com">support@aneurinadvisory.com</a></p>
+      <p>The Service is currently offered to business operators based in Ontario, British Columbia, and Alberta, Canada.</p>
     </section>
 
     <section id="p2">
@@ -129,7 +129,7 @@
         <li>Your WhatsApp phone number (used as your primary identifier)</li>
         <li>Your name, as provided during onboarding</li>
         <li>Your business name and structure (service vs. ecommerce, etc.)</li>
-        <li>Canadian province or territory</li>
+        <li>Canadian province (Ontario, British Columbia, or Alberta)</li>
         <li>Email address (if provided)</li>
         <li>Account status and subscription tier</li>
       </ul>
@@ -150,7 +150,7 @@
       <h3>Conversation Data</h3>
       <ul>
         <li>The full text content of your conversations with Zeni through WhatsApp</li>
-        <li>Voice notes you send (transcribed by OpenAI's Whisper API)</li>
+        <li>Voice notes you send (transcribed by OpenAI’s Whisper API)</li>
         <li>Images and PDFs you send for processing (receipts, documents)</li>
         <li>Interactive selections (button taps, list selections)</li>
         <li>Timestamps and session metadata</li>
@@ -194,17 +194,17 @@
         <li><strong>Consent:</strong> For optional features or data uses where we have requested and received your consent</li>
         <li><strong>Legal obligation:</strong> Where required to comply with applicable law</li>
       </ul>
-      <p>Under PIPEDA, we collect only the personal information reasonably required for the identified purposes and will not use or disclose that information for purposes other than those for which it was collected without your consent or as required by law.</p>
+      <p>Under PIPEDA, we collect only the personal information reasonably required for the identified purposes and will not use or disclose that information for purposes other than those for which it was collected without your consent or as required by law. Equivalent obligations apply under BC PIPA for British Columbia users and Alberta PIPA for Alberta users. Ontario commercial activities are governed by PIPEDA at the federal level.</p>
     </section>
 
     <section id="p5">
       <h2><span>Section 5</span>Third-Party Data Processors</h2>
-      <p>Your data is stored securely and used solely to provide Zeni's business operator features. AI responses are generated through OpenAI's API, which processes data in the United States under OpenAI's privacy policy and enterprise data protection terms. OpenAI's current API terms do not permit using API inputs to train their models, though this is subject to OpenAI's own policies. No client data is sold or shared with any third party for marketing purposes.</p>
+      <p>Your data is stored securely and used solely to provide Zeni’s business operator features. AI responses are generated through OpenAI’s API, which processes data in the United States under OpenAI’s privacy policy and enterprise data protection terms. OpenAI’s current API terms do not permit using API inputs to train their models, though this is subject to OpenAI’s own policies. No client data is sold or shared with any third party for marketing purposes.</p>
       <p>Payment processing is handled by Stripe. Message delivery runs through WhatsApp (Meta Platforms). All other infrastructure operates within the United States.</p>
       <p>We may disclose personal information to professional advisors under confidentiality obligations, and to law enforcement or regulatory authorities where required by law or valid legal process.</p>
 
       <details style="margin-top:20px;background:rgba(123,97,255,.04);border:1px solid var(--border);border-radius:8px;padding:16px 20px;">
-        <summary style="font-size:13px;font-weight:600;color:var(--muted);cursor:pointer;letter-spacing:.3px;">Full processor list (PIPEDA disclosure)</summary>
+        <summary style="font-size:13px;font-weight:600;color:var(--muted);cursor:pointer;letter-spacing:.3px;">Full processor list (PIPEDA / BC PIPA / AB PIPA disclosure)</summary>
         <table style="width:100%;border-collapse:collapse;margin-top:16px;">
           <thead>
             <tr>
@@ -222,11 +222,12 @@
           </tbody>
         </table>
       </details>
+    </section>
 
     <section id="p6">
       <h2><span>Section 6</span>Data Storage and Cross-Border Transfers</h2>
-      <p>Your data is stored on Supabase infrastructure located in the eastern United States. By using Zeni, you acknowledge and consent to your personal information being transferred to and processed in the United States, where data protection laws may differ from those in Canada or your home jurisdiction.</p>
-      <p>We implement contractual safeguards with our processors to ensure your data receives an appropriate level of protection regardless of where it is processed.</p>
+      <p>Your data is stored on Supabase infrastructure located in the eastern United States. By using Zeni, you acknowledge and consent to your personal information being transferred to and processed in the United States, where data protection laws may differ from those in Canada or the applicable provincial privacy legislation of Ontario, British Columbia, or Alberta.</p>
+      <p>We implement contractual safeguards with our processors to ensure your data receives an appropriate level of protection regardless of where it is processed. Transfers of personal information from British Columbia and Alberta to our U.S. processors are made on the basis of contractual protections consistent with BC PIPA and Alberta PIPA requirements regarding cross-border transfers.</p>
     </section>
 
     <section id="p7">
@@ -238,10 +239,10 @@
 
     <section id="p8">
       <h2><span>Section 8</span>AI Processing Disclosure</h2>
-      <p>Zeni's responses are generated by OpenAI's large language model AI. Your conversation content, including business information you share, is transmitted to OpenAI's API for processing.</p>
-      <p><strong>What this means for your data:</strong> The business information, financial data, and context you share with Zeni is used to generate relevant, personalized AI responses. This data is transmitted to OpenAI's servers in the United States for processing. OpenAI's current API terms prohibit using API inputs and outputs to train OpenAI's models; however, this is subject to OpenAI's terms which may change.</p>
-      <p>Voice notes you send are transcribed using OpenAI's Whisper API, which receives the audio file content. Images and PDFs are processed by OpenAI's vision API.</p>
-      <p>We encourage you to review OpenAI's privacy policy at <a href="https://openai.com/privacy" target="_blank">openai.com/privacy</a> and API usage policies for full details of how OpenAI handles data submitted via API.</p>
+      <p>Zeni’s responses are generated by OpenAI’s large language model AI. Your conversation content, including business information you share, is transmitted to OpenAI’s API for processing.</p>
+      <p><strong>What this means for your data:</strong> The business information, financial data, and context you share with Zeni is used to generate relevant, personalized AI responses. This data is transmitted to OpenAI’s servers in the United States for processing. OpenAI’s current API terms prohibit using API inputs and outputs to train OpenAI’s models; however, this is subject to OpenAI’s terms which may change.</p>
+      <p>Voice notes you send are transcribed using OpenAI’s Whisper API, which receives the audio file content. Images and PDFs are processed by OpenAI’s vision API.</p>
+      <p>We encourage you to review OpenAI’s privacy policy at <a href="https://openai.com/privacy" target="_blank">openai.com/privacy</a> and API usage policies for full details of how OpenAI handles data submitted via API.</p>
       <p>AI-generated outputs may be inaccurate. See the Terms of Service Section 4 for important disclaimers about AI limitations.</p>
     </section>
 
@@ -265,7 +266,7 @@
       <p>Where we process data on the basis of consent, you may withdraw that consent at any time. Withdrawal does not affect processing already carried out.</p>
 
       <h3>Complaints</h3>
-      <p>Canadian users have the right to lodge a complaint with the Office of the Privacy Commissioner of Canada (OPC) at <a href="https://www.priv.gc.ca" target="_blank">www.priv.gc.ca</a> if they believe their privacy rights have been violated. We encourage you to contact us directly first so we can attempt to resolve the matter.</p>
+      <p>Canadian users have the right to lodge a complaint with the Office of the Privacy Commissioner of Canada (OPC) at <a href="https://www.priv.gc.ca" target="_blank">www.priv.gc.ca</a> if they believe their privacy rights have been violated. British Columbia users may alternatively or additionally contact the Office of the Information and Privacy Commissioner for BC at <a href="https://www.oipc.bc.ca" target="_blank">oipc.bc.ca</a>. Alberta users may alternatively or additionally contact the Office of the Information and Privacy Commissioner of Alberta at <a href="https://www.oipc.ab.ca" target="_blank">oipc.ab.ca</a>. We encourage you to contact us directly first so we can attempt to resolve the matter.</p>
 
       <h3>How to Exercise Your Rights</h3>
       <p>To exercise any of these rights, contact us at <a href="mailto:support@aneurinadvisory.com">support@aneurinadvisory.com</a> with the subject line "Privacy Request." We may require verification of your identity before processing a request.</p>
@@ -277,7 +278,7 @@
     </section>
 
     <section id="p11">
-      <h2><span>Section 11</span>Children's Privacy</h2>
+      <h2><span>Section 11</span>Children’s Privacy</h2>
       <p>The Zeni Service is intended for business use by adults aged 18 and older. We do not knowingly collect personal information from individuals under the age of 18. If we become aware that we have collected information from a minor, we will delete it promptly. If you believe we have inadvertently collected such information, please contact us immediately.</p>
     </section>
 
@@ -294,7 +295,12 @@
       Email: <a href="mailto:support@aneurinadvisory.com">support@aneurinadvisory.com</a><br>
       Website: <a href="https://ca.aneurinadvisory.com">ca.aneurinadvisory.com</a></p>
       <p>We will respond to privacy enquiries within 30 days. If we require more time due to complexity, we will notify you of the extension and reason within the initial 30-day period.</p>
-      <p>For unresolved privacy concerns, Canadian users may contact the Office of the Privacy Commissioner of Canada: 30 Victoria Street, Gatineau, Quebec K1A 1H3 · 1-800-282-1376 · <a href="https://www.priv.gc.ca" target="_blank">www.priv.gc.ca</a></p>
+      <p>For unresolved privacy concerns:</p>
+      <ul>
+        <li><strong>All provinces:</strong> Office of the Privacy Commissioner of Canada · 1-800-282-1376 · <a href="https://www.priv.gc.ca" target="_blank">www.priv.gc.ca</a></li>
+        <li><strong>British Columbia:</strong> Office of the Information and Privacy Commissioner for BC · <a href="https://www.oipc.bc.ca" target="_blank">www.oipc.bc.ca</a></li>
+        <li><strong>Alberta:</strong> Office of the Information and Privacy Commissioner of Alberta · <a href="https://www.oipc.ab.ca" target="_blank">www.oipc.ab.ca</a></li>
+      </ul>
     </section>
 
   </div>
