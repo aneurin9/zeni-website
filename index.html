@@ -51,8 +51,30 @@
     /* NAV */
     nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; padding: 14px 0; backdrop-filter: blur(24px) saturate(1.5); background: rgba(10,15,44,.85); border-bottom: 1px solid var(--border); transition: border-color .3s; }
     .nav-inner { max-width: var(--max); margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; position: relative; }
-    .logo { text-decoration: none; display: flex; align-items: center; }
-    .logo img { height: 38px; width: auto; display: block; }
+    .logo {
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      min-width: max-content;
+    }
+    .logo img {
+      width: 42px;
+      height: 42px;
+      object-fit: contain;
+      display: block;
+      flex-shrink: 0;
+    }
+    .brand-word {
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -.5px;
+      background: var(--grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .logo .brand-word { font-size: 22px; }
     .nav-links { display: flex; align-items: center; gap: 26px; list-style: none; }
     .nav-links a { color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 400; transition: color .2s; }
     .nav-links a:hover { color: var(--white); }
@@ -278,17 +300,90 @@
     .cta-btns { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
 
     /* FOOTER */
-    footer { border-top: 1px solid var(--border); padding: 36px 0; }
-    .fi-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; }
-    .fl-logo { text-decoration: none; display: flex; align-items: center; }
-    .fl-logo img { height: 30px; width: auto; display: block; }
-    .ft-txt { font-size: 13px; color: var(--muted); }
-    .ft-txt a { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-decoration: none; }
-    .fl-links { display: flex; gap: 20px; list-style: none; }
-    .fl-links a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color .2s; }
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 40px 0;
+    }
+    .fi-row {
+      display: grid;
+      grid-template-columns: auto minmax(240px, 1fr) auto;
+      align-items: center;
+      gap: 24px 36px;
+    }
+    .fl-logo {
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      min-width: max-content;
+    }
+    .fl-logo img {
+      width: 32px;
+      height: 32px;
+      object-fit: contain;
+      display: block;
+      flex-shrink: 0;
+    }
+    .fl-logo .brand-word { font-size: 18px; }
+    .ft-txt {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      min-width: 0;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+    .ft-txt a {
+      background: var(--grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-decoration: none;
+    }
+    .ft-email {
+      display: inline-block;
+      width: fit-content;
+      max-width: 100%;
+      overflow-wrap: anywhere;
+    }
+    .fl-links {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+      gap: 12px 18px;
+      list-style: none;
+    }
+    .fl-links li {
+      display: flex;
+      align-items: center;
+    }
+    .fl-links a {
+      font-size: 13px;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color .2s, border-color .2s, background .2s;
+    }
     .fl-links a:hover { color: var(--white); }
-    .ft-ig { display: inline-flex; align-items: center; vertical-align: -3px; color: #00C2FF; text-decoration: none; transition: color .22s; }
-    .ft-ig:hover { color: #fff; }
+    .ft-ig {
+      width: 34px;
+      height: 34px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      border: 1px solid var(--border2);
+      border-radius: 10px;
+      background: rgba(123,97,255,.07);
+      color: #00C2FF !important;
+      -webkit-text-fill-color: initial;
+    }
+    .ft-ig:hover {
+      color: #fff !important;
+      border-color: rgba(0,194,255,.42);
+      background: rgba(0,194,255,.08);
+    }
 
     /* RESPONSIVE */
     @media (max-width: 900px) {
@@ -315,9 +410,37 @@
       .nav-links a { display: block; padding: 11px 12px; border-radius: 9px; }
       .nav-links a:hover { background: rgba(255,255,255,.04); }
       .nav-links .nav-btn { text-align: center; margin-top: 4px; }
+      .fi-row {
+        grid-template-columns: 1fr;
+        justify-items: start;
+        gap: 20px;
+      }
+      .ft-txt { width: 100%; }
+      .fl-links {
+        width: 100%;
+        justify-content: flex-start;
+      }
     }
     @media (max-width: 580px) {
       .wrap, .nav-inner { padding: 0 18px; }
+      .logo { gap: 8px; }
+      .logo img {
+        width: 36px;
+        height: 36px;
+      }
+      .logo .brand-word { font-size: 20px; }
+      footer { padding: 32px 0; }
+      .fi-row { gap: 18px; }
+      .ft-txt {
+        gap: 4px;
+        font-size: 12.5px;
+      }
+      .fl-links { gap: 10px 16px; }
+      .fl-logo img {
+        width: 30px;
+        height: 30px;
+      }
+      .fl-logo .brand-word { font-size: 18px; }
       .prob-grid, .handles-grid, .feat-grid { grid-template-columns: 1fr; }
       .core-card { padding: 34px 22px; }
       .core-amt { font-size: 48px; }
@@ -339,7 +462,10 @@
   </div>
 </div><nav id="nav">
   <div class="nav-inner">
-    <a href="#" class="logo"><img src="/logo.png" alt="Zeni"></a>
+    <a href="/" class="logo" aria-label="Zeni home">
+      <img src="/logo.png" alt="" width="42" height="42">
+      <span class="brand-word">Zeni</span>
+    </a>
     <ul class="nav-links">
       <li><a href="#how">How it works</a></li>
       <li><a href="#handles">What Zeni does</a></li>
@@ -642,9 +768,57 @@
 <footer>
   <div class="wrap">
     <div class="fi-row">
-      <a href="#" class="fl-logo"><img src="/logo.png" alt="Zeni"></a>
-      <p class="ft-txt">By <a href="https://ca.aneurinadvisory.com">Aneurin Advisory</a> &nbsp;·&nbsp; <a href="mailto:support@aneurinadvisory.com">support@aneurinadvisory.com</a> &nbsp;·&nbsp; <a href="https://www.instagram.com/aneurin.advisory/" target="_blank" rel="noopener noreferrer" class="ft-ig" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="0.6" fill="currentColor" stroke="none"/></svg></a></p>
-      <ul class="fl-links"><li><a href="/privacy">Privacy</a></li><li><a href="/terms">Terms of Service</a></li><li><a href="https://ca.aneurinadvisory.com">Aneurin Advisory</a></li></ul>
+      <a href="/" class="fl-logo" aria-label="Zeni home">
+        <img src="/logo.png" alt="" width="32" height="32">
+        <span class="brand-word">Zeni</span>
+      </a>
+
+      <div class="ft-txt">
+        <span>
+          By <a href="https://ca.aneurinadvisory.com">Aneurin Advisory</a>
+        </span>
+        <a
+          class="ft-email"
+          href="mailto:support@aneurinadvisory.com"
+        >support@aneurinadvisory.com</a>
+      </div>
+
+      <ul class="fl-links">
+        <li><a href="/privacy">Privacy</a></li>
+        <li><a href="/terms">Terms of Service</a></li>
+        <li>
+          <a
+            href="https://www.instagram.com/aneurin.advisory/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="ft-ig"
+            aria-label="Follow Aneurin Advisory on Instagram"
+            title="Instagram"
+          >
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.75"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+              <circle cx="12" cy="12" r="4.5"/>
+              <circle
+                cx="17.5"
+                cy="6.5"
+                r="0.6"
+                fill="currentColor"
+                stroke="none"
+              />
+            </svg>
+          </a>
+        </li>
+      </ul>
     </div>
   </div>
 </footer>
