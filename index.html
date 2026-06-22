@@ -51,7 +51,8 @@
     /* NAV */
     nav { position: fixed; top: 0; left: 0; right: 0; z-index: 200; padding: 14px 0; backdrop-filter: blur(24px) saturate(1.5); background: rgba(10,15,44,.85); border-bottom: 1px solid var(--border); transition: border-color .3s; }
     .nav-inner { max-width: var(--max); margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; position: relative; }
-    .logo { font-size: 22px; font-weight: 800; text-decoration: none; letter-spacing: -.4px; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .logo { text-decoration: none; display: flex; align-items: center; }
+    .logo img { height: 38px; width: auto; display: block; }
     .nav-links { display: flex; align-items: center; gap: 26px; list-style: none; }
     .nav-links a { color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 400; transition: color .2s; }
     .nav-links a:hover { color: var(--white); }
@@ -279,7 +280,8 @@
     /* FOOTER */
     footer { border-top: 1px solid var(--border); padding: 36px 0; }
     .fi-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; }
-    .fl-logo { font-size: 18px; font-weight: 800; text-decoration: none; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .fl-logo { text-decoration: none; display: flex; align-items: center; }
+    .fl-logo img { height: 30px; width: auto; display: block; }
     .ft-txt { font-size: 13px; color: var(--muted); }
     .ft-txt a { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-decoration: none; }
     .fl-links { display: flex; gap: 20px; list-style: none; }
@@ -337,7 +339,7 @@
   </div>
 </div><nav id="nav">
   <div class="nav-inner">
-    <a href="#" class="logo">Zeni</a>
+    <a href="#" class="logo"><img src="/logo.png" alt="Zeni"></a>
     <ul class="nav-links">
       <li><a href="#how">How it works</a></li>
       <li><a href="#handles">What Zeni does</a></li>
@@ -640,7 +642,7 @@
 <footer>
   <div class="wrap">
     <div class="fi-row">
-      <a href="#" class="fl-logo">Zeni</a>
+      <a href="#" class="fl-logo"><img src="/logo.png" alt="Zeni"></a>
       <p class="ft-txt">By <a href="https://ca.aneurinadvisory.com">Aneurin Advisory</a> &nbsp;·&nbsp; <a href="mailto:support@aneurinadvisory.com">support@aneurinadvisory.com</a> &nbsp;·&nbsp; <a href="https://www.instagram.com/aneurin.advisory/" target="_blank" rel="noopener noreferrer" class="ft-ig" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="0.6" fill="currentColor" stroke="none"/></svg></a></p>
       <ul class="fl-links"><li><a href="/privacy">Privacy</a></li><li><a href="/terms">Terms of Service</a></li><li><a href="https://ca.aneurinadvisory.com">Aneurin Advisory</a></li></ul>
     </div>
