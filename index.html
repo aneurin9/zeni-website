@@ -1176,6 +1176,13 @@ function gsEsc(s){
   var d=document.createElement('div'); d.textContent=s||''; return d.innerHTML;
 }
 
+function gsGreeting(){
+  var name=(gsData.name||'').trim();
+  if(!name) return '';
+  name=name.charAt(0).toUpperCase()+name.slice(1);
+  return 'Nice to meet you, '+gsEsc(name)+'. ';
+}
+
 function gsScreen(step){
   if(step===1){
     return '<div class="wt-eye">Step 1 of 4</div>'+
@@ -1190,14 +1197,14 @@ function gsScreen(step){
     if(gsData.otherProvince){
       if(gsData.waitlisted){
         return '<div class="wt-eye">Step 2 of 4</div>'+
-          '<div class="wt-title">Where are you building from?</div>'+
+          '<div class="wt-title">'+gsGreeting()+'Where are you building from?</div>'+
           '<div class="waitlist-panel">'+
             '<div class="wl-done"><span class="ic" data-ic="check"></span> You’re on the list — I’ll email you the moment Zeni reaches your province.</div>'+
           '</div>'+
           '<button class="wl-back" onclick="gsBackToProvinces()"><span class="ic" data-ic="back"></span> Choose a different province</button>';
       }
       return '<div class="wt-eye">Step 2 of 4</div>'+
-        '<div class="wt-title">Where are you building from?</div>'+
+        '<div class="wt-title">'+gsGreeting()+'Where are you building from?</div>'+
         '<div class="waitlist-panel">'+
           '<div class="wl-head"><div class="wl-ic"><span class="ic" data-ic="pin"></span></div><div><h5>Not in your province yet</h5></div></div>'+
           '<p>Zeni currently supports Ontario, British Columbia and Alberta. Join the waitlist and I’ll let you know the moment we expand.</p>'+
@@ -1211,7 +1218,7 @@ function gsScreen(step){
         '<button class="wl-back" onclick="gsBackToProvinces()"><span class="ic" data-ic="back"></span> Choose a different province</button>';
     }
     return '<div class="wt-eye">Step 2 of 4</div>'+
-      '<div class="wt-title">Where are you building from?</div>'+
+      '<div class="wt-title">'+gsGreeting()+'Where are you building from?</div>'+
       '<p class="wt-sub">Zeni is available in three provinces so far, with more on the way.</p>'+
       '<div class="prov-grid">'+
         PROVINCES.map(function(p){
