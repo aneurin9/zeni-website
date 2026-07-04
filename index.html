@@ -83,16 +83,21 @@
     background:radial-gradient(ellipse,rgba(255,214,236,.4),rgba(199,187,255,.24) 46%,transparent 74%);filter:blur(40px);animation:glow 16s ease-in-out infinite}
   @keyframes glow{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:.92}50%{transform:translate(-50%,-53%) scale(1.06);opacity:1}}
   .sky .waves{position:absolute;left:-6vw;right:-6vw;bottom:-2px;width:112vw;height:58%}
-  .hero-in{position:relative;z-index:2;display:grid;grid-template-columns:1.02fr .98fr;gap:48px;align-items:center}
+  .hero-in{position:relative;z-index:2;display:grid;grid-template-columns:1.08fr .92fr;gap:48px;align-items:center}
   .eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:13px;font-weight:600;color:var(--ink2);background:var(--glass);border:1px solid var(--glass-brd);padding:7px 15px;border-radius:100px;box-shadow:var(--shadow-sm);margin-bottom:22px}
   .eyebrow .pulse{width:8px;height:8px;border-radius:50%;background:var(--grad);animation:pulse 2.4s infinite}
+  .type-cursor{display:inline-block;width:2px;height:12px;background:var(--violet);margin-left:1px;vertical-align:-1px;animation:typeBlink .9s step-end infinite}
+  .type-cursor.done{animation:none;opacity:0;transition:opacity .5s ease}
+  @keyframes typeBlink{50%{opacity:0}}
   @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(123,97,255,.45)}70%{box-shadow:0 0 0 9px rgba(123,97,255,0)}100%{box-shadow:0 0 0 0 rgba(123,97,255,0)}}
   h1{font-size:clamp(38px,5vw,58px);line-height:1.04;letter-spacing:-1.9px;font-weight:800;text-wrap:balance;margin-bottom:20px}
   .hero-sub{font-size:17.5px;color:var(--ink2);max-width:452px;margin-bottom:26px;line-height:1.6}
-  .trust{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:30px}
-  .chip{display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.7);border-radius:14px;padding:10px 16px 10px 10px;font-size:13px;font-weight:500;color:var(--ink2);box-shadow:0 4px 18px rgba(90,70,160,.08);backdrop-filter:blur(14px) saturate(1.3);-webkit-backdrop-filter:blur(14px) saturate(1.3)}
-  .chip .ic{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.65);border:1px solid rgba(255,255,255,.8);display:inline-flex;align-items:center;justify-content:center;font-size:15px;color:var(--violet);flex-shrink:0;box-shadow:inset 0 1px 1px rgba(255,255,255,.6)}
-  .chip .ic.i-leaf{color:#3fa66a}
+  .trust{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:30px}
+  @media(min-width:881px){.trust{flex-wrap:nowrap}}
+  .chip{display:inline-flex;align-items:center;gap:9px;background:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.7);border-radius:14px;padding:8px 13px 8px 8px;font-size:12.5px;font-weight:600;color:var(--ink2);box-shadow:0 4px 18px rgba(90,70,160,.08);backdrop-filter:blur(14px) saturate(1.3);-webkit-backdrop-filter:blur(14px) saturate(1.3);white-space:nowrap}
+  .chip .ic{width:33px;height:33px;border-radius:50%;background:rgba(123,97,255,.16);border:1px solid rgba(255,255,255,.7);display:inline-flex;align-items:center;justify-content:center;font-size:17px;color:var(--violet);flex-shrink:0;box-shadow:inset 0 1px 1px rgba(255,255,255,.5)}
+  .chip .ic.i-leaf{background:rgba(26,143,90,.16);color:#1a8f5a}
+  .chip .ic.i-smile{background:rgba(90,169,255,.18);color:#2f6fb0}
   .hero-actions{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
   .btn-lg{padding:15px 28px;font-size:15.5px;border-radius:14px}
 
@@ -434,6 +439,7 @@
   .pricing-card .pc-price{font-size:38px;font-weight:800;letter-spacing:-1px;margin:14px 0 4px}
   .pricing-card .pc-price small{font-size:14.5px;font-weight:600;color:var(--muted)}
   .intro-badge{display:inline-flex;align-items:center;background:rgba(184,134,11,.12);color:#a8760a;border:1px solid rgba(184,134,11,.22);font-size:11.5px;font-weight:700;letter-spacing:.2px;padding:5px 12px;border-radius:100px;margin-bottom:14px}
+  .intro-badge-neutral{background:rgba(123,97,255,.10);color:var(--violet-d);border-color:rgba(123,97,255,.22)}
   .pc-regular{font-size:13px;color:var(--faint);margin-bottom:18px}
   .pricing-card .pc-desc{color:var(--muted);font-size:14px;margin-bottom:22px;line-height:1.55}
   .pricing-card .pc-list{list-style:none;display:flex;flex-direction:column;gap:11px;margin-bottom:28px}
@@ -468,8 +474,8 @@
   .trust-band{max-width:680px;margin:0 auto 36px;text-align:center}
   .trust-band h4{font-size:17px;font-weight:800;letter-spacing:-.3px;color:var(--ink);margin-bottom:20px}
   .tb-points{display:flex;flex-wrap:wrap;justify-content:center;gap:12px 26px;margin-bottom:20px}
-  .tb-point{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ink2);font-weight:500}
-  .tb-point .ic{color:var(--violet);font-size:15px;flex-shrink:0}
+  .tb-point{font-size:13px;color:var(--ink2);font-weight:500}
+  .tb-point:not(:last-child)::after{content:"·";margin-left:14px;color:var(--faint);font-weight:400}
   .tb-accordion{max-width:440px;margin:0 auto;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden}
   .tb-accordion summary{cursor:pointer;list-style:none;padding:11px 16px;font-size:12.5px;font-weight:600;color:var(--ink2);display:flex;align-items:center;justify-content:space-between;gap:10px}
   .tb-accordion summary::-webkit-details-marker{display:none}
@@ -481,6 +487,10 @@
   .foot-brand-row .brand img{width:26px;height:26px}
   .foot-brand-row .brand b{font-size:16px}
   .foot-by{font-size:12px;color:var(--faint);font-weight:500;margin-left:7px}
+  .foot-left{display:flex;flex-direction:column;gap:10px}
+  .foot-contact{gap:16px}
+  .foot-contact a{font-size:12.5px}
+  .foot-legal{gap:20px}
   .foot-links{display:flex;gap:20px;flex-wrap:wrap}
   .foot-links a{font-size:13px;color:var(--muted)}
   .foot-links a:hover{color:var(--ink)}
@@ -505,7 +515,7 @@
       <a href="#">What Zeni handles</a><a href="#pricing">Pricing</a><a href="#faq">FAQ</a>
     </div>
     <div class="nav-cta-wrap">
-      <button class="btn btn-primary">Get started</button>
+      <button class="btn btn-primary" onclick="openGetStarted()">Get started</button>
       <button class="hamburger" id="hamb" aria-label="Open menu" aria-expanded="false"><span class="ic" data-ic="menu"></span></button>
     </div>
   </div>
@@ -534,13 +544,13 @@
   </div>
   <div class="wrap"><div class="hero-in">
     <div>
-      <div class="eyebrow"><span class="pulse"></span> Hello, I'm Zeni.</div>
+      <div class="eyebrow"><span class="pulse"></span> <span id="typeText"></span><span class="type-cursor" id="typeCursor"></span></div>
       <h1>Your business operator on <span class="g2">WhatsApp.</span></h1>
       <p class="hero-sub">I help you set up and run your business in Canada, then expand into the U.S. when you’re ready — all through WhatsApp.</p>
       <div class="trust">
         <span class="chip"><span class="ic" data-ic="user"></span> Built for solopreneurs</span>
         <span class="chip"><span class="ic i-leaf" data-ic="leaf"></span> Canada-first, U.S.-ready</span>
-        <span class="chip"><span class="ic" data-ic="smile"></span> No new software to learn</span>
+        <span class="chip"><span class="ic i-smile" data-ic="smile"></span> No new software to learn</span>
       </div>
       <div class="hero-actions">
         <button class="btn btn-primary btn-lg" onclick="openGetStarted()">Get started with Zeni <span class="ic" data-ic="arrow"></span></button>
@@ -717,14 +727,15 @@
       </div>
       <div class="pricing-card">
         <div class="pc-tag">Zeni Premium</div>
-        <h3>Hand off the back-office</h3>
+        <span class="intro-badge intro-badge-neutral">Optional upgrade</span>
+        <h3>Everything else is handled</h3>
         <div class="pc-price">$350 <small>CAD / month</small></div>
         <p class="pc-desc">For when you want compliance fully off your plate — handled by our team, not AI.</p>
         <ul class="pc-list">
           <li><span class="ic" data-ic="check"></span><span><b>Everything in Core</b></span></li>
           <li><span class="ic" data-ic="check"></span><span>Taxes prepared and filed</span></li>
           <li><span class="ic" data-ic="check"></span><span>Business renewals managed</span></li>
-          <li><span class="ic" data-ic="check"></span><span>Human-managed compliance from Aneurin Advisory</span></li>
+          <li><span class="ic" data-ic="check"></span><span>Human-managed compliance &amp; monitoring</span></li>
         </ul>
         <button class="btn btn-ghost btn-lg" onclick="openGetStarted('premium')">Get Zeni Premium <span class="ic" data-ic="arrow"></span></button>
       </div>
@@ -782,9 +793,9 @@
   <div class="trust-band">
     <h4>Helpful without taking control away from you.</h4>
     <div class="tb-points">
-      <div class="tb-point"><span class="ic" data-ic="chat"></span><span>I explain anything unfamiliar, in plain language.</span></div>
-      <div class="tb-point"><span class="ic" data-ic="check"></span><span>You approve every action, before it happens.</span></div>
-      <div class="tb-point"><span class="ic" data-ic="user"></span><span>A human is always reachable, when you need one.</span></div>
+      <span class="tb-point">I explain anything unfamiliar, in plain language.</span>
+      <span class="tb-point">You approve every action, before it happens.</span>
+      <span class="tb-point">A human is always reachable, when you need one.</span>
     </div>
     <details class="tb-accordion">
       <summary>Privacy &amp; security details<span class="faq-plus">+</span></summary>
@@ -793,14 +804,18 @@
   </div>
 
   <div class="foot-brand-row">
-    <a class="brand" href="#top"><img src="/logo.png" alt="Zeni"><b>zeni</b><span class="foot-by">by Aneurin Advisory</span></a>
-    <div class="foot-links">
-      <a href="mailto:support@aneurinadvisory.com">support@aneurinadvisory.com</a>
-      <a href="/privacy">Privacy</a>
-      <a href="/terms">Terms</a>
-      <a href="https://www.instagram.com/aneurin.advisory/">Instagram</a>
+    <div class="foot-left">
+      <a class="brand" href="#top"><img src="/logo.png" alt="Zeni"><b>zeni</b><span class="foot-by">by Aneurin Advisory</span></a>
+      <div class="foot-links foot-contact">
+        <a href="mailto:support@aneurinadvisory.com">support@aneurinadvisory.com</a>
+        <a href="https://www.instagram.com/aneurin.advisory/">Instagram</a>
+      </div>
     </div>
     <span class="foot-copy">&copy; 2026 Zeni</span>
+    <div class="foot-links foot-legal">
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+    </div>
   </div>
 </div></footer>
 </main>
@@ -841,11 +856,11 @@
 var S='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">';
 var Sf='<svg viewBox="0 0 24 24" fill="currentColor">';
 var ICONS={
-  leaf:S+'<path d="M5 20c-1-8 4-15 15-16 1 10-5 16-13 16"/><path d="M5 20c3-1 6-3 8-6"/></svg>',
+  leaf:Sf+'<path d="M5 20c-1-8 4-15 15-16 1 10-5 16-13 16z"/><path d="M6.2 18.8c3-6 7-10 12-13" fill="none" stroke="#fff" stroke-width="1.3" stroke-linecap="round" opacity=".55"/></svg>',
   globe:S+'<circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c3 3.4 3 14.6 0 18M12 3c-3 3.4-3 14.6 0 18"/></svg>',
   chat:S+'<path d="M21 11.5a8.4 8 0 0 1-11.9 7.3L4 20l1.3-4A8 8 0 1 1 21 11.5z"/></svg>',
-  user:S+'<circle cx="12" cy="8.5" r="3.5"/><path d="M5 20c0-3.9 3.1-6.5 7-6.5s7 2.6 7 6.5"/></svg>',
-  smile:S+'<circle cx="12" cy="12" r="9"/><circle cx="8.7" cy="10" r="1" fill="currentColor" stroke="none"/><circle cx="15.3" cy="10" r="1" fill="currentColor" stroke="none"/><path d="M8 14c1 1.6 2.4 2.4 4 2.4s3-.8 4-2.4"/></svg>',
+  user:Sf+'<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>',
+  smile:Sf+'<circle cx="12" cy="12" r="9"/><circle cx="8.7" cy="10.3" r="1.15" fill="#fff"/><circle cx="15.3" cy="10.3" r="1.15" fill="#fff"/><path d="M7.8 14.2c1 1.7 2.4 2.6 4.2 2.6s3.2-.9 4.2-2.6" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/></svg>',
   doc:S+'<rect x="5" y="3" width="14" height="18" rx="2.4"/><path d="M9 8h6M9 12h6M9 16h4"/></svg>',
   clock:S+'<circle cx="12" cy="12" r="9"/><path d="M12 7.5V12l3 2"/></svg>',
   receipt:S+'<path d="M6 3h12v18l-2-1.2L14 21l-2-1.2L10 21l-2-1.2L6 21z"/><path d="M9 8h6M9 12h5"/></svg>',
@@ -888,6 +903,19 @@ var hamb=document.getElementById('hamb'),mm=document.getElementById('mobileMenu'
 function closeMenu(){mm.classList.remove('open');hamb.setAttribute('aria-expanded',false);}
 hamb.addEventListener('click',function(){var o=mm.classList.toggle('open');hamb.setAttribute('aria-expanded',o);});
 var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+(function(){
+  var el=document.getElementById('typeText'), cursor=document.getElementById('typeCursor');
+  var text="Hello, I'm Zeni.";
+  if(!el) return;
+  if(reduce){ el.textContent=text; return; }
+  var i=0;
+  function tick(){
+    if(i<=text.length){ el.textContent=text.slice(0,i); i++; setTimeout(tick,42); }
+    else { setTimeout(function(){ if(cursor) cursor.classList.add('done'); },900); }
+  }
+  tick();
+})();
+
 
 function el(h){var d=document.createElement('div');d.innerHTML=h.trim();return d.firstChild;}
 function RLIST(){return '<div class="rlist">\
@@ -1174,7 +1202,7 @@ function gsScreen(step){
         '<label class="gs-label" for="gsPhoneInput">WhatsApp number</label>'+
         '<div class="gs-phone-row">'+
           '<input class="gs-input gs-cc" type="text" value="+1" disabled>'+
-          '<input class="gs-input" id="gsPhoneInput" type="tel" placeholder="(416) 555-0132" value="'+gsEsc(gsData.phone)+'" autocomplete="tel">'+
+          '<input class="gs-input" id="gsPhoneInput" type="tel" inputmode="numeric" maxlength="14" placeholder="(416) 555-0132" value="'+gsEsc(gsData.phone)+'" autocomplete="tel">'+
         '</div>'+
         '<p class="gs-hint"><span class="ic" data-ic="lock" style="margin-right:5px;color:var(--violet)"></span>No verification code needed right now — I’ll confirm everything on WhatsApp after checkout.</p>'+
       '</div>';
@@ -1239,8 +1267,15 @@ function injectIconsFresh(root){
 function gsBindInputs(){
   var n=document.getElementById('gsNameInput');
   if(n){ n.addEventListener('input', function(){ gsData.name=this.value; gsUpdateNextState(); }); n.focus(); }
+  function formatPhone(raw){
+    var d=raw.replace(/[^0-9]/g,'').slice(0,10);
+    if(d.length===0) return '';
+    if(d.length<4) return '('+d;
+    if(d.length<7) return '('+d.slice(0,3)+') '+d.slice(3);
+    return '('+d.slice(0,3)+') '+d.slice(3,6)+'-'+d.slice(6,10);
+  }
   var ph=document.getElementById('gsPhoneInput');
-  if(ph){ ph.addEventListener('input', function(){ gsData.phone=this.value; gsUpdateNextState(); }); }
+  if(ph){ ph.addEventListener('input', function(){ this.value=formatPhone(this.value); this.setSelectionRange(this.value.length,this.value.length); gsData.phone=this.value; gsUpdateNextState(); }); }
   var we=document.getElementById('gsWaitlistEmail');
   if(we){ we.addEventListener('input', function(){ gsData.waitlistEmail=this.value; }); }
 }
