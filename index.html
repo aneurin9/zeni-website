@@ -141,6 +141,13 @@
   .typing i:nth-child(2){animation-delay:.2s}.typing i:nth-child(3){animation-delay:.4s}
   @keyframes blink{0%,60%,100%{opacity:.3;transform:translateY(0)}30%{opacity:1;transform:translateY(-3px)}}
 
+  .trusted-sec{position:relative;z-index:1;padding:34px 20px 6px;display:flex;justify-content:center}
+  .trusted{display:inline-block;padding:14px 30px;color:var(--muted);font-size:14px;font-weight:500;text-align:center;background:rgba(255,255,255,.42);border:1px solid rgba(255,255,255,.65);border-radius:100px;backdrop-filter:blur(14px) saturate(1.3);-webkit-backdrop-filter:blur(14px) saturate(1.3);box-shadow:0 4px 18px rgba(90,70,160,.07);max-width:100%}
+  .trusted b{color:var(--ink2);font-weight:700}
+  @media(max-width:520px){
+    .trusted-sec{padding:26px 16px 4px}
+    .trusted{font-size:12.5px;padding:12px 18px;white-space:normal;line-height:1.5;border-radius:22px}
+  }
 
   .calm{position:relative;z-index:1;padding:64px 0 24px}
   .calm-card{background:var(--glass);border:1px solid var(--glass-brd);border-radius:var(--r-lg);backdrop-filter:blur(16px);box-shadow:var(--shadow);padding:44px 40px;text-align:center;max-width:800px;margin:0 auto}
@@ -568,6 +575,10 @@
       </div>
     </div>
   </div></div>
+</section>
+
+<section class="trusted-sec">
+  <div class="trusted">Trusted by <b>Canadian founders</b> and small business owners</div>
 </section>
 
 <section class="calm"><div class="wrap">
