@@ -1,0 +1,42 @@
+name: Website validation
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened, ready_for_review]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check JavaScript
+        run: |
+          node --check paid-checkout.js
+          node --check api/checkout.js
+      - name: Check checkout integration
+        run: |
+          node - <<'NODE'
+          const fs = require('fs')
+          const index = fs.readFileSync('index.html', 'utf8')
+          const browser = fs.readFileSync('paid-checkout.js', 'utf8')
+          const bridge = fs.readFileSync('api/checkout.js', 'utf8')
+          const must = (label, text, marker) => { if (!text.includes(marker)) throw new Error(`${label} missing ${marker}`) }
+          const absent = (label, text, marker) => { if (text.includes(marker)) throw new Error(`${label} contains ${marker}`) }
+          must('index', index, '<script src="/paid-checkout.js"></script>')
+          absent('index', index, 'stripe-pricing-table')
+          absent('index', index, 'pricing-table.js')
+          absent('index', index, 'id="stripe-modal"')
+          must('browser', browser, "fetch('/api/checkout'")
+          must('browser', browser, 'Preparing secure checkout')
+          must('browser', browser, "url.hostname === 'checkout.stripe.com'")
+          must('bridge', bridge, 'ZENI_BACKEND_CHECKOUT_URL')
+          must('bridge', bridge, '/api/public/checkout')
+          must('bridge', bridge, "'Origin': requestOrigin")
+          must('flow', index, "var GS_STEP_LABELS = ['Name','Province','WhatsApp','Plan']")
+          must('flow', index, 'gsRunCheckout();')
+          console.log('Website paid onboarding validation passed')
+          NODE
