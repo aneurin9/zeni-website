@@ -96,7 +96,6 @@
   @media(min-width:881px){.trust{flex-wrap:nowrap}}
   .chip{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.7);border-radius:12px;padding:6px 11px 6px 6px;font-size:12px;font-weight:600;color:var(--ink2);box-shadow:0 3px 12px rgba(90,70,160,.06);backdrop-filter:blur(14px) saturate(1.3);-webkit-backdrop-filter:blur(14px) saturate(1.3);white-space:nowrap}
   .chip .ic{width:24px;height:24px;border-radius:50%;background:rgba(123,97,255,.16);border:1px solid rgba(255,255,255,.7);display:inline-flex;align-items:center;justify-content:center;font-size:13px;color:var(--violet);flex-shrink:0;box-shadow:inset 0 1px 1px rgba(255,255,255,.5)}
-  .chip .ic.i-leaf{background:rgba(196,86,42,.16);color:#b5502b}
   .chip .ic.i-smile{background:rgba(90,169,255,.18);color:#2f6fb0}
   .hero-actions{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
   .btn-lg{padding:15px 28px;font-size:15.5px;border-radius:14px}
@@ -546,7 +545,7 @@
       <p class="hero-sub">I help you set up and run your business in Canada, then expand into the U.S. when you’re ready — all through WhatsApp.</p>
       <div class="trust">
         <span class="chip"><span class="ic" data-ic="user"></span> Built for solopreneurs</span>
-        <span class="chip"><span class="ic i-leaf" data-ic="maple"></span> Canada-first, U.S.-ready</span>
+        <span class="chip"><span class="ic" data-ic="caFlag"></span> Canada-first, U.S.-ready</span>
         <span class="chip"><span class="ic i-smile" data-ic="chat"></span> No new software to learn</span>
       </div>
       <div class="hero-actions">
@@ -850,7 +849,7 @@ var S='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="
 var Sf='<svg viewBox="0 0 24 24" fill="currentColor">';
 var ICONS={
   leaf:Sf+'<path d="M5 20c-1-8 4-15 15-16 1 10-5 16-13 16z"/><path d="M6.2 18.8c3-6 7-10 12-13" fill="none" stroke="#fff" stroke-width="1.3" stroke-linecap="round" opacity=".55"/></svg>',
-  maple:Sf+'<g transform="rotate(-30 12 14)"><path d="M12 2C15 5 17 9 15 12C14 13.2 10 13.2 9 12C7 9 9 5 12 2Z"/></g><path d="M12 2C15 5 17 9 15 12C14 13.2 10 13.2 9 12C7 9 9 5 12 2Z"/><g transform="rotate(30 12 14)"><path d="M12 2C15 5 17 9 15 12C14 13.2 10 13.2 9 12C7 9 9 5 12 2Z"/></g><rect x="11.2" y="13.4" width="1.6" height="6.6" rx="0.8"/></svg>',
+  caFlag:'<svg viewBox="0 0 24 24"><clipPath id="chipFlagClip"><rect x="1.5" y="7" width="21" height="10" rx="1.6"/></clipPath><g clip-path="url(#chipFlagClip)"><rect x="1.5" y="7" width="21" height="10" fill="#e8112d"/><rect x="7.2" y="7" width="9.6" height="10" fill="#fff"/><path d="M12 8.3L12.6 9.6 14 9.3 13.4 10.6 15.5 11.3 13.7 12.3 14.5 13.8 12 13 9.5 13.8 10.3 12.3 8.5 11.3 10.6 10.6 10 9.3 11.4 9.6Z" fill="#e8112d"/></g></svg>',
   globe:S+'<circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c3 3.4 3 14.6 0 18M12 3c-3 3.4-3 14.6 0 18"/></svg>',
   chat:Sf+'<path d="M7 3H17A4 4 0 0 1 21 7V13A4 4 0 0 1 17 17H10.8L6 20.5V17H7A4 4 0 0 1 3 13V7A4 4 0 0 1 7 3Z"/></svg>',
   user:Sf+'<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>',
