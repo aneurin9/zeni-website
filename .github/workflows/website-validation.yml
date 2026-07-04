@@ -8,7 +8,9 @@ on:
       - 'index.html'
       - 'paid-checkout.js'
       - 'api/checkout.js'
+      - 'scripts/apply-paid-onboarding-index.py'
       - '.github/workflows/website-validation.yml'
+      - '.github/workflows/apply-paid-onboarding-index.yml'
 
 permissions:
   contents: read
@@ -18,6 +20,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - name: Apply guarded integration in validation workspace
+        run: python scripts/apply-paid-onboarding-index.py
 
       - name: Validate JavaScript syntax
         run: |
@@ -30,22 +35,29 @@ jobs:
           set -euo pipefail
           grep -q '<script src="/paid-checkout.js"></script>' index.html
           grep -q "fetch('/api/checkout'" paid-checkout.js
-          grep -q 'Preparing secure checkout' paid-checkout.js
+          grep -q 'Opening secure checkout' paid-checkout.js
           grep -q "url.hostname === 'checkout.stripe.com'" paid-checkout.js
+          grep -q 'cryptoApi.getRandomValues' paid-checkout.js
+          grep -q 'window.runPaidCheckout' paid-checkout.js
           grep -q 'ZENI_BACKEND_CHECKOUT_URL' api/checkout.js
-          grep -q "/api/public/checkout" api/checkout.js
-          grep -q "'Origin': PRODUCTION_ORIGIN" api/checkout.js
+          grep -q "pathname !== '/api/public/checkout'" api/checkout.js
+          grep -q "'Origin': requestOrigin" api/checkout.js
+          grep -q 'allowedRequestOrigin(req)' api/checkout.js
+          ! grep -q 'Math.random' paid-checkout.js
           ! grep -q 'stripe-pricing-table' index.html
           ! grep -q 'pricing-table.js' index.html
           ! grep -q 'id="stripe-modal"' index.html
           ! grep -q 'function openStripe()' index.html
+          ! grep -q 'openStripe();' index.html
           ! grep -q 'ZENI_BACKEND_CHECKOUT_URL' paid-checkout.js
 
-      - name: Verify customer flow remains intact
+      - name: Verify customer flow and secret boundary
         shell: bash
         run: |
           set -euo pipefail
           grep -q "var GS_STEP_LABELS = \['Name','Province','WhatsApp','Plan'\]" index.html
-          grep -q "gsRunCheckout();" index.html
+          grep -q 'function gsGreeting()' index.html
+          grep -q 'gsRunCheckout();' index.html
           grep -q "openGetStarted('core')" index.html
           grep -q "openGetStarted('premium')" index.html
+          ! grep -Eq 'STRIPE_SECRET_KEY|SUPABASE_SERVICE_ROLE_KEY|STRIPE_PRICE_TIER' index.html paid-checkout.js
