@@ -1,0 +1,51 @@
+name: Website validation
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened, ready_for_review]
+    paths:
+      - 'index.html'
+      - 'paid-checkout.js'
+      - 'api/checkout.js'
+      - '.github/workflows/website-validation.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate JavaScript syntax
+        run: |
+          node --check paid-checkout.js
+          node --check api/checkout.js
+
+      - name: Validate paid checkout integration
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -q '<script src="/paid-checkout.js"></script>' index.html
+          grep -q "fetch('/api/checkout'" paid-checkout.js
+          grep -q 'Preparing secure checkout' paid-checkout.js
+          grep -q "url.hostname === 'checkout.stripe.com'" paid-checkout.js
+          grep -q 'ZENI_BACKEND_CHECKOUT_URL' api/checkout.js
+          grep -q "/api/public/checkout" api/checkout.js
+          grep -q "'Origin': PRODUCTION_ORIGIN" api/checkout.js
+          ! grep -q 'stripe-pricing-table' index.html
+          ! grep -q 'pricing-table.js' index.html
+          ! grep -q 'id="stripe-modal"' index.html
+          ! grep -q 'function openStripe()' index.html
+          ! grep -q 'ZENI_BACKEND_CHECKOUT_URL' paid-checkout.js
+
+      - name: Verify customer flow remains intact
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -q "var GS_STEP_LABELS = \['Name','Province','WhatsApp','Plan'\]" index.html
+          grep -q "gsRunCheckout();" index.html
+          grep -q "openGetStarted('core')" index.html
+          grep -q "openGetStarted('premium')" index.html
