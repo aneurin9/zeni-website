@@ -1,493 +1,347 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Welcome to Zeni — Aneurin Advisory</title>
-  <meta name="description" content="You're all set. Here's everything you need to get started with Zeni.">
-  <link rel="icon" type="image/png" href="/zeni-favicon-new.png?v=1">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --navy:   #0A0F2C;
-      --navy2:  #0D1236;
-      --navy3:  #121840;
-      --purple: #7B61FF;
-      --blue:   #00C2FF;
-      --white:  #EAEAF0;
-      --muted:  #8892B8;
-      --border: rgba(123,97,255,0.14);
-      --border2: rgba(123,97,255,0.28);
-      --grad:   linear-gradient(135deg, #7B61FF 0%, #00C2FF 100%);
-      --ff:     "Inter", sans-serif;
-      --r:      12px;
-      --r-lg:   20px;
-      --max:    680px;
-    }
-    html { scroll-behavior: smooth; }
-    body {
-      background: var(--navy);
-      color: var(--white);
-      font-family: var(--ff);
-      font-size: 16px;
-      line-height: 1.6;
-      min-height: 100vh;
-      padding: 48px 24px 80px;
-    }
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-      background-image:
-        radial-gradient(circle, rgba(123,97,255,0.055) 1px, transparent 1px),
-        radial-gradient(circle, rgba(0,194,255,0.03) 1px, transparent 1px);
-      background-size: 48px 48px, 80px 80px;
-      background-position: 0 0, 24px 24px;
-    }
-    .wrap { max-width: var(--max); margin: 0 auto; position: relative; z-index: 1; }
-    .g { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Welcome to Zeni</title>
+<meta name="description" content="You're all set. Here's everything you need to get started with Zeni.">
+<link rel="icon" type="image/png" href="/zeni-favicon-new.png?v=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --pearl:#F3F1FC; --pearl2:#EFEDF8; --card:#FFFFFF;
+  --ink:#1B1C3A; --ink2:#40416A; --muted:#6C6F91; --faint:#9A9CBB;
+  --violet:#7B61FF; --violet-d:#6A4FF0; --mist:#5AA9FF; --glow:#B98BFF;
+  --line:rgba(27,28,58,.09); --line2:rgba(27,28,58,.14);
+  --grad:linear-gradient(135deg,#7B61FF 0%,#7A6EF2 55%,#6C86EC 100%);
+  --grad-word:linear-gradient(90deg,#FF7AC6 0%,#B968E8 42%,#7B61FF 68%,#4FA8FF 100%);
+  --glass:rgba(255,255,255,.62); --glass-brd:rgba(255,255,255,.8);
+  --wa-head:#FFFFFF; --wa-head-tx:#1B1C3A; --wa-body:#F0EDF7;
+  --wa-in:#FFFFFF; --wa-out:#DCF7C5; --wa-out-tx:#173321;
+  --amber:#8B6A2B; --amber-bg:rgba(181,143,69,.10); --amber-brd:rgba(181,143,69,.28);
+  --shadow-sm:0 2px 10px rgba(50,40,120,.06);
+  --shadow:0 18px 44px rgba(70,55,150,.12);
+  --shadow-lg:0 34px 80px rgba(60,45,140,.20);
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  --r:16px; --r-lg:24px; --max:760px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--pearl);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.sky{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;
+  background:radial-gradient(120% 55% at 50% 0%, #FFFFFF 0%, rgba(255,255,255,0) 55%),
+    linear-gradient(175deg,#FDFCFF 0%,#F7EFF7 22%,#F3E9FA 42%,#EDEBFC 60%,#E8EFFC 82%,#F3F1FC 100%);}
+.sky::before{content:"";position:absolute;left:50%;top:6%;transform:translateX(-50%);width:70vw;max-width:900px;height:34vh;border-radius:50%;
+  background:radial-gradient(ellipse,rgba(255,214,236,.4),rgba(199,187,255,.22) 46%,transparent 74%);filter:blur(40px);animation:glow 16s ease-in-out infinite}
+@keyframes glow{0%,100%{transform:translateX(-50%) scale(1);opacity:.9}50%{transform:translateX(-50%) scale(1.06);opacity:1}}
+@media (prefers-reduced-motion:reduce){.sky::before{animation:none}}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 24px;position:relative;z-index:1}
+a{color:inherit;text-decoration:none}
+.ic{display:inline-flex}
+.ic svg{width:1em;height:1em;display:block}
+svg{width:1em;height:1em;display:block}
+.g{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
 
-    /* HEADER */
-    .logo { font-size: 24px; font-weight: 800; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 4px; }
-    .logo-sub { font-size: 13px; color: var(--muted); margin-bottom: 40px; }
+/* HEADER */
+.top{padding:32px 0 6px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.brand{display:inline-flex;align-items:center;gap:10px}
+.brand img{width:34px;height:34px;object-fit:contain;filter:drop-shadow(0 4px 10px rgba(123,97,255,.25))}
+.brand b{font-size:19px;font-weight:800;letter-spacing:-.4px}
+.brand span{font-size:12px;color:var(--faint);font-weight:500;margin-left:6px}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600;color:var(--ink2);background:var(--glass);border:1px solid var(--glass-brd);padding:7px 14px;border-radius:100px;box-shadow:var(--shadow-sm)}
+.eyebrow .pulse{width:7px;height:7px;border-radius:50%;background:var(--grad);animation:pulse 2.4s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(123,97,255,.45)}70%{box-shadow:0 0 0 8px rgba(123,97,255,0)}100%{box-shadow:0 0 0 0 rgba(123,97,255,0)}}
 
-    /* CONFIRMATION */
-    .confirm {
-      background: rgba(123,97,255,0.08);
-      border: 1px solid rgba(123,97,255,0.25);
-      border-radius: var(--r-lg);
-      padding: 32px;
-      margin-bottom: 16px;
-      position: relative;
-      overflow: hidden;
-    }
-    .confirm::before {
-      content: "";
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      background: var(--grad);
-    }
-    .confirm-title { font-size: 26px; font-weight: 800; margin-bottom: 8px; }
-    .confirm-sub { font-size: 15px; color: var(--muted); line-height: 1.65; }
+/* SECTIONS */
+.section{padding:28px 0}
+.sec-eye{display:flex;align-items:center;gap:8px;font-size:11.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--violet);margin-bottom:10px}
+.sec-eye .ic{width:18px;height:18px;border-radius:50%;background:rgba(123,97,255,.14);display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0}
+.section h2{font-size:19px;font-weight:800;letter-spacing:-.3px;margin-bottom:14px}
+.section-lead{font-size:13.5px;color:var(--muted);margin-bottom:16px;line-height:1.6;max-width:520px}
 
-    /* PRICING */
-    .pricing-block {
-      background: var(--navy2);
-      border: 1px solid var(--border);
-      border-radius: var(--r);
-      padding: 20px 24px;
-      margin-bottom: 36px;
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-    .price-item { flex: 1; min-width: 200px; }
-    .price-label { font-size: 11px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--muted); margin-bottom: 6px; }
-    .price-row { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
-    .price-old { font-size: 15px; color: var(--muted); text-decoration: line-through; }
-    .price-new { font-size: 24px; font-weight: 800; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-    .price-mo { font-size: 14px; color: var(--muted); }
-    .price-locked { font-size: 12px; color: var(--muted); margin-top: 4px; }
-    .price-locked span { color: #34D399; font-weight: 600; }
-    .pricing-divider { width: 1px; background: var(--border); flex-shrink: 0; }
+/* CONFIRM CARD */
+.confirm{background:var(--glass);border:1px solid var(--glass-brd);border-radius:var(--r-lg);backdrop-filter:blur(16px);box-shadow:var(--shadow);padding:36px 34px;position:relative;overflow:hidden}
+.confirm::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--grad)}
+.confirm-check{width:46px;height:46px;border-radius:50%;background:rgba(26,143,90,.12);color:#1a8f5a;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:16px;box-shadow:0 0 0 6px rgba(26,143,90,.06)}
+.confirm h1{font-size:27px;font-weight:800;letter-spacing:-.6px;margin-bottom:10px}
+.confirm p{color:var(--muted);font-size:14.5px;line-height:1.65;max-width:520px}
+.confirm p b{color:var(--ink2);font-weight:600}
 
-    /* SECTIONS */
-    .section { margin-bottom: 36px; }
-    .section-label {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      background: var(--grad);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      margin-bottom: 14px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .section-label::before { content: ""; width: 16px; height: 1.5px; background: var(--grad); flex-shrink: 0; }
-    h2 { font-size: 20px; font-weight: 700; color: var(--white); margin-bottom: 12px; }
+/* PRICING RECAP */
+.price-grid{display:flex;gap:14px;flex-wrap:wrap}
+.price-card{flex:1;min-width:220px;background:var(--card);border:1.5px solid var(--line2);border-radius:18px;padding:20px 22px;box-shadow:var(--shadow-sm)}
+.price-card .pc-tag{font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--violet-d);margin-bottom:8px}
+.price-row{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin-bottom:6px}
+.price-old{font-size:14px;color:var(--faint);text-decoration:line-through}
+.price-new{font-size:26px;font-weight:800;letter-spacing:-.6px}
+.price-mo{font-size:13px;color:var(--muted)}
+.price-locked{font-size:12.5px;color:var(--muted);display:flex;align-items:flex-start;gap:6px}
+.price-locked .ic{color:#1a8f5a;font-size:13px;margin-top:2px;flex-shrink:0}
 
-    /* STEPS */
-    .steps { display: flex; flex-direction: column; gap: 12px; }
-    .step {
-      background: var(--navy2);
-      border: 1px solid var(--border);
-      border-radius: var(--r);
-      padding: 18px 20px;
-      display: flex;
-      gap: 14px;
-      align-items: flex-start;
-    }
-    .step-num {
-      width: 30px; height: 30px;
-      border-radius: 50%;
-      background: var(--grad);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 13px; font-weight: 700; color: #fff;
-      flex-shrink: 0;
-    }
-    .step-title { font-size: 15px; font-weight: 600; color: var(--white); margin-bottom: 3px; }
-    .step-body { font-size: 14px; color: var(--muted); line-height: 1.65; }
-    .step-body strong { color: var(--white); font-weight: 500; }
-    .step-body a { color: var(--purple); text-decoration: none; }
+/* STEPS */
+.steps{display:flex;flex-direction:column;gap:12px;margin-bottom:16px}
+.step{background:var(--card);border:1px solid var(--line2);border-radius:16px;padding:18px 20px;display:flex;gap:14px;align-items:flex-start;box-shadow:var(--shadow-sm)}
+.step-num{width:30px;height:30px;border-radius:50%;background:var(--grad);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;flex-shrink:0}
+.step-title{font-size:15px;font-weight:700;margin-bottom:3px}
+.step-body{font-size:13.5px;color:var(--muted);line-height:1.6}
+.step-body b{color:var(--ink);font-weight:600}
 
-    /* WARNING */
-    .warn {
-      background: rgba(255,200,0,0.05);
-      border: 1px solid rgba(255,200,0,0.18);
-      border-radius: var(--r);
-      padding: 16px 18px;
-      font-size: 14px;
-      color: var(--muted);
-      line-height: 1.65;
-      margin-top: 12px;
-    }
-    .warn strong { color: var(--white); font-weight: 500; }
+/* WARNING */
+.warn{background:var(--amber-bg);border:1px solid var(--amber-brd);border-radius:14px;padding:16px 18px;font-size:13.5px;color:#6b5322;line-height:1.6;display:flex;gap:12px}
+.warn .ic{color:var(--amber);font-size:18px;flex-shrink:0;margin-top:1px}
+.warn b{color:#4d3c18;font-weight:700}
 
-    /* WHATSAPP MOCKUP */
-    .phone-wrap {
-      display: flex;
-      justify-content: center;
-      margin: 20px 0;
-    }
-    .phone {
-      width: 100%;
-      max-width: 340px;
-      background: #111b21;
-      border-radius: 24px;
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.07);
-      box-shadow: 0 24px 60px rgba(0,0,0,0.5);
-    }
-    .pbar {
-      background: #1f2c34;
-      padding: 12px 16px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .pav {
-      width: 34px; height: 34px;
-      border-radius: 50%;
-      background: var(--grad);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 14px; font-weight: 800; color: #fff;
-      flex-shrink: 0;
-    }
-    .pnm { font-weight: 600; font-size: 13px; color: #e9edef; }
-    .pst { font-size: 10.5px; color: #8696a0; }
-    .pbody { background: #0b141a; padding: 12px; }
-    .bubble {
-      background: #1f2c34;
-      border-radius: 0 12px 12px 12px;
-      padding: 10px 13px;
-      font-size: 12.5px;
-      color: #e9edef;
-      line-height: 1.55;
-      margin-bottom: 8px;
-    }
-    .menu-sheet {
-      background: #1a2730;
-      border-radius: 12px;
-      overflow: hidden;
-      margin-top: 4px;
-    }
-    .menu-header {
-      background: #2a3942;
-      padding: 10px 14px;
-      font-size: 11px;
-      font-weight: 700;
-      color: #8696a0;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-    }
-    .menu-item {
-      padding: 12px 14px;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-      cursor: pointer;
-    }
-    .menu-item:last-child { border-bottom: none; }
-    .menu-item-title { font-size: 13px; font-weight: 600; color: #e9edef; margin-bottom: 2px; }
-    .menu-item-sub { font-size: 11.5px; color: #8696a0; }
-    .menu-tap { text-align: center; padding: 10px; font-size: 11px; color: #8696a0; background: #111b21; }
+/* PHONE MOCKUP (same component as hero) */
+.stage{display:flex;justify-content:center;margin:20px 0}
+.phone{width:280px;border-radius:40px;padding:8px;background:linear-gradient(155deg,#fff,#ECE9F7);box-shadow:var(--shadow-lg),inset 0 0 0 1px rgba(255,255,255,.6)}
+.phone-scr{border-radius:32px;overflow:hidden;background:var(--wa-body);box-shadow:0 0 0 1px rgba(27,28,58,.05)}
+.p-status{background:var(--wa-head);color:var(--wa-head-tx);display:flex;justify-content:space-between;align-items:center;padding:8px 16px 2px;font-size:11px;font-weight:600}
+.p-status .p-sig{display:inline-flex;gap:5px;align-items:center;font-size:12px;opacity:.72}
+.wa-top{background:var(--wa-head);color:var(--wa-head-tx);padding:8px 13px 11px;display:flex;align-items:center;gap:9px;border-bottom:1px solid var(--line)}
+.wa-top .av{width:32px;height:32px;border-radius:50%;background:#fff;display:grid;place-items:center;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,.12)}
+.wa-top .av img{width:32px;height:32px;object-fit:contain}
+.wa-top .nm{font-size:13px;font-weight:700;display:flex;align-items:center;gap:5px}
+.wa-top .nm .vf{color:var(--mist);font-size:13px}
+.wa-top .role{font-size:10px;color:#2fa360;font-weight:600}
+.wa-top .p-icons{margin-left:auto;display:flex;gap:10px;color:var(--muted);font-size:14px}
+.wa-body{padding:12px 10px;display:flex;flex-direction:column;gap:7px;background:var(--wa-body)}
+.day{align-self:center;background:#fff;color:var(--muted);font-size:9.5px;font-weight:600;padding:3px 10px;border-radius:8px;box-shadow:var(--shadow-sm);margin-bottom:2px}
+.bub{max-width:90%;font-size:11.5px;line-height:1.5;padding:8px 11px;border-radius:12px;box-shadow:0 1px 1px rgba(0,0,0,.05)}
+.bub.in{background:var(--wa-in);color:var(--ink);align-self:flex-start;border-top-left-radius:4px}
+.menu-sheet{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 1px 1px rgba(0,0,0,.05);align-self:stretch}
+.menu-header{background:var(--pearl2);padding:9px 13px;font-size:10px;font-weight:700;color:var(--muted);letter-spacing:.5px;text-transform:uppercase}
+.menu-item{padding:11px 13px;border-bottom:1px solid var(--line)}
+.menu-item:last-child{border-bottom:none}
+.menu-item-title{font-size:12px;font-weight:700;color:var(--ink);margin-bottom:1px}
+.menu-item-sub{font-size:10.5px;color:var(--muted)}
+.menu-tap{text-align:center;padding:8px;font-size:9.5px;color:var(--faint)}
 
-    /* MENU EXPLANATIONS */
-    .menu-cards { display: flex; flex-direction: column; gap: 10px; margin-top: 14px; }
-    .menu-card {
-      background: var(--navy2);
-      border: 1px solid var(--border);
-      border-radius: var(--r);
-      padding: 16px 18px;
-      display: flex;
-      gap: 12px;
-      align-items: flex-start;
-    }
-    .menu-icon {
-      font-size: 18px;
-      flex-shrink: 0;
-      margin-top: 1px;
-    }
-    .menu-card-title { font-size: 14px; font-weight: 600; color: var(--white); margin-bottom: 3px; }
-    .menu-card-body { font-size: 13.5px; color: var(--muted); line-height: 1.6; }
+/* MENU EXPLANATION CARDS */
+.menu-cards{display:flex;flex-direction:column;gap:10px;margin-top:16px}
+.menu-card{background:var(--card);border:1px solid var(--line2);border-radius:14px;padding:16px 18px;display:flex;gap:13px;align-items:flex-start;box-shadow:var(--shadow-sm)}
+.menu-icon{width:36px;height:36px;border-radius:10px;background:rgba(123,97,255,.12);color:var(--violet);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.menu-card-title{font-size:14px;font-weight:700;margin-bottom:3px}
+.menu-card-tag{font-size:12px;font-weight:600;color:var(--violet-d);margin-bottom:4px;display:block}
+.menu-card-body{font-size:13px;color:var(--muted);line-height:1.6}
 
-    /* BILLING */
-    .billing-card {
-      background: var(--navy2);
-      border: 1px solid var(--border);
-      border-radius: var(--r-lg);
-      padding: 24px;
-    }
-    .billing-card p { font-size: 14px; color: var(--muted); line-height: 1.65; margin-bottom: 16px; }
-    .billing-card p strong { color: var(--white); font-weight: 500; }
-    .portal-btn {
-      display: inline-block;
-      padding: 12px 24px;
-      background: var(--grad);
-      color: #fff;
-      font-weight: 700;
-      font-size: 14px;
-      border-radius: 9px;
-      text-decoration: none;
-      transition: opacity .2s;
-      margin-bottom: 14px;
-    }
-    .portal-btn:hover { opacity: .85; }
-    .billing-note { font-size: 13px; color: var(--muted); line-height: 1.6; }
-    .billing-note strong { color: var(--white); font-weight: 500; }
+/* BILLING */
+.billing-card{background:var(--card);border:1.5px solid var(--line2);border-radius:18px;padding:26px 28px;box-shadow:var(--shadow-sm)}
+.billing-card p{font-size:14px;color:var(--muted);line-height:1.65;margin-bottom:18px}
+.billing-card p b{color:var(--ink);font-weight:600}
+.btn{border:none;border-radius:13px;font-weight:600;transition:transform .18s,box-shadow .18s;display:inline-flex;align-items:center;gap:8px;justify-content:center;cursor:pointer}
+.btn-primary{background:var(--grad);color:#fff;padding:12px 22px;font-size:14px;box-shadow:0 8px 22px rgba(123,97,255,.32)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(123,97,255,.42)}
+.billing-note{font-size:12.5px;color:var(--muted);line-height:1.6;margin-top:14px}
+.billing-note b{color:var(--ink);font-weight:600}
 
-    /* SUPPORT */
-    .support-cards { display: flex; gap: 12px; flex-wrap: wrap; }
-    .support-card {
-      flex: 1;
-      min-width: 200px;
-      background: var(--navy2);
-      border: 1px solid var(--border);
-      border-radius: var(--r);
-      padding: 20px;
-    }
-    .support-card-icon { font-size: 20px; margin-bottom: 10px; }
-    .support-card-title { font-size: 14px; font-weight: 600; color: var(--white); margin-bottom: 4px; }
-    .support-card-body { font-size: 13px; color: var(--muted); line-height: 1.6; }
-    .support-card-body a { color: var(--purple); text-decoration: none; }
-    .support-note {
-      margin-top: 14px;
-      font-size: 13.5px;
-      color: var(--muted);
-      line-height: 1.7;
-      padding: 16px 18px;
-      background: rgba(123,97,255,0.05);
-      border: 1px solid var(--border);
-      border-radius: var(--r);
-    }
+/* SUPPORT */
+.support-grid{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:14px}
+.support-card{flex:1;min-width:220px;background:var(--card);border:1.5px solid var(--line2);border-radius:16px;padding:20px}
+.support-icon{width:36px;height:36px;border-radius:10px;background:rgba(90,169,255,.14);color:#2f6fb0;display:flex;align-items:center;justify-content:center;font-size:16px;margin-bottom:10px}
+.support-title{font-size:14px;font-weight:700;margin-bottom:6px}
+.support-body{font-size:13px;color:var(--muted);line-height:1.6}
+.support-body a,.support-body b{color:var(--ink);font-weight:600}
+.support-note{font-size:12.5px;color:var(--muted);line-height:1.65;padding:14px 16px;background:var(--pearl2);border-radius:12px}
 
-    /* FOOTER */
-    .footer { margin-top: 56px; padding-top: 24px; border-top: 1px solid var(--border); text-align: center; font-size: 13px; color: var(--muted); }
-    .footer a { color: var(--muted); text-decoration: none; }
-    .footer a:hover { color: var(--white); }
+/* FOUNDER NOTE */
+.note-card{background:linear-gradient(155deg,rgba(255,255,255,.85),rgba(247,239,247,.7));border:1px solid var(--glass-brd);border-left:3px solid var(--violet);border-radius:16px;padding:24px 26px;box-shadow:var(--shadow-sm)}
+.note-card p{font-size:13.5px;color:var(--ink2);line-height:1.7;margin-bottom:14px}
+.note-card p:last-of-type{margin-bottom:16px}
+.note-sign{font-size:13px;color:var(--muted);font-style:italic}
 
-    @media (max-width: 560px) {
-      body { padding: 36px 18px 64px; }
-      .confirm { padding: 24px 20px; }
-      .pricing-block { flex-direction: column; gap: 16px; }
-      .pricing-divider { width: 100%; height: 1px; }
-      .support-cards { flex-direction: column; }
-    }
-  </style>
+/* FOOTER */
+.foot{margin-top:20px;padding:26px 0 40px;border-top:1px solid var(--line);text-align:center;color:var(--faint);font-size:12.5px}
+.foot a{color:var(--muted)}
+.foot a:hover{color:var(--ink)}
+.foot p+p{margin-top:8px}
+
+@media(max-width:560px){
+  .confirm{padding:26px 22px}
+  .price-grid,.support-grid{flex-direction:column}
+  .top{justify-content:flex-start}
+}
+</style>
 </head>
 <body>
+<div class="sky"></div>
 <div class="wrap">
 
-  <!-- HEADER -->
-  <div class="logo">Zeni</div>
-  <div class="logo-sub">by Aneurin Advisory</div>
-
-  <!-- CONFIRMATION -->
-  <div class="confirm">
-    <div class="confirm-title">✅ You're all set.</div>
-    <div class="confirm-sub">Your subscription is active. Everything below is what you need to get started — read it once and you'll be good to go.</div>
+  <div class="top">
+    <a class="brand" href="https://zeni.aneurinadvisory.com"><img src="/logo.png" alt="Zeni"><b>zeni</b><span>by Aneurin Advisory</span></a>
+    <span class="eyebrow"><span class="pulse"></span> Payment confirmed</span>
   </div>
 
-  <!-- PRICING -->
-  <div class="pricing-block">
-    <div class="price-item">
-      <div class="price-label">Zeni Core</div>
-      <div class="price-row">
-        <span class="price-old">$299</span>
-        <span class="price-new">$149</span>
-        <span class="price-mo">CAD/mo</span>
-      </div>
-      <div class="price-locked"><span>Locked in permanently.</span> Your rate never increases.</div>
-    </div>
-    <div class="pricing-divider"></div>
-    <div class="price-item">
-      <div class="price-label">Zeni Premium</div>
-      <div class="price-row">
-        <span class="price-old">$450</span>
-        <span class="price-new">$350</span>
-        <span class="price-mo">CAD/mo</span>
-      </div>
-      <div class="price-locked"><span>Locked in permanently.</span> If you upgrade, this is your rate.</div>
+  <div class="section" style="padding-bottom:14px">
+    <div class="confirm">
+      <div class="confirm-check"><span class="ic" data-ic="check"></span></div>
+      <h1>You're <span class="g">all set.</span></h1>
+      <p>Your subscription is active — I'll meet you on WhatsApp in just a moment. First, here's everything you need to know. It only takes a minute to read, and then we can get started for real.</p>
     </div>
   </div>
 
-  <!-- GETTING STARTED -->
+  <div class="section" style="padding-top:0">
+    <div class="sec-eye"><span class="ic" data-ic="dollar"></span> Your plan</div>
+    <div class="price-grid">
+      <div class="price-card">
+        <div class="pc-tag">Zeni Core</div>
+        <div class="price-row"><span class="price-old">$299</span><span class="price-new">$149</span><span class="price-mo">CAD/mo</span></div>
+        <div class="price-locked"><span class="ic" data-ic="check"></span> Locked in permanently — your rate never increases</div>
+      </div>
+      <div class="price-card">
+        <div class="pc-tag">Zeni Premium</div>
+        <div class="price-row"><span class="price-new">$350</span><span class="price-mo">CAD/mo</span></div>
+        <div class="price-locked"><span class="ic" data-ic="check"></span> Locked in permanently. If you upgrade, this is your rate.</div>
+      </div>
+    </div>
+  </div>
+
   <div class="section">
-    <div class="section-label">Getting started</div>
-    <h2>How to access Zeni</h2>
+    <div class="sec-eye"><span class="ic" data-ic="chat"></span> Getting started</div>
+    <h2>How to reach me</h2>
     <div class="steps">
       <div class="step">
         <div class="step-num">1</div>
         <div>
-          <div class="step-title">Save Zeni's number</div>
-          <div class="step-body">Add <strong>+1 868-316-6361</strong> to your contacts. Name it "Zeni" or anything you like.</div>
+          <div class="step-title">Save my number</div>
+          <div class="step-body">Add <b>1 868-316-6361</b> to your contacts. Call me "Zeni" or anything you like.</div>
         </div>
       </div>
       <div class="step">
         <div class="step-num">2</div>
         <div>
-          <div class="step-title">Send your first message</div>
-          <div class="step-body">Open WhatsApp and send any message to that number — <strong>from the same number you entered at checkout.</strong> Zeni will respond immediately with a menu to get you started.</div>
+          <div class="step-title">Say hello</div>
+          <div class="step-body">Message me on WhatsApp from the number you gave me when you signed up, and I'll take it from there. You'll hear back immediately.</div>
         </div>
       </div>
     </div>
-
     <div class="warn">
-      <strong>Important:</strong> Zeni identifies you by your WhatsApp number. If you message from a different number than the one you provided at checkout, Zeni won't recognise your account. If that happens, message us at <strong>+1 437-217-0057</strong> and we'll sort it out right away — we'll send the Zeni contact directly to your WhatsApp.
+      <span class="ic" data-ic="lock"></span>
+      <span><b>One thing to know:</b> I recognise you by the WhatsApp number you gave me when you signed up. Want to use a different number instead? Just message <b>1 437-217-0057</b> and we'll switch it for you.</span>
     </div>
   </div>
 
-  <!-- FIRST MESSAGE MOCKUP -->
   <div class="section">
-    <div class="section-label">Your first message</div>
-    <h2>What you'll see</h2>
-    <p style="font-size:14px;color:var(--muted);margin-bottom:16px;line-height:1.65;">When you send your first message, Zeni will respond with this menu. Here's what each option means so you know exactly which one applies to you.</p>
+    <div class="sec-eye"><span class="ic" data-ic="eye"></span> Your first message</div>
+    <h2>What I'll say</h2>
+    <p class="section-lead">Here's exactly what you'll see the moment you message me, and what each option means, so you know which one's for you.</p>
 
-    <div class="phone-wrap">
+    <div class="stage">
       <div class="phone">
-        <div class="pbar">
-          <div class="pav">Z</div>
-          <div>
-            <div class="pnm">Zeni</div>
-            <div class="pst">online</div>
+        <div class="phone-scr">
+          <div class="p-status"><span>9:41</span><span class="p-sig"><span class="ic" data-ic="signal"></span><span class="ic" data-ic="wifi"></span><span class="ic" data-ic="battery"></span></span></div>
+          <div class="wa-top">
+            <div class="av"><img src="/logo.png" alt=""></div>
+            <div><div class="nm">Zeni <span class="vf ic" data-ic="verified"></span></div><div class="role">online</div></div>
+            <div class="p-icons"><span class="ic" data-ic="call"></span><span class="ic" data-ic="more"></span></div>
           </div>
-        </div>
-        <div class="pbody">
-          <div class="bubble">
-            Hi! I'm Zeni — your AI business operator.<br><br>
-            To get started, tell me a bit about where you're at:
-          </div>
-          <div class="menu-sheet">
-            <div class="menu-header">Get started</div>
-            <div class="menu-item">
-              <div class="menu-item-title">Start a new business</div>
-              <div class="menu-item-sub">Build from scratch with Zeni</div>
-            </div>
-            <div class="menu-item">
-              <div class="menu-item-title">Grow my existing business</div>
-              <div class="menu-item-sub">Set up Zeni around your business</div>
-            </div>
-            <div class="menu-item">
-              <div class="menu-item-title">Explore a business idea</div>
-              <div class="menu-item-sub">Use Zeni Founder Lab</div>
-            </div>
-            <div class="menu-item">
-              <div class="menu-item-title">See how Zeni works</div>
-              <div class="menu-item-sub">See what Zeni can do</div>
+          <div class="wa-body">
+            <div class="day">Today</div>
+            <div class="bub in">Hi! I'm Zeni — your AI business operator.<br><br>To get started, tell me a bit about where you're at:</div>
+            <div class="menu-sheet">
+              <div class="menu-header">Get started</div>
+              <div class="menu-item"><div class="menu-item-title">Start a new business</div><div class="menu-item-sub">I'll help you build the right foundation</div></div>
+              <div class="menu-item"><div class="menu-item-title">Grow my existing business</div><div class="menu-item-sub">I'll learn how it works and help you move it forward</div></div>
+              <div class="menu-item"><div class="menu-item-title">Explore a business idea</div><div class="menu-item-sub">We'll think it through, step by step</div></div>
+              <div class="menu-item"><div class="menu-item-title">See how Zeni works</div><div class="menu-item-sub">Take the quick guided tour</div></div>
+              <div class="menu-tap">Tap an item to select it</div>
             </div>
           </div>
-          <div class="menu-tap">Tap an item to select it</div>
         </div>
       </div>
     </div>
 
     <div class="menu-cards">
       <div class="menu-card">
-        <div class="menu-icon">🏗️</div>
-        <div>
-          <div class="menu-card-title">Start a new business</div>
-          <div class="menu-card-body">You have an idea and want to build it properly. Zeni walks you through structuring and registering your business in Canada and/or the U.S., step by step. No prior knowledge needed — Zeni tells you exactly what to do at every stage.</div>
-        </div>
+        <div class="menu-icon"><span class="ic" data-ic="seedling"></span></div>
+        <div><div class="menu-card-title">Start a new business</div><div class="menu-card-body">You've got an idea and want to build it properly. I'll walk you through structuring and registering your business in Canada and/or the U.S., step by step — no prior knowledge needed. I'll tell you exactly what to do at every stage.</div></div>
       </div>
       <div class="menu-card">
-        <div class="menu-icon">📈</div>
-        <div>
-          <div class="menu-card-title">Grow my existing business</div>
-          <div class="menu-card-body">You're already running a business and want Zeni set up around it. Zeni learns your current setup, gets your information organised, and starts running your day-to-day operations from there.</div>
-        </div>
+        <div class="menu-icon"><span class="ic" data-ic="building"></span></div>
+        <div><div class="menu-card-title">Grow my existing business</div><div class="menu-card-body">You're already running a business and want me set up around it. I'll learn your current setup, get your information organised, and start working alongside you from there.</div></div>
       </div>
       <div class="menu-card">
-        <div class="menu-icon">💡</div>
-        <div>
-          <div class="menu-card-title">Explore a business idea</div>
-          <div class="menu-card-body">Not sure exactly what you want to build yet? Zeni Founder Lab helps you shape, pressure-test, and validate your idea before committing to setup. A good starting point if you're still deciding on direction.</div>
-        </div>
+        <div class="menu-icon"><span class="ic" data-ic="bulb"></span></div>
+        <div><div class="menu-card-title">Explore a business idea</div><div class="menu-card-body">Not sure exactly what you want to build yet? My Founder Lab helps you shape, pressure-test, and validate your idea before committing to setup — a good starting point if you're still deciding on direction.</div></div>
       </div>
       <div class="menu-card">
-        <div class="menu-icon">🎯</div>
-        <div>
-          <div class="menu-card-title">See how Zeni works</div>
-          <div class="menu-card-body">A guided tour of everything Zeni does once you're set up — daily briefings, finances, deadlines, documents, planning, and more. Worth going through even if you're mid-setup. It shows you exactly where you're headed and what to expect once Zeni is fully running your business.</div>
-        </div>
+        <div class="menu-icon"><span class="ic" data-ic="eye"></span></div>
+        <div><div class="menu-card-title">See how Zeni works</div><div class="menu-card-body">A guided tour of everything I do once you're set up — daily briefings, finances, deadlines, documents, planning, and more. Worth going through even if you're mid-setup.</div></div>
       </div>
     </div>
   </div>
 
-  <!-- BILLING -->
   <div class="section">
-    <div class="section-label">Billing & subscription</div>
-    <h2>Managing your account</h2>
+    <div class="sec-eye"><span class="ic" data-ic="receipt"></span> Billing &amp; subscription</div>
+    <h2>You're always in control</h2>
     <div class="billing-card">
-      <p>Your billing, invoices, payment method, and subscription are all managed through the Stripe customer portal. <strong>Bookmark this link</strong> — you'll need it if you ever want to update your card, download an invoice, or make changes to your plan.</p>
-      <a href="https://billing.stripe.com/p/login/5kQ7sK4eAbbgbrpf421ck00" target="_blank" class="portal-btn">Manage my subscription →</a>
-      <div class="billing-note">
-        You'll be asked to enter your email address — use the same email you signed up with and Stripe will show you your account. You can also message Zeni <strong>"manage my billing"</strong> at any time and Zeni will send you the link directly.
-      </div>
+      <p>I'll never touch your card without you knowing. Your billing, invoices, payment method, and subscription are all managed through the Stripe customer portal. <b>Bookmark this link</b> — you'll need it if you ever want to update your card, download an invoice, or make changes to your plan.</p>
+      <a href="https://billing.stripe.com/p/login/5kQ7sK4eAbbgbrpf421ck00" target="_blank" class="btn btn-primary">Manage my subscription <span class="ic" data-ic="arrow"></span></a>
+      <div class="billing-note">You'll be asked to enter your email address — use the same one you signed up with and Stripe will show you your account. Or just message me <b>"manage my billing"</b> any time and I'll send you the link directly.</div>
     </div>
   </div>
 
-  <!-- SUPPORT -->
   <div class="section">
-    <div class="section-label">Support</div>
-    <h2>We're here if you need us</h2>
-    <div class="support-cards">
+    <div class="sec-eye"><span class="ic" data-ic="chat"></span> Support</div>
+    <h2>I've got a human team behind me</h2>
+    <div class="support-grid">
       <div class="support-card">
-        <div class="support-card-icon">💬</div>
-        <div class="support-card-title">WhatsApp — fastest</div>
-        <div class="support-card-body">
-          Message us directly at<br>
-          <a href="https://wa.me/14372170057"><strong>+1 437-217-0057</strong></a><br><br>
-          For anything urgent — account access issues, setup questions, anything that's blocking you. We respond fast.
-        </div>
+        <div class="support-icon"><span class="ic" data-ic="chat"></span></div>
+        <div class="support-title">WhatsApp — fastest</div>
+        <div class="support-body">Message us directly at <a href="https://wa.me/14372170057">1 437-217-0057</a>.<br><br>For anything urgent — account access issues, setup questions, anything that's blocking you. We respond fast.</div>
       </div>
       <div class="support-card">
-        <div class="support-card-icon">✉️</div>
-        <div class="support-card-title">Email — non-urgent</div>
-        <div class="support-card-body">
-          <a href="mailto:support@aneurinadvisory.com"><strong>support@aneurinadvisory.com</strong></a><br><br>
-          For general questions, feedback, or anything that doesn't need an immediate response.
-        </div>
+        <div class="support-icon"><span class="ic" data-ic="envelope"></span></div>
+        <div class="support-title">Email — non-urgent</div>
+        <div class="support-body"><a href="mailto:support@aneurinadvisory.com">support@aneurinadvisory.com</a><br><br>For general questions, feedback, or anything that doesn't need an immediate response.</div>
       </div>
-    </div>
-    <div class="support-note">
-      Zeni is currently serving a small group of clients. That means direct, personal support — not a ticket queue. If something isn't working, reach out and we'll fix it.
     </div>
   </div>
 
-  <!-- FOOTER -->
-  <div class="footer">
+  <div class="section">
+    <div class="sec-eye"><span class="ic" data-ic="heart"></span> From the team</div>
+    <h2>You're one of our first.</h2>
+    <div class="note-card">
+      <p>Zeni is brand new, and you're one of the first people using it.</p>
+      <p>We've tested it carefully, but you may still hit the occasional rough edge — that's normal for something this early. Tell us when you do. We read every message ourselves and fix issues fast, usually the same day.</p>
+      <p>Here's the trade: your price is locked in for good, and you get direct access to the people building Zeni, not a support queue. In exchange, we're keeping this group small and paying close attention — your experience is directly shaping what Zeni becomes before we open things up more widely.</p>
+      <p>Message us any time — a bug, a question, or just feedback. We're building this with you, not just for you.</p>
+      <div class="note-sign">— The Zeni team</div>
+    </div>
+  </div>
+
+  <div class="foot">
     <p>Zeni &nbsp;·&nbsp; by <a href="https://ca.aneurinadvisory.com">Aneurin Advisory</a> &nbsp;·&nbsp; <a href="mailto:support@aneurinadvisory.com">support@aneurinadvisory.com</a></p>
-    <p style="margin-top:8px;"><a href="/privacy">Privacy</a> &nbsp;·&nbsp; <a href="/terms">Terms of Service</a></p>
+    <p><a href="/privacy">Privacy</a> &nbsp;·&nbsp; <a href="/terms">Terms of Service</a></p>
   </div>
 
 </div>
+
+<script>
+var S='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">';
+var Sf='<svg viewBox="0 0 24 24" fill="currentColor">';
+var ICONS={
+  check:S+'<path d="M4.5 12.5l4.5 4.5L20 6.5"/></svg>',
+  chat:Sf+'<path d="M7 3H17A4 4 0 0 1 21 7V13A4 4 0 0 1 17 17H10.8L6 20.5V17H7A4 4 0 0 1 3 13V7A4 4 0 0 1 7 3Z"/></svg>',
+  envelope:S+'<rect x="3" y="5" width="18" height="14" rx="2.4"/><path d="M3.5 7l8.5 6 8.5-6"/></svg>',
+  seedling:S+'<path d="M12 21v-7"/><path d="M12 14c0-3-2.4-5-6-5 0 3 2.4 5 6 5z"/><path d="M12 12.4c0-3 2.4-5 6-5 0 3-2.4 5-6 5z"/></svg>',
+  building:S+'<rect x="5" y="3" width="14" height="18" rx="1.6"/><path d="M9 7h2M13 7h2M9 11h2M13 11h2M9 15h2M13 15h2"/></svg>',
+  bulb:S+'<path d="M9.5 18.5h5M10.5 21.5h3"/><path d="M12 3a6 6 0 0 1 4 10.4c-.8.8-1.1 1.4-1.1 2.6H9.1c0-1.2-.3-1.8-1.1-2.6A6 6 0 0 1 12 3z"/></svg>',
+  eye:S+'<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>',
+  lock:S+'<rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>',
+  arrow:S+'<path d="M5 12h14M13 6l6 6-6 6"/></svg>',
+  dollar:S+'<circle cx="12" cy="12" r="9"/><path d="M12 6.5v11M14.6 9c-.5-.9-1.5-1.3-2.6-1.3-1.5 0-2.6.8-2.6 2s1.1 1.7 2.6 2 2.6.9 2.6 2-1.1 2-2.6 2c-1.1 0-2.1-.5-2.6-1.3"/></svg>',
+  receipt:S+'<path d="M6 3h12v18l-2-1.2L14 21l-2-1.2L10 21l-2-1.2L6 21z"/><path d="M9 8h6M9 12h5"/></svg>',
+  verified:Sf+'<path d="M12 2l2.3 1.7 2.8-.3 1.2 2.6 2.6 1.2-.3 2.8L22 12l-1.7 2.3.3 2.8-2.6 1.2-1.2 2.6-2.8-.3L12 22l-2.3-1.7-2.8.3-1.2-2.6L3.1 16l.3-2.8L2 12l1.7-2.3-.3-2.8L6 5.7l1.2-2.6 2.8.3z"/><path d="M9.5 12.2l1.8 1.8 3.4-3.6" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  call:S+'<path d="M5 4h3.5l1.7 4.3-2.1 1.5a11 11 0 0 0 5.1 5.1l1.5-2.1L19 16v3.5a1.5 1.5 0 0 1-1.6 1.5A15.5 15.5 0 0 1 3.5 6.6 1.5 1.5 0 0 1 5 5z"/></svg>',
+  more:Sf+'<circle cx="12" cy="5" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="12" cy="19" r="1.5"/></svg>',
+  signal:Sf+'<rect x="2" y="9" width="3" height="6" rx="1"/><rect x="7" y="6.5" width="3" height="8.5" rx="1"/><rect x="12" y="4" width="3" height="11" rx="1"/></svg>',
+  wifi:S+'<path d="M2.5 8.5a14 14 0 0 1 19 0M5.5 11.5a9.5 9.5 0 0 1 13 0M8.5 14.5a5 5 0 0 1 7 0"/><circle cx="12" cy="18" r=".6" fill="currentColor"/></svg>',
+  battery:S+'<rect x="2" y="7" width="17" height="10" rx="2.4"/><rect x="4" y="9" width="11" height="6" rx="1" fill="currentColor" stroke="none"/><path d="M21.5 10.5v3"/></svg>',
+  heart:S+'<path d="M12 20s-7-4.3-9.3-8.4C1 8.5 2.6 5.5 5.6 5.5c1.9 0 3.2 1.1 4.4 2.6 1.2-1.5 2.5-2.6 4.4-2.6 3 0 4.6 3 2.9 6.1C19 15.7 12 20 12 20z"/></svg>'
+};
+document.querySelectorAll('[data-ic]').forEach(function(e){e.innerHTML=ICONS[e.dataset.ic]||'';});
+</script>
 </body>
 </html>
