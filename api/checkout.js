@@ -3,6 +3,7 @@
 const { createHmac } = require('node:crypto')
 
 const PRODUCTION_ORIGIN = 'https://zeni.aneurinadvisory.com'
+const OWNED_VERCEL_PREVIEW_HOST_PATTERN = /^zeni-website(?:-[a-z0-9-]+)?-info-92096591s-projects\.vercel\.app$/i
 const REQUEST_ID_PATTERN = /^[A-Za-z0-9_-]{20,120}$/
 const MAX_BODY_BYTES = 4096
 
@@ -35,11 +36,26 @@ function addVercelOrigin(allowed, value) {
   if (host) allowed.add(`https://${host}`)
 }
 
+function isOwnedVercelPreviewOrigin(req, origin) {
+  try {
+    const parsed = new URL(origin)
+    const fetchSite = String(req.headers['sec-fetch-site'] || '').trim().toLowerCase()
+    return parsed.protocol === 'https:' &&
+      OWNED_VERCEL_PREVIEW_HOST_PATTERN.test(parsed.hostname) &&
+      (!fetchSite || fetchSite === 'same-origin')
+  } catch {
+    return false
+  }
+}
+
 function allowedRequestOrigin(req) {
   const origin = normalizedOrigin(req.headers.origin)
   if (!origin) return null
 
-  const allowed = new Set([PRODUCTION_ORIGIN])
+  if (origin === PRODUCTION_ORIGIN) return origin
+  if (isOwnedVercelPreviewOrigin(req, origin)) return origin
+
+  const allowed = new Set()
   const sameOriginHost = requestHostOrigin(req)
   if (sameOriginHost) allowed.add(sameOriginHost)
 
