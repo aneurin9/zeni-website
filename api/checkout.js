@@ -70,6 +70,21 @@ function allowedRequestOrigin(req) {
   return allowed.has(origin) ? origin : null
 }
 
+function logOriginDiagnostic(req) {
+  if (process.env.VERCEL_ENV !== 'preview') return
+
+  console.warn('[Paid Checkout Bridge] Origin diagnostic', {
+    origin: req.headers.origin || null,
+    host: req.headers.host || null,
+    forwardedHost: req.headers['x-forwarded-host'] || null,
+    forwardedProto: req.headers['x-forwarded-proto'] || null,
+    fetchSite: req.headers['sec-fetch-site'] || null,
+    vercelUrl: process.env.VERCEL_URL || null,
+    vercelBranchUrl: process.env.VERCEL_BRANCH_URL || null,
+    vercelEnv: process.env.VERCEL_ENV || null,
+  })
+}
+
 function parseBackendUrl() {
   const raw = String(process.env.ZENI_BACKEND_CHECKOUT_URL || '').trim()
   if (!raw) throw new Error('ZENI_BACKEND_CHECKOUT_URL is not configured')
@@ -149,7 +164,10 @@ module.exports = async function checkoutBridge(req, res) {
   }
 
   const requestOrigin = allowedRequestOrigin(req)
-  if (!requestOrigin) return send(res, 403, { error: 'origin not allowed' })
+  if (!requestOrigin) {
+    logOriginDiagnostic(req)
+    return send(res, 403, { error: 'origin not allowed' })
+  }
 
   const contentType = String(req.headers['content-type'] || '').toLowerCase()
   if (!contentType.startsWith('application/json')) {
