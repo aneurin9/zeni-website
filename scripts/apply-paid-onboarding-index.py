@@ -1,7 +1,7 @@
 from pathlib import Path
 import re
 
-# One-time, marker-guarded source patch for the paid Checkout handoff.
+# Marker-guarded source patches for the paid Checkout handoff and welcome CTA.
 path = Path('index.html')
 text = path.read_text()
 
@@ -79,4 +79,18 @@ if 'function gsGreeting()' not in text:
     raise SystemExit('Latest personalized Get Started flow is missing')
 
 path.write_text(text)
-print('Applied guarded paid onboarding index patch')
+
+welcome_path = Path('welcome/index.html')
+welcome = welcome_path.read_text()
+welcome_cta = '''    <a href="https://wa.me/18683166361?text=Hi%20Zeni" target="_blank" rel="noopener" class="btn btn-primary" style="margin:2px 0 16px">Message Zeni on WhatsApp <span class="ic" data-ic="arrow"></span></a>\n'''
+welcome_marker = '''    </div>\n    <div class="warn">\n'''
+if welcome_cta not in welcome:
+    if welcome.count(welcome_marker) != 1:
+        raise SystemExit('Could not locate the welcome-page WhatsApp CTA marker')
+    welcome = welcome.replace(welcome_marker, '    </div>\n' + welcome_cta + '    <div class="warn">\n', 1)
+
+if welcome.count('https://wa.me/18683166361?text=Hi%20Zeni') != 1:
+    raise SystemExit('Primary Zeni WhatsApp CTA must appear exactly once')
+welcome_path.write_text(welcome)
+
+print('Applied guarded paid onboarding website patches')
