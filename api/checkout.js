@@ -21,11 +21,23 @@ function normalizedOrigin(value) {
   }
 }
 
+function requestHostOrigin(req) {
+  const forwardedHost = String(req.headers['x-forwarded-host'] || '').split(',')[0].trim()
+  const host = forwardedHost || String(req.headers.host || '').trim()
+  if (!host) return null
+
+  const protocol = String(req.headers['x-forwarded-proto'] || '').split(',')[0].trim() || 'https'
+  return normalizedOrigin(`${protocol}://${host}`)
+}
+
 function allowedRequestOrigin(req) {
   const origin = normalizedOrigin(req.headers.origin)
   if (!origin) return null
 
   const allowed = new Set([PRODUCTION_ORIGIN])
+  const sameOriginHost = requestHostOrigin(req)
+  if (sameOriginHost) allowed.add(sameOriginHost)
+
   const vercelUrl = String(process.env.VERCEL_URL || '').trim()
   if (vercelUrl) allowed.add(`https://${vercelUrl}`)
 
@@ -84,10 +96,15 @@ function validatedBody(raw) {
 
 function sourceIp(req) {
   const vercelForwarded = String(req.headers['x-vercel-forwarded-for'] || '').split(',')[0].trim()
-  const forwarded = String(req.headers['x-forwarded-for'] || '').split(',')[0].trim()
   const realIp = String(req.headers['x-real-ip'] || '').trim()
   const socketIp = String(req.socket?.remoteAddress || '').trim()
-  return (vercelForwarded || forwarded || realIp || socketIp).slice(0, 128)
+
+  if (process.env.VERCEL || process.env.VERCEL_ENV) {
+    return (vercelForwarded || realIp || socketIp).slice(0, 128)
+  }
+
+  const forwarded = String(req.headers['x-forwarded-for'] || '').split(',')[0].trim()
+  return (realIp || forwarded || socketIp).slice(0, 128)
 }
 
 function signedBackendHeaders(secret, clientIp, serializedBody) {
