@@ -1,7 +1,7 @@
 from pathlib import Path
 import re
 
-# Marker-guarded source patches for the paid Checkout handoff and welcome CTA.
+# Marker-guarded source patches for the signed paid Checkout handoff and welcome CTA.
 path = Path('index.html')
 text = path.read_text()
 
