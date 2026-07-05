@@ -1,5 +1,7 @@
 'use strict'
 
+const { createHmac } = require('node:crypto')
+
 const PRODUCTION_ORIGIN = 'https://zeni.aneurinadvisory.com'
 const REQUEST_ID_PATTERN = /^[A-Za-z0-9_-]{20,120}$/
 const MAX_BODY_BYTES = 4096
@@ -56,6 +58,12 @@ function parseBackendUrl() {
   return url.toString()
 }
 
+function checkoutBridgeSecret() {
+  const secret = String(process.env.ZENI_CHECKOUT_BRIDGE_SECRET || '')
+  if (secret.length < 32) throw new Error('ZENI_CHECKOUT_BRIDGE_SECRET is not configured securely')
+  return secret
+}
+
 function validatedBody(raw) {
   const body = raw && typeof raw === 'object' && !Array.isArray(raw) ? raw : {}
   const requestId = String(body.requestId || '').trim()
@@ -75,12 +83,25 @@ function validatedBody(raw) {
 }
 
 function sourceIp(req) {
-  const forwarded = String(req.headers['x-forwarded-for'] || '')
-    .split(',')[0]
-    .trim()
+  const vercelForwarded = String(req.headers['x-vercel-forwarded-for'] || '').split(',')[0].trim()
+  const forwarded = String(req.headers['x-forwarded-for'] || '').split(',')[0].trim()
   const realIp = String(req.headers['x-real-ip'] || '').trim()
   const socketIp = String(req.socket?.remoteAddress || '').trim()
-  return (forwarded || realIp || socketIp).slice(0, 128)
+  return (vercelForwarded || forwarded || realIp || socketIp).slice(0, 128)
+}
+
+function signedBackendHeaders(secret, clientIp, serializedBody) {
+  const timestamp = String(Math.floor(Date.now() / 1000))
+  const clientIpHash = createHmac('sha256', secret).update(`ip:${clientIp}`).digest('hex')
+  const signature = createHmac('sha256', secret)
+    .update(`${timestamp}.${clientIpHash}.${serializedBody}`)
+    .digest('hex')
+
+  return {
+    'X-Zeni-Checkout-Timestamp': timestamp,
+    'X-Zeni-Client-IP-Hash': clientIpHash,
+    'X-Zeni-Checkout-Signature': signature,
+  }
 }
 
 module.exports = async function checkoutBridge(req, res) {
@@ -91,6 +112,11 @@ module.exports = async function checkoutBridge(req, res) {
 
   const requestOrigin = allowedRequestOrigin(req)
   if (!requestOrigin) return send(res, 403, { error: 'origin not allowed' })
+
+  const contentType = String(req.headers['content-type'] || '').toLowerCase()
+  if (!contentType.startsWith('application/json')) {
+    return send(res, 415, { error: 'content type must be application/json' })
+  }
 
   const contentLength = Number(req.headers['content-length'] || 0)
   if (contentLength > MAX_BODY_BYTES) return send(res, 413, { error: 'request too large' })
@@ -119,16 +145,25 @@ module.exports = async function checkoutBridge(req, res) {
   if (!body) return send(res, 400, { error: 'invalid checkout request' })
 
   let backendUrl
+  let secret
   try {
     backendUrl = parseBackendUrl()
+    secret = checkoutBridgeSecret()
   } catch (error) {
     console.error('[Paid Checkout Bridge] Configuration error', error)
     return send(res, 503, { error: 'checkout temporarily unavailable' })
   }
 
+  const clientIp = sourceIp(req)
+  if (!clientIp) {
+    console.error('[Paid Checkout Bridge] Trusted client IP was unavailable')
+    return send(res, 503, { error: 'checkout temporarily unavailable' })
+  }
+
+  const serializedBody = JSON.stringify(body)
+  const bridgeHeaders = signedBackendHeaders(secret, clientIp, serializedBody)
   const controller = new AbortController()
   const timeout = setTimeout(() => controller.abort(), 15000)
-  const forwardedFor = sourceIp(req)
 
   try {
     const upstream = await fetch(backendUrl, {
@@ -137,9 +172,9 @@ module.exports = async function checkoutBridge(req, res) {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
         'Origin': requestOrigin,
-        ...(forwardedFor ? { 'X-Forwarded-For': forwardedFor } : {}),
+        ...bridgeHeaders,
       },
-      body: JSON.stringify(body),
+      body: serializedBody,
       signal: controller.signal,
     })
 
