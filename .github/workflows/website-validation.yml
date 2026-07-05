@@ -6,6 +6,7 @@ on:
     types: [opened, synchronize, reopened, ready_for_review]
     paths:
       - 'index.html'
+      - 'welcome/index.html'
       - 'paid-checkout.js'
       - 'api/checkout.js'
       - 'scripts/apply-paid-onboarding-index.py'
@@ -40,16 +41,24 @@ jobs:
           grep -q 'cryptoApi.getRandomValues' paid-checkout.js
           grep -q 'window.runPaidCheckout' paid-checkout.js
           grep -q 'ZENI_BACKEND_CHECKOUT_URL' api/checkout.js
+          grep -q 'ZENI_CHECKOUT_BRIDGE_SECRET' api/checkout.js
           grep -q "pathname !== '/api/public/checkout'" api/checkout.js
           grep -q "'Origin': requestOrigin" api/checkout.js
           grep -q 'allowedRequestOrigin(req)' api/checkout.js
+          grep -q "req.headers\['x-vercel-forwarded-for'\]" api/checkout.js
+          grep -q 'X-Zeni-Checkout-Timestamp' api/checkout.js
+          grep -q 'X-Zeni-Client-IP-Hash' api/checkout.js
+          grep -q 'X-Zeni-Checkout-Signature' api/checkout.js
+          grep -q "createHmac('sha256'" api/checkout.js
           ! grep -q 'Math.random' paid-checkout.js
+          ! grep -q "'X-Forwarded-For':" api/checkout.js
           ! grep -q 'stripe-pricing-table' index.html
           ! grep -q 'pricing-table.js' index.html
           ! grep -q 'id="stripe-modal"' index.html
           ! grep -q 'function openStripe()' index.html
           ! grep -q 'openStripe();' index.html
           ! grep -q 'ZENI_BACKEND_CHECKOUT_URL' paid-checkout.js
+          ! grep -q 'ZENI_CHECKOUT_BRIDGE_SECRET' paid-checkout.js index.html
 
       - name: Verify customer flow and secret boundary
         shell: bash
@@ -60,4 +69,5 @@ jobs:
           grep -q 'gsRunCheckout();' index.html
           grep -q "openGetStarted('core')" index.html
           grep -q "openGetStarted('premium')" index.html
+          grep -q 'https://wa.me/18683166361?text=Hi%20Zeni' welcome/index.html
           ! grep -Eq 'STRIPE_SECRET_KEY|SUPABASE_SERVICE_ROLE_KEY|STRIPE_PRICE_TIER' index.html paid-checkout.js
