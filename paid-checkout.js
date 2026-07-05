@@ -112,7 +112,7 @@
   function responseMessage(response, payload) {
     var backendError = String(payload && payload.error || '')
 
-    if (response.status === 400 || response.status === 413) {
+    if (response.status === 400 || response.status === 413 || response.status === 415) {
       return 'Please check your signup details before continuing.'
     }
 
@@ -122,6 +122,10 @@
 
     if (response.status === 409 && backendError === 'active subscription already exists') {
       return 'This WhatsApp number already has an active Zeni subscription. Contact support if you need help accessing it.'
+    }
+
+    if (response.status === 409 && backendError === 'existing subscription requires support') {
+      return 'This WhatsApp number already has a Stripe subscription that needs attention. Contact support and we’ll help you continue safely.'
     }
 
     if (response.status === 409) {
