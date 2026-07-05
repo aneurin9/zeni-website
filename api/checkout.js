@@ -148,6 +148,16 @@ function signedBackendHeaders(secret, clientIp, serializedBody) {
   }
 }
 
+// Optional Vercel Deployment Protection bypass for the signed server-to-server
+// call. Only emitted when VERCEL_AUTOMATION_BYPASS_SECRET is set on this
+// (website) deployment; unset in production, so no header is sent there. This
+// lets the bridge reach a protection-gated backend Preview without disabling
+// protection for human visitors. See: Vercel "Protection Bypass for Automation".
+function protectionBypassHeaders() {
+  const secret = String(process.env.VERCEL_AUTOMATION_BYPASS_SECRET || '').trim()
+  return secret ? { 'x-vercel-protection-bypass': secret } : {}
+}
+
 module.exports = async function checkoutBridge(req, res) {
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST')
@@ -157,7 +167,7 @@ module.exports = async function checkoutBridge(req, res) {
   const requestOrigin = allowedRequestOrigin(req)
   if (!requestOrigin) {
     logOriginDiagnostic(req)
-    return send(res, 403, { error: 'origin not allowed' })
+    return send(res, 403, { error: 'origin not allowed', code: 'website_bridge_origin_rejected' })
   }
 
   const contentType = String(req.headers['content-type'] || '').toLowerCase()
@@ -220,21 +230,56 @@ module.exports = async function checkoutBridge(req, res) {
         'Content-Type': 'application/json',
         'Origin': requestOrigin,
         ...bridgeHeaders,
+        ...protectionBypassHeaders(),
       },
       body: serializedBody,
       signal: controller.signal,
     })
 
+    const upstreamContentType = String(upstream.headers.get('content-type') || '').toLowerCase()
     const text = await upstream.text()
-    let payload
-    try {
-      payload = text ? JSON.parse(text) : {}
-    } catch {
-      payload = { error: 'invalid checkout response' }
+
+    let payload = null
+    let parseFailed = false
+    if (text) {
+      try {
+        payload = JSON.parse(text)
+      } catch {
+        parseFailed = true
+      }
+    } else {
+      payload = {}
     }
 
-    if (!payload || typeof payload !== 'object' || Array.isArray(payload)) {
-      payload = { error: 'invalid checkout response' }
+    const isJsonObject = payload !== null && typeof payload === 'object' && !Array.isArray(payload)
+
+    // TEMP DIAGNOSTIC (preview only): reveals when the backend Preview returns a
+    // non-JSON body (e.g. a Vercel Deployment Protection HTML page) — the case
+    // the browser otherwise surfaces as the ambiguous "invalid secure link".
+    // Logs no PII, no secrets, no signatures, no response body, no full Checkout
+    // URL — only status, content-type, and a hostname.
+    if (process.env.VERCEL_ENV === 'preview') {
+      let urlHost = null
+      try {
+        if (isJsonObject && payload.url) urlHost = new URL(String(payload.url)).hostname
+      } catch {
+        urlHost = 'unparseable'
+      }
+      console.warn('[Paid Checkout Bridge] Upstream diagnostic', {
+        upstreamStatus: upstream.status,
+        upstreamContentType: upstreamContentType || null,
+        parseFailed,
+        hasUrl: Boolean(isJsonObject && payload.url),
+        urlHost,
+      })
+    }
+
+    // A non-JSON upstream body (protection/login/HTML page, gateway error) must
+    // never be forwarded with its original status: a 2xx HTML page would reach
+    // the browser as response.ok with no url ("invalid secure link"), masking the
+    // real cause. Surface it as an unambiguous bridge failure instead.
+    if (parseFailed || !isJsonObject) {
+      return send(res, 502, { error: 'checkout temporarily unavailable', code: 'upstream_non_json' })
     }
 
     return send(res, upstream.status, payload)
