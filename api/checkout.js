@@ -30,6 +30,11 @@ function requestHostOrigin(req) {
   return normalizedOrigin(`${protocol}://${host}`)
 }
 
+function addVercelOrigin(allowed, value) {
+  const host = String(value || '').trim()
+  if (host) allowed.add(`https://${host}`)
+}
+
 function allowedRequestOrigin(req) {
   const origin = normalizedOrigin(req.headers.origin)
   if (!origin) return null
@@ -38,8 +43,8 @@ function allowedRequestOrigin(req) {
   const sameOriginHost = requestHostOrigin(req)
   if (sameOriginHost) allowed.add(sameOriginHost)
 
-  const vercelUrl = String(process.env.VERCEL_URL || '').trim()
-  if (vercelUrl) allowed.add(`https://${vercelUrl}`)
+  addVercelOrigin(allowed, process.env.VERCEL_URL)
+  addVercelOrigin(allowed, process.env.VERCEL_BRANCH_URL)
 
   if (process.env.VERCEL_ENV !== 'production' && process.env.NODE_ENV !== 'production') {
     allowed.add('http://localhost:3000')
