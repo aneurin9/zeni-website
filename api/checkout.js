@@ -31,43 +31,34 @@ function requestHostOrigin(req) {
   return normalizedOrigin(`${protocol}://${host}`)
 }
 
-function addVercelOrigin(allowed, value) {
-  const host = String(value || '').trim()
-  if (host) allowed.add(`https://${host}`)
-}
-
-function isOwnedVercelPreviewOrigin(req, origin) {
+function trustedWebsiteOrigin(origin) {
   try {
     const parsed = new URL(origin)
-    const fetchSite = String(req.headers['sec-fetch-site'] || '').trim().toLowerCase()
-    return parsed.protocol === 'https:' &&
-      OWNED_VERCEL_PREVIEW_HOST_PATTERN.test(parsed.hostname) &&
-      (!fetchSite || fetchSite === 'same-origin')
+    if (parsed.origin === PRODUCTION_ORIGIN) return true
+    if (parsed.protocol === 'https:' && OWNED_VERCEL_PREVIEW_HOST_PATTERN.test(parsed.hostname)) return true
+
+    return process.env.VERCEL_ENV !== 'production' &&
+      parsed.protocol === 'http:' &&
+      (parsed.hostname === 'localhost' || parsed.hostname === '127.0.0.1')
   } catch {
     return false
   }
 }
 
 function allowedRequestOrigin(req) {
-  const origin = normalizedOrigin(req.headers.origin)
-  if (!origin) return null
+  const hostOrigin = requestHostOrigin(req)
+  if (!hostOrigin || !trustedWebsiteOrigin(hostOrigin)) return null
 
-  if (origin === PRODUCTION_ORIGIN) return origin
-  if (isOwnedVercelPreviewOrigin(req, origin)) return origin
+  const browserOrigin = normalizedOrigin(req.headers.origin)
+  const fetchSite = String(req.headers['sec-fetch-site'] || '').trim().toLowerCase()
 
-  const allowed = new Set()
-  const sameOriginHost = requestHostOrigin(req)
-  if (sameOriginHost) allowed.add(sameOriginHost)
-
-  addVercelOrigin(allowed, process.env.VERCEL_URL)
-  addVercelOrigin(allowed, process.env.VERCEL_BRANCH_URL)
-
-  if (process.env.VERCEL_ENV !== 'production' && process.env.NODE_ENV !== 'production') {
-    allowed.add('http://localhost:3000')
-    allowed.add('http://127.0.0.1:3000')
+  if (browserOrigin) {
+    if (browserOrigin !== hostOrigin) return null
+    if (fetchSite && fetchSite !== 'same-origin') return null
+    return hostOrigin
   }
 
-  return allowed.has(origin) ? origin : null
+  return fetchSite === 'same-origin' ? hostOrigin : null
 }
 
 function logOriginDiagnostic(req) {
