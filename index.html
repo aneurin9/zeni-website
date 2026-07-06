@@ -17,7 +17,6 @@
 <meta name="twitter:description" content="Zeni walks you through setup then runs your business every day through WhatsApp. No team. No complexity. No experience needed.">  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-<script async src="https://js.stripe.com/v3/pricing-table.js"></script>
   <link rel="icon" type="image/png" href="/zeni-favicon-new.png?v=1">
   <style>
   :root{
@@ -505,12 +504,6 @@
 </head>
 <body>
 
-<div id="stripe-modal" role="dialog" aria-modal="true" style="display:none;position:fixed;inset:0;z-index:500;background:rgba(10,15,44,.95);backdrop-filter:blur(16px);overflow-y:auto;">
-  <div style="max-width:960px;margin:0 auto;padding:64px 20px 48px;position:relative;">
-    <button id="stripe-close" aria-label="Close" style="position:fixed;top:18px;right:20px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);color:#EAEAF0;width:40px;height:40px;border-radius:50%;cursor:pointer;font-size:18px;line-height:1;font-family:inherit;z-index:501;">✕</button>
-    <stripe-pricing-table pricing-table-id="prctbl_1Tg2hvD07QICv7iOzBMgbmm6" publishable-key="pk_live_51SZSzkD07QICv7iO89rJjJPgDC2SFjpeJDNouSImMKju5pJxkub45ot6ARsfAopVPx5o8XmsIGB3GZtSmygYPzGi00wS3vDVNk"></stripe-pricing-table>
-  </div>
-</div>
 <nav>
   <div class="nav-in">
     <a class="brand" href="#top"><img src="/logo.png" alt="Zeni"><b>zeni</b></a>
@@ -1410,8 +1403,20 @@ function gsNextClick(){
 }
 
 function gsRunCheckout(){
-  closeGS();
-  openStripe();
+  if (typeof window.runPaidCheckout === 'function') {
+    return window.runPaidCheckout();
+  }
+  var box=document.getElementById('gsBody');
+  if(!box) return;
+  var error=document.getElementById('gsCheckoutError');
+  if(!error){
+    error=document.createElement('p');
+    error.id='gsCheckoutError';
+    error.setAttribute('role','alert');
+    error.style.cssText='display:block;margin:16px 0 0;padding:11px 13px;border-radius:11px;background:rgba(190,45,65,.08);border:1px solid rgba(190,45,65,.18);color:#9f2e43;font-size:13px;line-height:1.45;';
+    box.appendChild(error);
+  }
+  error.textContent='Checkout couldn’t be opened right now. Please refresh and try again.';
 }
 
 function openGetStarted(presetPlan){
@@ -1565,14 +1570,7 @@ renderOutcomeTabs();
 renderOutcomePanel();
 
 </script>
-<script>
-// Stripe modal
-function openStripe(){document.getElementById('stripe-modal').style.display='block';document.body.style.overflow='hidden';}
-function closeStripe(){document.getElementById('stripe-modal').style.display='none';document.body.style.overflow='';}
-document.getElementById('stripe-close').addEventListener('click',closeStripe);
-document.getElementById('stripe-modal').addEventListener('click',function(e){if(e.target===this)closeStripe();});
-document.addEventListener('keydown',function(e){if(e.key==='Escape')closeStripe();});
-</script>
 
+<script src="/paid-checkout.js"></script>
 </body>
 </html>

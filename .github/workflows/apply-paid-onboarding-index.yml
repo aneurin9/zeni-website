@@ -1,0 +1,51 @@
+name: Apply paid onboarding website patches
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened, ready_for_review]
+    paths:
+      - 'scripts/apply-paid-onboarding-index.py'
+      - '.github/workflows/apply-paid-onboarding-index.yml'
+      - 'paid-checkout.js'
+      - 'api/checkout.js'
+      - 'welcome/index.html'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: paid-onboarding-index-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  apply:
+    if: ${{ github.event.pull_request.head.ref == 'build/automatic-paid-onboarding-website' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: build/automatic-paid-onboarding-website
+          fetch-depth: 0
+
+      - name: Apply guarded website patches
+        run: python scripts/apply-paid-onboarding-index.py
+
+      - name: Validate checkout JavaScript
+        run: |
+          node --check api/checkout.js
+          node --check paid-checkout.js
+
+      - name: Commit patched website files once
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- index.html welcome/index.html; then
+            echo 'Website patches already committed.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html welcome/index.html
+          git commit -m 'Complete secure checkout website handoff'
+          git push origin HEAD:build/automatic-paid-onboarding-website
