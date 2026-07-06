@@ -42,7 +42,9 @@ jobs:
           grep -q 'window.runPaidCheckout' paid-checkout.js
           grep -q 'ZENI_BACKEND_CHECKOUT_URL' api/checkout.js
           grep -q 'ZENI_CHECKOUT_BRIDGE_SECRET' api/checkout.js
-          grep -q "pathname !== '/api/public/checkout'" api/checkout.js
+          grep -q "LEGACY_BACKEND_CHECKOUT_PATH = '/api/public/checkout'" api/checkout.js
+          grep -q "CONFIGURED_BACKEND_CHECKOUT_PATH = '/api/public/configured-checkout'" api/checkout.js
+          grep -q 'url.pathname = CONFIGURED_BACKEND_CHECKOUT_PATH' api/checkout.js
           grep -q "'Origin': requestOrigin" api/checkout.js
           grep -q 'allowedRequestOrigin(req)' api/checkout.js
           grep -q "req.headers\['x-vercel-forwarded-for'\]" api/checkout.js
