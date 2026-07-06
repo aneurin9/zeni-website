@@ -6,6 +6,8 @@ const PRODUCTION_ORIGIN = 'https://zeni.aneurinadvisory.com'
 const OWNED_VERCEL_PREVIEW_HOST_PATTERN = /^zeni-website(?:-[a-z0-9-]+)?-info-92096591s-projects\.vercel\.app$/i
 const REQUEST_ID_PATTERN = /^[A-Za-z0-9_-]{20,120}$/
 const MAX_BODY_BYTES = 4096
+const LEGACY_BACKEND_CHECKOUT_PATH = '/api/public/checkout'
+const CONFIGURED_BACKEND_CHECKOUT_PATH = '/api/public/configured-checkout'
 
 function send(res, status, body) {
   res.setHeader('Cache-Control', 'no-store')
@@ -88,12 +90,14 @@ function parseBackendUrl() {
     url.password ||
     url.search ||
     url.hash ||
-    pathname !== '/api/public/checkout'
+    ![LEGACY_BACKEND_CHECKOUT_PATH, CONFIGURED_BACKEND_CHECKOUT_PATH].includes(pathname)
   ) {
     throw new Error('ZENI_BACKEND_CHECKOUT_URL is invalid')
   }
 
-  url.pathname = pathname
+  // Existing deployments may still store the legacy path in Vercel. Rewrite it
+  // server-side so no environment-value change is needed during the safe rollout.
+  url.pathname = CONFIGURED_BACKEND_CHECKOUT_PATH
   return url.toString()
 }
 
