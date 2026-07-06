@@ -1294,9 +1294,17 @@ function injectIconsFresh(root){
   injectIcons(root);
 }
 
+function gsOnEnter(el, fn){
+  if(!el) return;
+  el.addEventListener('keydown', function(e){
+    if(e.key==='Enter'){ e.preventDefault(); fn(); }
+  });
+}
+
 function gsBindInputs(){
   var n=document.getElementById('gsNameInput');
   if(n){ n.addEventListener('input', function(){ gsData.name=this.value; gsUpdateNextState(); }); n.focus(); }
+  gsOnEnter(n, gsNextClick);
   function formatPhone(raw){
     var d=raw.replace(/[^0-9]/g,'').slice(0,10);
     if(d.length===0) return '';
@@ -1306,10 +1314,13 @@ function gsBindInputs(){
   }
   var ph=document.getElementById('gsPhoneInput');
   if(ph){ ph.addEventListener('input', function(){ this.value=formatPhone(this.value); this.setSelectionRange(this.value.length,this.value.length); gsData.phone=this.value; gsUpdateNextState(); }); }
+  gsOnEnter(ph, gsNextClick);
   var we=document.getElementById('gsWaitlistEmail');
   if(we){ we.addEventListener('input', function(){ gsData.waitlistEmail=this.value; gsHideWaitlistError(); }); }
+  gsOnEnter(we, gsJoinWaitlist);
   var wp=document.getElementById('gsWaitlistProvince');
   if(wp){ wp.addEventListener('input', function(){ gsData.waitlistProvince=this.value; }); }
+  gsOnEnter(wp, gsJoinWaitlist);
 }
 function gsHideWaitlistError(){
   var errEl=document.getElementById('gsWaitlistError');
