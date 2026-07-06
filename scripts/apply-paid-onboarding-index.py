@@ -55,6 +55,33 @@ if old_checkout in text:
 elif new_checkout not in text:
     raise SystemExit('Could not locate the Get Started checkout handoff')
 
+# Preserve the latest main-branch keyboard behavior while this feature branch is merged.
+enter_helper = '''function gsOnEnter(el, fn){
+  if(!el) return;
+  el.addEventListener('keydown', function(e){
+    if(e.key==='Enter'){ e.preventDefault(); fn(); }
+  });
+}
+
+'''
+if enter_helper not in text:
+    marker = 'function gsBindInputs(){\n'
+    if marker not in text:
+        raise SystemExit('Could not locate gsBindInputs for Enter-key support')
+    text = text.replace(marker, enter_helper + marker, 1)
+
+enter_bindings = (
+    ("  if(n){ n.addEventListener('input', function(){ gsData.name=this.value; gsUpdateNextState(); }); n.focus(); }\n", "  if(n){ n.addEventListener('input', function(){ gsData.name=this.value; gsUpdateNextState(); }); n.focus(); }\n  gsOnEnter(n, gsNextClick);\n"),
+    ("  if(ph){ ph.addEventListener('input', function(){ this.value=formatPhone(this.value); this.setSelectionRange(this.value.length,this.value.length); gsData.phone=this.value; gsUpdateNextState(); }); }\n", "  if(ph){ ph.addEventListener('input', function(){ this.value=formatPhone(this.value); this.setSelectionRange(this.value.length,this.value.length); gsData.phone=this.value; gsUpdateNextState(); }); }\n  gsOnEnter(ph, gsNextClick);\n"),
+    ("  if(we){ we.addEventListener('input', function(){ gsData.waitlistEmail=this.value; gsHideWaitlistError(); }); }\n", "  if(we){ we.addEventListener('input', function(){ gsData.waitlistEmail=this.value; gsHideWaitlistError(); }); }\n  gsOnEnter(we, gsJoinWaitlist);\n"),
+    ("  if(wp){ wp.addEventListener('input', function(){ gsData.waitlistProvince=this.value; }); }\n", "  if(wp){ wp.addEventListener('input', function(){ gsData.waitlistProvince=this.value; }); }\n  gsOnEnter(wp, gsJoinWaitlist);\n"),
+)
+for original, updated in enter_bindings:
+    if updated not in text:
+        if original not in text:
+            raise SystemExit('Could not preserve Enter-key binding in Get Started flow')
+        text = text.replace(original, updated, 1)
+
 checkout_script = '<script src="/paid-checkout.js"></script>\n'
 if checkout_script not in text:
     if '</body>' not in text:
@@ -77,6 +104,8 @@ if 'function gsRunCheckout()' not in text or 'window.runPaidCheckout' not in tex
     raise SystemExit('Get Started checkout dispatcher is missing')
 if 'function gsGreeting()' not in text:
     raise SystemExit('Latest personalized Get Started flow is missing')
+if text.count('function gsOnEnter(el, fn)') != 1:
+    raise SystemExit('Enter-key helper must appear exactly once')
 
 path.write_text(text)
 
