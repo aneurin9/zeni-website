@@ -7,8 +7,10 @@ on:
     paths:
       - 'index.html'
       - 'welcome/index.html'
+      - 'welcome/welcome.js'
       - 'paid-checkout.js'
       - 'api/checkout.js'
+      - 'api/welcome.js'
       - 'scripts/apply-paid-onboarding-index.py'
       - '.github/workflows/website-validation.yml'
       - '.github/workflows/apply-paid-onboarding-index.yml'
@@ -29,6 +31,8 @@ jobs:
         run: |
           node --check paid-checkout.js
           node --check api/checkout.js
+          node --check api/welcome.js
+          node --check welcome/welcome.js
 
       - name: Validate paid checkout integration
         shell: bash
@@ -72,4 +76,13 @@ jobs:
           grep -q "openGetStarted('core')" index.html
           grep -q "openGetStarted('premium')" index.html
           grep -q 'https://wa.me/18683166361?text=Hi%20Zeni' welcome/index.html
-          ! grep -Eq 'STRIPE_SECRET_KEY|SUPABASE_SERVICE_ROLE_KEY|STRIPE_PRICE_TIER' index.html paid-checkout.js
+          grep -q 'id="welcome-title"' welcome/index.html
+          grep -q '<script src="/welcome/welcome.js"></script>' welcome/index.html
+          grep -q "fetch('/api/welcome?checkout_session_id='" welcome/welcome.js
+          grep -q 'history.replaceState' welcome/welcome.js
+          grep -q "BACKEND_WELCOME_PATH = '/api/public/welcome'" api/welcome.js
+          grep -q 'X-Zeni-Welcome-Timestamp' api/welcome.js
+          grep -q 'X-Zeni-Welcome-Signature' api/welcome.js
+          grep -q "createHmac('sha256'" api/welcome.js
+          ! grep -Eq 'STRIPE_SECRET_KEY|SUPABASE_SERVICE_ROLE_KEY|STRIPE_PRICE_TIER' index.html paid-checkout.js welcome/index.html welcome/welcome.js
+          ! grep -Eq '[?&]name=' welcome/index.html welcome/welcome.js
