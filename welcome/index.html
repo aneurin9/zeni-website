@@ -143,6 +143,18 @@ svg{width:1em;height:1em;display:block}
 .support-body a,.support-body b{color:var(--ink);font-weight:600}
 .support-note{font-size:12.5px;color:var(--muted);line-height:1.65;padding:14px 16px;background:var(--pearl2);border-radius:12px}
 
+/* HANDY COMMANDS */
+.cmd-details{background:var(--card);border:1px solid var(--line2);border-radius:16px;box-shadow:var(--shadow-sm);overflow:hidden}
+.cmd-summary{list-style:none;cursor:pointer;padding:18px 20px;display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:14px;font-weight:700;color:var(--ink)}
+.cmd-summary::-webkit-details-marker{display:none}
+.cmd-summary .chev{width:14px;height:14px;color:var(--violet);transform:rotate(90deg);transition:transform .2s;flex-shrink:0}
+.cmd-details[open] .cmd-summary .chev{transform:rotate(-90deg)}
+.cmd-list{padding:2px 20px 20px;display:flex;flex-direction:column;gap:16px;border-top:1px solid var(--line)}
+.cmd-item{display:flex;flex-direction:column;gap:4px;padding-top:14px}
+.cmd-tag{font-size:12.5px;font-weight:700;color:var(--violet-d);font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.cmd-what{font-size:13px;color:var(--ink2);line-height:1.6}
+.cmd-when{font-size:12px;color:var(--faint);line-height:1.55}
+
 /* FOUNDER NOTE */
 .note-card{background:linear-gradient(155deg,rgba(255,255,255,.85),rgba(247,239,247,.7));border:1px solid var(--glass-brd);border-left:3px solid var(--violet);border-radius:16px;padding:24px 26px;box-shadow:var(--shadow-sm)}
 .note-card p{font-size:13.5px;color:var(--ink2);line-height:1.7;margin-bottom:14px}
@@ -269,6 +281,32 @@ svg{width:1em;height:1em;display:block}
         <div><div class="menu-card-title">See how Zeni works</div><div class="menu-card-body">A guided tour of everything I do once you're set up — daily briefings, finances, deadlines, documents, planning, and more. Worth going through even if you're mid-setup.</div></div>
       </div>
     </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-eye"><span class="ic" data-ic="bulb"></span> Good to know</div>
+    <h2>A few things worth knowing</h2>
+    <p class="section-lead">During setup, you can send any of these any time, no need to wait for a menu.</p>
+    <details class="cmd-details">
+      <summary class="cmd-summary">3 handy commands to remember <span class="ic chev" data-ic="arrow"></span></summary>
+      <div class="cmd-list">
+        <div class="cmd-item">
+          <span class="cmd-tag">"I'm frustrated"</span>
+          <span class="cmd-what">Zeni slows down and breaks the step down, or connects you with the team if it's something they need to look at.</span>
+          <span class="cmd-when">Use it when a step feels unclear or overwhelming, say the word and Zeni will slow things down.</span>
+        </div>
+        <div class="cmd-item">
+          <span class="cmd-tag">"Show setup progress"</span>
+          <span class="cmd-what">Shows your current phase, % complete, and exactly what's left.</span>
+          <span class="cmd-when">Use it any time you want a clear picture of how far you've come and what's still ahead.</span>
+        </div>
+        <div class="cmd-item">
+          <span class="cmd-tag">"Cancel current request"</span>
+          <span class="cmd-what">Clears whatever you just asked for. Your saved progress is untouched.</span>
+          <span class="cmd-when">Use it if something's stuck, glitching, or not going through, cancel it and try again without starting over.</span>
+        </div>
+      </div>
+    </details>
   </div>
 
   <div class="section">
