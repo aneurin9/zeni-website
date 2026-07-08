@@ -174,7 +174,7 @@ svg{width:1em;height:1em;display:block}
   <div class="section" style="padding-bottom:14px">
     <div class="confirm">
       <div class="confirm-check"><span class="ic" data-ic="check"></span></div>
-      <h1>You're <span class="g">all set.</span></h1>
+      <h1 id="welcome-title">You're <span class="g">all set.</span></h1>
       <p>Your subscription is active — I'll meet you on WhatsApp in just a moment. First, here's everything you need to know. It only takes a minute to read, and then we can get started for real.</p>
     </div>
   </div>
@@ -237,7 +237,7 @@ svg{width:1em;height:1em;display:block}
           </div>
           <div class="wa-body">
             <div class="day">Today</div>
-            <div class="bub in">Hi! I'm Zeni — your AI business operator.<br><br>To get started, tell me a bit about where you're at:</div>
+            <div class="bub in">Hi Marcus, I’m Zeni — your WhatsApp business operator.<br><br>To get started, tell me a bit about where you're at:</div>
             <div class="menu-sheet">
               <div class="menu-header">Get started</div>
               <div class="menu-item"><div class="menu-item-title">Start a new business</div><div class="menu-item-sub">I'll help you build the right foundation</div></div>
@@ -342,5 +342,6 @@ var ICONS={
 };
 document.querySelectorAll('[data-ic]').forEach(function(e){e.innerHTML=ICONS[e.dataset.ic]||'';});
 </script>
+<script src="/welcome/welcome.js"></script>
 </body>
 </html>
