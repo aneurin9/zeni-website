@@ -80,6 +80,9 @@ jobs:
           grep -q '<script src="/welcome/welcome.js"></script>' welcome/index.html
           grep -q "fetch('/api/welcome?checkout_session_id='" welcome/welcome.js
           grep -q 'history.replaceState' welcome/welcome.js
+          grep -q 'function alignFirstMessagePreview()' welcome/welcome.js
+          grep -q 'Let’s get you into the right setup path.' welcome/welcome.js
+          grep -q "title.textContent.trim() === 'See how Zeni works'" welcome/welcome.js
           grep -q "BACKEND_WELCOME_PATH = '/api/public/welcome'" api/welcome.js
           grep -q 'X-Zeni-Welcome-Timestamp' api/welcome.js
           grep -q 'X-Zeni-Welcome-Signature' api/welcome.js
