@@ -20,6 +20,25 @@
     heading.appendChild(accent)
   }
 
+  function alignFirstMessagePreview() {
+    var bubble = document.querySelector('.bub.in')
+    if (bubble) {
+      bubble.textContent = ''
+      bubble.appendChild(document.createTextNode('Hi Marcus, I’m Zeni — your WhatsApp business operator.'))
+      bubble.appendChild(document.createElement('br'))
+      bubble.appendChild(document.createElement('br'))
+      bubble.appendChild(document.createTextNode('Let’s get you into the right setup path.'))
+      bubble.appendChild(document.createElement('br'))
+      bubble.appendChild(document.createElement('br'))
+      bubble.appendChild(document.createTextNode('Choose the closest option:'))
+    }
+
+    Array.prototype.forEach.call(document.querySelectorAll('.menu-item, .menu-card'), function (item) {
+      var title = item.querySelector('.menu-item-title, .menu-card-title')
+      if (title && title.textContent.trim() === 'See how Zeni works') item.remove()
+    })
+  }
+
   async function loadPersonalization() {
     var url = new URL(window.location.href)
     var sessionId = String(url.searchParams.get('checkout_session_id') || '').trim()
@@ -42,5 +61,6 @@
     }
   }
 
+  alignFirstMessagePreview()
   loadPersonalization()
 })()
