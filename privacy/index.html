@@ -571,9 +571,9 @@
       <p>
         Because Zeni works through WhatsApp and uses artificial intelligence,
         relevant messages, documents, images, and voice notes may be processed
-        by our service providers, including Meta, OpenAI, Supabase, Vercel, and
-        Stripe. Some processing occurs outside Canada, including in the United
-        States.
+        by our service providers, including Meta, OpenAI, Supabase, Vercel,
+        Stripe, and Sentry. Some processing occurs outside Canada, including in
+        the United States.
       </p>
 
       <div class="trust-grid">
@@ -716,6 +716,7 @@
         <ul>
           <li>API usage records used for rate limiting and service reliability</li>
           <li>Error logs, diagnostic records, and security events</li>
+          <li>Application error, diagnostic, and performance information, such as technical stack traces, affected pages or routes, browser or operating-system type, release version, event identifiers, and timing or tracing information</li>
           <li>Basic device, browser, IP-address, and request information collected by hosting providers</li>
         </ul>
 
@@ -968,10 +969,27 @@
                   <td>Application and website hosting, delivery, logs, and performance</td>
                   <td>Global edge infrastructure, including the United States</td>
                 </tr>
+                <tr>
+                  <td>Sentry</td>
+                  <td>Application error monitoring, performance tracing, release diagnostics, and readable technical stack traces</td>
+                  <td>United States — Sentry US region</td>
+                </tr>
               </tbody>
             </table>
           </div>
         </details>
+
+        <p>
+          <strong>Sentry privacy controls.</strong> Zeni uses Sentry to identify
+          and diagnose application errors and performance problems. The current
+          configuration is designed to minimize the personal information included
+          in Sentry events. Automatic collection of user information, cookies,
+          request and response headers, HTTP request and response bodies, query
+          parameters, generative-AI inputs and outputs, and stack-frame local
+          variables is disabled. Additional filtering removes sensitive
+          authentication and webhook information. Session Replay and Sentry Logs
+          are not enabled.
+        </p>
 
         <p>
           We may also disclose information to professional advisers or
