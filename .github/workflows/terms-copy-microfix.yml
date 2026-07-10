@@ -1,0 +1,69 @@
+name: Terms copy micro-fix
+
+on:
+  push:
+    branches:
+      - agent/terms-premium-copy
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/terms-premium-copy
+          fetch-depth: 0
+
+      - name: Update Terms copy
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path('terms/index.html')
+          text = path.read_text()
+
+          replacements = {
+              'Zeni Pro Tier — Specific Terms and Limitations': 'Zeni Premium Tier — Specific Terms and Limitations',
+              'The Zeni Pro tier includes': 'The Zeni Premium tier includes',
+              'Pro tier subscribers': 'Premium tier subscribers',
+              'Pro tier services': 'Premium tier services',
+              'Pro services': 'Premium services',
+              'a Pro filing': 'a Premium filing',
+              'Pro subscription fees': 'Premium subscription fees',
+              'including Canada, the United States, or Trinidad and Tobago.': 'including Canada or the United States.',
+          }
+
+          for old, new in replacements.items():
+              if old not in text:
+                  raise SystemExit(f'Missing expected Terms text: {old}')
+              text = text.replace(old, new)
+
+          forbidden = [
+              'Zeni Pro Tier',
+              'The Zeni Pro tier',
+              'Pro tier subscribers',
+              'Pro tier services',
+              'Pro services',
+              'a Pro filing',
+              'Pro subscription fees',
+              'Trinidad and Tobago',
+          ]
+          for value in forbidden:
+              if value in text:
+                  raise SystemExit(f'Forbidden legacy Terms text remains: {value}')
+
+          path.write_text(text)
+          PY
+
+      - name: Remove temporary workflow and commit
+        run: |
+          rm .github/workflows/terms-copy-microfix.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add terms/index.html .github/workflows/terms-copy-microfix.yml
+          git commit -m "Align Terms with Premium plan naming"
+          git push origin HEAD:agent/terms-premium-copy
