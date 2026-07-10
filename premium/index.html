@@ -140,8 +140,8 @@
   .hlist{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:12px 26px}
   .hlist li{display:flex;gap:12px;align-items:flex-start;padding:13px 14px;border-radius:14px;background:rgba(255,255,255,.75);border:1px solid var(--line);transition:transform .2s,border-color .2s,box-shadow .2s}
   .hlist li:hover{transform:translateX(4px);border-color:rgba(123,97,255,.25);box-shadow:var(--shadow-sm)}
-  .tick{flex:0 0 24px;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:rgba(123,97,255,.12);color:var(--violet-d);margin-top:1px}
-  .tick svg{width:12px;height:12px}
+  .tick{flex:0 0 24px;width:24px;height:24px;min-width:24px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:rgba(123,97,255,.12);color:var(--violet-d);margin-top:1px;line-height:0}
+  .tick svg{width:12px;height:12px;flex:0 0 12px}
   .hlist b{font-size:14.5px;display:block;letter-spacing:-.2px}
   .hlist span{display:block;margin-top:2px;color:var(--muted);font-size:12.5px;line-height:1.5}
   .how-line{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:24px;padding-top:22px;border-top:1px solid var(--line);font-size:13px;color:var(--ink2);font-weight:600}
@@ -276,7 +276,7 @@
               </div>
             </div>
             <div class="feed-note" id="feedNote">
-              <span class="fn-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+              <span class="fn-ic"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span>
               <span><b>All handled.</b> Nothing needed from you this month.</span>
             </div>
             <div class="feed-foot"><span>Deadlines monitored year-round</span><b id="feedCount">0 / 3 handled</b></div>
@@ -310,27 +310,27 @@
         </div>
         <ul class="hlist">
           <li>
-            <span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+            <span class="tick"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span>
             <div><b>Business taxes prepared &amp; filed</b><span>Your routine annual return, from the records you provide.</span></div>
           </li>
           <li>
-            <span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+            <span class="tick"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span>
             <div><b>GST/HST registration &amp; returns</b><span>Registered when needed, routine returns prepared and filed.</span></div>
           </li>
           <li>
-            <span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+            <span class="tick"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span>
             <div><b>Renewals managed</b><span>Corporate, provincial, LLC and registered-agent renewals kept on track.</span></div>
           </li>
           <li>
-            <span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+            <span class="tick"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span>
             <div><b>Deadlines monitored year-round</b><span>You hear about what’s due before it becomes urgent.</span></div>
           </li>
           <li>
-            <span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+            <span class="tick"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span>
             <div><b>Eligible routine fees covered</b><span>Government filing, renewal and registered-agent fees within your coverage.</span></div>
           </li>
           <li>
-            <span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+            <span class="tick"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span>
             <div><b>Human support, on WhatsApp</b><span>Routine compliance questions answered by a real person who knows your file.</span></div>
           </li>
         </ul>
@@ -351,7 +351,7 @@
     <div class="wrap">
       <div class="price-card reveal">
         <div class="up-copy">
-          <div class="launch-badge">✦ Launch price · first 20 users</div>
+          <div class="launch-badge">Launch price · first 20 users</div>
           <div class="price-line"><strong>$350</strong><small>CAD / month</small></div>
           <div class="price-reg">Regular $499 CAD/mo · Includes everything in Zeni Core</div>
         </div>
@@ -360,7 +360,7 @@
           <span class="price-sub">Cancel anytime</span>
         </div>
       </div>
-      <p class="terms-note reveal">Routine coverage has limits — taxes owing, penalties and historical issues aren’t included. Full coverage, eligibility and exclusions are set out in the <a href="/terms">Zeni Premium Terms →</a></p>
+      <p class="terms-note reveal">Routine coverage has limits — taxes owing, penalties and historical issues aren’t included. Full coverage, eligibility and exclusions are set out in the <a href="/terms#premium">Zeni Premium Terms →</a></p>
     </div>
   </section>
 </main>
