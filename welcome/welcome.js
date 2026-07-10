@@ -59,7 +59,7 @@
       if (!option) return
       indexed[option.title] = item
       title.textContent = option.title
-      var description = item.querySelector(descriptionSelector)
+      var description = descriptionSelector ? item.querySelector(descriptionSelector) : null
       if (description) description.textContent = option.description
     })
 
@@ -87,7 +87,7 @@
     alignMenuItems(menuSheet, '.menu-item', '.menu-item-title', '.menu-item-sub', menuTap)
 
     var menuCards = document.querySelector('.menu-cards')
-    alignMenuItems(menuCards, '.menu-card', '.menu-card-title', '.menu-card-body', null)
+    alignMenuItems(menuCards, '.menu-card', '.menu-card-title', null, null)
   }
 
   async function loadPersonalization() {
