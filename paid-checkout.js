@@ -1,6 +1,11 @@
 (function () {
   'use strict'
 
+  var pricingFoot = document.querySelector('.pricing-foot')
+  if (pricingFoot) {
+    pricingFoot.innerHTML = 'Cancel anytime &middot; Available in <b>Ontario, British Columbia &amp; Alberta</b>'
+  }
+
   var checkoutRequestId = ''
   var submittedFingerprint = ''
   var checkoutHasSubmitted = false
