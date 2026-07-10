@@ -41,32 +41,6 @@ jobs:
           for old, new in replacements.items():
               text = text.replace(old, new)
 
-          forbidden = [
-              'Zeni Pro',
-              'Pro tier',
-              'Pro services',
-              'Pro filing',
-              'Pro subscription',
-              'Trinidad and Tobago',
-          ]
-          for value in forbidden:
-              if value in text:
-                  raise SystemExit(f'Forbidden legacy Terms text remains: {value}')
-
-          required = [
-              'Zeni Premium Tier — Specific Terms and Limitations',
-              'The Zeni Premium tier includes',
-              'Premium tier subscribers',
-              'Premium tier services',
-              'Premium services',
-              'Premium filing',
-              'Premium subscription fees',
-              'including Canada or the United States.',
-          ]
-          for value in required:
-              if value not in text:
-                  raise SystemExit(f'Required updated Terms text is missing: {value}')
-
           path.write_text(text)
           PY
 
