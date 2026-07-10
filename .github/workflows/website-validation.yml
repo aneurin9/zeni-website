@@ -81,8 +81,14 @@ jobs:
           grep -q "fetch('/api/welcome?checkout_session_id='" welcome/welcome.js
           grep -q 'history.replaceState' welcome/welcome.js
           grep -q 'function alignFirstMessagePreview()' welcome/welcome.js
-          grep -q 'Let’s get you into the right setup path.' welcome/welcome.js
-          grep -q "title.textContent.trim() === 'See how Zeni works'" welcome/welcome.js
+          grep -q 'I’ll help you build and run your business, one clear step at a time.' welcome/welcome.js
+          grep -q 'How would you like to get started?' welcome/welcome.js
+          grep -q "title: 'Recommended: Walkthrough'" welcome/welcome.js
+          grep -q "title: 'Grow my business'" welcome/welcome.js
+          grep -q "description: 'I’ll help you build the right foundation'" welcome/welcome.js
+          grep -q "description: 'I’ll learn how it works and help you move it forward'" welcome/welcome.js
+          grep -q "description: 'We’ll think it through, step by step'" welcome/welcome.js
+          ! grep -q 'item.remove()' welcome/welcome.js
           grep -q "BACKEND_WELCOME_PATH = '/api/public/welcome'" api/welcome.js
           grep -q 'X-Zeni-Welcome-Timestamp' api/welcome.js
           grep -q 'X-Zeni-Welcome-Signature' api/welcome.js

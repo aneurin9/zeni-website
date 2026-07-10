@@ -2,6 +2,28 @@
   'use strict'
 
   var SESSION_PATTERN = /^cs_(?:test|live)_[A-Za-z0-9_]+$/
+  var MENU_OPTIONS = [
+    {
+      matches: ['See how Zeni works', 'Recommended: Walkthrough'],
+      title: 'Recommended: Walkthrough',
+      description: 'See how Zeni works'
+    },
+    {
+      matches: ['Start a new business'],
+      title: 'Start a new business',
+      description: 'I’ll help you build the right foundation'
+    },
+    {
+      matches: ['Grow my existing business', 'Grow existing business', 'Grow my business'],
+      title: 'Grow my business',
+      description: 'I’ll learn how it works and help you move it forward'
+    },
+    {
+      matches: ['Explore a business idea'],
+      title: 'Explore a business idea',
+      description: 'We’ll think it through, step by step'
+    }
+  ]
 
   function safeFirstName(value) {
     var name = String(value || '').trim()
@@ -20,6 +42,33 @@
     heading.appendChild(accent)
   }
 
+  function findOption(title) {
+    var clean = String(title || '').trim()
+    return MENU_OPTIONS.find(function (option) {
+      return option.matches.indexOf(clean) !== -1
+    })
+  }
+
+  function alignMenuItems(container, itemSelector, titleSelector, descriptionSelector, insertBefore) {
+    if (!container) return
+    var indexed = {}
+
+    Array.prototype.forEach.call(container.querySelectorAll(itemSelector), function (item) {
+      var title = item.querySelector(titleSelector)
+      var option = findOption(title && title.textContent)
+      if (!option) return
+      indexed[option.title] = item
+      title.textContent = option.title
+      var description = descriptionSelector ? item.querySelector(descriptionSelector) : null
+      if (description) description.textContent = option.description
+    })
+
+    MENU_OPTIONS.forEach(function (option) {
+      var item = indexed[option.title]
+      if (item) container.insertBefore(item, insertBefore || null)
+    })
+  }
+
   function alignFirstMessagePreview() {
     var bubble = document.querySelector('.bub.in')
     if (bubble) {
@@ -27,16 +76,18 @@
       bubble.appendChild(document.createTextNode('Hi Marcus, I’m Zeni — your WhatsApp business operator.'))
       bubble.appendChild(document.createElement('br'))
       bubble.appendChild(document.createElement('br'))
-      bubble.appendChild(document.createTextNode('Let’s get you into the right setup path.'))
+      bubble.appendChild(document.createTextNode('I’ll help you build and run your business, one clear step at a time.'))
       bubble.appendChild(document.createElement('br'))
       bubble.appendChild(document.createElement('br'))
-      bubble.appendChild(document.createTextNode('Choose the closest option:'))
+      bubble.appendChild(document.createTextNode('How would you like to get started?'))
     }
 
-    Array.prototype.forEach.call(document.querySelectorAll('.menu-item, .menu-card'), function (item) {
-      var title = item.querySelector('.menu-item-title, .menu-card-title')
-      if (title && title.textContent.trim() === 'See how Zeni works') item.remove()
-    })
+    var menuSheet = document.querySelector('.menu-sheet')
+    var menuTap = menuSheet && menuSheet.querySelector('.menu-tap')
+    alignMenuItems(menuSheet, '.menu-item', '.menu-item-title', '.menu-item-sub', menuTap)
+
+    var menuCards = document.querySelector('.menu-cards')
+    alignMenuItems(menuCards, '.menu-card', '.menu-card-title', null, null)
   }
 
   async function loadPersonalization() {
