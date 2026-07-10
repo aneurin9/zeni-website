@@ -1,0 +1,60 @@
+name: Compact welcome phone mockup
+
+on:
+  push:
+    branches:
+      - agent/compact-welcome-phone
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/compact-welcome-phone
+          fetch-depth: 0
+
+      - name: Tighten phone proportions
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path('welcome/index.html')
+          text = path.read_text()
+
+          replacements = {
+              '.stage{display:flex;justify-content:center;margin:20px 0}': '.stage{display:flex;justify-content:center;margin:18px 0 22px}',
+              '.phone{width:280px;border-radius:40px;padding:8px;background:linear-gradient(155deg,#fff,#ECE9F7);box-shadow:var(--shadow-lg),inset 0 0 0 1px rgba(255,255,255,.6)}': '.phone{width:min(100%,326px);border-radius:38px;padding:7px;background:linear-gradient(155deg,#fff,#ECE9F7);box-shadow:var(--shadow-lg),inset 0 0 0 1px rgba(255,255,255,.6)}',
+              '.phone-scr{border-radius:32px;overflow:hidden;background:var(--wa-body);box-shadow:0 0 0 1px rgba(27,28,58,.05)}': '.phone-scr{border-radius:31px;overflow:hidden;background:var(--wa-body);box-shadow:0 0 0 1px rgba(27,28,58,.05)}',
+              '.p-status{background:var(--wa-head);color:var(--wa-head-tx);display:flex;justify-content:space-between;align-items:center;padding:8px 16px 2px;font-size:11px;font-weight:600}': '.p-status{background:var(--wa-head);color:var(--wa-head-tx);display:flex;justify-content:space-between;align-items:center;padding:7px 16px 1px;font-size:10.5px;font-weight:600}',
+              '.wa-top{background:var(--wa-head);color:var(--wa-head-tx);padding:8px 13px 11px;display:flex;align-items:center;gap:9px;border-bottom:1px solid var(--line)}': '.wa-top{background:var(--wa-head);color:var(--wa-head-tx);padding:7px 12px 9px;display:flex;align-items:center;gap:9px;border-bottom:1px solid var(--line)}',
+              '.wa-body{padding:12px 10px;display:flex;flex-direction:column;gap:7px;background:var(--wa-body)}': '.wa-body{padding:9px;display:flex;flex-direction:column;gap:6px;background:var(--wa-body)}',
+              '.day{align-self:center;background:#fff;color:var(--muted);font-size:9.5px;font-weight:600;padding:3px 10px;border-radius:8px;box-shadow:var(--shadow-sm);margin-bottom:2px}': '.day{align-self:center;background:#fff;color:var(--muted);font-size:9px;font-weight:600;padding:2px 9px;border-radius:8px;box-shadow:var(--shadow-sm);margin-bottom:1px}',
+              '.bub{max-width:90%;font-size:11.5px;line-height:1.5;padding:8px 11px;border-radius:12px;box-shadow:0 1px 1px rgba(0,0,0,.05)}': '.bub{max-width:100%;font-size:11.25px;line-height:1.42;padding:7px 10px;border-radius:12px;box-shadow:0 1px 1px rgba(0,0,0,.05)}',
+              '.menu-header{background:var(--pearl2);padding:9px 13px;font-size:10px;font-weight:700;color:var(--muted);letter-spacing:.5px;text-transform:uppercase}': '.menu-header{background:var(--pearl2);padding:7px 12px;font-size:9.5px;font-weight:700;color:var(--muted);letter-spacing:.5px;text-transform:uppercase}',
+              '.menu-item{padding:11px 13px;border-bottom:1px solid var(--line)}': '.menu-item{padding:8px 12px;border-bottom:1px solid var(--line)}',
+              '.menu-item-title{font-size:12px;font-weight:700;color:var(--ink);margin-bottom:1px}': '.menu-item-title{font-size:11.75px;font-weight:700;color:var(--ink);margin-bottom:1px}',
+              '.menu-item-sub{font-size:10.5px;color:var(--muted)}': '.menu-item-sub{font-size:10.25px;line-height:1.35;color:var(--muted)}',
+              '.menu-tap{text-align:center;padding:8px;font-size:9.5px;color:var(--faint)}': '.menu-tap{text-align:center;padding:6px;font-size:9px;color:var(--faint)}',
+          }
+
+          for old, new in replacements.items():
+              if old not in text:
+                  raise SystemExit(f'Missing expected phone style: {old}')
+              text = text.replace(old, new, 1)
+
+          path.write_text(text)
+          PY
+
+      - name: Remove temporary workflow and commit
+        run: |
+          rm .github/workflows/compact-welcome-phone.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add welcome/index.html .github/workflows/compact-welcome-phone.yml
+          git commit -m "Refine welcome phone proportions"
+          git push origin HEAD:agent/compact-welcome-phone
