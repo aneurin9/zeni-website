@@ -360,6 +360,116 @@
       margin-bottom: 0;
     }
 
+    h4 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ink);
+      margin: 18px 0 6px;
+    }
+
+    .addendum {
+      background: var(--card);
+      border: 1px solid var(--line2);
+      border-radius: 16px;
+      margin-top: 26px;
+      box-shadow: var(--shadow-sm);
+      scroll-margin-top: 96px;
+      overflow: hidden;
+    }
+
+    .addendum summary {
+      cursor: pointer;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 20px 24px;
+      user-select: none;
+      transition: background 0.2s;
+    }
+
+    .addendum summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .addendum summary:hover {
+      background: rgba(123, 97, 255, 0.04);
+    }
+
+    .addendum .add-badge {
+      flex-shrink: 0;
+      padding: 5px 12px;
+      border-radius: 100px;
+      background: rgba(123, 97, 255, 0.1);
+      border: 1px solid rgba(123, 97, 255, 0.22);
+      color: var(--violet-d);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+    }
+
+    .addendum .add-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.35;
+    }
+
+    .addendum .add-title small {
+      display: block;
+      font-size: 12.5px;
+      font-weight: 500;
+      color: var(--muted);
+    }
+
+    .addendum .chev {
+      margin-left: auto;
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 1px solid var(--line2);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 12px;
+      transition: transform 0.25s;
+    }
+
+    .addendum[open] .chev {
+      transform: rotate(180deg);
+    }
+
+    .addendum-body {
+      padding: 8px 26px 28px;
+      border-top: 1px solid var(--line);
+    }
+
+    .addendum-body > h3 {
+      margin-top: 26px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+    }
+
+    .addendum-body > h3:first-of-type {
+      border-top: 0;
+      padding-top: 0;
+    }
+
+    @media (max-width: 520px) {
+      .addendum summary {
+        padding: 17px 18px;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .addendum-body {
+        padding: 6px 18px 22px;
+      }
+    }
+
     footer {
       border-top: 1px solid var(--line);
       padding: 34px 0;
@@ -952,6 +1062,979 @@
           any refund, assessment, or liability. Tax outcomes depend on facts
           and laws entirely outside the Company's control.
         </p>
+
+        <p>
+          The complete Zeni Premium Additional Terms are set out below. They
+          form part of this Agreement and apply in addition to the provisions
+          above. If they conflict with another provision of these Terms
+          regarding a service specifically included in Premium, the Premium
+          Additional Terms apply to that service to the extent of the
+          conflict.
+        </p>
+
+        <details class="addendum" id="premium">
+          <summary>
+            <span class="add-badge">Addendum</span>
+            <span class="add-title">
+              Zeni Premium — Additional Terms
+              <small>Applies only to Zeni Premium subscribers · Tap to expand</small>
+            </span>
+            <span class="chev" aria-hidden="true">▼</span>
+          </summary>
+          <div class="addendum-body">
+
+            <p>
+              These Zeni Premium Additional Terms ("Premium Additional Terms")
+              apply when you purchase, subscribe to, or use the Zeni Premium
+              plan ("Premium").
+            </p>
+            <p>
+              They form part of the Zeni Terms and Conditions and apply in
+              addition to all other provisions of those Terms, including
+              provisions relating to payment, automatic renewal, cancellation,
+              privacy, acceptable use, disclaimers, limitation of liability,
+              dispute resolution, and governing law.
+            </p>
+            <p>
+              If these Premium Additional Terms conflict with another provision
+              of the Zeni Terms and Conditions regarding a service specifically
+              included in Premium, these Premium Additional Terms will apply to
+              that service to the extent of the conflict.
+            </p>
+            <p>
+              <strong>By subscribing to or using Premium, you confirm that you
+              have read, understood, and agreed to these Premium Additional
+              Terms.</strong>
+            </p>
+
+            <h3>1. What Zeni Premium includes</h3>
+            <p>Premium includes:</p>
+            <ul>
+              <li>the complete Zeni business operator included with Zeni Core; and</li>
+              <li>human-managed support for eligible routine business tax filings, government returns, corporate renewals, registered-agent renewals, and related compliance obligations.</li>
+            </ul>
+            <p>
+              The human-managed portion of Premium may be provided by Aneurin
+              Advisory personnel, independent contractors, tax preparers,
+              bookkeepers, accountants, compliance specialists,
+              registered-agent providers, or other approved service providers
+              selected by us.
+            </p>
+            <p>
+              Premium is designed for straightforward, owner-operated
+              businesses. It is not an unlimited accounting, legal,
+              tax-advisory, bookkeeping, consulting, or compliance retainer.
+            </p>
+            <p>
+              The exact services that apply to you depend on your business
+              structure, registrations, filing periods, jurisdictions, records,
+              prior compliance history, and eligibility.
+            </p>
+
+            <h3>2. Included entities</h3>
+            <p>
+              Unless we expressly agree otherwise in writing, one Premium
+              subscription may cover no more than:
+            </p>
+            <ul>
+              <li>one qualifying Canadian corporation; and</li>
+              <li>one qualifying United States limited liability company, where applicable.</li>
+            </ul>
+            <p>
+              The United States LLC is optional. You do not need to form or
+              maintain a United States entity to subscribe to Premium.
+            </p>
+            <p>
+              Additional corporations, LLCs, partnerships, trusts, sole
+              proprietorships, registered businesses, or other legal entities
+              are not included unless additional coverage is expressly
+              confirmed in writing.
+            </p>
+            <p>
+              Premium coverage belongs to the subscribed customer and the
+              approved entities. It may not be shared with unrelated
+              businesses, owners, customers, or third parties.
+            </p>
+
+            <h3>3. Canadian corporation income-tax return</h3>
+            <p>
+              For an eligible Canadian corporation, Premium includes the
+              preparation and filing of one routine T2 Corporation Income Tax
+              Return for each completed corporate tax year that becomes due
+              while Premium coverage is active.
+            </p>
+            <p>
+              The included T2 service is intended for a straightforward
+              owner-operated corporation with complete and reasonably current
+              financial records.
+            </p>
+            <p>The service may include:</p>
+            <ul>
+              <li>reviewing the information and records you provide;</li>
+              <li>requesting information reasonably required to prepare the return;</li>
+              <li>preparing the corporation's routine T2 return and applicable standard schedules;</li>
+              <li>providing the return or a summary to you for review;</li>
+              <li>obtaining any approval, declaration, authorization, or signature required from you; and</li>
+              <li>electronically filing the completed return where permitted and appropriate.</li>
+            </ul>
+            <p>
+              Resident corporations in Canada generally have to file a T2
+              return for each tax year, including in some circumstances where
+              no tax is payable.
+            </p>
+
+            <h4>Personal tax returns are not included</h4>
+            <p>Premium does not include the preparation or filing of:</p>
+            <ul>
+              <li>a personal T1 Income Tax and Benefit Return;</li>
+              <li>a spouse's or family member's personal tax return;</li>
+              <li>a personal United States tax return;</li>
+              <li>Form 1040;</li>
+              <li>Form 1040-NR; or</li>
+              <li>any other individual income-tax return.</li>
+            </ul>
+            <p>
+              Where salary, dividends, shareholder benefits, shareholder loans,
+              investments, foreign property, or other corporate matters affect
+              your personal tax return, you remain responsible for arranging
+              and filing your personal return separately.
+            </p>
+
+            <h4>Additional Canadian tax work not included</h4>
+            <p>Premium does not automatically include:</p>
+            <ul>
+              <li>tax planning or tax-structure advice;</li>
+              <li>amended returns;</li>
+              <li>historical or overdue returns;</li>
+              <li>reconstruction of incomplete financial records;</li>
+              <li>scientific research and experimental development claims;</li>
+              <li>complex refundable-tax calculations;</li>
+              <li>corporate reorganizations;</li>
+              <li>transactions between related corporations;</li>
+              <li>foreign-affiliate reporting;</li>
+              <li>transfer-pricing matters;</li>
+              <li>complex tax elections;</li>
+              <li>formal financial statements requiring compilation, review, or audit assurance;</li>
+              <li>trust or partnership returns;</li>
+              <li>payroll returns or remittances;</li>
+              <li>audits, objections, appeals, investigations, or voluntary disclosures; or</li>
+              <li>any filing requiring specialist advice or work outside the routine Premium scope.</li>
+            </ul>
+            <p>
+              If additional or specialist work is required, we will explain the
+              proposed scope and cost before separately charged work is
+              undertaken.
+            </p>
+
+            <h3>4. GST/HST services</h3>
+            <p>
+              Where applicable to the included Canadian corporation, Premium
+              may include:
+            </p>
+            <ul>
+              <li>routine GST/HST registration support;</li>
+              <li>monitoring disclosed GST/HST reporting deadlines;</li>
+              <li>preparation and filing of routine GST/HST returns;</li>
+              <li>explaining the amount reported;</li>
+              <li>identifying any balance that you are responsible for paying; and</li>
+              <li>routine administrative support relating to the corporation's GST/HST account.</li>
+            </ul>
+            <p>
+              GST/HST returns will be prepared using the information and
+              records you provide.
+            </p>
+            <p>You remain responsible for:</p>
+            <ul>
+              <li>providing complete sales, expense, input-tax-credit, and supporting information;</li>
+              <li>maintaining legally required records;</li>
+              <li>reviewing each return;</li>
+              <li>approving or signing the return where required; and</li>
+              <li>paying all GST/HST balances by the applicable deadline.</li>
+            </ul>
+            <p><strong>Premium does not pay GST/HST owing on your behalf.</strong></p>
+            <p>Premium does not automatically include:</p>
+            <ul>
+              <li>GST/HST audits, objections, or appeals;</li>
+              <li>voluntary disclosures;</li>
+              <li>historical return reconstruction;</li>
+              <li>complex place-of-supply analysis;</li>
+              <li>provincial sales-tax registrations or returns;</li>
+              <li>customs or excise filings; or</li>
+              <li>specialist indirect-tax advice.</li>
+            </ul>
+
+            <h3>5. Canadian corporate renewals</h3>
+            <p>
+              For the included Canadian corporation, Premium may include
+              monitoring, preparing, and submitting eligible routine
+              corporate-maintenance filings that become due while Premium is
+              active.
+            </p>
+            <p>
+              Depending on the corporation's jurisdiction and structure, these
+              may include:
+            </p>
+            <ul>
+              <li>a federal corporate annual return;</li>
+              <li>a supported provincial corporate annual return;</li>
+              <li>a supported provincial business-name renewal; and</li>
+              <li>another routine corporate-maintenance filing expressly confirmed as included.</li>
+            </ul>
+            <p>
+              A corporate annual return is separate from a corporation
+              income-tax return.
+            </p>
+            <p>Premium does not automatically include:</p>
+            <ul>
+              <li>incorporation or initial business registration;</li>
+              <li>articles of amendment;</li>
+              <li>changes to ownership or share structure;</li>
+              <li>complex director or officer changes;</li>
+              <li>amalgamations;</li>
+              <li>continuances;</li>
+              <li>revivals or reinstatements;</li>
+              <li>dissolutions;</li>
+              <li>extra-provincial registrations;</li>
+              <li>minute-book preparation or maintenance;</li>
+              <li>shareholder agreements;</li>
+              <li>director or shareholder resolutions requiring legal drafting; or</li>
+              <li>legal advice concerning corporate records or governance.</li>
+            </ul>
+
+            <h3>6. United States LLC annual information filing</h3>
+            <p>
+              Where one supported United States LLC has been approved for
+              Premium coverage, Premium may include the preparation and
+              submission of one routine annual federal information-filing
+              package consisting of:
+            </p>
+            <ul>
+              <li>IRS Form 5472; and</li>
+              <li>the accompanying pro forma Form 1120.</li>
+            </ul>
+            <p>This service applies only where the LLC:</p>
+            <ul>
+              <li>is a United States domestic single-member LLC;</li>
+              <li>is wholly owned by a non-United States person;</li>
+              <li>is treated as a disregarded entity for United States federal income-tax purposes;</li>
+              <li>has not elected to be taxed as a corporation;</li>
+              <li>has a valid Employer Identification Number;</li>
+              <li>has a straightforward ownership and transaction history;</li>
+              <li>has maintained sufficient records;</li>
+              <li>has provided complete information about reportable transactions involving its owner and related parties; and</li>
+              <li>does not require additional federal, state, local, personal, partnership, or corporate tax filings outside the standard Premium scope.</li>
+            </ul>
+            <p>
+              The IRS treats a foreign-owned U.S. disregarded entity as a
+              reporting corporation for Form 5472 purposes when the applicable
+              rules and reportable-transaction requirements are met.
+            </p>
+            <p>
+              The accompanying pro forma Form 1120 is prepared solely as part
+              of the foreign-owned disregarded entity information-filing
+              package. It is not an ordinary United States corporate
+              income-tax return.
+            </p>
+            <p>The included service may consist of:</p>
+            <ul>
+              <li>collecting information about the LLC, its foreign owner, and related parties;</li>
+              <li>reviewing the records and representations you provide;</li>
+              <li>identifying disclosed potentially reportable transactions;</li>
+              <li>preparing the applicable Form 5472;</li>
+              <li>preparing the accompanying pro forma Form 1120;</li>
+              <li>providing the filing package or relevant summary to you for review;</li>
+              <li>obtaining any required approval, authorization, or signature; and</li>
+              <li>submitting or coordinating submission using an accepted filing method.</li>
+            </ul>
+            <p>
+              Form 5472 is used to report specified transactions between a
+              reporting corporation and foreign or domestic related parties.
+            </p>
+
+            <h3>7. United States LLC state renewal and registered agent</h3>
+            <p>For the included United States LLC, Premium may also include:</p>
+            <ul>
+              <li>monitoring the LLC's disclosed annual state filing or renewal deadline;</li>
+              <li>preparing and submitting one routine state annual report or entity renewal;</li>
+              <li>coordinating one routine registered-agent renewal;</li>
+              <li>paying an eligible state annual-report or renewal fee, subject to the fee limit in these Premium Additional Terms; and</li>
+              <li>paying an eligible registered-agent renewal fee, subject to the fee limit in these Premium Additional Terms.</li>
+            </ul>
+            <p>
+              Coverage applies only to the state in which the approved LLC is
+              formed, unless an additional jurisdiction is expressly included
+              in writing.
+            </p>
+
+            <h3>8. United States services not included</h3>
+            <p>
+              Unless expressly confirmed in a separate written service
+              description, Premium does not include:
+            </p>
+            <ul>
+              <li>an ordinary Form 1120 corporate income-tax return;</li>
+              <li>Form 1120-F;</li>
+              <li>Form 1065;</li>
+              <li>Form 1040 or Form 1040-NR;</li>
+              <li>personal United States tax returns;</li>
+              <li>federal income-tax calculations or payments;</li>
+              <li>state or local income-tax returns;</li>
+              <li>state franchise-tax returns other than a routine annual entity filing expressly confirmed as included;</li>
+              <li>sales-tax registrations or returns;</li>
+              <li>payroll filings or employment taxes;</li>
+              <li>excise-tax filings;</li>
+              <li>entity-classification or other tax elections;</li>
+              <li>filings for a multi-member LLC;</li>
+              <li>filings for an LLC that has elected corporate treatment;</li>
+              <li>filings involving multiple owners or complex related-party structures;</li>
+              <li>foreign qualification in an additional state;</li>
+              <li>licences or permits;</li>
+              <li>industry-specific registrations;</li>
+              <li>analysis of whether you or the LLC is engaged in a United States trade or business;</li>
+              <li>effectively connected income analysis;</li>
+              <li>permanent-establishment analysis;</li>
+              <li>tax-treaty advice;</li>
+              <li>withholding-tax filings;</li>
+              <li>audits, examinations, penalty-abatement requests, objections, appeals, or investigations;</li>
+              <li>delinquent, amended, or historical filings;</li>
+              <li>bookkeeping or reconstruction of LLC transactions;</li>
+              <li>legal advice; or</li>
+              <li>any filing or analysis requiring specialist professional judgment beyond routine Form 5472 and pro forma Form 1120 preparation.</li>
+            </ul>
+            <p>
+              If the LLC's activities, ownership, tax classification,
+              transaction history, or United States presence indicate that
+              additional filings or specialist analysis may be required, we
+              may:
+            </p>
+            <ul>
+              <li>pause the routine filing;</li>
+              <li>request further information;</li>
+              <li>refer the matter to a qualified specialist;</li>
+              <li>offer additional work for a separately approved fee; or</li>
+              <li>decline to complete the filing where it cannot responsibly be prepared within the Premium scope.</li>
+            </ul>
+            <p>
+              Premium does not guarantee that Form 5472 and a pro forma Form
+              1120 are the only United States filings applicable to you or
+              your LLC.
+            </p>
+
+            <h3>9. Included routine government and renewal fees</h3>
+            <p>
+              An active Premium subscription includes payment of up to
+              <strong>CAD $250</strong> in eligible routine external fees
+              during each annual Premium allowance period.
+            </p>
+            <p>
+              The annual allowance period begins on the date your Premium
+              subscription starts and resets on each anniversary of that date
+              while the subscription remains active.
+            </p>
+            <p>
+              This allowance does not create a minimum subscription period.
+              You may cancel Premium at any time in accordance with these
+              Terms.
+            </p>
+            <p>
+              The CAD $250 limit is the maximum aggregate amount available
+              across the included Canadian corporation and United States LLC
+              during each allowance period. It is not a separate CAD $250
+              allowance for each entity, filing, renewal, provider, or
+              jurisdiction.
+            </p>
+            <p>Eligible external fees may include:</p>
+            <ul>
+              <li>the government or registry fee for an included Canadian corporate annual return or routine corporate renewal;</li>
+              <li>the state fee for one included United States LLC annual report or entity renewal; and</li>
+              <li>one routine registered-agent renewal fee for the included United States LLC.</li>
+            </ul>
+            <p>
+              The allowance applies only to actual eligible charges payable to
+              a government authority, registry, state authority,
+              registered-agent provider, or similar third party.
+            </p>
+            <p>
+              Our ordinary labour, preparation, administration, monitoring, and
+              coordination for services included in Premium are covered by the
+              Premium subscription price and do not reduce the CAD $250
+              external-fee allowance.
+            </p>
+            <p>
+              Where a fee is charged in United States dollars or another
+              currency, the amount applied toward the CAD $250 limit will be
+              the Canadian-dollar amount actually charged to us, including
+              applicable currency-conversion or payment-processing charges.
+            </p>
+            <p>
+              If eligible external fees exceed the remaining allowance, we
+              will notify you before paying the excess where reasonably
+              possible. You will be responsible for any amount above the
+              available limit.
+            </p>
+            <p>The allowance:</p>
+            <ul>
+              <li>has no cash value;</li>
+              <li>cannot be refunded, transferred, exchanged, or sold;</li>
+              <li>cannot be applied toward Premium subscription payments;</li>
+              <li>cannot be used for another customer or unrelated entity;</li>
+              <li>does not carry forward into a later allowance period;</li>
+              <li>applies only while Premium is active; and</li>
+              <li>ends when Premium coverage ends.</li>
+            </ul>
+            <p>
+              Unused allowance will not be refunded, paid in cash,
+              transferred, or credited when a subscription is cancelled.
+            </p>
+
+            <h3>10. Fees that are not included</h3>
+            <p>The CAD $250 allowance does not cover:</p>
+            <ul>
+              <li>Canadian or United States income taxes;</li>
+              <li>GST/HST, sales taxes, or other taxes owing;</li>
+              <li>tax instalments;</li>
+              <li>payroll remittances;</li>
+              <li>assessments;</li>
+              <li>penalties or interest;</li>
+              <li>late-filing or late-payment fees;</li>
+              <li>expedited-processing fees;</li>
+              <li>reinstatement, revival, restoration, dissolution, or correction fees;</li>
+              <li>incorporation or LLC-formation fees;</li>
+              <li>amendments, ownership changes, or reorganizations;</li>
+              <li>licences, permits, or industry registrations;</li>
+              <li>fees for additional entities or jurisdictions;</li>
+              <li>legal, accounting, bookkeeping, or specialist tax-preparation fees;</li>
+              <li>postage, courier, notarization, apostille, translation, or certification costs;</li>
+              <li>charges caused by inaccurate, incomplete, or late information;</li>
+              <li>historical or overdue obligations;</li>
+              <li>fees that became due before Premium began; or</li>
+              <li>any cost outside the confirmed routine Premium scope.</li>
+            </ul>
+
+            <h3>11. Timing of included fee payments</h3>
+            <p>An external fee is eligible only where:</p>
+            <ul>
+              <li>the fee becomes due while Premium is active;</li>
+              <li>the relevant entity is included under the subscription;</li>
+              <li>the related filing or renewal falls within the confirmed Premium scope;</li>
+              <li>all requested information, authorization, and approval have been provided;</li>
+              <li>the subscription account is in good standing; and</li>
+              <li>sufficient allowance remains available.</li>
+            </ul>
+            <p>
+              A fee that became due before Premium started is not included
+              unless we expressly confirm otherwise in writing.
+            </p>
+            <p>We may:</p>
+            <ul>
+              <li>pay an eligible fee directly to the relevant authority or provider;</li>
+              <li>reimburse a documented eligible payment;</li>
+              <li>apply credit through the relevant provider; or</li>
+              <li>use another reasonable payment method.</li>
+            </ul>
+            <p>
+              We are not required to pay a fee substantially before its
+              ordinary due date.
+            </p>
+
+            <h3>12. Eligibility and initial review</h3>
+            <p>
+              Premium is intended for straightforward owner-operated
+              businesses with manageable records and routine compliance needs.
+            </p>
+            <p>
+              We may review your entities, registrations, filing history,
+              ownership, records, accounts, notices, and compliance status
+              before confirming that a particular service is included.
+            </p>
+            <p>Following that review, we may determine that:</p>
+            <ul>
+              <li>the service falls within the standard Premium scope;</li>
+              <li>additional information or record cleanup is required;</li>
+              <li>historical or overdue work must be completed first;</li>
+              <li>an additional fee applies;</li>
+              <li>a regulated or specialist professional is required; or</li>
+              <li>we cannot provide the requested service.</li>
+            </ul>
+            <p>
+              A Premium subscription does not guarantee that every entity,
+              filing, jurisdiction, notice, transaction, or compliance matter
+              will qualify for standard coverage.
+            </p>
+            <p>
+              If work falls outside the included scope, we will explain the
+              issue and any proposed additional cost before undertaking
+              separately charged work.
+            </p>
+
+            <h3>13. Your responsibilities</h3>
+            <p>
+              Premium depends on your timely cooperation and the accuracy of
+              the information you provide.
+            </p>
+            <p>You agree to:</p>
+            <ul>
+              <li>provide complete, accurate, current, and truthful information;</li>
+              <li>provide requested financial records, bank statements, receipts, notices, tax documents, government correspondence, and supporting materials;</li>
+              <li>keep bookkeeping and financial records reasonably current;</li>
+              <li>identify all relevant entities, registrations, accounts, owners, related parties, and jurisdictions;</li>
+              <li>disclose overdue filings, previous errors, notices, penalties, audits, investigations, or unresolved compliance matters;</li>
+              <li>promptly notify us of material changes to your business;</li>
+              <li>provide requested information by the deadlines we communicate;</li>
+              <li>review all returns, filings, calculations, and documents presented to you;</li>
+              <li>approve or sign submissions where required;</li>
+              <li>maintain access to required government and business accounts;</li>
+              <li>complete identity-verification and representative-authorization procedures;</li>
+              <li>maintain your own copies of important records and filed documents; and</li>
+              <li>pay all taxes, balances, assessments, and amounts not included under the CAD $250 fee allowance.</li>
+            </ul>
+            <p>
+              You remain legally responsible for your business, the accuracy
+              and completeness of the information supplied, the correctness of
+              your instructions, and all taxes and other amounts owing.
+            </p>
+            <p>
+              We may rely on information and documents supplied by you without
+              independently auditing or verifying them unless we expressly
+              agree otherwise.
+            </p>
+
+            <h3>14. Form 5472 information and records</h3>
+            <p>
+              For the included Form 5472 and pro forma Form 1120 service, you
+              agree to provide complete records of all potentially reportable
+              transactions involving:
+            </p>
+            <ul>
+              <li>the United States LLC;</li>
+              <li>its foreign owner;</li>
+              <li>any related person; and</li>
+              <li>any entity or individual whose relationship or transaction may affect the filing.</li>
+            </ul>
+            <p>This information may include:</p>
+            <ul>
+              <li>money contributed to or withdrawn from the LLC;</li>
+              <li>formation and startup costs;</li>
+              <li>expenses paid personally by the owner;</li>
+              <li>reimbursements;</li>
+              <li>loans or advances;</li>
+              <li>sales or purchases;</li>
+              <li>rents, royalties, commissions, or service payments;</li>
+              <li>transfers of money or property;</li>
+              <li>amounts paid to or received from related persons;</li>
+              <li>closure or liquidation distributions; and</li>
+              <li>any other transaction requested by the person preparing the filing.</li>
+            </ul>
+            <p>
+              The IRS definition of reportable transactions includes specified
+              monetary, non-monetary, and other transactions involving related
+              parties.
+            </p>
+            <p>You are responsible for:</p>
+            <ul>
+              <li>maintaining sufficient records;</li>
+              <li>identifying all related parties;</li>
+              <li>disclosing all potentially reportable transactions;</li>
+              <li>confirming the LLC's ownership and tax classification;</li>
+              <li>reviewing the completed filing;</li>
+              <li>signing or approving it where required; and</li>
+              <li>promptly notifying us if information changes.</li>
+            </ul>
+            <p>
+              If your records are incomplete, inconsistent, or insufficient to
+              prepare the filing responsibly, we may delay or decline
+              submission until the issue is resolved.
+            </p>
+            <p>
+              Bookkeeping, reconstruction, historical analysis, or specialist
+              review required because records are incomplete may be offered
+              for an additional fee.
+            </p>
+
+            <h3>15. Authorizations and account access</h3>
+            <p>
+              Some Premium services require you to authorize Aneurin Advisory
+              or an approved provider to access, communicate about, or act in
+              relation to a tax, registry, registered-agent, or government
+              account.
+            </p>
+            <p>You agree to complete required authorization procedures promptly.</p>
+            <p>
+              Where available, access should be provided through an official
+              representative, delegated-user, or equivalent authorization
+              process. We will not knowingly impersonate you or bypass
+              account-security controls.
+            </p>
+            <p>
+              You may revoke an authorization at any time. However, doing so
+              may prevent or delay us from providing the affected service and
+              does not remove your responsibility for the related obligation
+              or deadline.
+            </p>
+
+            <h3>16. Review and approval</h3>
+            <p>
+              You remain responsible for reviewing returns, filings, forms,
+              calculations, and other submissions prepared for your business.
+            </p>
+            <p>
+              Unless standing authority has been lawfully granted and
+              expressly accepted for a particular routine filing, we will not
+              intentionally submit a material return or filing until:
+            </p>
+            <ul>
+              <li>the required information has been received;</li>
+              <li>the filing has been prepared;</li>
+              <li>you have been given a reasonable opportunity to review it;</li>
+              <li>any required declaration has been completed; and</li>
+              <li>you have provided the required approval or signature.</li>
+            </ul>
+            <p>
+              Your approval confirms that, to the best of your knowledge, the
+              filing is complete and accurate.
+            </p>
+            <p>
+              If you do not provide requested information, approval,
+              authorization, or signature by the deadline communicated to you,
+              we may be unable to complete the filing on time.
+            </p>
+
+            <h3>17. Deadlines and late information</h3>
+            <p>
+              We will use reasonable efforts to monitor and communicate known
+              deadlines that fall within the confirmed Premium scope.
+            </p>
+            <p>We can only monitor or manage an obligation where:</p>
+            <ul>
+              <li>you have disclosed the entity, registration, account, and obligation;</li>
+              <li>the obligation is within the confirmed Premium scope;</li>
+              <li>you have provided accurate filing dates and account information;</li>
+              <li>the required records and access have been provided;</li>
+              <li>Premium remains active; and</li>
+              <li>you respond with sufficient time for the work to be completed.</li>
+            </ul>
+            <p>
+              You remain responsible for your business's legal obligations and
+              deadlines.
+            </p>
+            <p>We are not responsible for a missed or delayed filing caused by:</p>
+            <ul>
+              <li>late, incomplete, inaccurate, or misleading information;</li>
+              <li>delayed approval, authorization, or signature;</li>
+              <li>failure to provide required account access;</li>
+              <li>an undisclosed entity, account, transaction, filing period, or obligation;</li>
+              <li>errors or omissions that existed before Premium began;</li>
+              <li>acts or omissions of a previous service provider;</li>
+              <li>delays or failures affecting a government, registry, banking, registered-agent, postal, courier, or third-party system;</li>
+              <li>a change in law, form, policy, deadline, or filing procedure; or</li>
+              <li>circumstances outside our reasonable control.</li>
+            </ul>
+            <p>
+              Premium does not cover penalties, interest, reinstatement fees,
+              or additional costs caused by these circumstances.
+            </p>
+
+            <h3>18. Taxes and balances owing</h3>
+            <p>
+              The Premium subscription price and CAD $250 fee allowance do not
+              pay substantive tax liabilities or other amounts owed by you or
+              your business.
+            </p>
+            <p>You remain responsible for paying:</p>
+            <ul>
+              <li>Canadian and United States income taxes;</li>
+              <li>GST/HST;</li>
+              <li>sales taxes;</li>
+              <li>payroll deductions or remittances;</li>
+              <li>tax instalments;</li>
+              <li>assessments;</li>
+              <li>penalties;</li>
+              <li>interest; and</li>
+              <li>any other balance owing to a government authority or third party.</li>
+            </ul>
+            <p>
+              We may explain an amount owing or provide payment instructions,
+              but you are responsible for ensuring sufficient funds are
+              available and that payment is made by the applicable deadline.
+            </p>
+
+            <h3>19. Historical and out-of-scope work</h3>
+            <p>
+              Premium covers eligible current routine obligations that become
+              due while Premium is active. It does not automatically cover
+              problems or overdue work that existed before Premium began.
+            </p>
+            <p>Historical or out-of-scope work may include:</p>
+            <ul>
+              <li>overdue or unfiled returns;</li>
+              <li>incomplete bookkeeping;</li>
+              <li>reconstruction of financial records;</li>
+              <li>corrections or amendments to previous filings;</li>
+              <li>unresolved government notices;</li>
+              <li>penalties, audits, objections, appeals, or investigations;</li>
+              <li>dissolved, struck, or non-compliant entities;</li>
+              <li>reinstatements;</li>
+              <li>tax planning;</li>
+              <li>complex related-party transactions;</li>
+              <li>legal advice;</li>
+              <li>specialist accounting advice;</li>
+              <li>personal tax returns;</li>
+              <li>work involving an additional entity; and</li>
+              <li>obligations involving an additional jurisdiction.</li>
+            </ul>
+            <p>
+              We may decline this work, refer it to a specialist, or offer it
+              for a separately approved fee. No separately charged work will
+              be undertaken without informing you of the proposed scope and
+              cost.
+            </p>
+
+            <h3>20. Use of contractors and service providers</h3>
+            <p>
+              You authorize Aneurin Advisory to use qualified employees,
+              independent contractors, tax preparers, accountants,
+              bookkeepers, registered-agent providers, compliance specialists,
+              technology providers, and other service providers where
+              reasonably necessary to deliver Premium.
+            </p>
+            <p>
+              We may share with those providers the information reasonably
+              required to perform the relevant service, subject to our Privacy
+              Policy and applicable confidentiality and data-protection
+              obligations.
+            </p>
+            <p>
+              You may be required to agree to a provider's legally required
+              authorization, engagement, or professional terms. We may replace
+              or reassign a service provider where reasonably necessary.
+            </p>
+            <p>
+              Premium does not guarantee that the same individual will handle
+              every filing or remain assigned to your account throughout your
+              subscription.
+            </p>
+
+            <h3>21. Professional limitations</h3>
+            <p>
+              Aneurin Advisory is not a law firm, and Premium does not include
+              legal advice or legal representation unless a separate written
+              agreement expressly identifies a licensed lawyer as the service
+              provider.
+            </p>
+            <p>
+              Routine explanations, reminders, administrative support, filing
+              coordination, and general information are not substitutes for
+              legal advice, complex tax advice, or regulated professional
+              judgment.
+            </p>
+            <p>
+              Where a matter requires a lawyer, chartered professional
+              accountant, certified public accountant, enrolled agent, or
+              another regulated specialist, we may:
+            </p>
+            <ul>
+              <li>refer the matter to an appropriate provider;</li>
+              <li>coordinate the provider where agreed;</li>
+              <li>provide a separate quote; or</li>
+              <li>require you to engage the provider directly.</li>
+            </ul>
+            <p>
+              No lawyer-client, accountant-client, fiduciary, or other
+              regulated professional relationship is created merely because
+              you subscribe to Premium.
+            </p>
+            <p>
+              Where a qualified professional is separately engaged to perform
+              a particular service, the professional relationship and
+              applicable responsibilities will be governed by that provider's
+              engagement terms.
+            </p>
+
+            <h3>22. No guaranteed result</h3>
+            <p>Premium does not guarantee:</p>
+            <ul>
+              <li>acceptance of a filing, return, registration, election, deduction, or position;</li>
+              <li>any particular tax result;</li>
+              <li>the amount of any tax, refund, assessment, interest, or penalty;</li>
+              <li>that an authority will process a submission within a particular period;</li>
+              <li>that an authority will agree with a filing position;</li>
+              <li>that a penalty will be waived;</li>
+              <li>that a business will remain in good standing where required information, authorization, approval, or payment is not provided; or</li>
+              <li>any particular business, legal, tax, financial, or regulatory outcome.</li>
+            </ul>
+            <p>
+              Government agencies, registries, tax authorities,
+              registered-agent providers, and other third parties retain final
+              authority over their decisions and processing.
+            </p>
+
+            <h3>23. Corrections</h3>
+            <p>
+              You must notify us promptly if you believe that a return,
+              filing, calculation, document, or submission contains an error.
+            </p>
+            <p>
+              Where an error was caused solely by us and you fulfilled your
+              responsibilities under these Terms, we will use reasonable
+              efforts to correct the affected work without charging an
+              additional service fee.
+            </p>
+            <p>This does not require us to pay:</p>
+            <ul>
+              <li>taxes or balances that were legally owing;</li>
+              <li>penalties or interest that would have applied regardless of the error;</li>
+              <li>costs resulting from inaccurate, incomplete, or late information;</li>
+              <li>costs arising from information you did not disclose;</li>
+              <li>losses caused by your failure to review a submission;</li>
+              <li>indirect or consequential losses; or</li>
+              <li>specialist or third-party costs outside the confirmed correction scope.</li>
+            </ul>
+            <p>
+              Corrections caused by new information, customer error, a prior
+              service provider, an authority reassessment, or a change in law
+              may require a separately approved fee.
+            </p>
+
+            <h3>24. Artificial intelligence and human review</h3>
+            <p>The Zeni AI business operator may assist with:</p>
+            <ul>
+              <li>organizing information;</li>
+              <li>identifying deadlines;</li>
+              <li>explaining routine matters;</li>
+              <li>collecting records;</li>
+              <li>preparing drafts; and</li>
+              <li>coordinating human-managed Premium services.</li>
+            </ul>
+            <p>
+              Artificial intelligence output may contain errors and must not
+              be treated as a final legal, accounting, tax, or regulatory
+              determination. Material Premium filings will be subject to the
+              human-review process applicable to that service.
+            </p>
+            <p>
+              You must not rely solely on an automated response where a matter
+              is material, urgent, uncertain, or requires professional
+              judgment.
+            </p>
+
+            <h3>25. Cancellation</h3>
+            <p>
+              You may cancel Premium at any time in accordance with the
+              cancellation provisions of the main Zeni Terms and Conditions.
+              There is no minimum subscription period and no cancellation
+              penalty.
+            </p>
+            <p>
+              Unless otherwise stated in the main Zeni Terms and Conditions,
+              cancellation takes effect at the end of the current paid billing
+              period.
+            </p>
+            <p>After cancellation takes effect:</p>
+            <ul>
+              <li>human-managed Premium services and deadline monitoring will stop;</li>
+              <li>we are not required to begin new filings or renewals;</li>
+              <li>unused portions of the CAD $250 fee allowance will expire without refund, transfer, or credit;</li>
+              <li>you remain responsible for all future filings, renewals, taxes, payments, and deadlines; and</li>
+              <li>government or third-party fees already paid are non-refundable unless the relevant authority or provider refunds them to us.</li>
+            </ul>
+            <p>
+              Where an included filing or renewal is already substantially
+              underway when cancellation takes effect, we may:
+            </p>
+            <ul>
+              <li>complete it where reasonably practical;</li>
+              <li>provide available records to you;</li>
+              <li>stop work and explain what remains outstanding; or</li>
+              <li>require payment of any separately approved cost already incurred.</li>
+            </ul>
+            <p>
+              We will not be responsible for obligations or deadlines arising
+              after Premium coverage ends.
+            </p>
+
+            <h3>26. Suspension or termination</h3>
+            <p>We may suspend or terminate Premium where:</p>
+            <ul>
+              <li>a subscription payment is overdue, reversed, or disputed;</li>
+              <li>requested information, authorization, approval, or access is not provided;</li>
+              <li>information appears false, incomplete, misleading, or fraudulent;</li>
+              <li>continued work may breach a law, regulation, professional obligation, or authority requirement;</li>
+              <li>the matter falls materially outside the supported Premium scope;</li>
+              <li>you use the service unlawfully or abusively;</li>
+              <li>your use creates an unreasonable security, operational, professional, or reputational risk; or</li>
+              <li>you materially breach the Zeni Terms and Conditions.</li>
+            </ul>
+            <p>
+              Suspension or termination does not extend government deadlines
+              or remove your responsibility for your business's obligations.
+              Where reasonably possible, we will notify you of the issue and
+              explain any available next step.
+            </p>
+
+            <h3>27. Records</h3>
+            <p>
+              You are responsible for retaining original records and
+              maintaining your own copies of important filings, confirmations,
+              notices, and supporting documents.
+            </p>
+            <p>
+              We may retain service records for the period reasonably required
+              for operational, legal, tax, security, and dispute-resolution
+              purposes, subject to the Zeni Privacy Policy. Premium does not
+              guarantee permanent document storage.
+            </p>
+
+            <h3>28. Premium service descriptions</h3>
+            <p>
+              The Premium page and other marketing materials provide a general
+              overview of the service. These Premium Additional Terms,
+              together with any specific written engagement confirmation or
+              service schedule, determine the actual included scope,
+              eligibility requirements, limits, and exclusions.
+            </p>
+            <p>
+              Statements such as "handled for you," "everything important kept
+              on track," "eligible routine fees paid for you," or similar
+              marketing descriptions refer only to eligible routine services
+              within the confirmed Premium scope.
+            </p>
+            <p>They do not:</p>
+            <ul>
+              <li>create unlimited coverage;</li>
+              <li>include services expressly excluded by these Terms;</li>
+              <li>guarantee any particular result; or</li>
+              <li>remove your legal responsibility for your business, information, approvals, taxes, payments, records, and obligations.</li>
+            </ul>
+
+            <h3>29. Relationship with the main Zeni Terms</h3>
+            <p>
+              All provisions of the main Zeni Terms and Conditions that are
+              not expressly modified by these Premium Additional Terms
+              continue to apply. This includes provisions relating to:
+            </p>
+            <ul>
+              <li>subscription billing;</li>
+              <li>automatic renewal;</li>
+              <li>cancellation;</li>
+              <li>refunds;</li>
+              <li>acceptable use;</li>
+              <li>privacy;</li>
+              <li>intellectual property;</li>
+              <li>warranties and disclaimers;</li>
+              <li>limitation of liability;</li>
+              <li>indemnification;</li>
+              <li>dispute resolution;</li>
+              <li>governing law; and</li>
+              <li>general contractual provisions.</li>
+            </ul>
+            <p>
+              These Premium Additional Terms are governed by the same
+              governing-law and dispute-resolution provisions stated in the
+              main Zeni Terms and Conditions.
+            </p>
+
+          </div>
+        </details>
       </section>
 
       <section id="s9">
@@ -1400,5 +2483,22 @@
       </ul>
     </div>
   </footer>
+
+  <script>
+    (function () {
+      var addendum = document.getElementById('premium');
+      if (!addendum) return;
+
+      function openFromHash() {
+        if (location.hash === '#premium') {
+          addendum.open = true;
+          addendum.scrollIntoView({ block: 'start' });
+        }
+      }
+
+      window.addEventListener('hashchange', openFromHash);
+      openFromHash();
+    })();
+  </script>
 </body>
 </html>
