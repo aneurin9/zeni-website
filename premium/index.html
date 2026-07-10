@@ -119,6 +119,17 @@
   .feed-foot{display:flex;justify-content:space-between;align-items:center;padding:11px 18px;border-top:1px solid var(--line);background:rgba(255,255,255,.6);font-size:11px;color:var(--faint)}
   .feed-foot b{color:var(--ink2);font-variant-numeric:tabular-nums}
 
+  /* ---------- bridge ---------- */
+  .bridge{position:relative;z-index:1;padding:2px 0 10px}
+  .bridge-card{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;max-width:960px;margin:0 auto;padding:20px 28px;border-radius:20px;background:var(--glass);border:1px solid var(--glass-brd);box-shadow:var(--shadow-sm);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+  .bridge-pill{display:inline-flex;align-items:center;gap:9px;padding:9px 16px;border-radius:100px;font-size:13.5px;font-weight:700;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-sm)}
+  .bridge-pill .bi{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:12px}
+  .bridge-pill.core .bi{background:rgba(123,97,255,.14);color:var(--violet)}
+  .bridge-pill.team .bi{background:rgba(255,122,198,.16);color:#c04a91}
+  .bridge-pill.prem{background:var(--grad);color:#fff;border:none;box-shadow:0 8px 20px rgba(123,97,255,.3)}
+  .bridge-op{font-size:17px;font-weight:700;color:var(--faint)}
+  .bridge-caption{text-align:center;margin-top:13px;font-size:13.5px;color:var(--muted)}
+
   /* ---------- what's handled ---------- */
   .section{position:relative;padding:30px 0 64px}
   .handled-card{max-width:920px;margin:0 auto;padding:38px 42px;border-radius:24px;background:rgba(255,255,255,.7);border:1px solid var(--glass-brd);box-shadow:var(--shadow);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
@@ -140,21 +151,16 @@
   .how-line .harr{color:var(--faint)}
 
   /* ---------- pricing band ---------- */
-  .upgrade-card{position:relative;max-width:920px;margin:0 auto;border-radius:26px;overflow:hidden;background:#191A38;color:#fff;box-shadow:var(--shadow-lg);isolation:isolate}
-  .upgrade-card::before{content:"";position:absolute;inset:0;z-index:-1;
-    background:radial-gradient(480px 280px at 82% 0%,rgba(123,97,255,.42),transparent 68%),
-               radial-gradient(420px 260px at 8% 100%,rgba(255,122,198,.16),transparent 70%)}
-  .upgrade-in{display:flex;align-items:center;justify-content:space-between;gap:28px;padding:32px 40px;flex-wrap:wrap}
-  .up-copy .up-eye{display:inline-flex;align-items:center;gap:8px;padding:6px 13px;border-radius:100px;background:linear-gradient(135deg,rgba(255,122,198,.2),rgba(123,97,255,.24));border:1px solid rgba(255,255,255,.18);font-size:11px;font-weight:800;letter-spacing:.5px;color:#FFD7EE;margin-bottom:13px}
+  .price-card{position:relative;max-width:920px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:28px;flex-wrap:wrap;padding:30px 38px;border-radius:24px;background:rgba(255,255,255,.72);border:1px solid var(--glass-brd);box-shadow:var(--shadow);backdrop-filter:blur(16px) saturate(1.25);-webkit-backdrop-filter:blur(16px) saturate(1.25)}
+  .launch-badge{display:inline-flex;align-items:center;gap:7px;padding:6px 13px;border-radius:100px;background:rgba(123,97,255,.08);border:1px solid rgba(123,97,255,.19);color:var(--violet-d);font-size:11.5px;font-weight:800;letter-spacing:.4px;margin-bottom:12px}
   .price-line{display:flex;align-items:baseline;gap:9px}
-  .price-line strong{font-family:var(--serif);font-weight:560;font-size:46px;line-height:1;letter-spacing:-.03em}
-  .price-line small{font-size:14px;font-weight:600;color:rgba(255,255,255,.72)}
-  .price-reg{margin-top:7px;font-size:13px;color:rgba(255,255,255,.55)}
-  .price-reg s{color:rgba(255,255,255,.45)}
+  .price-line strong{font-family:var(--serif);font-weight:560;font-size:48px;line-height:1;letter-spacing:-.03em}
+  .price-line small{font-size:14px;font-weight:600;color:var(--ink2)}
+  .price-reg{margin-top:7px;font-size:13.5px;color:var(--muted)}
   .up-cta{display:flex;flex-direction:column;align-items:flex-end;gap:9px}
-  .up-cta .price-sub{font-size:12px;color:rgba(255,255,255,.55)}
+  .up-cta .price-sub{font-size:12.5px;font-weight:600;color:var(--muted)}
   .terms-note{max-width:760px;margin:20px auto 0;text-align:center;color:var(--faint);font-size:12.5px;line-height:1.7}
-  .terms-note a{color:var(--violet-d);font-weight:700}
+  .terms-note a{color:var(--violet-d);font-weight:700;white-space:nowrap}
   .terms-note a:hover{text-decoration:underline}
 
   /* ---------- footer ---------- */
@@ -180,6 +186,7 @@
   @media(max-width:960px){
     .hero-in{grid-template-columns:1fr;gap:44px}
     .hero-copy{max-width:600px}
+    .up-cta{align-items:flex-start}
   }
   @media(max-width:720px){
     .wrap{width:min(100% - 32px,var(--max))}
@@ -187,9 +194,11 @@
     .hero{padding:46px 0 42px}
     .handled-card{padding:28px 24px}
     .hlist{grid-template-columns:1fr}
-    .how-line{justify-content:flex-start}
-    .upgrade-in{padding:28px 26px}
-    .up-cta{align-items:flex-start}
+    .how-line{flex-direction:column;align-items:flex-start;gap:12px}
+    .how-line .harr{display:none}
+    .bridge-card{gap:10px;padding:18px 20px}
+    .price-card{padding:26px 24px}
+    .up-cta{align-items:flex-start;width:100%}
     .up-cta .btn{width:100%}
     .footer-in{flex-direction:column;align-items:flex-start}
   }
@@ -277,6 +286,20 @@
     </div>
   </header>
 
+  <!-- ============ BRIDGE ============ -->
+  <section class="bridge">
+    <div class="wrap reveal">
+      <div class="bridge-card" role="img" aria-label="Zeni Core plus a human compliance team equals Zeni Premium">
+        <span class="bridge-pill core"><span class="bi">✦</span>Zeni Core runs your business</span>
+        <span class="bridge-op">+</span>
+        <span class="bridge-pill team"><span class="bi">♥</span>A human team handles compliance</span>
+        <span class="bridge-op">=</span>
+        <span class="bridge-pill prem">Zeni Premium</span>
+      </div>
+      <p class="bridge-caption">Same Zeni, same WhatsApp — with the compliance side of your business fully off your plate.</p>
+    </div>
+  </section>
+
   <!-- ============ WHAT'S HANDLED ============ -->
   <section class="section">
     <div class="wrap">
@@ -326,17 +349,15 @@
   <!-- ============ PRICE ============ -->
   <section class="section" style="padding-top:0">
     <div class="wrap">
-      <div class="upgrade-card reveal">
-        <div class="upgrade-in">
-          <div class="up-copy">
-            <div class="up-eye">✦ Launch price · first 20 users</div>
-            <div class="price-line"><strong>$350</strong><small>CAD / month</small></div>
-            <div class="price-reg">Regular <s>$499 CAD/mo</s> · Includes everything in Zeni Core</div>
-          </div>
-          <div class="up-cta">
-            <a class="btn btn-primary btn-lg" href="/#pricing">Choose Zeni Premium <span class="arr">→</span></a>
-            <span class="price-sub">Upgrade or cancel anytime · No new app</span>
-          </div>
+      <div class="price-card reveal">
+        <div class="up-copy">
+          <div class="launch-badge">✦ Launch price · first 20 users</div>
+          <div class="price-line"><strong>$350</strong><small>CAD / month</small></div>
+          <div class="price-reg">Regular $499 CAD/mo · Includes everything in Zeni Core</div>
+        </div>
+        <div class="up-cta">
+          <a class="btn btn-primary btn-lg" href="/#pricing">Choose Zeni Premium <span class="arr">→</span></a>
+          <span class="price-sub">Cancel anytime</span>
         </div>
       </div>
       <p class="terms-note reveal">Routine coverage has limits — taxes owing, penalties and historical issues aren’t included. Full coverage, eligibility and exclusions are set out in the <a href="/terms">Zeni Premium Terms →</a></p>
