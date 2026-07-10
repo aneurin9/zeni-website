@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zeni Premium — Human-managed business compliance</title>
+  <meta name="description" content="Zeni Premium keeps routine business taxes, GST/HST filings, renewals and compliance organized, prepared and handled for you.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://zeni.aneurinadvisory.com/premium">
+  <link rel="icon" type="image/png" href="/zeni-favicon-new.png?v=1">
+  <style>
+    :root{
+      --pearl:#F3F1FC;--pearl2:#EFEDF8;--card:#FFF;--ink:#1B1C3A;--ink2:#40416A;--muted:#63658A;--faint:#7A7C9C;
+      --violet:#7B61FF;--violet-d:#684CED;--mist:#5AA9FF;--line:rgba(27,28,58,.09);--line2:rgba(27,28,58,.14);
+      --grad:linear-gradient(135deg,#7B61FF 0%,#7567F1 54%,#618AEF 100%);
+      --glass:rgba(255,255,255,.72);--shadow-sm:0 7px 22px rgba(65,52,140,.07);--shadow:0 18px 48px rgba(65,52,140,.12);
+      --max:1120px;--sans:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{min-width:320px;background:var(--pearl);color:var(--ink);font-family:var(--sans);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}a{color:inherit;text-decoration:none}button{font:inherit}img,svg{display:block}.wrap{width:min(var(--max),calc(100% - 48px));margin:auto}:focus-visible{outline:3px solid rgba(123,97,255,.32);outline-offset:3px;border-radius:10px}
+    nav{position:sticky;top:0;z-index:50;border-bottom:1px solid var(--line);background:rgba(255,255,255,.68);backdrop-filter:blur(18px) saturate(1.3);-webkit-backdrop-filter:blur(18px) saturate(1.3)}.nav-in{min-height:66px;display:flex;align-items:center;justify-content:space-between;gap:18px}.brand{display:inline-flex;align-items:center;gap:10px;font-size:21px;font-weight:800;letter-spacing:-.5px}.brand img{width:36px;height:36px;object-fit:contain;filter:drop-shadow(0 5px 12px rgba(123,97,255,.22))}.nav-links{display:flex;align-items:center;gap:26px}.nav-links a{font-size:14px;color:var(--muted);font-weight:600}.nav-links a:hover{color:var(--ink)}
+    .btn{min-height:45px;display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:13px;padding:12px 22px;font-size:14.5px;font-weight:700;cursor:pointer;transition:transform .18s,box-shadow .18s}.btn:hover{transform:translateY(-2px)}.btn-primary{color:#fff;background:var(--grad);box-shadow:0 9px 24px rgba(123,97,255,.28)}.btn-primary:hover{box-shadow:0 13px 30px rgba(123,97,255,.38)}.btn-lg{min-height:52px;padding:14px 28px;font-size:15px;border-radius:14px}
+    .intro{position:relative;padding:78px 0 42px;overflow:hidden;isolation:isolate}.intro:before{content:"";position:absolute;inset:0;z-index:-2;background:radial-gradient(780px 340px at 50% 0%,rgba(255,255,255,.98),transparent 72%),radial-gradient(470px 300px at 18% 32%,rgba(255,211,233,.25),transparent 72%),radial-gradient(520px 320px at 84% 30%,rgba(173,205,255,.28),transparent 72%),linear-gradient(180deg,#FCFBFF 0%,#F6F1FA 68%,var(--pearl) 100%)}.intro:after{content:"";position:absolute;width:640px;height:220px;left:50%;bottom:-70px;z-index:-1;transform:translateX(-50%);background:radial-gradient(ellipse,rgba(123,97,255,.11),transparent 68%);filter:blur(24px);animation:ambient 10s ease-in-out infinite alternate}@keyframes ambient{to{transform:translateX(-50%) scale(1.08);opacity:.72}}
+    .intro-copy{max-width:850px;margin:auto;text-align:center}.eyebrow{display:inline-flex;align-items:center;gap:9px;margin-bottom:20px;padding:7px 14px;border:1px solid rgba(255,255,255,.9);border-radius:999px;background:rgba(255,255,255,.7);box-shadow:var(--shadow-sm);color:var(--violet-d);font-size:12px;font-weight:800;letter-spacing:1.25px;text-transform:uppercase}.eyebrow i{width:8px;height:8px;border-radius:50%;background:var(--grad);box-shadow:0 0 0 6px rgba(123,97,255,.1)}h1{font-size:clamp(38px,5.8vw,62px);line-height:1.05;letter-spacing:-2.15px;text-wrap:balance}.topline{display:block;margin-bottom:7px;color:var(--ink2);font-size:.58em;font-weight:730;letter-spacing:-1px}.lead{max-width:720px;margin:24px auto 0;color:var(--ink2);font-size:clamp(16px,1.8vw,18px);line-height:1.68;text-wrap:balance}.promise{margin-top:24px}.promise strong{display:block;font-size:17px}.promise span{display:block;margin-top:4px;color:var(--ink2);font-size:15.5px}
+    .offer-wrap{padding:0 0 68px}.offer{max-width:980px;margin:auto;display:grid;grid-template-columns:auto 1fr auto;gap:28px;align-items:center;padding:26px 28px;border:1px solid rgba(255,255,255,.94);border-radius:23px;background:rgba(255,255,255,.78);box-shadow:var(--shadow);backdrop-filter:blur(16px) saturate(1.25);-webkit-backdrop-filter:blur(16px) saturate(1.25)}.price{min-width:205px}.price-line{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}.price strong{font-size:50px;line-height:.95;letter-spacing:-2px}.price small{color:var(--ink2);font-size:15px;font-weight:650}.regular{margin-top:8px;color:var(--muted);font-size:13.5px;font-weight:600}.launch{display:inline-flex;margin-top:9px;padding:6px 11px;border:1px solid rgba(123,97,255,.19);border-radius:999px;background:rgba(123,97,255,.08);color:var(--violet-d);font-size:11.5px;font-weight:800}.offer-copy{padding-left:28px;border-left:1px solid var(--line)}.offer-copy p{color:var(--ink2);font-size:14.5px}.offer-copy p+p{margin-top:8px}.offer-copy b{color:var(--ink)}.offer .btn{white-space:nowrap}
+    .section{padding:72px 0}.section.alt{background:rgba(255,255,255,.32);border-top:1px solid rgba(255,255,255,.7);border-bottom:1px solid rgba(255,255,255,.7)}.section-head{max-width:700px;margin:0 auto 34px;text-align:center}.kicker{color:var(--violet-d);font-size:12px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase}.section-head h2{margin-top:8px;font-size:clamp(29px,3.8vw,40px);line-height:1.16;letter-spacing:-1.15px;text-wrap:balance}.section-head p{margin-top:11px;color:var(--muted);font-size:15.5px}
+    .services{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}.service{position:relative;min-height:210px;padding:22px 19px;border:1px solid var(--line);border-radius:18px;background:var(--card);box-shadow:var(--shadow-sm);transition:transform .22s,box-shadow .22s,border-color .22s}.service:hover,.service:focus-within{transform:translateY(-5px);box-shadow:var(--shadow);border-color:rgba(123,97,255,.25)}.service-icon{width:44px;height:44px;display:grid;place-items:center;margin-bottom:16px;border-radius:13px;background:linear-gradient(135deg,rgba(123,97,255,.15),rgba(90,169,255,.12));color:var(--violet)}.service-icon svg{width:22px;height:22px}.service h3{font-size:15.5px;line-height:1.3;letter-spacing:-.25px}.service p{margin-top:8px;color:var(--muted);font-size:13px;line-height:1.56}.service:after{content:"";position:absolute;left:19px;right:19px;bottom:0;height:2px;border-radius:2px;background:var(--grad);transform:scaleX(0);transform-origin:left;transition:transform .25s}.service:hover:after,.service:focus-within:after{transform:scaleX(1)}
+    .fee{margin-top:18px;display:flex;align-items:center;gap:18px;padding:22px 24px;border:1px solid rgba(123,97,255,.13);border-radius:19px;background:linear-gradient(110deg,rgba(255,255,255,.88),rgba(236,233,255,.8));box-shadow:var(--shadow-sm)}.fee-icon{flex:0 0 48px;width:48px;height:48px;display:grid;place-items:center;border-radius:50%;background:var(--grad);color:#fff;box-shadow:0 9px 22px rgba(123,97,255,.27)}.fee-icon svg{width:24px;height:24px}.fee h3{font-size:16px}.fee p{margin-top:3px;color:var(--ink2);font-size:14px}
+    .split{display:grid;grid-template-columns:1fr 1fr;gap:22px}.panel{padding:31px;border:1px solid var(--line);border-radius:22px;background:rgba(255,255,255,.72);box-shadow:var(--shadow-sm)}.panel h2{font-size:25px;letter-spacing:-.65px}.steps,.fit-list{list-style:none;display:grid;gap:17px;margin-top:23px}.step{display:grid;grid-template-columns:34px 1fr;gap:13px;align-items:start}.num{width:34px;height:34px;display:grid;place-items:center;border-radius:50%;background:var(--grad);color:#fff;font-size:13px;font-weight:800;box-shadow:0 7px 16px rgba(123,97,255,.22)}.step h3,.fit-list b{font-size:14.5px}.step p,.fit-list span{display:block;margin-top:3px;color:var(--muted);font-size:13px}.fit-list li{display:flex;gap:11px;align-items:flex-start;padding:14px 15px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.72)}.tick{flex:0 0 22px;width:22px;height:22px;display:grid;place-items:center;border-radius:50%;background:rgba(123,97,255,.12);color:var(--violet-d);font-size:12px;font-weight:900}
+    .terms{max-width:860px;margin:28px auto 0;text-align:center;color:var(--faint);font-size:12.5px;line-height:1.65}.terms a{color:var(--violet-d);font-weight:750}.final{padding:0 0 76px}.final-card{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:25px 28px;border:1px solid rgba(255,255,255,.92);border-radius:20px;background:rgba(255,255,255,.74);box-shadow:var(--shadow-sm)}.final-card h2{font-size:20px;letter-spacing:-.4px}.final-card p{margin-top:3px;color:var(--muted);font-size:13.5px}footer{padding:28px 0 34px;border-top:1px solid var(--line);background:rgba(255,255,255,.35)}.footer-in{display:flex;align-items:center;justify-content:space-between;gap:20px}.footer-brand{display:flex;flex-direction:column;gap:5px}.footer-brand .brand{font-size:17px}.footer-brand .brand img{width:29px;height:29px}.by{color:var(--faint);font-size:12px}.footer-links{display:flex;gap:20px;flex-wrap:wrap;color:var(--muted);font-size:13px;font-weight:600}
+    .reveal{opacity:0;transform:translateY(16px);transition:opacity .65s ease,transform .65s ease}.reveal.in{opacity:1;transform:none}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+    @media(max-width:980px){.services{grid-template-columns:repeat(2,1fr)}.service:last-child{grid-column:1/-1;min-height:0}.offer{grid-template-columns:auto 1fr}.offer .btn{grid-column:1/-1;width:100%}.split{gap:18px}}
+    @media(max-width:720px){.wrap{width:min(100% - 32px,var(--max))}.nav-links a:not(.btn){display:none}.intro{padding:56px 0 34px}.offer-wrap{padding-bottom:54px}.offer{grid-template-columns:1fr;gap:19px;padding:23px}.offer-copy{padding:18px 0 0;border-left:0;border-top:1px solid var(--line)}.offer .btn{grid-column:auto}.section{padding:58px 0}.services{grid-template-columns:1fr}.service,.service:last-child{grid-column:auto;min-height:0}.split{grid-template-columns:1fr}.panel{padding:27px 23px}.final-card{align-items:flex-start;flex-direction:column}.final-card .btn{width:100%}.footer-in{align-items:flex-start;flex-direction:column}}
+    @media(max-width:430px){.wrap{width:min(100% - 24px,var(--max))}.brand{font-size:18px;gap:8px}.brand img{width:32px;height:32px}.nav-in{min-height:61px}.nav-links .btn{padding:10px 14px;font-size:13px;min-height:40px}.intro{padding-top:46px}.eyebrow{font-size:10.5px;letter-spacing:1px}h1{font-size:clamp(36px,11vw,46px);letter-spacing:-1.65px}.topline{line-height:1.2;margin-bottom:10px}.lead{font-size:15.5px}.promise strong{font-size:16px}.promise span{font-size:14.5px}.price strong{font-size:46px}.fee{align-items:flex-start;padding:20px}.section-head{margin-bottom:28px}.final{padding-bottom:58px}}
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="wrap nav-in">
+      <a class="brand" href="/" aria-label="Zeni home"><img src="/logo.png" alt=""><span>zeni</span></a>
+      <div class="nav-links"><a href="/#handles">Features</a><a href="/#pricing">Pricing</a><a class="btn btn-primary" href="/#pricing">Get started</a></div>
+    </div>
+  </nav>
+
+  <main>
+    <section class="intro">
+      <div class="wrap intro-copy reveal">
+        <div class="eyebrow"><i></i>Zeni Premium</div>
+        <h1><span class="topline">The business you wanted.</span>Without the compliance sitting in the back of your mind.</h1>
+        <p class="lead">Zeni Premium is for founders who do not want to spend their time remembering tax deadlines, arranging annual filings or figuring out what needs to be renewed.</p>
+        <div class="promise"><strong>You run the business.</strong><span>We keep the routine compliance side organized, prepared and handled for you.</span></div>
+      </div>
+    </section>
+
+    <section class="offer-wrap">
+      <div class="wrap">
+        <div class="offer reveal">
+          <div class="price">
+            <div class="price-line"><strong>$350</strong><small>CAD / month</small></div>
+            <div class="regular">Regular $499 CAD/month</div>
+            <span class="launch">Limited to the first 20 users</span>
+          </div>
+          <div class="offer-copy">
+            <p>Includes the full Zeni business operator, plus dedicated human-managed compliance support.</p>
+            <p><b>Everything in Zeni Core. Everything important kept on track.</b></p>
+          </div>
+          <a class="btn btn-primary btn-lg" href="/#pricing">Choose Zeni Premium</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" id="coverage">
+      <div class="wrap">
+        <div class="section-head reveal"><div class="kicker">Premium compliance</div><h2>What’s handled for you</h2><p>For your qualifying Canadian business, and your U.S. LLC when applicable.</p></div>
+        <div class="services">
+          <article class="service reveal"><div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h9l3 3v15H6z"/><path d="M15 3v4h4M9 11h6M9 15h4"/><circle cx="17.5" cy="17.5" r="3"/><path d="M17.5 16v3M16 17.5h3"/></svg></div><h3>Business tax preparation &amp; filing</h3><p>Your routine annual business tax return is prepared and filed from the records you provide.</p></article>
+          <article class="service reveal"><div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M19 5 5 19"/><circle cx="7" cy="7" r="2.5"/><circle cx="17" cy="17" r="2.5"/></svg></div><h3>GST/HST registration &amp; returns</h3><p>Registration is handled when needed, along with routine GST/HST return preparation and filing.</p></article>
+          <article class="service reveal"><div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10h18M5 10v8M9 10v8M15 10v8M19 10v8M3 20h18M12 3l9 5H3z"/></svg></div><h3>Business renewals managed</h3><p>Corporate, provincial and LLC renewals are kept on track, including registered-agent renewals.</p></article>
+          <article class="service reveal"><div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/></svg></div><h3>Deadlines kept on track</h3><p>Your key compliance dates are monitored so you know what is due before it becomes urgent.</p></article>
+          <article class="service reveal"><div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3 1.7-5A7 7 0 0 1 3 12a7 7 0 0 1 7-7h4a7 7 0 0 1 7 7z"/></svg></div><h3>Human compliance support</h3><p>Ask routine compliance questions and get a clear answer from a real person who knows your file.</p></article>
+        </div>
+        <div class="fee reveal"><div class="fee-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5c-.7-.7-1.7-1-3-1-1.7 0-3 .8-3 2s1 1.8 3 2.2 3 1 3 2.3-1.3 2.2-3.2 2.2c-1.2 0-2.3-.4-3.1-1.1M12 5.5v13"/></svg></div><div><h3>Eligible routine filing and renewal fees paid for you</h3><p>Eligible government filing, renewal and registered-agent fees within your included Premium coverage are covered.</p></div></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="split">
+          <div class="panel reveal"><h2>How it works</h2><ol class="steps"><li class="step"><span class="num">1</span><div><h3>We reach out before something is due</h3><p>You receive one clear request with enough time to respond.</p></div></li><li class="step"><span class="num">2</span><div><h3>You send what we need</h3><p>Share the requested records or information securely.</p></div></li><li class="step"><span class="num">3</span><div><h3>We handle it through completion</h3><p>Your filing or renewal is prepared, explained and kept moving.</p></div></li></ol></div>
+          <div class="panel reveal"><h2>Who it’s for</h2><ul class="fit-list"><li><span class="tick">✓</span><div><b>Solo founders and owner-operated businesses</b><span>Straightforward new or early-stage businesses.</span></div></li><li><span class="tick">✓</span><div><b>One qualifying Canadian business</b><span>And one U.S. LLC when applicable.</span></div></li><li><span class="tick">✓</span><div><b>Founders who want it handled</b><span>You do not want to manage or chase routine compliance yourself.</span></div></li></ul></div>
+        </div>
+        <p class="terms reveal">Eligible routine filing and renewal fees are included. Taxes owing, assessments, penalties, historical filing issues and work outside the routine Premium scope are not included. Full coverage, eligibility, exclusions and responsibilities are set out in the <a href="/terms">Zeni Premium Terms →</a></p>
+      </div>
+    </section>
+
+    <section class="final">
+      <div class="wrap"><div class="final-card reveal"><div><h2>You run the business.</h2><p>We keep the important compliance work on track.</p></div><a class="btn btn-primary btn-lg" href="/#pricing">Choose Zeni Premium</a></div></div>
+    </section>
+  </main>
+
+  <footer><div class="wrap footer-in"><div class="footer-brand"><a class="brand" href="/"><img src="/logo.png" alt=""><span>zeni</span></a><span class="by">by Aneurin Advisory</span></div><div class="footer-links"><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="mailto:support@aneurinadvisory.com">Support</a></div></div></footer>
+
+  <script>
+    (function(){
+      var items=document.querySelectorAll('.reveal');
+      if(!('IntersectionObserver' in window)){items.forEach(function(x){x.classList.add('in')});return;}
+      var observer=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(entry.isIntersecting){entry.target.classList.add('in');observer.unobserve(entry.target)}})},{threshold:.12,rootMargin:'0px 0px -30px'});
+      items.forEach(function(x){observer.observe(x)});
+    })();
+  </script>
+</body>
+</html>
