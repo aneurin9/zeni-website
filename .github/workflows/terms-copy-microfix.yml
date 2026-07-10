@@ -28,34 +28,44 @@ jobs:
           text = path.read_text()
 
           replacements = {
-              'Zeni Pro Tier — Specific Terms and Limitations': 'Zeni Premium Tier — Specific Terms and Limitations',
-              'The Zeni Pro tier includes': 'The Zeni Premium tier includes',
+              'Zeni Pro Tier': 'Zeni Premium Tier',
+              'Zeni Pro tier': 'Zeni Premium tier',
               'Pro tier subscribers': 'Premium tier subscribers',
               'Pro tier services': 'Premium tier services',
               'Pro services': 'Premium services',
-              'a Pro filing': 'a Premium filing',
+              'Pro filing': 'Premium filing',
               'Pro subscription fees': 'Premium subscription fees',
-              'including Canada, the United States, or Trinidad and Tobago.': 'including Canada or the United States.',
+              'Canada, the United States, or Trinidad and Tobago': 'Canada or the United States',
           }
 
           for old, new in replacements.items():
-              if old not in text:
-                  raise SystemExit(f'Missing expected Terms text: {old}')
               text = text.replace(old, new)
 
           forbidden = [
-              'Zeni Pro Tier',
-              'The Zeni Pro tier',
-              'Pro tier subscribers',
-              'Pro tier services',
+              'Zeni Pro',
+              'Pro tier',
               'Pro services',
-              'a Pro filing',
-              'Pro subscription fees',
+              'Pro filing',
+              'Pro subscription',
               'Trinidad and Tobago',
           ]
           for value in forbidden:
               if value in text:
                   raise SystemExit(f'Forbidden legacy Terms text remains: {value}')
+
+          required = [
+              'Zeni Premium Tier — Specific Terms and Limitations',
+              'The Zeni Premium tier includes',
+              'Premium tier subscribers',
+              'Premium tier services',
+              'Premium services',
+              'Premium filing',
+              'Premium subscription fees',
+              'including Canada or the United States.',
+          ]
+          for value in required:
+              if value not in text:
+                  raise SystemExit(f'Required updated Terms text is missing: {value}')
 
           path.write_text(text)
           PY
