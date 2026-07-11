@@ -448,10 +448,8 @@
   .pricing-card .pc-list li .ic{color:var(--mist);font-size:15px;margin-top:1px;flex-shrink:0}
   .pricing-card .pc-list li b{color:var(--ink)}
   .pricing-card .btn{margin-top:auto;width:100%}
-  .pc-more{display:inline-flex;align-items:center;gap:5px;margin:14px 0 0;font-size:12px;font-weight:600;color:var(--faint);transition:color .18s}
-  .pc-more .arr{font-size:11px;transition:transform .18s}
-  .pc-more:hover{color:var(--violet-d);text-decoration:none}
-  .pc-more:hover .arr{transform:translateX(2px)}
+  .pc-more{display:block;margin:0 0 22px;font-size:12px;font-weight:500;color:var(--faint);transition:color .18s}
+  .pc-more:hover{color:var(--muted);text-decoration:underline;text-underline-offset:2px}
   .pricing-foot{text-align:center;color:var(--muted);font-size:13.5px;margin-top:28px}
   .pricing-foot b{color:var(--ink2)}
 
@@ -737,7 +735,7 @@
           <li><span class="ic" data-ic="check"></span><span>Essential fees included</span></li>
           <li><span class="ic" data-ic="check"></span><span>Human-managed compliance &amp; monitoring</span></li>
         </ul>
-        <a class="pc-more" href="/premium">Learn more about Premium <span class="arr">→</span></a>
+        <a class="pc-more" href="/premium">Learn more</a>
         <button class="btn btn-ghost btn-lg" onclick="openGetStarted('premium')">Get Zeni Premium <span class="ic" data-ic="arrow"></span></button>
       </div>
     </div>
