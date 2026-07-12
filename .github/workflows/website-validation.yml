@@ -75,7 +75,7 @@ jobs:
           grep -q 'gsRunCheckout();' index.html
           grep -q "openGetStarted('core')" index.html
           grep -q "openGetStarted('premium')" index.html
-          grep -q 'https://wa.me/18683166361?text=Hi%20Zeni' welcome/index.html
+          grep -q 'https://wa.me/16475601842?text=Hi%20Zeni' welcome/index.html
           grep -q 'id="welcome-title"' welcome/index.html
           grep -q '<script src="/welcome/welcome.js"></script>' welcome/index.html
           grep -q "fetch('/api/welcome?checkout_session_id='" welcome/welcome.js
