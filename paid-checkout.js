@@ -6,6 +6,33 @@
     pricingFoot.innerHTML = 'Cancel anytime &middot; Available in <b>Ontario, British Columbia &amp; Alberta</b>'
   }
 
+  var modalViewportStyle = document.createElement('style')
+  modalViewportStyle.textContent = [
+    '.modal{height:var(--modal-vh,100vh)}',
+    '.modal-card{max-height:calc(var(--modal-vh,100vh) - 44px)}',
+    '@media(max-width:520px){',
+    '  .modal{padding:calc(12px + env(safe-area-inset-top)) 12px calc(12px + env(safe-area-inset-bottom));align-items:center}',
+    '  .modal-card{max-height:calc(var(--modal-vh,100vh) - 24px - env(safe-area-inset-top) - env(safe-area-inset-bottom))}',
+    '  .modal-body{min-height:0;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}',
+    '}'
+  ].join('\n')
+  document.head.appendChild(modalViewportStyle)
+
+  function syncModalViewport() {
+    var viewport = window.visualViewport
+    var height = viewport ? viewport.height : window.innerHeight
+    if (height) {
+      document.documentElement.style.setProperty('--modal-vh', Math.round(height) + 'px')
+    }
+  }
+
+  syncModalViewport()
+  window.addEventListener('resize', syncModalViewport)
+  if (window.visualViewport) {
+    window.visualViewport.addEventListener('resize', syncModalViewport)
+    window.visualViewport.addEventListener('scroll', syncModalViewport)
+  }
+
   var checkoutRequestId = ''
   var submittedFingerprint = ''
   var checkoutHasSubmitted = false
@@ -226,11 +253,24 @@
     }
   }
 
+  var originalOpenDemo = window.openDemo
+  if (typeof originalOpenDemo === 'function') {
+    window.openDemo = function openDemoWithStableViewport() {
+      syncModalViewport()
+      var result = originalOpenDemo.apply(this, arguments)
+      window.requestAnimationFrame(syncModalViewport)
+      return result
+    }
+  }
+
   var originalOpenGetStarted = window.openGetStarted
   if (typeof originalOpenGetStarted === 'function') {
     window.openGetStarted = function openGetStartedWithCheckout(presetPlan) {
+      syncModalViewport()
       beginCheckoutAttempt()
-      return originalOpenGetStarted(presetPlan)
+      var result = originalOpenGetStarted(presetPlan)
+      window.requestAnimationFrame(syncModalViewport)
+      return result
     }
   }
 
