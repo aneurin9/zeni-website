@@ -69,6 +69,17 @@
     })
   }
 
+  function polishWelcomePage() {
+    var warningCopy = document.querySelector('.warn span:last-child')
+    if (warningCopy && warningCopy.innerHTML.indexOf('Just message') !== -1) {
+      warningCopy.innerHTML = warningCopy.innerHTML.replace('Just message', 'Just WhatsApp')
+    }
+
+    var style = document.createElement('style')
+    style.textContent = '.price-row .price-old{flex:0 0 100%;width:100%;text-align:left;margin-bottom:-4px}'
+    document.head.appendChild(style)
+  }
+
   function alignFirstMessagePreview() {
     var bubble = document.querySelector('.bub.in')
     if (bubble) {
@@ -112,6 +123,7 @@
     }
   }
 
+  polishWelcomePage()
   alignFirstMessagePreview()
   loadPersonalization()
 })()
