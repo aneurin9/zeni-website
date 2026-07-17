@@ -1,9 +1,13 @@
 name: Apply welcome natural-language note
 
 on:
-  push:
+  pull_request:
     branches:
       - main
+    types:
+      - opened
+      - synchronize
+      - reopened
 
 permissions:
   contents: write
@@ -13,9 +17,10 @@ jobs:
     if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     steps:
-      - name: Check out merged main branch
+      - name: Check out pull request branch
         uses: actions/checkout@v4
         with:
+          ref: ${{ github.head_ref }}
           fetch-depth: 0
 
       - name: Apply focused welcome-page change
@@ -34,4 +39,4 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add welcome/index.html scripts/apply-welcome-natural-note.py .github/workflows/apply-welcome-natural-note.yml
           git commit -m "Add natural wording note to welcome commands"
-          git push origin HEAD:main
+          git push origin HEAD:${{ github.head_ref }}
