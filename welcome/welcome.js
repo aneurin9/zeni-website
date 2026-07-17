@@ -69,6 +69,27 @@
     })
   }
 
+  function addNaturalCommandNote() {
+    var commandList = document.querySelector('.cmd-details .cmd-list')
+    if (!commandList || commandList.querySelector('.cmd-natural')) return
+
+    var note = document.createElement('div')
+    note.className = 'cmd-natural'
+    note.setAttribute('role', 'note')
+
+    var title = document.createElement('span')
+    title.className = 'cmd-natural-title'
+    title.textContent = 'Say it naturally'
+
+    var copy = document.createElement('span')
+    copy.className = 'cmd-natural-copy'
+    copy.textContent = 'You don’t need to memorize exact commands. Say things like “skip this,” “pause here,” “go back,” or “I already did this,” and I’ll understand.'
+
+    note.appendChild(title)
+    note.appendChild(copy)
+    commandList.appendChild(note)
+  }
+
   function polishWelcomePage() {
     var warningCopy = document.querySelector('.warn span:last-child')
     if (warningCopy && warningCopy.innerHTML.indexOf('Just message') !== -1) {
@@ -76,8 +97,15 @@
     }
 
     var style = document.createElement('style')
-    style.textContent = '.price-row .price-old{flex:0 0 100%;width:100%;text-align:left;margin-bottom:-4px}'
+    style.textContent = [
+      '.price-row .price-old{flex:0 0 100%;width:100%;text-align:left;margin-bottom:-4px}',
+      '.cmd-natural{margin-top:2px;padding-top:14px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:3px}',
+      '.cmd-natural-title{font-size:12.5px;font-weight:700;color:var(--ink2)}',
+      '.cmd-natural-copy{font-size:12px;color:var(--faint);line-height:1.6;max-width:600px}'
+    ].join('')
     document.head.appendChild(style)
+
+    addNaturalCommandNote()
   }
 
   function alignFirstMessagePreview() {
