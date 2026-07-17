@@ -98,7 +98,9 @@
 
     var style = document.createElement('style')
     style.textContent = [
-      '.price-row .price-old{flex:0 0 100%;width:100%;text-align:left;margin-bottom:-4px}',
+      '.price-row .price-new{order:1}',
+      '.price-row .price-mo{order:2}',
+      '.price-row .price-old{order:3;margin-left:4px}',
       '.cmd-natural{margin-top:2px;padding-top:14px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:3px}',
       '.cmd-natural-title{font-size:12.5px;font-weight:700;color:var(--ink2)}',
       '.cmd-natural-copy{font-size:12px;color:var(--faint);line-height:1.6;max-width:600px}'
