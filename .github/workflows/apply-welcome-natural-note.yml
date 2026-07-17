@@ -1,0 +1,37 @@
+name: Apply welcome natural-language note
+
+on:
+  push:
+    branches:
+      - agent/welcome-natural-language-note
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out feature branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Apply focused welcome-page change
+        run: python scripts/apply-welcome-natural-note.py
+
+      - name: Validate and commit clean result
+        run: |
+          rm scripts/apply-welcome-natural-note.py
+          rm .github/workflows/apply-welcome-natural-note.yml
+          git diff --check
+          test "$(grep -o '<div class="cmd-item">' welcome/index.html | wc -l | tr -d ' ')" = "3"
+          test "$(grep -o '<div class="cmd-natural" role="note">' welcome/index.html | wc -l | tr -d ' ')" = "1"
+          grep -F 'You don’t need to memorize exact commands.' welcome/index.html
+          git diff -- welcome/index.html
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add welcome/index.html scripts/apply-welcome-natural-note.py .github/workflows/apply-welcome-natural-note.yml
+          git commit -m "Add natural wording note to welcome commands"
+          git push origin HEAD:agent/welcome-natural-language-note
