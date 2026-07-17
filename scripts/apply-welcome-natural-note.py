@@ -1,3 +1,4 @@
+# Temporary pull-request runner; removed after the validated patch is applied.
 from html.parser import HTMLParser
 from pathlib import Path
 import re
