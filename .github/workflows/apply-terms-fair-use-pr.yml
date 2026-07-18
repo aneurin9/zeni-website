@@ -1,26 +1,25 @@
 name: Apply Terms fair-use subsection
 
 on:
-  pull_request:
-    types: [opened, synchronize, reopened]
-    branches: [main]
+  push:
+    branches:
+      - agent/add-fair-use-service-limits
 
 permissions:
   contents: write
-  pull-requests: read
 
 jobs:
   apply-change:
-    if: github.head_ref == 'agent/add-fair-use-service-limits' && github.actor != 'github-actions[bot]'
+    if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     steps:
-      - name: Check out pull request branch
+      - name: Check out branch
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.head_ref }}
+          ref: agent/add-fair-use-service-limits
           fetch-depth: 0
 
-      - name: Add fair-use subsection
+      - name: Add fair-use subsection and clean up
         shell: bash
         run: |
           python - <<'PY'
@@ -61,10 +60,10 @@ jobs:
               path.write_text(text, encoding="utf-8")
           PY
 
-          rm .github/workflows/apply-terms-fair-use-pr.yml
+          rm -f .github/workflows/apply-terms-fair-use-pr.yml .github/terms-fair-use-trigger.txt
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add terms/index.html .github/workflows/apply-terms-fair-use-pr.yml
+          git add terms/index.html .github/workflows/apply-terms-fair-use-pr.yml .github/terms-fair-use-trigger.txt
           git diff --cached --check
           git commit -m "Add fair use and service limits terms"
-          git push origin HEAD:${{ github.head_ref }}
+          git push origin HEAD:agent/add-fair-use-service-limits
