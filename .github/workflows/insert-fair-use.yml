@@ -1,9 +1,13 @@
 name: Insert approved fair-use Terms
 
 on:
-  push:
+  pull_request:
     branches:
-      - agent/fair-use-and-mobile-price
+      - main
+    types:
+      - synchronize
+      - reopened
+      - ready_for_review
     paths:
       - .github/workflows/insert-fair-use.yml
 
@@ -12,6 +16,7 @@ permissions:
 
 jobs:
   update-terms:
+    if: ${{ github.event.pull_request.head.ref == 'agent/fair-use-and-mobile-price' }}
     runs-on: ubuntu-latest
     steps:
       - name: Check out branch
