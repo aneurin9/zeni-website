@@ -1,0 +1,70 @@
+name: Apply Terms fair-use subsection
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches: [main]
+
+permissions:
+  contents: write
+  pull-requests: read
+
+jobs:
+  apply-change:
+    if: github.head_ref == 'agent/add-fair-use-service-limits' && github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out pull request branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
+
+      - name: Add fair-use subsection
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          path = Path("terms/index.html")
+          text = path.read_text(encoding="utf-8")
+          anchor = "        <h3>Prohibited Conduct</h3>"
+          subsection = """        <h3>Fair Use and Service Limits</h3>
+        <p>
+          Zeni is designed for natural, day-to-day use by an individual business
+          operator. To protect customer accounts and keep the Service secure,
+          reliable, and available, the Company may apply reasonable usage limits,
+          rate limits, feature allowances, or temporary pauses when activity is
+          unusually intensive, automated, abusive, technically abnormal, or
+          creates a risk to the Service or other users.
+        </p>
+
+        <p>
+          Certain features, including live web verification, may have monthly
+          allowances. Reaching a feature allowance will ordinarily affect only
+          that feature, and the rest of Zeni will remain available. These controls
+          are intended to prevent misuse and technical instability, not to
+          restrict normal day-to-day use.
+        </p>
+
+        <p>
+          The Company may reasonably adjust protective limits as security risks,
+          third-party provider requirements, technical capacity, or the Service
+          change. Where reasonably practicable, Zeni will explain a temporary
+          pause and when normal use can resume.
+        </p>"""
+
+          if "<h3>Fair Use and Service Limits</h3>" not in text:
+              if anchor not in text:
+                  raise SystemExit("Expected Prohibited Conduct heading was not found")
+              text = text.replace(anchor, subsection + "\n\n" + anchor, 1)
+              path.write_text(text, encoding="utf-8")
+          PY
+
+          rm .github/workflows/apply-terms-fair-use-pr.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add terms/index.html .github/workflows/apply-terms-fair-use-pr.yml
+          git diff --cached --check
+          git commit -m "Add fair use and service limits terms"
+          git push origin HEAD:${{ github.head_ref }}
