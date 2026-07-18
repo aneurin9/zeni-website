@@ -98,6 +98,7 @@
 
     var style = document.createElement('style')
     style.textContent = [
+      '.price-row{flex-wrap:nowrap}',
       '.price-row .price-new{order:1}',
       '.price-row .price-mo{order:2}',
       '.price-row .price-old{order:3;margin-left:4px}',
