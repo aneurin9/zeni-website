@@ -1,0 +1,55 @@
+name: Apply fair-use and mobile price polish
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened, ready_for_review]
+    paths:
+      - 'scripts/apply-fair-use-and-mobile-price.py'
+      - '.github/workflows/apply-fair-use-and-mobile-price.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: fair-use-mobile-price-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  apply:
+    if: ${{ github.event.pull_request.head.ref == 'agent/fair-use-and-mobile-price' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/fair-use-and-mobile-price
+          fetch-depth: 0
+
+      - name: Apply guarded Terms and welcome-page patches
+        run: python scripts/apply-fair-use-and-mobile-price.py
+
+      - name: Validate updated website files
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --check welcome/welcome.js
+          grep -q '<h3>Fair Use and Service Limits</h3>' terms/index.html
+          grep -q 'including live web verification, may have monthly' terms/index.html
+          grep -q 'not to restrict normal day-to-day use' terms/index.html
+          grep -q 'flex-wrap:nowrap' welcome/index.html
+          grep -q '<span class="price-new">$149</span><span class="price-old">$299</span><span class="price-mo">CAD/mo</span>' welcome/index.html
+          ! grep -q '.price-row .price-new{order:1}' welcome/welcome.js
+          ! grep -q '.price-row .price-old{order:3' welcome/welcome.js
+
+      - name: Commit final website files only
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm scripts/apply-fair-use-and-mobile-price.py
+          rm .github/workflows/apply-fair-use-and-mobile-price.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add terms/index.html welcome/index.html welcome/welcome.js
+          git add -u scripts/apply-fair-use-and-mobile-price.py .github/workflows/apply-fair-use-and-mobile-price.yml
+          git commit -m 'Clarify fair use and align mobile pricing'
+          git push origin HEAD:agent/fair-use-and-mobile-price
