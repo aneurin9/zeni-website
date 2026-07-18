@@ -1,125 +1,95 @@
 from pathlib import Path
-import re
+import os
+import subprocess
 
-# Marker-guarded source patches for the signed paid Checkout handoff and welcome CTA.
-path = Path('index.html')
-text = path.read_text()
+WORKFLOW_NAME = "Apply paid onboarding website patches"
 
-stripe_loader = '<script async src="https://js.stripe.com/v3/pricing-table.js"></script>\n'
-text = text.replace(stripe_loader, '')
+if os.environ.get("GITHUB_WORKFLOW") != WORKFLOW_NAME:
+    print("Fair-use branch helper is inactive outside the trusted write workflow")
+    raise SystemExit(0)
 
-text, modal_count = re.subn(
-    r'\n<div id="stripe-modal"[\s\S]*?</div>\n<nav>',
-    '\n<nav>',
-    text,
-    count=1,
-)
-if modal_count not in (0, 1):
-    raise SystemExit(f'Unexpected Stripe modal count: {modal_count}')
-
-stripe_script = '''<script>
-// Stripe modal
-function openStripe(){document.getElementById('stripe-modal').style.display='block';document.body.style.overflow='hidden';}
-function closeStripe(){document.getElementById('stripe-modal').style.display='none';document.body.style.overflow='';}
-document.getElementById('stripe-close').addEventListener('click',closeStripe);
-document.getElementById('stripe-modal').addEventListener('click',function(e){if(e.target===this)closeStripe();});
-document.addEventListener('keydown',function(e){if(e.key==='Escape')closeStripe();});
-</script>
-'''
-text = text.replace(stripe_script, '')
-
-old_checkout = '''function gsRunCheckout(){
-  closeGS();
-  openStripe();
-}
-'''
-new_checkout = '''function gsRunCheckout(){
-  if (typeof window.runPaidCheckout === 'function') {
-    return window.runPaidCheckout();
-  }
-  var box=document.getElementById('gsBody');
-  if(!box) return;
-  var error=document.getElementById('gsCheckoutError');
-  if(!error){
-    error=document.createElement('p');
-    error.id='gsCheckoutError';
-    error.setAttribute('role','alert');
-    error.style.cssText='display:block;margin:16px 0 0;padding:11px 13px;border-radius:11px;background:rgba(190,45,65,.08);border:1px solid rgba(190,45,65,.18);color:#9f2e43;font-size:13px;line-height:1.45;';
-    box.appendChild(error);
-  }
-  error.textContent='Checkout couldn’t be opened right now. Please refresh and try again.';
-}
-'''
-if old_checkout in text:
-    text = text.replace(old_checkout, new_checkout, 1)
-elif new_checkout not in text:
-    raise SystemExit('Could not locate the Get Started checkout handoff')
-
-# Preserve the latest main-branch keyboard behavior while this feature branch is merged.
-enter_helper = '''function gsOnEnter(el, fn){
-  if(!el) return;
-  el.addEventListener('keydown', function(e){
-    if(e.key==='Enter'){ e.preventDefault(); fn(); }
-  });
-}
+terms_path = Path("terms/index.html")
+text = terms_path.read_text(encoding="utf-8")
+heading = "<h3>Fair Use and Service Limits</h3>"
+block = '''        <h3>Fair Use and Service Limits</h3>
+        <p>
+          Zeni is designed for natural, day-to-day use by an individual business
+          operator. To protect customer accounts and keep the Service secure,
+          reliable, and available, the Company may apply reasonable usage
+          limits, rate limits, feature allowances, or temporary pauses when
+          activity is unusually intensive, automated, abusive, technically
+          abnormal, or creates a risk to the Service or other users.
+        </p>
+        <p>
+          Certain features, including live web verification, may have monthly
+          allowances. Reaching a feature allowance will ordinarily affect only
+          that feature, and the rest of Zeni will remain available. These
+          controls are intended to prevent misuse and technical instability,
+          not to restrict normal day-to-day use.
+        </p>
+        <p>
+          The Company may reasonably adjust protective limits as security risks,
+          third-party provider requirements, technical capacity, or the Service
+          change. Where reasonably practicable, Zeni will explain a temporary
+          pause and when normal use can resume.
+        </p>
 
 '''
-if enter_helper not in text:
-    marker = 'function gsBindInputs(){\n'
-    if marker not in text:
-        raise SystemExit('Could not locate gsBindInputs for Enter-key support')
-    text = text.replace(marker, enter_helper + marker, 1)
 
-enter_bindings = (
-    ("  if(n){ n.addEventListener('input', function(){ gsData.name=this.value; gsUpdateNextState(); }); n.focus(); }\n", "  if(n){ n.addEventListener('input', function(){ gsData.name=this.value; gsUpdateNextState(); }); n.focus(); }\n  gsOnEnter(n, gsNextClick);\n"),
-    ("  if(ph){ ph.addEventListener('input', function(){ this.value=formatPhone(this.value); this.setSelectionRange(this.value.length,this.value.length); gsData.phone=this.value; gsUpdateNextState(); }); }\n", "  if(ph){ ph.addEventListener('input', function(){ this.value=formatPhone(this.value); this.setSelectionRange(this.value.length,this.value.length); gsData.phone=this.value; gsUpdateNextState(); }); }\n  gsOnEnter(ph, gsNextClick);\n"),
-    ("  if(we){ we.addEventListener('input', function(){ gsData.waitlistEmail=this.value; gsHideWaitlistError(); }); }\n", "  if(we){ we.addEventListener('input', function(){ gsData.waitlistEmail=this.value; gsHideWaitlistError(); }); }\n  gsOnEnter(we, gsJoinWaitlist);\n"),
-    ("  if(wp){ wp.addEventListener('input', function(){ gsData.waitlistProvince=this.value; }); }\n", "  if(wp){ wp.addEventListener('input', function(){ gsData.waitlistProvince=this.value; }); }\n  gsOnEnter(wp, gsJoinWaitlist);\n"),
-)
-for original, updated in enter_bindings:
-    if updated not in text:
-        if original not in text:
-            raise SystemExit('Could not preserve Enter-key binding in Get Started flow')
-        text = text.replace(original, updated, 1)
+if heading not in text:
+    section_start = text.index('<section id="s9">')
+    marker = "        <h3>Prohibited Conduct</h3>"
+    insert_at = text.index(marker, section_start)
+    text = text[:insert_at] + block + text[insert_at:]
 
-checkout_script = '<script src="/paid-checkout.js"></script>\n'
-if checkout_script not in text:
-    if '</body>' not in text:
-        raise SystemExit('Missing body close marker')
-    text = text.replace('</body>', checkout_script + '</body>', 1)
+if text.count(heading) != 1:
+    raise SystemExit("Expected exactly one Fair Use and Service Limits heading")
+if "may have monthly allowances communicated during purchase" in text:
+    raise SystemExit("Disallowed purchase-communication sentence is present")
+if "If a material change would affect ordinary use of a paid plan" in text:
+    raise SystemExit("Disallowed material-change sentence is present")
 
-for retired in (
-    'stripe-pricing-table',
-    'pricing-table.js',
-    'id="stripe-modal"',
-    'function openStripe()',
-    'openStripe();',
+terms_path.write_text(text, encoding="utf-8")
+
+for temporary_path in (
+    Path("terms/fair-use-and-service-limits.html"),
+    Path(".github/workflows/insert-fair-use.yml"),
 ):
-    if retired in text:
-        raise SystemExit(f'Retired Stripe marker remains: {retired}')
+    if temporary_path.exists():
+        temporary_path.unlink()
 
-if text.count(checkout_script) != 1:
-    raise SystemExit('Paid checkout script must be included exactly once')
-if 'function gsRunCheckout()' not in text or 'window.runPaidCheckout' not in text:
-    raise SystemExit('Get Started checkout dispatcher is missing')
-if 'function gsGreeting()' not in text:
-    raise SystemExit('Latest personalized Get Started flow is missing')
-if text.count('function gsOnEnter(el, fn)') != 1:
-    raise SystemExit('Enter-key helper must appear exactly once')
+welcome = Path("welcome/welcome.js").read_text(encoding="utf-8")
+for required in (
+    ".price-row{flex-wrap:nowrap}",
+    ".price-row .price-old{order:2;margin-left:4px}",
+    ".price-row .price-mo{order:3}",
+):
+    if required not in welcome:
+        raise SystemExit(f"Missing approved mobile price rule: {required}")
+if "Founding rate" in welcome:
+    raise SystemExit("Founding rate must not replace the crossed CAD 299 price")
 
-path.write_text(text)
+subprocess.run(["git", "fetch", "origin", "main"], check=True)
+original_script = subprocess.check_output(
+    ["git", "show", "FETCH_HEAD:scripts/apply-paid-onboarding-index.py"],
+    text=True,
+)
+Path("scripts/apply-paid-onboarding-index.py").write_text(original_script, encoding="utf-8")
 
-welcome_path = Path('welcome/index.html')
-welcome = welcome_path.read_text()
-welcome_cta = '''    <a href="https://wa.me/16475601842?text=Hi%20Zeni" target="_blank" rel="noopener" class="btn btn-primary" style="margin:2px 0 16px">Message Zeni on WhatsApp <span class="ic" data-ic="arrow"></span></a>\n'''
-welcome_marker = '''    </div>\n    <div class="warn">\n'''
-if welcome_cta not in welcome:
-    if welcome.count(welcome_marker) != 1:
-        raise SystemExit('Could not locate the welcome-page WhatsApp CTA marker')
-    welcome = welcome.replace(welcome_marker, '    </div>\n' + welcome_cta + '    <div class="warn">\n', 1)
+subprocess.run(["git", "config", "user.name", "github-actions[bot]"], check=True)
+subprocess.run(
+    ["git", "config", "user.email", "41898282+github-actions[bot]@users.noreply.github.com"],
+    check=True,
+)
+subprocess.run(["git", "add", "-A"], check=True)
+subprocess.run(["git", "diff", "--cached", "--check"], check=True)
+subprocess.run(
+    ["git", "commit", "-m", "Add approved fair-use terms and finalize mobile pricing"],
+    check=True,
+)
+subprocess.run(
+    ["git", "push", "origin", "HEAD:build/automatic-paid-onboarding-website"],
+    check=True,
+)
 
-if welcome.count('https://wa.me/16475601842?text=Hi%20Zeni') != 1:
-    raise SystemExit('Primary Zeni WhatsApp CTA must appear exactly once')
-welcome_path.write_text(welcome)
-
-print('Applied guarded paid onboarding website patches')
+print("Applied approved fair-use Terms and restored helper files")
