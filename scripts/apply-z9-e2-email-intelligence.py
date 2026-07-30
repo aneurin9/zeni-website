@@ -20,6 +20,10 @@ def verify_once(text: str, marker: str, label: str) -> None:
         raise SystemExit(f'{label}: expected one generated marker, found {count}')
 
 
+def normalized_text(text: str) -> str:
+    return ' '.join(text.split())
+
+
 # Homepage outcome block -----------------------------------------------------
 home_path = Path('index.html')
 home = home_path.read_text()
@@ -145,6 +149,7 @@ if PRIVACY_MARKER not in privacy:
     )
 
 verify_once(privacy, PRIVACY_MARKER, 'privacy')
+privacy_normalized = normalized_text(privacy)
 for required in (
     'This feature is optional.',
     'does not request permission to send, delete, archive, move',
@@ -154,7 +159,7 @@ for required in (
     'pause email processing',
     'does not delete or change email in Zoho',
 ):
-    if required not in privacy:
+    if required not in privacy_normalized:
         raise SystemExit(f'Privacy disclosure missing: {required}')
 privacy_path.write_text(privacy)
 
@@ -217,6 +222,7 @@ if TERMS_MARKER not in terms:
     )
 
 verify_once(terms, TERMS_MARKER, 'terms')
+terms_normalized = normalized_text(terms)
 for required in (
     'optional read-only integration with Zoho Mail',
     'must have authority to connect the mailbox',
@@ -224,7 +230,7 @@ for required in (
     'cannot authorize a payment',
     'does not guarantee that every important message will be identified',
 ):
-    if required not in terms:
+    if required not in terms_normalized:
         raise SystemExit(f'Terms disclosure missing: {required}')
 terms_path.write_text(terms)
 
