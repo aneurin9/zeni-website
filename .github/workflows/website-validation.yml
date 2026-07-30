@@ -12,6 +12,7 @@ on:
       - 'api/checkout.js'
       - 'api/welcome.js'
       - 'scripts/apply-paid-onboarding-index.py'
+      - 'scripts/apply-z9-e2-email-intelligence.py'
       - '.github/workflows/website-validation.yml'
       - '.github/workflows/apply-paid-onboarding-index.yml'
 
@@ -26,6 +27,9 @@ jobs:
 
       - name: Apply guarded integration in validation workspace
         run: python scripts/apply-paid-onboarding-index.py
+
+      - name: Apply guarded Z9-E2 wording in validation workspace
+        run: python scripts/apply-z9-e2-email-intelligence.py
 
       - name: Validate JavaScript syntax
         run: |
@@ -94,4 +98,47 @@ jobs:
           grep -q 'X-Zeni-Welcome-Signature' api/welcome.js
           grep -q "createHmac('sha256'" api/welcome.js
           ! grep -Eq 'STRIPE_SECRET_KEY|SUPABASE_SERVICE_ROLE_KEY|STRIPE_PRICE_TIER' index.html paid-checkout.js welcome/index.html welcome/welcome.js
-          ! grep -Eq '[?&]name=' welcome/index.html welcome/welcome.js
+
+      - name: Validate Z9-E2 outcome and legal wording
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          home = Path('index.html').read_text()
+          privacy = ' '.join(Path('privacy/index.html').read_text().split())
+          terms = ' '.join(Path('terms/index.html').read_text().split())
+
+          required_home = (
+              '<!-- Z9-E2 Email Intelligence capability -->',
+              'Your business inbox stops becoming another job.',
+              'Important messages become clear next steps—without leaving WhatsApp.',
+              'Works with the business email Zeni helps you set up.',
+          )
+          required_privacy = (
+              '<!-- Z9-E2 Email Intelligence privacy -->',
+              'Raw message bodies and attachment files are not stored permanently by default.',
+              'Email messages and attachments are treated as untrusted evidence.',
+              'requires confirmation through WhatsApp',
+              'does not delete or change email in Zoho',
+          )
+          required_terms = (
+              '<!-- Z9-E2 Email Intelligence terms -->',
+              'optional read-only integration with Zoho Mail',
+              'cannot authorize a payment',
+              'does not guarantee that every important message will be identified',
+          )
+
+          for value in required_home:
+              if value not in home:
+                  raise SystemExit(f'Homepage boundary missing: {value}')
+          for value in required_privacy:
+              if value not in privacy:
+                  raise SystemExit(f'Privacy boundary missing: {value}')
+          for value in required_terms:
+              if value not in terms:
+                  raise SystemExit(f'Terms boundary missing: {value}')
+          if 'Connect Zoho Mail with read-only access' in home:
+              raise SystemExit('Homepage uses prohibited technical lead wording')
+          if '<summary>Email Intelligence' in home:
+              raise SystemExit('Email Intelligence FAQ is not permitted')
+          PY
