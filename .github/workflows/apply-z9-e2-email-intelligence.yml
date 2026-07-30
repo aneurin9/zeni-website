@@ -32,26 +32,48 @@ jobs:
         run: python scripts/apply-z9-e2-email-intelligence.py
 
       - name: Validate generated wording boundaries
-        shell: bash
         run: |
-          set -euo pipefail
-          grep -q '<!-- Z9-E2 Email Intelligence capability -->' index.html
-          grep -q 'Your business inbox stops becoming another job.' index.html
-          grep -q 'Important messages become clear next steps—without leaving WhatsApp.' index.html
-          grep -q 'Works with the business email Zeni helps you set up.' index.html
-          ! grep -q 'Connect Zoho Mail with read-only access' index.html
-          ! grep -q '<summary>Email Intelligence' index.html
+          python - <<'PY'
+          from pathlib import Path
 
-          grep -q '<!-- Z9-E2 Email Intelligence privacy -->' privacy/index.html
-          grep -q 'Raw message bodies and attachment files are not stored' privacy/index.html
-          grep -q 'Email messages and attachments are treated as untrusted evidence' privacy/index.html
-          grep -q 'requires confirmation' privacy/index.html
-          grep -q 'does not delete or change email in Zoho' privacy/index.html
+          home = Path('index.html').read_text()
+          privacy = ' '.join(Path('privacy/index.html').read_text().split())
+          terms = ' '.join(Path('terms/index.html').read_text().split())
 
-          grep -q '<!-- Z9-E2 Email Intelligence terms -->' terms/index.html
-          grep -q 'optional read-only integration with Zoho Mail' terms/index.html
-          grep -q 'cannot authorize a payment' terms/index.html
-          grep -q 'does not guarantee that every important message will be identified' terms/index.html
+          required_home = (
+              '<!-- Z9-E2 Email Intelligence capability -->',
+              'Your business inbox stops becoming another job.',
+              'Important messages become clear next steps—without leaving WhatsApp.',
+              'Works with the business email Zeni helps you set up.',
+          )
+          required_privacy = (
+              '<!-- Z9-E2 Email Intelligence privacy -->',
+              'Raw message bodies and attachment files are not stored permanently by default.',
+              'Email messages and attachments are treated as untrusted evidence.',
+              'requires confirmation through WhatsApp',
+              'does not delete or change email in Zoho',
+          )
+          required_terms = (
+              '<!-- Z9-E2 Email Intelligence terms -->',
+              'optional read-only integration with Zoho Mail',
+              'cannot authorize a payment',
+              'does not guarantee that every important message will be identified',
+          )
+
+          for value in required_home:
+              if value not in home:
+                  raise SystemExit(f'Homepage boundary missing: {value}')
+          for value in required_privacy:
+              if value not in privacy:
+                  raise SystemExit(f'Privacy boundary missing: {value}')
+          for value in required_terms:
+              if value not in terms:
+                  raise SystemExit(f'Terms boundary missing: {value}')
+          if 'Connect Zoho Mail with read-only access' in home:
+              raise SystemExit('Homepage uses prohibited technical lead wording')
+          if '<summary>Email Intelligence' in home:
+              raise SystemExit('Email Intelligence FAQ is not permitted')
+          PY
 
       - name: Commit generated website files once
         shell: bash
