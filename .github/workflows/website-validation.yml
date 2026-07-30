@@ -94,3 +94,4 @@ jobs:
           grep -q 'X-Zeni-Welcome-Signature' api/welcome.js
           grep -q "createHmac('sha256'" api/welcome.js
           ! grep -Eq 'STRIPE_SECRET_KEY|SUPABASE_SERVICE_ROLE_KEY|STRIPE_PRICE_TIER' index.html paid-checkout.js welcome/index.html welcome/welcome.js
+          ! grep -Eq '[?&]name=' welcome/index.html welcome/welcome.js
