@@ -1,0 +1,68 @@
+name: Apply Z9-E2 Email Intelligence website patches
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize, reopened, ready_for_review]
+    paths:
+      - 'scripts/apply-z9-e2-email-intelligence.py'
+      - '.github/workflows/apply-z9-e2-email-intelligence.yml'
+      - 'index.html'
+      - 'privacy/index.html'
+      - 'terms/index.html'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: z9-e2-email-intelligence-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  apply:
+    if: ${{ github.event.pull_request.head.ref == 'agent/adopt-z9-e2-public-email-intelligence-copy-20260730' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/adopt-z9-e2-public-email-intelligence-copy-20260730
+          fetch-depth: 0
+
+      - name: Apply guarded website and legal patches
+        run: python scripts/apply-z9-e2-email-intelligence.py
+
+      - name: Validate generated wording boundaries
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -q '<!-- Z9-E2 Email Intelligence capability -->' index.html
+          grep -q 'Your business inbox stops becoming another job.' index.html
+          grep -q 'Important messages become clear next steps—without leaving WhatsApp.' index.html
+          grep -q 'Works with the business email Zeni helps you set up.' index.html
+          ! grep -q 'Connect Zoho Mail with read-only access' index.html
+          ! grep -q '<summary>Email Intelligence' index.html
+
+          grep -q '<!-- Z9-E2 Email Intelligence privacy -->' privacy/index.html
+          grep -q 'Raw message bodies and attachment files are not stored' privacy/index.html
+          grep -q 'Email messages and attachments are treated as untrusted evidence' privacy/index.html
+          grep -q 'requires confirmation' privacy/index.html
+          grep -q 'does not delete or change email in Zoho' privacy/index.html
+
+          grep -q '<!-- Z9-E2 Email Intelligence terms -->' terms/index.html
+          grep -q 'optional read-only integration with Zoho Mail' terms/index.html
+          grep -q 'cannot authorize a payment' terms/index.html
+          grep -q 'does not guarantee that every important message will be identified' terms/index.html
+
+      - name: Commit generated website files once
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- index.html privacy/index.html terms/index.html; then
+            echo 'Z9-E2 website patches already committed.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add index.html privacy/index.html terms/index.html
+          git commit -m 'Apply approved Email Intelligence website wording'
+          git push origin HEAD:agent/adopt-z9-e2-public-email-intelligence-copy-20260730
