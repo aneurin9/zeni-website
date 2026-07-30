@@ -29,7 +29,16 @@ jobs:
         run: python scripts/apply-paid-onboarding-index.py
 
       - name: Apply guarded Z9-E2 wording in validation workspace
-        run: python scripts/apply-z9-e2-email-intelligence.py
+        id: z9_apply
+        if: always()
+        continue-on-error: true
+        shell: bash
+        run: |
+          set +e
+          python scripts/apply-z9-e2-email-intelligence.py > >(tee z9-e2-validation.log) 2>&1
+          status=$?
+          echo "apply_status=$status" >> "$GITHUB_OUTPUT"
+          exit 0
 
       - name: Validate JavaScript syntax
         run: |
@@ -100,8 +109,13 @@ jobs:
           ! grep -Eq 'STRIPE_SECRET_KEY|SUPABASE_SERVICE_ROLE_KEY|STRIPE_PRICE_TIER' index.html paid-checkout.js welcome/index.html welcome/welcome.js
 
       - name: Validate Z9-E2 outcome and legal wording
+        id: z9_validate
+        if: always()
+        continue-on-error: true
+        shell: bash
         run: |
-          python - <<'PY'
+          set +e
+          python - <<'PY' >> z9-e2-validation.log 2>&1
           from pathlib import Path
 
           home = Path('index.html').read_text()
@@ -142,3 +156,31 @@ jobs:
           if '<summary>Email Intelligence' in home:
               raise SystemExit('Email Intelligence FAQ is not permitted')
           PY
+          status=$?
+          cat z9-e2-validation.log
+          echo "validate_status=$status" >> "$GITHUB_OUTPUT"
+          exit 0
+
+      - name: Upload Z9-E2 diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: z9-e2-validation-${{ github.run_id }}
+          path: z9-e2-validation.log
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Enforce Z9-E2 validation
+        if: always()
+        shell: bash
+        run: |
+          apply_status="${{ steps.z9_apply.outputs.apply_status }}"
+          validate_status="${{ steps.z9_validate.outputs.validate_status }}"
+          if [ -z "$apply_status" ] || [ -z "$validate_status" ]; then
+            echo 'Z9-E2 validation did not report both statuses.' >&2
+            exit 1
+          fi
+          if [ "$apply_status" -ne 0 ] || [ "$validate_status" -ne 0 ]; then
+            echo "Z9-E2 validation failed: apply=$apply_status validate=$validate_status" >&2
+            exit 1
+          fi
