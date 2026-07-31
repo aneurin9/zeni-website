@@ -173,12 +173,13 @@ for required in (
     'Works with the Zoho business email I help you set up.',
     'Inbox, documents &amp; drafts',
     'Important business emails surfaced',
-    'Supplier reply needed',
     'What does Westline need?',
     'Nothing has been sent.',
 ):
     if home.count(required) != 1:
         raise SystemExit(f'Homepage integrated Inbox contract missing or duplicated: {required}')
+if home.count('Supplier reply needed') != 2:
+    raise SystemExit('Supplier reply visual must appear exactly twice')
 for prohibited in (
     'Documents &amp; drafts',
     'Receipt to review',
