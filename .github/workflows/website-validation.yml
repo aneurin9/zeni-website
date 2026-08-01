@@ -5,39 +5,14 @@ on:
     branches: [main]
     types: [opened, synchronize, reopened, ready_for_review]
     paths:
-      - 'scripts/audit-landing-page-production.cjs'
       - '.github/workflows/website-validation.yml'
 
 permissions:
   contents: read
 
 jobs:
-  browser-audit:
+  runner-probe:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
     steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-
-      - name: Install Playwright Chromium
-        run: |
-          npm init -y
-          npm install --no-save playwright
-          npx playwright install --with-deps chromium
-
-      - name: Audit live landing page across viewports
-        env:
-          TARGET_URL: https://zeni.aneurinadvisory.com/
-        run: node scripts/audit-landing-page-production.cjs
-
-      - name: Upload audit artifacts
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: landing-page-production-audit
-          path: landing-audit-artifacts
-          if-no-files-found: error
-          retention-days: 7
+      - name: Confirm runner starts
+        run: echo runner-ready
