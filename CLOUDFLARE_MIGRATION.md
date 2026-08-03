@@ -2,6 +2,17 @@
 
 Canonical migration ledger: GitHub issue #72.
 
+## Current connected preview state
+
+- Cloudflare Worker: `zeni-website`.
+- Git repository: `aneurin9/zeni-website`.
+- Connected production branch: `agent/migrate-website-to-cloudflare-20260803`.
+- Build command: `npm run build:cloudflare`.
+- Non-production branch builds: disabled during the controlled preview phase.
+- Custom domain: not attached.
+- Runtime variables and secrets: not configured.
+- Current Vercel website remains the live production and rollback path.
+
 ## Target architecture
 
 - Cloudflare Workers with Static Assets.
@@ -25,14 +36,16 @@ The Cloudflare build applies the same guarded website transformations used by Ve
 
 ## Cloudflare Workers Builds settings
 
-Use these settings only after Stage A is reviewed:
+The controlled preview currently uses:
 
 - Repository: `aneurin9/zeni-website`
-- Production branch: keep production deployment disabled or pointed away from `main` until cutover is explicitly approved.
-- Enable builds for non-production branches for preview verification.
+- Production branch: `agent/migrate-website-to-cloudflare-20260803`
+- Builds for non-production branches: disabled
 - Build command: `npm run build:cloudflare`
 - Deploy command: default `npx wrangler deploy`
-- Preview deploy command: default `npx wrangler versions upload`
+- Root directory: repository root
+
+Do not change the production branch to `main`, enable broad branch builds, or attach the production domain until the preview and checkout gates are complete.
 
 ## Runtime variables and secrets
 
