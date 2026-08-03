@@ -11,7 +11,17 @@ on:
       - 'paid-checkout.js'
       - 'api/checkout.js'
       - 'api/welcome.js'
+      - 'worker/**'
+      - 'wrangler.jsonc'
+      - 'package.json'
+      - '_headers'
+      - 'CLOUDFLARE_MIGRATION.md'
       - 'scripts/apply-paid-onboarding-index.py'
+      - 'scripts/apply-z9-e2-email-intelligence.py'
+      - 'scripts/apply-z9-e3-website-experience.py'
+      - 'scripts/apply-landing-copy-and-demo-pacing.py'
+      - 'scripts/build-cloudflare-assets.py'
+      - 'scripts/validate-cloudflare-portability.py'
       - '.github/workflows/website-validation.yml'
       - '.github/workflows/apply-paid-onboarding-index.yml'
 
@@ -24,15 +34,22 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
       - name: Apply guarded integration in validation workspace
         run: python scripts/apply-paid-onboarding-index.py
 
-      - name: Validate JavaScript syntax
+      - name: Validate JavaScript and Python syntax
         run: |
           node --check paid-checkout.js
           node --check api/checkout.js
           node --check api/welcome.js
           node --check welcome/welcome.js
+          node --check worker/index.js
+          python -m py_compile scripts/build-cloudflare-assets.py
+          python -m py_compile scripts/validate-cloudflare-portability.py
 
       - name: Validate paid checkout integration
         shell: bash
@@ -95,3 +112,15 @@ jobs:
           grep -q "createHmac('sha256'" api/welcome.js
           ! grep -Eq 'STRIPE_SECRET_KEY|SUPABASE_SERVICE_ROLE_KEY|STRIPE_PRICE_TIER' index.html paid-checkout.js welcome/index.html welcome/welcome.js
           ! grep -Eq '[?&]name=' welcome/index.html welcome/welcome.js
+
+      - name: Validate Cloudflare portability contracts
+        run: python scripts/validate-cloudflare-portability.py
+
+      - name: Install pinned Cloudflare tooling
+        run: npm install --ignore-scripts --no-audit --no-fund
+
+      - name: Build Cloudflare static assets
+        run: npm run build:cloudflare
+
+      - name: Validate Cloudflare deployment bundle
+        run: npx wrangler deploy --dry-run --outdir .wrangler-dry-run
