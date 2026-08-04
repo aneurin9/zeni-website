@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build": "npm run build:cloudflare",
-    "build:cloudflare": "python3 scripts/apply-z9-e2-email-intelligence.py && python3 scripts/apply-z9-e3-website-experience.py && python3 scripts/apply-landing-copy-and-demo-pacing.py && python3 scripts/build-cloudflare-assets.py",
+    "build:cloudflare": "python3 scripts/apply-z9-e2-email-intelligence.py && python3 scripts/apply-z9-e3-website-experience.py && python3 scripts/apply-landing-copy-and-demo-pacing.py && python3 scripts/apply-email-tab-label.py && python3 scripts/build-cloudflare-assets.py",
     "check:cloudflare": "node --check worker/index.js && python3 scripts/validate-cloudflare-portability.py",
     "deploy:cloudflare": "npm run build:cloudflare && wrangler deploy"
   },
