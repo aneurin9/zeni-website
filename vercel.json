@@ -1,5 +1,5 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "python3 scripts/apply-z9-e2-email-intelligence.py && python3 scripts/apply-z9-e3-website-experience.py && python3 scripts/apply-landing-copy-and-demo-pacing.py",
+  "buildCommand": "python3 scripts/apply-z9-e2-email-intelligence.py && python3 scripts/apply-z9-e3-website-experience.py && python3 scripts/apply-landing-copy-and-demo-pacing.py && python3 scripts/apply-email-tab-label.py",
   "outputDirectory": "."
 }
