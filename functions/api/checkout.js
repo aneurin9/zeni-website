@@ -1,0 +1,195 @@
+const PRODUCTION_ORIGIN = 'https://zeni.aneurinadvisory.com'
+const OWNED_PAGES_HOST_PATTERN = /^(?:[a-z0-9-]+\.)?zeni-website\.pages\.dev$/i
+const REQUEST_ID_PATTERN = /^[A-Za-z0-9_-]{20,120}$/
+const MAX_BODY_BYTES = 4096
+const LEGACY_BACKEND_CHECKOUT_PATH = '/api/public/checkout'
+const CONFIGURED_BACKEND_CHECKOUT_PATH = '/api/public/configured-checkout'
+
+function json(status, body) {
+  return new Response(JSON.stringify(body), {
+    status,
+    headers: {
+      'Cache-Control': 'no-store',
+      'Content-Type': 'application/json; charset=utf-8',
+      'X-Content-Type-Options': 'nosniff',
+    },
+  })
+}
+
+function trustedWebsiteOrigin(origin) {
+  try {
+    const parsed = new URL(origin)
+    return parsed.origin === PRODUCTION_ORIGIN ||
+      (parsed.protocol === 'https:' && OWNED_PAGES_HOST_PATTERN.test(parsed.hostname))
+  } catch {
+    return false
+  }
+}
+
+function allowedRequestOrigin(request) {
+  const hostOrigin = new URL(request.url).origin
+  if (!trustedWebsiteOrigin(hostOrigin)) return null
+
+  const browserOrigin = request.headers.get('origin')
+  const fetchSite = String(request.headers.get('sec-fetch-site') || '').trim().toLowerCase()
+  if (browserOrigin) {
+    let normalized
+    try { normalized = new URL(browserOrigin).origin } catch { return null }
+    if (normalized !== hostOrigin) return null
+    if (fetchSite && fetchSite !== 'same-origin') return null
+    return hostOrigin
+  }
+  return fetchSite === 'same-origin' ? hostOrigin : null
+}
+
+function parseBackendUrl(env) {
+  const raw = String(env.ZENI_BACKEND_CHECKOUT_URL || '').trim()
+  if (!raw) throw new Error('ZENI_BACKEND_CHECKOUT_URL is not configured')
+  const url = new URL(raw)
+  const pathname = url.pathname.replace(/\/+$/, '')
+  if (
+    url.protocol !== 'https:' || url.username || url.password || url.search || url.hash ||
+    ![LEGACY_BACKEND_CHECKOUT_PATH, CONFIGURED_BACKEND_CHECKOUT_PATH].includes(pathname)
+  ) throw new Error('ZENI_BACKEND_CHECKOUT_URL is invalid')
+  url.pathname = CONFIGURED_BACKEND_CHECKOUT_PATH
+  return url.toString()
+}
+
+function bridgeSecret(env) {
+  const secret = String(env.ZENI_CHECKOUT_BRIDGE_SECRET || '')
+  if (secret.length < 32) throw new Error('ZENI_CHECKOUT_BRIDGE_SECRET is not configured securely')
+  return secret
+}
+
+function validatedBody(raw) {
+  const body = raw && typeof raw === 'object' && !Array.isArray(raw) ? raw : {}
+  const requestId = String(body.requestId || '').trim()
+  const firstName = String(body.firstName || '').trim().replace(/\s+/g, ' ')
+  const digits = String(body.whatsappNumber || '').replace(/\D/g, '')
+  const whatsappNumber = digits.length === 10 ? `1${digits}` : digits
+  const province = String(body.province || '').trim().toUpperCase()
+  const plan = String(body.plan || '').trim().toLowerCase()
+
+  if (!REQUEST_ID_PATTERN.test(requestId)) return null
+  if (!firstName || firstName.length > 120) return null
+  if (!/^1\d{10}$/.test(whatsappNumber)) return null
+  if (!['ON', 'BC', 'AB'].includes(province)) return null
+  if (!['core', 'premium'].includes(plan)) return null
+
+  return { requestId, firstName, whatsappNumber, province, plan }
+}
+
+function sourceIp(request) {
+  return String(request.headers.get('cf-connecting-ip') || request.headers.get('x-forwarded-for') || '')
+    .split(',')[0].trim().slice(0, 128)
+}
+
+function bytesToHex(bytes) {
+  return Array.from(new Uint8Array(bytes), b => b.toString(16).padStart(2, '0')).join('')
+}
+
+async function hmacHex(secret, value) {
+  const encoder = new TextEncoder()
+  const key = await crypto.subtle.importKey(
+    'raw',
+    encoder.encode(secret),
+    { name: 'HMAC', hash: 'SHA-256' },
+    false,
+    ['sign'],
+  )
+  return bytesToHex(await crypto.subtle.sign('HMAC', key, encoder.encode(value)))
+}
+
+async function signedBackendHeaders(secret, clientIp, serializedBody) {
+  const timestamp = String(Math.floor(Date.now() / 1000))
+  const clientIpHash = await hmacHex(secret, `ip:${clientIp}`)
+  const signature = await hmacHex(secret, `${timestamp}.${clientIpHash}.${serializedBody}`)
+  return {
+    'X-Zeni-Checkout-Timestamp': timestamp,
+    'X-Zeni-Client-IP-Hash': clientIpHash,
+    'X-Zeni-Checkout-Signature': signature,
+  }
+}
+
+export async function onRequestPost({ request, env }) {
+  const requestOrigin = allowedRequestOrigin(request)
+  if (!requestOrigin) {
+    return json(403, { error: 'origin not allowed', code: 'website_bridge_origin_rejected' })
+  }
+
+  if (!String(request.headers.get('content-type') || '').toLowerCase().startsWith('application/json')) {
+    return json(415, { error: 'content type must be application/json' })
+  }
+
+  const contentLength = Number(request.headers.get('content-length') || 0)
+  if (contentLength > MAX_BODY_BYTES) return json(413, { error: 'request too large' })
+
+  const rawText = await request.text()
+  if (new TextEncoder().encode(rawText).byteLength > MAX_BODY_BYTES) {
+    return json(413, { error: 'request too large' })
+  }
+
+  let raw
+  try { raw = JSON.parse(rawText || '{}') } catch { return json(400, { error: 'invalid json' }) }
+
+  const body = validatedBody(raw)
+  if (!body) return json(400, { error: 'invalid checkout request' })
+
+  let backendUrl
+  let secret
+  try {
+    backendUrl = parseBackendUrl(env)
+    secret = bridgeSecret(env)
+  } catch (error) {
+    console.error('[Paid Checkout Bridge] Configuration error', error)
+    return json(503, { error: 'checkout temporarily unavailable' })
+  }
+
+  const clientIp = sourceIp(request)
+  if (!clientIp) {
+    console.error('[Paid Checkout Bridge] Trusted client IP was unavailable')
+    return json(503, { error: 'checkout temporarily unavailable' })
+  }
+
+  const serializedBody = JSON.stringify(body)
+  const bridgeHeaders = await signedBackendHeaders(secret, clientIp, serializedBody)
+
+  try {
+    const upstream = await fetch(backendUrl, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        Origin: requestOrigin,
+        ...bridgeHeaders,
+      },
+      body: serializedBody,
+      signal: AbortSignal.timeout(15000),
+    })
+
+    const text = await upstream.text()
+    let payload
+    try { payload = text ? JSON.parse(text) : {} } catch {
+      return json(502, { error: 'checkout temporarily unavailable', code: 'upstream_non_json' })
+    }
+
+    if (!payload || typeof payload !== 'object' || Array.isArray(payload)) {
+      return json(502, { error: 'checkout temporarily unavailable', code: 'upstream_non_json' })
+    }
+
+    return json(upstream.status, payload)
+  } catch (error) {
+    console.error('[Paid Checkout Bridge] Backend request failed', error)
+    return json(502, { error: 'checkout temporarily unavailable' })
+  }
+}
+
+export async function onRequest() {
+  return new Response(JSON.stringify({ error: 'method not allowed' }), {
+    status: 405,
+    headers: {
+      Allow: 'POST',
+      'Content-Type': 'application/json; charset=utf-8',
+    },
+  })
+}
