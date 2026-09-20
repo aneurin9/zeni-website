@@ -11,6 +11,8 @@ on:
       - 'paid-checkout.js'
       - 'api/checkout.js'
       - 'api/welcome.js'
+      - 'functions/api/checkout.js'
+      - 'functions/api/welcome.js'
       - 'scripts/apply-paid-onboarding-index.py'
       - '.github/workflows/website-validation.yml'
       - '.github/workflows/apply-paid-onboarding-index.yml'
@@ -32,6 +34,8 @@ jobs:
           node --check paid-checkout.js
           node --check api/checkout.js
           node --check api/welcome.js
+          node --check functions/api/checkout.js
+          node --check functions/api/welcome.js
           node --check welcome/welcome.js
 
       - name: Validate paid checkout integration
@@ -63,6 +67,14 @@ jobs:
           ! grep -q 'id="stripe-modal"' index.html
           ! grep -q 'function openStripe()' index.html
           ! grep -q 'openStripe();' index.html
+          grep -q "export async function onRequestPost" functions/api/checkout.js
+          grep -q "cf-connecting-ip" functions/api/checkout.js
+          grep -q "crypto.subtle" functions/api/checkout.js
+          grep -q "CONFIGURED_BACKEND_CHECKOUT_PATH = '/api/public/configured-checkout'" functions/api/checkout.js
+          grep -q 'X-Zeni-Checkout-Timestamp' functions/api/checkout.js
+          grep -q 'X-Zeni-Client-IP-Hash' functions/api/checkout.js
+          grep -q 'X-Zeni-Checkout-Signature' functions/api/checkout.js
+          ! grep -q "node:crypto" functions/api/checkout.js
           ! grep -q 'ZENI_BACKEND_CHECKOUT_URL' paid-checkout.js
           ! grep -q 'ZENI_CHECKOUT_BRIDGE_SECRET' paid-checkout.js index.html
 
@@ -94,4 +106,10 @@ jobs:
           grep -q 'X-Zeni-Welcome-Signature' api/welcome.js
           grep -q "createHmac('sha256'" api/welcome.js
           ! grep -Eq 'STRIPE_SECRET_KEY|SUPABASE_SERVICE_ROLE_KEY|STRIPE_PRICE_TIER' index.html paid-checkout.js welcome/index.html welcome/welcome.js
+          grep -q "export async function onRequestGet" functions/api/welcome.js
+          grep -q "BACKEND_WELCOME_PATH = '/api/public/welcome'" functions/api/welcome.js
+          grep -q "crypto.subtle" functions/api/welcome.js
+          grep -q 'X-Zeni-Welcome-Timestamp' functions/api/welcome.js
+          grep -q 'X-Zeni-Welcome-Signature' functions/api/welcome.js
+          ! grep -q "node:crypto" functions/api/welcome.js
           ! grep -Eq '[?&]name=' welcome/index.html welcome/welcome.js
