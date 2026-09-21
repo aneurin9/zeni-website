@@ -75,7 +75,8 @@
 
   function canonicalPhone() {
     var digits = String(window.gsData && window.gsData.phone || '').replace(/\D/g, '')
-    return digits.length === 10 ? '1' + digits : digits
+    if (digits.length === 11 && digits.charAt(0) === '1') digits = digits.slice(1)
+    return digits.length === 10 ? '1' + digits : ''
   }
 
   function currentFingerprint() {

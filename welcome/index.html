@@ -77,6 +77,8 @@ svg{width:1em;height:1em;display:block}
 .price-mo{font-size:13px;color:var(--muted)}
 .price-locked{font-size:12.5px;color:var(--muted);display:flex;align-items:flex-start;gap:6px}
 .price-locked .ic{color:#1a8f5a;font-size:13px;margin-top:2px;flex-shrink:0}
+.price-policy{font-size:12.5px;color:var(--muted);line-height:1.6;margin-top:14px}
+.price-policy a{color:var(--violet-d);font-weight:600;text-decoration:underline;text-underline-offset:2px}
 
 /* STEPS */
 .steps{display:flex;flex-direction:column;gap:12px;margin-bottom:16px}
@@ -192,19 +194,21 @@ svg{width:1em;height:1em;display:block}
   </div>
 
   <div class="section" style="padding-top:0">
-    <div class="sec-eye"><span class="ic" data-ic="dollar"></span> Your plan</div>
+    <div class="sec-eye"><span class="ic" data-ic="dollar"></span> Zeni plans</div>
+    <p class="section-lead">Your subscription is active at the monthly rate confirmed at checkout. These are the two Zeni plans for reference:</p>
     <div class="price-grid">
       <div class="price-card">
         <div class="pc-tag">Zeni Core</div>
         <div class="price-row"><span class="price-old">$299</span><span class="price-new">$149</span><span class="price-mo">CAD/mo</span></div>
-        <div class="price-locked"><span class="ic" data-ic="check"></span> Locked in permanently — your rate never increases</div>
+        <div class="price-locked"><span class="ic" data-ic="check"></span> Guided setup and the full Zeni AI operator</div>
       </div>
       <div class="price-card">
         <div class="pc-tag">Zeni Premium</div>
         <div class="price-row"><span class="price-new">$350</span><span class="price-mo">CAD/mo</span></div>
-        <div class="price-locked"><span class="ic" data-ic="check"></span> Locked in permanently. If you upgrade, this is your rate.</div>
+        <div class="price-locked"><span class="ic" data-ic="check"></span> The full Zeni AI operator plus human-managed compliance</div>
       </div>
     </div>
+    <p class="price-policy">Your monthly rate is the rate confirmed at checkout. Any introductory pricing is honoured for the duration of your continuous active subscription, as described in the <a href="/terms#s6">Terms of Service</a>.</p>
   </div>
 
   <div class="section">

@@ -1266,7 +1266,7 @@ function gsScreen(step){
         '<label class="gs-label" for="gsPhoneInput">WhatsApp number</label>'+
         '<div class="gs-phone-row">'+
           '<input class="gs-input gs-cc" type="text" value="+1" disabled>'+
-          '<input class="gs-input" id="gsPhoneInput" type="tel" inputmode="numeric" maxlength="14" placeholder="(416) 555-0132" value="'+gsEsc(gsData.phone)+'" autocomplete="tel">'+
+          '<input class="gs-input" id="gsPhoneInput" type="tel" inputmode="numeric" placeholder="(416) 555-0132" value="'+gsEsc(gsData.phone)+'" autocomplete="tel">'+
         '</div>'+
         '<p class="gs-hint"><span class="ic" data-ic="lock" style="margin-right:5px;color:var(--violet)"></span>No verification code needed right now — I’ll confirm everything on WhatsApp after checkout.</p>'+
       '</div>';
@@ -1304,8 +1304,15 @@ function gsRenderSteps(){
 function gsValid(step){
   if(step===1) return gsData.name.trim().length>0;
   if(step===2) return !gsData.otherProvince && ['ON','BC','AB'].indexOf(gsData.province)>-1;
-  if(step===3) return gsData.phone.replace(/\D/g,'').length>=10;
+  if(step===3) return /^\d{10}$/.test(gsNormalizePhoneDigits(gsData.phone));
   return true;
+}
+
+function gsNormalizePhoneDigits(raw){
+  var d=String(raw||'').replace(/\D/g,'');
+  if(d.length===10) return d;
+  if(d.length===11 && d.charAt(0)==='1') return d.slice(1);
+  return '';
 }
 
 function gsUpdateNextState(){
@@ -1340,8 +1347,10 @@ function gsBindInputs(){
   if(n){ n.addEventListener('input', function(){ gsData.name=this.value; gsUpdateNextState(); }); n.focus(); }
   gsOnEnter(n, gsNextClick);
   function formatPhone(raw){
-    var d=raw.replace(/[^0-9]/g,'').slice(0,10);
+    var d=String(raw||'').replace(/\D/g,'');
+    if(d.length===11 && d.charAt(0)==='1') d=d.slice(1);
     if(d.length===0) return '';
+    if(d.length>10) return d;
     if(d.length<4) return '('+d;
     if(d.length<7) return '('+d.slice(0,3)+') '+d.slice(3);
     return '('+d.slice(0,3)+') '+d.slice(3,6)+'-'+d.slice(6,10);
