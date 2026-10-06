@@ -188,7 +188,7 @@
 
     clearError()
 
-    if (!firstName || ['ON', 'BC', 'AB'].indexOf(province) === -1 || ['core', 'premium'].indexOf(plan) === -1 || !/^1\d{10}$/.test(phone)) {
+    if (!firstName || ['ON', 'BC', 'AB'].indexOf(province) === -1 || ['core', 'core_weekly'].indexOf(plan) === -1 || !/^1\d{10}$/.test(phone)) {
       showError('Please check your signup details before continuing.')
       return
     }
