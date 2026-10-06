@@ -434,7 +434,7 @@
   .pricing-card{background:var(--card);border:1.5px solid var(--line2);border-radius:26px;padding:34px 32px;box-shadow:var(--shadow-sm);display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s}
   .pricing-card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
   .pricing-card.feature{border-color:var(--violet);box-shadow:0 16px 40px rgba(123,97,255,.16);position:relative}
-  .pricing-card.feature::before{content:'Most people start here';position:absolute;top:-13px;left:32px;background:var(--grad);color:#fff;font-size:11px;font-weight:700;letter-spacing:.3px;padding:5px 14px;border-radius:100px;box-shadow:0 6px 14px rgba(123,97,255,.35)}
+  .pricing-card.feature::before{content:'Best value';position:absolute;top:-13px;left:32px;background:var(--grad);color:#fff;font-size:11px;font-weight:700;letter-spacing:.3px;padding:5px 14px;border-radius:100px;box-shadow:0 6px 14px rgba(123,97,255,.35)}
   .pc-tag{font-size:11.5px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--violet-d);margin-bottom:12px}
   .pricing-card h3{font-size:23px;font-weight:800;letter-spacing:-.5px}
   .pricing-card .pc-price{font-size:38px;font-weight:800;letter-spacing:-1px;margin:14px 0 4px}
@@ -452,6 +452,12 @@
   .pc-more:hover{color:var(--muted);text-decoration:underline;text-underline-offset:2px}
   .pricing-foot{text-align:center;color:var(--muted);font-size:13.5px;margin-top:28px}
   .pricing-foot b{color:var(--ink2)}
+  .premium-teaser{max-width:900px;margin:18px auto 0;padding:20px 26px;display:flex;justify-content:space-between;align-items:center;gap:20px;background:rgba(255,255,255,.55);border:1px solid var(--line2);border-radius:20px}
+  .premium-teaser strong{display:block;font-size:16px;color:var(--ink);margin-bottom:3px}
+  .premium-teaser p{font-size:13px;color:var(--muted);line-height:1.55}
+  .premium-teaser .premium-coming{color:var(--violet-d);font-weight:700}
+  .premium-teaser a{flex-shrink:0;font-size:13px;font-weight:700;color:var(--violet-d)}
+  @media(max-width:520px){.premium-teaser{align-items:flex-start;flex-direction:column}}
 
   /* ---------- FAQ ---------- */
   .faq-list{max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:12px}
@@ -703,43 +709,45 @@
   <div class="wrap">
     <div class="sec-head">
       <div class="sec-eye">Pricing</div>
-      <h2>Start selling. <span class="g">Everything else is handled.</span></h2>
-      <p>One plan to get going. One upgrade for when you want compliance fully off your plate.</p>
+      <h2>One Zeni. <span class="g">Two ways to get started.</span></h2>
+      <p>Same full Zeni Core experience. Choose the billing option that works for you.</p>
     </div>
     <div class="pricing-grid">
-      <div class="pricing-card feature">
-        <div class="pc-tag">Zeni Core</div>
-        <span class="intro-badge">Introductory price &middot; First 50 users</span>
-        <h3>Setup + your AI operator</h3>
-        <div class="pc-price">$149 <small>CAD / month</small></div>
-        <div class="pc-regular">Regular $299 CAD/mo</div>
-        <p class="pc-desc">Start here. I’ll guide your setup, then run your business with you, every day.</p>
+      <div class="pricing-card">
+        <div class="pc-tag">Zeni Core · Weekly</div>
+        <h3>Start small</h3>
+        <div class="pc-price">$29 <small>CAD / week</small></div>
+        <p class="pc-desc">Get started with less upfront. Experience Zeni for yourself.</p>
         <ul class="pc-list">
           <li><span class="ic" data-ic="check"></span><span>Guided setup for your Canadian business</span></li>
           <li><span class="ic" data-ic="check"></span><span>Full Zeni AI business operator</span></li>
           <li><span class="ic" data-ic="check"></span><span>Money, invoices, documents and reminders</span></li>
           <li><span class="ic" data-ic="check"></span><span>Business context, always in WhatsApp</span></li>
         </ul>
-        <button class="btn btn-primary btn-lg" onclick="openGetStarted('core')">Get started with Zeni <span class="ic" data-ic="arrow"></span></button>
+        <button class="btn btn-ghost btn-lg" onclick="openGetStarted('core_weekly')">Get started weekly <span class="ic" data-ic="arrow"></span></button>
       </div>
-      <div class="pricing-card">
-        <div class="pc-tag">Zeni Premium</div>
-        <span class="intro-badge intro-badge-neutral">Optional &middot; Upgrade anytime</span>
-        <h3>Everything else is handled</h3>
-        <div class="pc-price">$350 <small>CAD / month</small></div>
-        <p class="pc-desc">For when you want compliance fully off your plate — handled by our team, not AI.</p>
+      <div class="pricing-card feature">
+        <div class="pc-tag">Zeni Core · Monthly</div>
+        <h3>Better long-term value</h3>
+        <div class="pc-price">$99 <small>CAD / month</small></div>
+        <p class="pc-desc">The same Zeni, at a lower cost for regular ongoing use.</p>
         <ul class="pc-list">
-          <li><span class="ic" data-ic="check"></span><span><b>Everything in Core</b></span></li>
-          <li><span class="ic" data-ic="check"></span><span>Taxes prepared and filed</span></li>
-          <li><span class="ic" data-ic="check"></span><span>Business renewals managed</span></li>
-          <li><span class="ic" data-ic="check"></span><span>Essential fees included</span></li>
-          <li><span class="ic" data-ic="check"></span><span>Human-managed compliance &amp; monitoring</span></li>
+          <li><span class="ic" data-ic="check"></span><span>Guided setup for your Canadian business</span></li>
+          <li><span class="ic" data-ic="check"></span><span>Full Zeni AI business operator</span></li>
+          <li><span class="ic" data-ic="check"></span><span>Money, invoices, documents and reminders</span></li>
+          <li><span class="ic" data-ic="check"></span><span>Business context, always in WhatsApp</span></li>
         </ul>
-        <a class="pc-more" href="/premium">Learn more</a>
-        <button class="btn btn-ghost btn-lg" onclick="openGetStarted('premium')">Get Zeni Premium <span class="ic" data-ic="arrow"></span></button>
+        <button class="btn btn-primary btn-lg" onclick="openGetStarted('core')">Get started monthly <span class="ic" data-ic="arrow"></span></button>
       </div>
     </div>
-    <p class="pricing-foot">No experience needed &middot; No new app &middot; Cancel anytime &middot; Available in <b>Ontario, British Columbia &amp; Alberta</b></p>
+    <div class="premium-teaser">
+      <div>
+        <strong>Zeni Premium <span class="premium-coming">· Coming soon</span></strong>
+        <p>CAD $299/month · Add a human team for business compliance when Premium launches.</p>
+      </div>
+      <a href="/premium">Learn more →</a>
+    </div>
+    <p class="pricing-foot">Both options renew automatically &middot; Cancel anytime &middot; Available in <b>Ontario, British Columbia &amp; Alberta</b></p>
   </div>
 </section>
 
@@ -1168,35 +1176,22 @@ document.addEventListener('keydown',function(e){
 var SUPABASE_URL = 'https://wxhtlwjptthrkmmevemf.supabase.co';
 var SUPABASE_ANON_KEY = 'sb_publishable_kMqQIfRdn5avgl-ui4JYSg_0LHMIB3x';
 var gsStep = 1, gsFurthest = 1, gsLastFocus = null;
-var gsData = { name:'', province:'', otherProvince:false, phone:'', plan:'core', waitlisted:false, waitlistEmail:'', waitlistProvince:'' };
+var gsData = { name:'', province:'', otherProvince:false, phone:'', plan:'core_weekly', waitlisted:false, waitlistEmail:'', waitlistProvince:'' };
 var GS_STEP_LABELS = ['Name','Province','WhatsApp','Plan'];
 var PROVINCES = [
   {code:'ON', name:'Ontario'},
   {code:'BC', name:'British Columbia'},
   {code:'AB', name:'Alberta'}
 ];
+var CORE_FEATURES = [
+  'Guided setup for your Canadian business',
+  'Full Zeni AI business operator',
+  'Money, invoices, documents and reminders',
+  'Business context, always in WhatsApp'
+];
 var PLANS = {
-  core: {
-    name:'Zeni Core', price:149,
-    tag:'Get started',
-    features:[
-      'Guided setup for your Canadian business',
-      'Full Zeni AI business operator',
-      'Money, invoices, documents and reminders',
-      'Business context, always in WhatsApp'
-    ]
-  },
-  premium: {
-    name:'Zeni Premium', price:350,
-    tag:'Everything else is handled',
-    features:[
-      '<b>Everything in Core</b>',
-      'Taxes prepared and filed',
-      'Business renewals managed',
-      'Essential fees included',
-      'Human-managed compliance &amp; monitoring'
-    ]
-  }
+  core_weekly: {name:'Zeni Core · Weekly',price:29,interval:'week',tag:'Start for less',features:CORE_FEATURES},
+  core: {name:'Zeni Core · Monthly',price:99,interval:'month',tag:'Best value',features:CORE_FEATURES}
 };
 
 function gsEsc(s){
@@ -1271,13 +1266,12 @@ function gsScreen(step){
         '<p class="gs-hint"><span class="ic" data-ic="lock" style="margin-right:5px;color:var(--violet)"></span>No verification code needed right now — I’ll confirm everything on WhatsApp after checkout.</p>'+
       '</div>';
   }
-  var core=PLANS.core, prem=PLANS.premium;
   return '<div class="wt-eye">Step 4 of 4</div>'+
-    '<div class="wt-title">Choose how much you want off your plate.</div>'+
-    '<p class="wt-sub">Both plans include the full AI operator. Premium adds a human team for compliance.</p>'+
+    '<div class="wt-title">Choose how you want to start.</div>'+
+    '<p class="wt-sub">Same full Zeni Core features. Only the billing schedule changes.</p>'+
     '<div class="plan-grid">'+
-      gsPlanCard('core', core)+
-      gsPlanCard('premium', prem)+
+      gsPlanCard('core_weekly', PLANS.core_weekly)+
+      gsPlanCard('core', PLANS.core)+
     '</div>';
 }
 
@@ -1287,7 +1281,7 @@ function gsPlanCard(id, plan){
     '<span class="pc-check"></span>'+
     '<div class="plan-tag">'+plan.tag+'</div>'+
     '<h4>'+plan.name+'</h4>'+
-    '<div class="plan-price">$'+plan.price+' <small>CAD / month</small></div>'+
+    '<div class="plan-price">$'+plan.price+' <small>CAD / '+plan.interval+'</small></div>'+
     '<ul class="plan-list">'+plan.features.map(function(f){return '<li><span class="ic" data-ic="check"></span><span>'+f+'</span></li>';}).join('')+'</ul>'+
   '</button>';
 }
@@ -1323,7 +1317,7 @@ function gsUpdateNextState(){
   btn.style.opacity = ok ? '1' : '.45';
   btn.style.pointerEvents = ok ? 'auto' : 'none';
   if(gsStep===4){
-    btn.innerHTML = 'Continue to secure checkout — $'+PLANS[gsData.plan].price+' CAD/month <span class="ic" data-ic="arrow"></span>';
+    btn.innerHTML = 'Continue to secure checkout — $'+PLANS[gsData.plan].price+' CAD/'+PLANS[gsData.plan].interval <span class="ic" data-ic="arrow"></span>';
     injectIconsFresh(btn);
   } else {
     btn.innerHTML = 'Continue <span class="ic" data-ic="arrow"></span>';
