@@ -1317,7 +1317,7 @@ function gsUpdateNextState(){
   btn.style.opacity = ok ? '1' : '.45';
   btn.style.pointerEvents = ok ? 'auto' : 'none';
   if(gsStep===4){
-    btn.innerHTML = 'Continue to secure checkout — $'+PLANS[gsData.plan].price+' CAD/'+PLANS[gsData.plan].interval <span class="ic" data-ic="arrow"></span>';
+    btn.innerHTML = 'Continue to secure checkout — $'+PLANS[gsData.plan].price+' CAD/'+PLANS[gsData.plan].interval+' <span class="ic" data-ic="arrow"></span>';
     injectIconsFresh(btn);
   } else {
     btn.innerHTML = 'Continue <span class="ic" data-ic="arrow"></span>';
