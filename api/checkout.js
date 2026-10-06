@@ -120,7 +120,7 @@ function validatedBody(raw) {
   if (!firstName || firstName.length > 120) return null
   if (!/^1\d{10}$/.test(whatsappNumber)) return null
   if (!['ON', 'BC', 'AB'].includes(province)) return null
-  if (!['core', 'premium'].includes(plan)) return null
+  if (!['core', 'core_weekly'].includes(plan)) return null
 
   return { requestId, firstName, whatsappNumber, province, plan }
 }
