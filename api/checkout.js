@@ -2,7 +2,8 @@
 
 const { createHmac } = require('node:crypto')
 
-const PRODUCTION_ORIGIN = 'https://zeni.aneurinadvisory.com'
+const PRODUCTION_ORIGIN = 'https://zeni.business'
+const LEGACY_PRODUCTION_ORIGIN = 'https://zeni.aneurinadvisory.com'
 const OWNED_VERCEL_PREVIEW_HOST_PATTERN = /^zeni-website(?:-[a-z0-9-]+)?-info-92096591s-projects\.vercel\.app$/i
 const REQUEST_ID_PATTERN = /^[A-Za-z0-9_-]{20,120}$/
 const MAX_BODY_BYTES = 4096
@@ -36,7 +37,7 @@ function requestHostOrigin(req) {
 function trustedWebsiteOrigin(origin) {
   try {
     const parsed = new URL(origin)
-    if (parsed.origin === PRODUCTION_ORIGIN) return true
+    if (parsed.origin === PRODUCTION_ORIGIN || parsed.origin === LEGACY_PRODUCTION_ORIGIN) return true
     if (parsed.protocol === 'https:' && OWNED_VERCEL_PREVIEW_HOST_PATTERN.test(parsed.hostname)) return true
 
     return process.env.VERCEL_ENV !== 'production' &&

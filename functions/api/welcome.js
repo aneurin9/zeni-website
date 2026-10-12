@@ -1,4 +1,5 @@
-const PRODUCTION_ORIGIN = 'https://zeni.aneurinadvisory.com'
+const PRODUCTION_ORIGIN = 'https://zeni.business'
+const LEGACY_PRODUCTION_ORIGIN = 'https://zeni.aneurinadvisory.com'
 const OWNED_PAGES_HOST_PATTERN = /^(?:[a-z0-9-]+\.)?zeni-website\.pages\.dev$/i
 const CHECKOUT_SESSION_PATTERN = /^cs_(?:test|live)_[A-Za-z0-9_]+$/
 const BACKEND_WELCOME_PATH = '/api/public/welcome'
@@ -19,6 +20,7 @@ function trustedWebsiteOrigin(origin) {
   try {
     const parsed = new URL(origin)
     return parsed.origin === PRODUCTION_ORIGIN ||
+      parsed.origin === LEGACY_PRODUCTION_ORIGIN ||
       (parsed.protocol === 'https:' && OWNED_PAGES_HOST_PATTERN.test(parsed.hostname))
   } catch {
     return false

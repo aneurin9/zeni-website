@@ -1,6 +1,7 @@
 import { webcrypto } from 'node:crypto'
 
-const PRODUCTION_ORIGIN = 'https://zeni.aneurinadvisory.com'
+const PRODUCTION_ORIGIN = 'https://zeni.business'
+const LEGACY_PRODUCTION_ORIGIN = 'https://zeni.aneurinadvisory.com'
 const OWNED_NETLIFY_HOST_PATTERN = /^(?:[a-z0-9-]+--)?[a-z0-9-]+\.netlify\.app$/i
 const REQUEST_ID_PATTERN = /^[A-Za-z0-9_-]{20,120}$/
 const MAX_BODY_BYTES = 4096
@@ -30,6 +31,7 @@ function trustedWebsiteOrigin(origin) {
   try {
     const parsed = new URL(origin)
     return parsed.origin === PRODUCTION_ORIGIN ||
+      parsed.origin === LEGACY_PRODUCTION_ORIGIN ||
       (parsed.protocol === 'https:' && OWNED_NETLIFY_HOST_PATTERN.test(parsed.hostname))
   } catch {
     return false
