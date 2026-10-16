@@ -70,15 +70,17 @@ function validatedBody(raw) {
   const digits = String(body.whatsappNumber || '').replace(/\D/g, '')
   const whatsappNumber = digits.length === 10 ? `1${digits}` : digits
   const province = String(body.province || '').trim().toUpperCase()
-  const plan = String(body.plan || '').trim().toLowerCase()
+  const selectedPlan = String(body.plan || '').trim().toLowerCase()
+  const billingCadence = selectedPlan === 'core_weekly' ? 'weekly' :
+    selectedPlan === 'core' ? 'monthly' : null
 
   if (!REQUEST_ID_PATTERN.test(requestId)) return null
   if (!firstName || firstName.length > 120) return null
   if (!/^1\d{10}$/.test(whatsappNumber)) return null
   if (!['ON', 'BC', 'AB'].includes(province)) return null
-  if (!['core', 'core_weekly'].includes(plan)) return null
+  if (!billingCadence) return null
 
-  return { requestId, firstName, whatsappNumber, province, plan }
+  return { requestId, firstName, whatsappNumber, province, plan: 'core', billingCadence }
 }
 
 function sourceIp(request) {
