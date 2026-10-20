@@ -1,0 +1,69 @@
+name: F9 Netlify domain cutover
+
+on:
+  push:
+    branches:
+      - programme/f9-domain-cutover-20261020
+
+permissions:
+  contents: read
+
+jobs:
+  cutover:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      SITE_ID: 49f73111-6922-4093-a8b5-3f12cd1d4123
+    steps:
+      - name: Cut over custom domain and request TLS
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_TOKEN: ${{ secrets.NETLIFY_TOKEN }}
+        run: |
+          set -euo pipefail
+          TOKEN="${NETLIFY_AUTH_TOKEN:-${NETLIFY_TOKEN:-}}"
+          if [ -z "$TOKEN" ]; then
+            echo "F9_NETLIFY_DOMAIN_RESULT=NO_TOKEN"
+            exit 42
+          fi
+          echo "::add-mask::$TOKEN"
+
+          API="https://api.netlify.com/api/v1/sites/$SITE_ID"
+          AUTH="Authorization: Bearer $TOKEN"
+
+          curl -fsS -X PATCH \
+            -H "$AUTH" \
+            -H "Content-Type: application/json" \
+            --data '{"custom_domain":"zeni.business","domain_aliases":["zeni.aneurinadvisory.com"],"force_ssl":true}' \
+            "$API" > /tmp/site.json
+
+          jq '{id,name,custom_domain,domain_aliases,url,ssl_url,force_ssl,managed_dns}' /tmp/site.json
+
+          set +e
+          RENEW_CODE=$(curl -sS -o /tmp/ssl-renew.json -w '%{http_code}' -X POST -H "$AUTH" "$API/ssl/renew")
+          set -e
+          echo "ssl_renew_http=$RENEW_CODE"
+
+          if ! [[ "$RENEW_CODE" =~ ^2 ]]; then
+            set +e
+            PROVISION_CODE=$(curl -sS -o /tmp/ssl-provision.json -w '%{http_code}' -X POST -H "$AUTH" "$API/ssl")
+            set -e
+            echo "ssl_provision_http=$PROVISION_CODE"
+            if ! [[ "$PROVISION_CODE" =~ ^2 ]]; then
+              echo "SSL response:"
+              jq -c '{message,code,error,state,domains}' /tmp/ssl-provision.json 2>/dev/null || cat /tmp/ssl-provision.json
+              exit 43
+            fi
+          fi
+
+          set +e
+          CERT_CODE=$(curl -sS -o /tmp/ssl.json -w '%{http_code}' -H "$AUTH" "$API/ssl")
+          set -e
+          echo "ssl_get_http=$CERT_CODE"
+          if [[ "$CERT_CODE" =~ ^2 ]]; then
+            jq '{state,domains,created_at,updated_at,expires_at}' /tmp/ssl.json
+          fi
+
+          curl -fsS -H "$AUTH" "$API" > /tmp/site-final.json
+          jq '{id,name,custom_domain,domain_aliases,url,ssl_url,force_ssl,managed_dns}' /tmp/site-final.json
+          echo "F9_NETLIFY_DOMAIN_RESULT=APPLIED"
