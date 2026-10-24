@@ -1,6 +1,13 @@
 name: Website validation
 
 on:
+  push:
+    branches:
+      - programme/855-retention-policy-alignment-20261024
+    paths:
+      - 'terms/index.html'
+      - 'privacy/index.html'
+      - '.github/workflows/website-validation.yml'
   pull_request:
     branches: [main]
     types: [opened, synchronize, reopened, ready_for_review]
@@ -8,6 +15,8 @@ on:
       - 'index.html'
       - 'welcome/index.html'
       - 'welcome/welcome.js'
+      - 'terms/index.html'
+      - 'privacy/index.html'
       - 'paid-checkout.js'
       - 'api/checkout.js'
       - 'api/welcome.js'
@@ -37,6 +46,19 @@ jobs:
           node --check functions/api/checkout.js
           node --check functions/api/welcome.js
           node --check welcome/welcome.js
+
+      - name: Validate Terms and Privacy retention alignment
+        shell: bash
+        run: |
+          set -euo pipefail
+          ! grep -q 'your data will be retained for 30 days after' terms/index.html
+          grep -q 'After cancellation or account closure, we will delete or de-identify' terms/index.html
+          grep -q 'href="/privacy/"' terms/index.html
+          grep -q 'subject to the' terms/index.html
+          grep -q 'normal backup cycles' terms/index.html
+          grep -q 'After a verified deletion request or account closure, we will delete' privacy/index.html
+          grep -q 'subject to legal obligations, security records, unresolved disputes,' privacy/index.html
+          grep -q 'backup cycles, and provider limitations' privacy/index.html
 
       - name: Validate paid checkout integration
         shell: bash
