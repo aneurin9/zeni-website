@@ -3,7 +3,7 @@ import assert from 'node:assert/strict'
 
 const terms=fs.readFileSync('terms/index.html','utf8')
 const privacy=fs.readFileSync('privacy/index.html','utf8')
-const compact=(value)=>value.replace(/\\s+/g,' ')
+const compact=(value)=>value.replace(/\s+/g,' ')
 const termsText=compact(terms)
 const privacyText=compact(privacy)
 const netlify=fs.readFileSync('netlify.toml','utf8')
