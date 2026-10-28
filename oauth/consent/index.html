@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Authorize Zeni Support</title>
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="referrer" content="no-referrer">
+  <link rel="icon" type="image/png" href="/zeni-favicon-new.png?v=1">
+  <style>
+    :root{
+      --pearl:#F3F1FC; --card:#FFFFFF; --ink:#1B1C3A; --ink2:#40416A;
+      --muted:#63658A; --violet:#7B61FF; --violet-d:#6A4FF0;
+      --line:rgba(27,28,58,.12); --danger:#B42318; --success:#16803C;
+      --grad:linear-gradient(135deg,#7B61FF 0%,#7A6EF2 55%,#6C86EC 100%);
+      --shadow:0 24px 60px rgba(70,55,150,.14);
+      --sans:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    }
+    *{box-sizing:border-box}
+    html,body{min-height:100%}
+    body{
+      margin:0;font-family:var(--sans);color:var(--ink);background:
+        radial-gradient(900px 420px at 50% -100px,rgba(123,97,255,.18),transparent 66%),
+        var(--pearl);line-height:1.5;-webkit-font-smoothing:antialiased
+    }
+    main{min-height:100vh;display:grid;place-items:center;padding:32px 18px}
+    .card{width:min(100%,520px);background:rgba(255,255,255,.94);border:1px solid rgba(255,255,255,.9);
+      border-radius:24px;box-shadow:var(--shadow);padding:32px}
+    .brand{display:flex;align-items:center;gap:10px;margin-bottom:26px}
+    .brand img{width:38px;height:38px;object-fit:contain}
+    .brand strong{font-size:21px;letter-spacing:-.4px}
+    h1{font-size:28px;line-height:1.15;letter-spacing:-.6px;margin:0 0 10px}
+    .lead{color:var(--ink2);margin:0 0 24px}
+    .panel{background:#F8F7FC;border:1px solid var(--line);border-radius:16px;padding:16px;margin:18px 0}
+    .row{display:flex;gap:12px;justify-content:space-between;align-items:flex-start;margin:7px 0}
+    .row span:first-child{color:var(--muted);font-size:13px}
+    .row span:last-child{text-align:right;font-size:13px;font-weight:650;max-width:68%;overflow-wrap:anywhere}
+    label{display:block;font-size:13px;font-weight:650;margin:15px 0 7px}
+    input{width:100%;border:1px solid var(--line);border-radius:12px;background:#fff;color:var(--ink);
+      font:inherit;padding:12px 13px;outline:none}
+    input:focus{border-color:rgba(123,97,255,.65);box-shadow:0 0 0 3px rgba(123,97,255,.12)}
+    .actions{display:flex;gap:10px;margin-top:20px}
+    button{border:0;border-radius:12px;padding:12px 16px;font:inherit;font-weight:650;cursor:pointer}
+    button:disabled{opacity:.55;cursor:not-allowed}
+    .primary{background:var(--grad);color:#fff;flex:1}
+    .secondary{background:#F0EEF8;color:var(--ink);border:1px solid var(--line)}
+    .status{margin-top:16px;font-size:13px;color:var(--muted);min-height:20px}
+    .status.error{color:var(--danger)}
+    .status.ok{color:var(--success)}
+    .fine{font-size:12px;color:var(--muted);margin-top:20px}
+    .hidden{display:none!important}
+    .spinner{display:inline-block;width:14px;height:14px;border:2px solid currentColor;border-right-color:transparent;
+      border-radius:50%;vertical-align:-2px;margin-right:7px;animation:spin .7s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    @media(max-width:520px){.card{padding:25px 20px;border-radius:20px}.actions{flex-direction:column-reverse}}
+  </style>
+</head>
+<body>
+  <main>
+    <section class="card" aria-labelledby="title">
+      <div class="brand"><img src="/logo.png" alt=""><strong>Zeni</strong></div>
+
+      <div id="fatal" class="hidden">
+        <h1 id="title">Unable to authorize</h1>
+        <p class="lead">This authorization request could not be verified.</p>
+        <p id="fatal-message" class="status error"></p>
+      </div>
+
+      <div id="login">
+        <h1 id="title-login">Authorize Zeni Support</h1>
+        <p class="lead">Sign in with the existing Zeni Owner account. Your password is sent only to Zeni's Supabase Auth service.</p>
+        <form id="login-form" autocomplete="on">
+          <label for="email">Owner email</label>
+          <input id="email" name="email" type="email" autocomplete="username" required>
+          <label for="password">Password</label>
+          <input id="password" name="password" type="password" autocomplete="current-password" required>
+          <div class="actions">
+            <button class="primary" type="submit" id="login-button">Continue</button>
+          </div>
+        </form>
+        <p id="login-status" class="status" role="status"></p>
+      </div>
+
+      <div id="mfa" class="hidden">
+        <h1>Verify it’s you</h1>
+        <p class="lead">Enter the 6-digit code from the authenticator already linked to the Zeni Owner account.</p>
+        <form id="mfa-form" autocomplete="one-time-code">
+          <label for="totp">Authenticator code</label>
+          <input id="totp" name="totp" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6" required>
+          <div class="actions">
+            <button class="primary" type="submit" id="mfa-button">Verify</button>
+          </div>
+        </form>
+        <p id="mfa-status" class="status" role="status"></p>
+      </div>
+
+      <div id="consent" class="hidden">
+        <h1>Connect Zeni Support</h1>
+        <p class="lead">Approve this connection only if you started it from your ChatGPT account.</p>
+        <div class="panel">
+          <div class="row"><span>Application</span><span id="client-name">Zeni Support</span></div>
+          <div class="row"><span>Permission</span><span id="scope">Email support access</span></div>
+          <div class="row"><span>Return to</span><span id="redirect-host">ChatGPT</span></div>
+        </div>
+        <div class="actions">
+          <button class="secondary" type="button" id="deny-button">Deny</button>
+          <button class="primary" type="button" id="approve-button">Approve connection</button>
+        </div>
+        <p id="consent-status" class="status" role="status"></p>
+        <p class="fine">Approving this connection does not authorize automatic customer replies. Zeni Support still requires Owner approval for outbound support actions.</p>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.118.0/dist/umd/supabase.js"></script>
+  <script>
+  (() => {
+    'use strict';
+
+    const SUPABASE_URL = 'https://wxhtlwjptthrkmmevemf.supabase.co';
+    const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_kMqQIfRdn5avgl-ui4JYSg_0LHMIB3x';
+    const authorizationId = new URLSearchParams(location.search).get('authorization_id');
+
+    const ui = {
+      fatal: document.getElementById('fatal'),
+      fatalMessage: document.getElementById('fatal-message'),
+      login: document.getElementById('login'),
+      loginForm: document.getElementById('login-form'),
+      loginButton: document.getElementById('login-button'),
+      loginStatus: document.getElementById('login-status'),
+      mfa: document.getElementById('mfa'),
+      mfaForm: document.getElementById('mfa-form'),
+      mfaButton: document.getElementById('mfa-button'),
+      mfaStatus: document.getElementById('mfa-status'),
+      consent: document.getElementById('consent'),
+      clientName: document.getElementById('client-name'),
+      scope: document.getElementById('scope'),
+      redirectHost: document.getElementById('redirect-host'),
+      approve: document.getElementById('approve-button'),
+      deny: document.getElementById('deny-button'),
+      consentStatus: document.getElementById('consent-status'),
+    };
+
+    function show(name) {
+      for (const key of ['fatal','login','mfa','consent']) ui[key].classList.toggle('hidden', key !== name);
+    }
+
+    function status(node, message, kind = '') {
+      node.textContent = message || '';
+      node.className = 'status' + (kind ? ' ' + kind : '');
+    }
+
+    function busy(button, on, label) {
+      button.disabled = on;
+      if (on) {
+        button.dataset.label = button.textContent;
+        button.innerHTML = '<span class="spinner" aria-hidden="true"></span>' + label;
+      } else {
+        button.textContent = button.dataset.label || label;
+      }
+    }
+
+    function fatal(message) {
+      ui.fatalMessage.textContent = message;
+      show('fatal');
+    }
+
+    if (!authorizationId || authorizationId.length > 2048) {
+      fatal('Missing or invalid authorization request.');
+      return;
+    }
+
+    if (!window.supabase || typeof window.supabase.createClient !== 'function') {
+      fatal('The secure sign-in service could not load. Please close this page and try again.');
+      return;
+    }
+
+    const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
+      auth: {
+        persistSession: false,
+        autoRefreshToken: false,
+        detectSessionInUrl: false,
+      },
+    });
+
+    let verifiedFactorId = null;
+    let authDetails = null;
+
+    async function requireMfaOrConsent() {
+      const { data: aal, error: aalError } = await client.auth.mfa.getAuthenticatorAssuranceLevel();
+      if (aalError) throw aalError;
+
+      if (aal && aal.currentLevel === 'aal2') {
+        await loadConsent();
+        return;
+      }
+
+      const { data: factors, error: factorError } = await client.auth.mfa.listFactors();
+      if (factorError) throw factorError;
+      const verified = (factors && Array.isArray(factors.totp) ? factors.totp : [])
+        .find((factor) => factor && factor.status === 'verified');
+
+      if (!verified || !verified.id) {
+        throw new Error('The authorized Owner account does not have a verified authenticator factor.');
+      }
+
+      verifiedFactorId = verified.id;
+      show('mfa');
+      document.getElementById('totp').focus();
+    }
+
+    async function loadConsent() {
+      const { data: userData, error: userError } = await client.auth.getUser();
+      if (userError || !userData || !userData.user) throw userError || new Error('Owner session could not be verified.');
+
+      const { data, error } = await client.auth.oauth.getAuthorizationDetails(authorizationId);
+      if (error || !data) throw error || new Error('Authorization request could not be loaded.');
+
+      if (!Object.prototype.hasOwnProperty.call(data, 'authorization_id')) {
+        if (!data.redirect_url) throw new Error('Authorization response is missing a return URL.');
+        location.assign(data.redirect_url);
+        return;
+      }
+
+      authDetails = data;
+      const redirect = new URL(String(data.redirect_uri || ''), location.origin);
+      if (redirect.protocol !== 'https:' || redirect.hostname !== 'chatgpt.com') {
+        throw new Error('The requesting application is not an approved ChatGPT callback.');
+      }
+
+      ui.clientName.textContent = String((data.client && data.client.name) || 'Zeni Support');
+      const requested = String(data.scope || '').trim();
+      ui.scope.textContent = requested ? requested.split(/\s+/).join(', ') : 'Zeni Support access';
+      ui.redirectHost.textContent = redirect.hostname;
+      show('consent');
+    }
+
+    ui.loginForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      status(ui.loginStatus, '');
+      busy(ui.loginButton, true, 'Signing in…');
+      try {
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value;
+        if (!email || !password) throw new Error('Enter the Owner email and password.');
+
+        const { error } = await client.auth.signInWithPassword({ email, password });
+        document.getElementById('password').value = '';
+        if (error) throw error;
+        await requireMfaOrConsent();
+      } catch (error) {
+        status(ui.loginStatus, error && error.message ? error.message : 'Sign-in failed.', 'error');
+      } finally {
+        busy(ui.loginButton, false, 'Continue');
+      }
+    });
+
+    ui.mfaForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      status(ui.mfaStatus, '');
+      busy(ui.mfaButton, true, 'Verifying…');
+      try {
+        const code = document.getElementById('totp').value.trim();
+        if (!verifiedFactorId || !/^[0-9]{6}$/.test(code)) throw new Error('Enter the 6-digit authenticator code.');
+        const { error } = await client.auth.mfa.challengeAndVerify({ factorId: verifiedFactorId, code });
+        document.getElementById('totp').value = '';
+        if (error) throw error;
+        await loadConsent();
+      } catch (error) {
+        status(ui.mfaStatus, error && error.message ? error.message : 'Verification failed.', 'error');
+      } finally {
+        busy(ui.mfaButton, false, 'Verify');
+      }
+    });
+
+    async function decide(approve) {
+      ui.approve.disabled = true;
+      ui.deny.disabled = true;
+      status(ui.consentStatus, approve ? 'Approving connection…' : 'Denying connection…');
+      try {
+        if (!authDetails) throw new Error('Authorization request is not loaded.');
+        const result = approve
+          ? await client.auth.oauth.approveAuthorization(authorizationId)
+          : await client.auth.oauth.denyAuthorization(authorizationId);
+        if (result.error) throw result.error;
+        if (!result.data || !result.data.redirect_url) throw new Error('Authorization response is missing a return URL.');
+        location.assign(result.data.redirect_url);
+      } catch (error) {
+        status(ui.consentStatus, error && error.message ? error.message : 'Authorization failed.', 'error');
+        ui.approve.disabled = false;
+        ui.deny.disabled = false;
+      }
+    }
+
+    ui.approve.addEventListener('click', () => decide(true));
+    ui.deny.addEventListener('click', () => decide(false));
+
+    show('login');
+  })();
+  </script>
+</body>
+</html>
