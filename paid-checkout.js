@@ -79,12 +79,22 @@
     return digits.length === 10 ? '1' + digits : ''
   }
 
+  function browserTimezone() {
+    try {
+      var timezone = String(Intl.DateTimeFormat().resolvedOptions().timeZone || '').trim()
+      return /^[A-Za-z0-9._+\/-]{1,100}$/.test(timezone) ? timezone : ''
+    } catch (_) {
+      return ''
+    }
+  }
+
   function currentFingerprint() {
     var data = window.gsData || {}
     return [
       String(data.name || '').trim(),
       String(data.province || '').trim().toUpperCase(),
       canonicalPhone(),
+      browserTimezone(),
       String(data.plan || '').trim().toLowerCase()
     ].join('|')
   }
@@ -181,6 +191,7 @@
     var province = String(data.province || '').trim().toUpperCase()
     var plan = String(data.plan || '').trim().toLowerCase()
     var firstName = String(data.name || '').trim()
+    var timezone = browserTimezone()
     var fingerprint = currentFingerprint()
     var button = document.getElementById('gsNext')
     var originalHtml = button ? button.innerHTML : ''
@@ -219,6 +230,7 @@
           firstName: firstName,
           whatsappNumber: phone,
           province: province,
+          timezone: timezone,
           plan: plan
         })
       })
