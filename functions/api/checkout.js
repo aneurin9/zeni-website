@@ -70,6 +70,7 @@ function validatedBody(raw) {
   const digits = String(body.whatsappNumber || '').replace(/\D/g, '')
   const whatsappNumber = digits.length === 10 ? `1${digits}` : digits
   const province = String(body.province || '').trim().toUpperCase()
+  const timezone = String(body.timezone || '').trim()
   const selectedPlan = String(body.plan || '').trim().toLowerCase()
   const billingCadence = selectedPlan === 'core_weekly' ? 'weekly' :
     selectedPlan === 'core' ? 'monthly' : null
@@ -78,9 +79,10 @@ function validatedBody(raw) {
   if (!firstName || firstName.length > 120) return null
   if (!/^1\d{10}$/.test(whatsappNumber)) return null
   if (!['ON', 'BC', 'AB'].includes(province)) return null
+  if (timezone && !/^[A-Za-z0-9._+\/-]{1,100}$/.test(timezone)) return null
   if (!billingCadence) return null
 
-  return { requestId, firstName, whatsappNumber, province, plan: 'core', billingCadence }
+  return { requestId, firstName, whatsappNumber, province, timezone, plan: 'core', billingCadence }
 }
 
 function sourceIp(request) {
