@@ -86,8 +86,8 @@ if PATCH_MARKER not in home:
 
     home = replace_once(
         home,
-        "        feat('sun','Every day',['Automatic morning briefing','Reminders that reach you','Tasks &amp; day planner','Client &amp; contact lookup','Weekly &amp; monthly reviews','Shipment tracking'])+",
-        "        feat('sun','Every day',['Automatic Morning Brief','Important business emails surfaced','Tasks, reminders &amp; day planning','Customer &amp; supplier follow-ups','Weekly &amp; monthly reviews','Shipment tracking'])+",
+        "        feat('sun','Every day',['Automatic morning briefing','Reminders that reach you','Tasks &amp; day planner','Client &amp; contact lookup','Weekly &amp; monthly reviews'])+",
+        "        feat('sun','Every day',['Automatic Morning Brief','Important business emails surfaced','Tasks, reminders &amp; day planning','Customer &amp; supplier follow-ups','Weekly &amp; monthly reviews'])+",
         'How Zeni works Every day card',
     )
     home = replace_once(
