@@ -132,11 +132,26 @@
     alignMenuItems(menuCards, '.menu-card', '.menu-card-title', null, null)
   }
 
+  function setPaymentState(state) {
+    document.body.setAttribute('data-payment-state', state)
+    if (state === 'verified') return
+
+    var title = document.getElementById('paidGateTitle')
+    var copy = document.getElementById('paidGateCopy')
+    var back = document.getElementById('paidGateReturn')
+    if (title) title.textContent = 'We couldn’t verify a completed checkout.'
+    if (copy) copy.textContent = 'Use the checkout-success link from Stripe, or return to Zeni and contact support if you believe your subscription is already active.'
+    if (back) back.style.display = 'inline-block'
+  }
+
   async function loadPersonalization() {
     var url = new URL(window.location.href)
     var sessionId = String(url.searchParams.get('checkout_session_id') || '').trim()
     window.history.replaceState({}, document.title, url.pathname + url.hash)
-    if (!SESSION_PATTERN.test(sessionId)) return
+    if (!SESSION_PATTERN.test(sessionId)) {
+      setPaymentState('unverified')
+      return
+    }
 
     try {
       var response = await fetch('/api/welcome?checkout_session_id=' + encodeURIComponent(sessionId), {
@@ -145,12 +160,16 @@
         credentials: 'same-origin',
         cache: 'no-store'
       })
-      if (!response.ok) return
+      if (!response.ok) {
+        setPaymentState('unverified')
+        return
+      }
       var payload = await response.json()
       var firstName = safeFirstName(payload && payload.firstName)
       if (firstName) personalize(firstName)
+      setPaymentState('verified')
     } catch (_) {
-      // The generic welcome remains visible when verification is unavailable.
+      setPaymentState('unverified')
     }
   }
 
