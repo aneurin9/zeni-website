@@ -86,14 +86,14 @@ if PATCH_MARKER not in home:
 
     home = replace_once(
         home,
-        "        feat('sun','Every day',['Automatic morning briefing','Reminders that reach you','Tasks &amp; day planner','Client &amp; contact lookup','Weekly &amp; monthly reviews'])+",
-        "        feat('sun','Every day',['Automatic Morning Brief','Important business emails surfaced','Tasks, reminders &amp; day planning','Customer &amp; supplier follow-ups','Weekly &amp; monthly reviews'])+",
+        "        feat('sun','Every day',['Automatic morning briefing','Reminders that reach you','Tasks &amp; day planner','Client &amp; contact lookup','Weekly &amp; monthly reviews','Shipment records'])+",
+        "        feat('sun','Every day',['Automatic Morning Brief','Important business emails surfaced','Tasks, reminders &amp; day planning','Customer &amp; supplier follow-ups','Weekly &amp; monthly reviews','Shipment records'])+",
         'How Zeni works Every day card',
     )
     home = replace_once(
         home,
-        "        feat('doc','Documents &amp; drafts',['Service agreements &amp; NDAs','Proposals &amp; contracts','Late-payment notices','Emails &amp; messages','Receipt &amp; PDF reader'])+",
-        "        feat('doc','Inbox, documents &amp; drafts',['Business email searched &amp; summarized','Replies drafted using your business context','Invoices, PDFs &amp; attachments understood','Contracts, proposals &amp; notices drafted','Nothing sent without your approval'])+",
+        "        feat('doc','Documents &amp; drafts',['Service agreements &amp; NDAs','Proposals &amp; contracts','Late-payment notices','Emails &amp; messages','Receipt, image &amp; PDF review'])+",
+        "        feat('doc','Inbox, documents &amp; drafts',['Business email searched &amp; summarized','Replies drafted using your business context','Invoices, PDFs &amp; attachments reviewed','Contracts, proposals &amp; notices drafted','Nothing sent without your approval'])+",
         'How Zeni works Inbox card',
     )
 
