@@ -552,6 +552,87 @@
   .foot-copy{font-size:12.5px;color:var(--faint)}
   @media(max-width:560px){.foot-brand-row{flex-direction:column;align-items:flex-start}}
 
+
+  /* STAGED MASCOT CONCEPT: How working with Zeni feels only.
+     Original website copy, steps and interactions remain unchanged. */
+  .chapter-shell{max-width:1040px}
+  .chapter-panel.chapter-with-mascot{
+    position:relative;isolation:isolate;overflow:hidden;
+    grid-template-columns:minmax(0,.96fr) minmax(0,1.04fr);
+    min-height:480px;gap:18px;padding:34px 36px 0;
+    background:linear-gradient(115deg,#fff 0%,#fff 48%,#f7f4ff 100%);
+    border-radius:30px;
+  }
+  .chapter-with-mascot .chapter-copy{position:relative;z-index:3;align-self:center;padding:0 2px 36px 0;min-width:0}
+  .chapter-with-mascot .ch-title{font-size:clamp(25px,2.6vw,35px);letter-spacing:-.9px}
+  .chapter-with-mascot .ch-desc{font-size:14.5px}
+  .chapter-with-mascot .chapter-art{
+    position:relative;isolation:isolate;align-self:stretch;min-width:0;min-height:440px;
+  }
+  .chapter-with-mascot .chapter-art:before{
+    content:"";position:absolute;z-index:-1;
+    width:400px;height:400px;right:-75px;bottom:-100px;border-radius:50%;
+    background:radial-gradient(circle at 50% 45%,#eee8fd 0%,#f4efff 45%,rgba(245,241,255,0) 72%);
+    pointer-events:none
+  }
+  .chapter-with-mascot .chapter-figure{
+    position:absolute;z-index:1;right:-46px;bottom:-12px;width:435px;
+    aspect-ratio:299/218;pointer-events:none;
+    filter:drop-shadow(0 14px 18px rgba(70,48,106,.11));
+    transition:opacity .32s ease,transform .45s cubic-bezier(.22,1,.36,1);
+  }
+  .chapter-with-mascot .chapter-figure img{width:100%;height:100%;object-fit:contain;display:block}
+  .chapter-with-mascot .chapter-art[data-mode="setup"] .figure-run,
+  .chapter-with-mascot .chapter-art[data-mode="run"] .figure-setup{opacity:0;transform:translateY(10px) scale(.97)}
+  .chapter-with-mascot .chapter-art[data-mode="setup"] .figure-setup,
+  .chapter-with-mascot .chapter-art[data-mode="run"] .figure-run{opacity:1;transform:translateY(0) scale(1)}
+  /* Neutral screen patch covers the temporary logo in the concept crop. */
+  .chapter-with-mascot .operator-screen-plain{
+    position:absolute;left:53.2%;top:63.3%;width:39%;height:30.6%;
+    background:linear-gradient(95deg,#a2818c,#a787a0 52%,#a58191);
+    clip-path:polygon(10% 0,100% 0,88% 100%,0 100%);
+  }
+  .chapter-with-mascot .ch-visual{
+    position:absolute;z-index:2;left:0;top:27px;width:min(65%,256px);
+    display:grid;gap:10px;padding:0;background:none;border:0;border-radius:0;
+    pointer-events:none;
+  }
+  .chapter-with-mascot .ch-visual .cv-row{
+    position:relative;display:flex;gap:9px;align-items:center;padding:10px;
+    border:1px solid #e9e1f9;border-radius:15px;
+    background:rgba(255,255,255,.96);box-shadow:0 12px 26px rgba(63,42,106,.105);
+    backdrop-filter:blur(8px);min-width:0;
+  }
+  .chapter-with-mascot .ch-visual .cv-row:nth-child(2){margin-left:11px}
+  .chapter-with-mascot .ch-visual .cv-row:nth-child(3){margin-left:23px}
+  .chapter-with-mascot .ch-visual .cv-t{font-size:11.5px;line-height:1.35}
+  .chapter-with-mascot .ch-visual .cv-s{font-size:10px;line-height:1.4}
+  .chapter-with-mascot .ch-visual .cv-ic{height:30px;width:30px;border-radius:10px}
+  @media(max-width:880px){
+    .chapter-panel.chapter-with-mascot{grid-template-columns:1fr;padding:30px 26px 0;gap:3px}
+    .chapter-with-mascot .chapter-copy{padding-bottom:5px}
+    .chapter-with-mascot .chapter-art{min-height:355px;max-width:560px;width:100%;margin:0 auto}
+    .chapter-with-mascot .chapter-figure{width:390px;right:-17px;bottom:-12px}
+    .chapter-with-mascot .ch-visual{top:16px;left:0}
+  }
+  @media(max-width:520px){
+    .chapter-panel.chapter-with-mascot{padding:24px 20px 0;border-radius:24px}
+    .chapter-with-mascot .ch-title{font-size:27px}
+    .chapter-with-mascot .ch-desc{font-size:13.6px}
+    .chapter-with-mascot .chapter-art{min-height:300px}
+    .chapter-with-mascot .chapter-figure{width:313px;right:-48px;bottom:-5px}
+    .chapter-with-mascot .ch-visual{width:62%;max-width:200px;top:12px}
+    .chapter-with-mascot .ch-visual .cv-row{padding:7px;gap:6px;border-radius:11px}
+    .chapter-with-mascot .ch-visual .cv-row:nth-child(2){margin-left:5px}
+    .chapter-with-mascot .ch-visual .cv-row:nth-child(3){margin-left:10px}
+    .chapter-with-mascot .ch-visual .cv-ic{width:24px;height:24px;min-width:24px}
+    .chapter-with-mascot .ch-visual .cv-t{font-size:9px}
+    .chapter-with-mascot .ch-visual .cv-s{font-size:8px}
+  }
+  @media(prefers-reduced-motion:reduce){
+    .chapter-with-mascot .chapter-figure{transition:none!important}
+  }
+
 </style>
 </head>
 <body>
@@ -1590,14 +1671,19 @@ function chVisualRow(row){
 function renderChapter(id){
   var c = CHAPTERS[id];
   var html =
-    '<div><div class="ch-kicker">'+c.kicker+'</div>'+
+    '<div class="chapter-copy"><div class="ch-kicker">'+c.kicker+'</div>'+
     '<div class="ch-title">'+c.title+'</div>'+
     '<p class="ch-desc">'+c.desc+'</p>'+
     '<ul class="ch-list">'+c.list.map(function(item,i){
       return '<li style="animation-delay:'+(i*0.08)+'s"><span class="ic" data-ic="check"></span><span>'+item+'</span></li>';
     }).join('')+'</ul></div>'+
-    '<div class="ch-visual">'+c.visual.map(chVisualRow).join('')+'</div>';
+    '<div class="chapter-art" data-mode="'+id+'">'+
+      '<div class="chapter-figure figure-setup" aria-hidden="true"><img src="/assets/mascot/zeni3-setup-concept.png" alt="" decoding="async"></div>'+
+      '<div class="chapter-figure figure-run" aria-hidden="true"><img src="/assets/mascot/zeni3-operator-concept.png" alt="" decoding="async"><span class="operator-screen-plain"></span></div>'+
+      '<div class="ch-visual">'+c.visual.map(chVisualRow).join('')+'</div>'+
+    '</div>';
   var panel = document.getElementById('chapterPanel');
+  panel.classList.add('chapter-with-mascot');
   panel.innerHTML = html;
   panel.classList.remove('anim'); void panel.offsetWidth; panel.classList.add('anim');
   injectIcons(panel);
