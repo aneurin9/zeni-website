@@ -403,6 +403,58 @@
   .outcome-note{text-align:center;color:var(--muted);font-size:13.5px;margin-top:24px}
   .outcome-note b{color:var(--ink2)}
 
+
+  /* ---------- BOUNDED VISUAL REFRESH: OUTCOME MINI-DEMOS ---------- */
+  .outcome-shell{max-width:1050px}
+  .outcome-panel{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(295px,.95fr);gap:30px;align-items:center;padding:34px}
+  .oc-copy{min-width:0}
+  .outcome-panel .oc-head{margin-bottom:20px}
+  .outcome-panel .oc-list{grid-template-columns:1fr;gap:13px}
+  .oc-demo{min-width:0;display:flex;justify-content:center;align-items:center;padding:22px 14px;border-radius:22px;background:linear-gradient(155deg,#F6F3FD,#EEECF7);border:1px solid rgba(27,28,58,.07)}
+  .oc-demo-phone{width:min(100%,330px);overflow:hidden;border:5px solid #302B43;border-radius:32px;background:#F1EEF7;box-shadow:0 18px 42px rgba(32,29,69,.13),inset 0 1px rgba(255,255,255,.6)}
+  .oc-demo-status{display:flex;justify-content:space-between;align-items:center;height:28px;padding:6px 14px 2px;background:#fff;color:var(--ink);font-size:10.5px;font-weight:700}
+  .oc-demo-status .oc-demo-signals{display:flex;gap:3px;align-items:center;font-size:12px}
+  .oc-demo-status .oc-demo-signals .ic{width:13px;height:13px}
+  .oc-demo-top{display:flex;gap:10px;align-items:center;padding:9px 13px 10px;background:#fff;border-bottom:1px solid rgba(27,28,58,.07)}
+  .oc-demo-avatar{width:35px;height:35px;flex-shrink:0;border-radius:50%;overflow:hidden;background:#F3EFFC;border:1px solid rgba(123,97,255,.14)}
+  .oc-demo-avatar img{display:block;width:100%;height:100%;object-fit:contain}
+  .oc-demo-identity{display:flex;flex-direction:column;line-height:1.2;gap:3px}
+  .oc-demo-identity b{font-size:13px;color:var(--ink)}
+  .oc-demo-identity small{font-size:10.5px;color:#26824e}
+  .oc-demo-chat{display:flex;flex-direction:column;justify-content:center;gap:11px;min-height:236px;padding:16px 12px 18px;background:#F1EEF7}
+  .oc-demo-bubble{position:relative;max-width:94%;padding:11px 12px 18px;border-radius:13px;font-size:12.5px;line-height:1.5;color:var(--ink);box-shadow:0 2px 7px rgba(36,30,74,.07);overflow-wrap:break-word}
+  .oc-demo-bubble.user{align-self:flex-end;background:#DCF7C5;border-top-right-radius:4px;color:#173321}
+  .oc-demo-bubble.zeni{align-self:flex-start;background:#fff;border-top-left-radius:4px}
+  .oc-demo-time{position:absolute;right:10px;bottom:5px;font-size:9px;line-height:1;color:var(--faint)}
+  .oc-demo-bubble.user .oc-demo-time{color:#54775b}
+  @keyframes oc-chat-arrive{from{transform:translateY(7px)}to{transform:translateY(0)}}
+  .outcome-panel.anim .oc-demo-bubble{animation:oc-chat-arrive .38s ease-out both}
+  .outcome-panel.anim .oc-demo-bubble.zeni{animation-delay:.18s}
+
+  /* ---------- MEMORY v1 WORKING PREFERENCE EXAMPLE ---------- */
+  .memory-card .mem-row{padding:10px 0}
+  .memory-card .mem-preference{margin-top:12px;padding:12px;border:1px solid rgba(123,97,255,.14);border-radius:14px;background:#F7F4FF}
+  .memory-card .mem-control-note{margin:12px 4px 0;color:var(--muted);font-size:11.5px;line-height:1.45;text-align:center}
+  @media(max-width:880px){
+    .outcome-panel{display:flex;flex-direction:column;align-items:stretch;gap:16px;padding:26px 22px}
+    .oc-copy{display:contents}
+    .outcome-panel .oc-head{order:1;margin:0}
+    .oc-demo{order:2;padding:16px 10px}
+    .outcome-panel .oc-list{order:3;display:grid;grid-template-columns:1fr;gap:11px}
+  }
+  @media(max-width:520px){
+    .outcome-panel{padding:22px 17px;gap:15px}
+    .oc-demo{padding:12px 8px}
+    .oc-demo-phone{max-width:320px;border-width:4px}
+    .oc-demo-chat{min-height:220px;padding:12px 10px 14px}
+    .oc-demo-bubble{font-size:12px}
+    .memory-card .mem-preference{padding:10px}
+    .memory-card .mem-control-note{font-size:11px}
+  }
+  @media(prefers-reduced-motion:reduce){
+    .outcome-panel.anim .oc-demo-bubble{animation:none!important}
+  }
+
   /* ---------- MEMORY & CONTINUITY ---------- */
   .memory-shell{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
   .memory-copy .sec-eye{text-align:left}
@@ -693,6 +745,8 @@
         <div class="mem-row"><div class="mr-ic"><span class="ic" data-ic="target"></span></div><div><div class="mr-t">Current priority</div><div class="mr-s">Overdue invoice, INV-1042</div></div></div>
         <div class="mem-row"><div class="mr-ic"><span class="ic" data-ic="calendar"></span></div><div><div class="mr-t">Next deadline</div><div class="mr-s">Annual return, 21 days</div></div></div>
         <div class="mem-row"><div class="mr-ic"><span class="ic" data-ic="globe"></span></div><div><div class="mr-t">U.S. expansion</div><div class="mr-s">Saved for later</div></div></div>
+        <div class="mem-row mem-preference"><div class="mr-ic"><span class="ic" data-ic="book"></span></div><div><div class="mr-t">How you prefer to work</div><div class="mr-s">Brief answers and two practical options</div></div></div>
+        <p class="mem-control-note">Preferences stay yours to review, correct or forget.</p>
       </div>
     </div>
   </div>
@@ -1573,6 +1627,45 @@ var OUTCOMES = [
   { id:'plan', ic:'target', tab:'Planning', title:'Guidance based on your numbers, not generic tips.', sub:'Advice that actually knows your business.',
     items:['Monthly goals, tracked automatically','A 90-day roadmap, built from your real data','&ldquo;What should I focus on right now?&rdquo; — answered','Weekly and monthly reviews, without a spreadsheet'] }
 ];
+
+/* Small, self-contained examples. These are sample conversations, not live account data. */
+var OUTCOME_DEMOS = {
+  money: {
+    question: 'Which invoices need attention?',
+    answer: 'Two invoices are overdue. I can prepare friendly payment reminders for your review before sending.'
+  },
+  daily: {
+    question: 'What actually needs me today?',
+    answer: 'Two priorities: a supplier reply due today and an overdue invoice. The routine updates can wait. Want to handle the reply first?'
+  },
+  deadlines: {
+    question: 'Anything important coming up?',
+    answer: 'Your Ontario annual return is due in 21 days. I can help you prepare and remind you before the deadline.'
+  },
+  protect: {
+    question: 'This supplier emailed new payment details. Is it safe?',
+    answer: 'The change is unusual for this supplier. Verify it through a trusted contact before paying or updating any details.'
+  },
+  docs: {
+    question: 'Can you prepare a branded proposal for my new client?',
+    answer: 'I can use your confirmed business details and brand. You can review the PDF and recipient before approving any send.'
+  },
+  plan: {
+    question: 'What should I focus on for my 10-order goal?',
+    answer: 'You’re at 3 of 10 orders. Based on your goal and saved preferences, I’d suggest two next actions. Want the short plan?'
+  }
+};
+function outcomeDemo(id){
+  var d=OUTCOME_DEMOS[id]||OUTCOME_DEMOS.money;
+  return '<div class="oc-demo" aria-label="Example conversation with Zeni">'+
+    '<div class="oc-demo-phone">'+
+      '<div class="oc-demo-status"><span>9:41</span><span class="oc-demo-signals"><span class="ic" data-ic="signal"></span><span class="ic" data-ic="wifi"></span><span class="ic" data-ic="battery"></span></span></div>'+
+      '<div class="oc-demo-top"><div class="oc-demo-avatar"><img src="/logo.png" alt="" loading="lazy" decoding="async"></div><div class="oc-demo-identity"><b>Zeni</b><small>online</small></div></div>'+
+      '<div class="oc-demo-chat"><div class="oc-demo-bubble user">'+d.question+'<span class="oc-demo-time">9:41 ✓✓</span></div>'+
+      '<div class="oc-demo-bubble zeni">'+d.answer+'<span class="oc-demo-time">9:42</span></div></div>'+
+    '</div></div>';
+}
+
 var ocActive = 'money';
 
 function renderOutcomeTabs(){
@@ -1585,8 +1678,9 @@ function renderOutcomePanel(){
   var o = OUTCOMES.filter(function(x){return x.id===ocActive;})[0];
   var panel = document.getElementById('outcomePanel');
   panel.innerHTML =
-    '<div class="oc-head"><div class="oc-ic">'+ICONS[o.ic]+'</div><div><h3>'+o.title+'</h3><p>'+o.sub+'</p></div></div>'+
-    '<ul class="oc-list">'+o.items.map(function(it){return '<li><span class="ic" data-ic="check"></span><span>'+it+'</span></li>';}).join('')+'</ul>';
+    '<div class="oc-copy"><div class="oc-head"><div class="oc-ic">'+ICONS[o.ic]+'</div><div><h3>'+o.title+'</h3><p>'+o.sub+'</p></div></div>'+
+    '<ul class="oc-list">'+o.items.map(function(it){return '<li><span class="ic" data-ic="check"></span><span>'+it+'</span></li>';}).join('')+'</ul></div>'+
+    outcomeDemo(o.id);
   panel.classList.remove('anim'); void panel.offsetWidth; panel.classList.add('anim');
   injectIcons(panel);
 }
