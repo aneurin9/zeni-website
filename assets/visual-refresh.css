@@ -173,7 +173,7 @@
 .oc-phone-contact{min-width:0;display:flex;flex-direction:column;align-items:flex-start;line-height:1.2}
 .oc-phone-name{display:flex;align-items:center;gap:4px;color:var(--ink);font-size:12px;font-weight:700}
 .oc-phone-verified{display:flex;color:var(--mist)}.oc-phone-verified svg{width:12px;height:12px}
-.oc-phone-online{font-size:10px;font-weight:600;color:#2fa360;line-height:16px}
+.oc-phone-online{font-size:10px;font-weight:600;color:#26703c;line-height:16px}
 .oc-phone-actions{margin-left:auto;gap:10px}
 .oc-demo .oc-demo-chat{display:flex;min-height:246px;flex-direction:column;gap:12px;width:100%;padding:12px 11px 20px}
 .oc-phone-day{align-self:center;border-radius:7px;background:#fff;color:var(--muted);padding:3px 10px;box-shadow:var(--shadow-sm);font-size:10px;font-weight:600;line-height:1.3}

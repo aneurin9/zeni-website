@@ -13,6 +13,12 @@ on:
       - 'api/welcome.js'
       - 'functions/api/checkout.js'
       - 'functions/api/welcome.js'
+      - 'netlify/functions/**'
+      - 'netlify.toml'
+      - 'assets/visual-refresh.css'
+      - 'privacy/index.html'
+      - 'terms/index.html'
+      - 'scripts/validate-netlify-bridges.mjs'
       - 'scripts/apply-paid-onboarding-index.py'
       - '.github/workflows/website-validation.yml'
       - '.github/workflows/apply-paid-onboarding-index.yml'
@@ -37,6 +43,9 @@ jobs:
           node --check functions/api/checkout.js
           node --check functions/api/welcome.js
           node --check welcome/welcome.js
+          node --check netlify/functions/checkout.mjs
+          node --check netlify/functions/welcome.mjs
+          node scripts/validate-netlify-bridges.mjs
 
       - name: Validate paid checkout integration
         shell: bash
@@ -92,7 +101,8 @@ jobs:
           grep -q '<script src="/welcome/welcome.js"></script>' welcome/index.html
           grep -q "fetch('/api/welcome?checkout_session_id='" welcome/welcome.js
           grep -q 'history.replaceState' welcome/welcome.js
-          grep -q 'function alignFirstMessagePreview()' welcome/welcome.js
+          grep -q 'function alignFirstMessagePreview(firstName)' welcome/welcome.js
+          grep -q 'alignFirstMessagePreview(firstName)' welcome/welcome.js
           grep -q 'I’ll help you build and run your business, one clear step at a time.' welcome/welcome.js
           grep -q 'How would you like to get started?' welcome/welcome.js
           grep -q "title: 'Recommended: Walkthrough'" welcome/welcome.js

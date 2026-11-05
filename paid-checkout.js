@@ -1,11 +1,6 @@
 (function () {
   'use strict'
 
-  var pricingFoot = document.querySelector('.pricing-foot')
-  if (pricingFoot) {
-    pricingFoot.innerHTML = 'Cancel anytime &middot; Available in <b>Ontario, British Columbia &amp; Alberta</b>'
-  }
-
   var modalViewportStyle = document.createElement('style')
   modalViewportStyle.textContent = [
     '.modal{height:var(--modal-vh,100vh)}',
