@@ -1,6 +1,6 @@
 /* A single clipped mascot rises from the greeting edge. No duplicated paws or desynchronised animation. */
 .eyebrow{gap:9px;min-height:0;padding:7px 15px;position:relative;isolation:isolate;overflow:visible;white-space:nowrap;background:transparent;border-color:transparent;box-shadow:none}
-.eyebrow::before{content:"";position:absolute;inset:0;z-index:2;border:1px solid var(--glass-brd);border-top-color:transparent;border-radius:inherit;background:linear-gradient(to bottom,rgba(255,255,255,0) 0px,var(--glass) 6px,var(--glass) 100%);box-shadow:0 7px 12px -9px rgba(50,40,120,.07);pointer-events:none}
+.eyebrow::before{content:"";position:absolute;inset:0;z-index:2;border:0;border-radius:inherit;background:#fff;box-shadow:0 9px 14px -11px rgba(50,40,120,.07);pointer-events:none}
 .greeting-text{position:relative;z-index:5;display:inline-flex;align-items:center;min-width:123px;gap:2px}
 .greeting-mascot-stage{position:absolute;z-index:4;right:4px;bottom:calc(100% - 4px);width:88px;height:88px;overflow:hidden;pointer-events:none}
 .greeting-mascot-stage img{position:absolute;display:block;left:0;bottom:-3px;width:88px;height:88px;max-width:none;object-fit:contain;opacity:0;transform:translate3d(0,67px,0) scale(.96);transform-origin:50% 100%;backface-visibility:hidden;filter:drop-shadow(0 7px 10px rgba(63,45,112,.10))}
