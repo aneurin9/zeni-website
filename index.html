@@ -217,6 +217,12 @@
   .feat-note{text-align:center;color:var(--muted);font-size:13px;margin-top:18px}
   .feat-note b{color:var(--ink2)}
   #wtBody:has(.feat-grid){min-height:0}
+  @media(max-width:520px) and (max-height:400px){
+    #demoModal:has(#wtBody .feat-grid) .modal-foot{flex-wrap:nowrap;gap:4px;padding:8px 12px}
+    #demoModal:has(#wtBody .feat-grid) .steps{order:0;width:auto;flex-wrap:nowrap;gap:0;min-width:0}
+    #demoModal:has(#wtBody .feat-grid) .stepdot{padding:3px 2px}
+    #demoModal:has(#wtBody .feat-grid) .navbtn{font-size:12px;padding:7px 8px}
+  }
 
   .simwrap{margin-top:20px;display:flex;justify-content:center}
   .simchat{width:100%;max-width:440px;background:var(--wa-body);border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:var(--shadow)}
