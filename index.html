@@ -545,7 +545,7 @@
   </div>
   <div class="wrap"><div class="hero-in">
     <div>
-      <div class="eyebrow"><span class="greeting-portal" aria-hidden="true"><span class="greeting-light"></span><img src="/assets/mascot/zeni-welcome-v2.webp" width="96" height="96" decoding="async" fetchpriority="high" alt=""></span><span class="greeting-text"><span id="typeText"></span><span class="type-cursor" id="typeCursor"></span></span></div>
+      <div class="eyebrow"><span class="greeting-mascot-stage" aria-hidden="true"><img src="/assets/mascot/zeni-welcome-v2.webp" width="96" height="96" decoding="async" fetchpriority="high" alt=""></span><span class="greeting-text"><span id="typeText"></span><span class="type-cursor" id="typeCursor"></span></span></div>
       <h1>Your business operator on <span class="g2">WhatsApp.</span></h1>
       <p class="hero-sub">I help you set up and run your business in Canada, then expand into the U.S. when you’re ready — all through WhatsApp.</p>
       <div class="trust">
@@ -942,8 +942,10 @@ var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
   function tick(){
     if(i<=text.length){
       el.textContent=text.slice(0,i);
-      if(i===7 && greeting) greeting.classList.add('zeni-arriving');
-      if(i===text.length && greeting) greeting.classList.add('zeni-arrived');
+      if(i===text.length && greeting){
+        setTimeout(function(){ greeting.classList.add('zeni-arriving'); },180);
+        setTimeout(function(){ greeting.classList.add('zeni-arrived'); },980);
+      }
       i++; setTimeout(tick,68);
     }
     else { setTimeout(function(){ if(cursor) cursor.classList.add('done'); },900); }
