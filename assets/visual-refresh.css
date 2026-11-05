@@ -1,0 +1,130 @@
+/* A shared material language for the staged scenes: pearl, soft ink and glass. */
+.eyebrow{gap:11px;min-height:58px;padding:5px 17px 5px 5px;position:relative;isolation:isolate;white-space:nowrap}
+.greeting-text{display:inline-flex;align-items:center;min-width:123px;gap:2px}
+.greeting-portal{position:relative;display:block;width:10px;height:46px;overflow:hidden;border-radius:19px;background:transparent;transition:width .65s cubic-bezier(.2,.8,.2,1),background .5s;box-shadow:inset 0 0 0 1px rgba(123,97,255,.08);flex-shrink:0}
+.greeting-light{position:absolute;inset:19px 1px;border-radius:50%;background:var(--violet);box-shadow:0 0 0 5px rgba(123,97,255,.07);transition:opacity .25s}
+.greeting-portal img{display:block;position:absolute;width:68px;height:68px;max-width:none;left:-10px;bottom:-15px;object-fit:contain;opacity:0;transform:translateY(38px);transition:transform .75s cubic-bezier(.2,.8,.2,1),opacity .28s}
+.zeni-arriving .greeting-portal{width:48px;background:#ede7fc}
+.zeni-arriving .greeting-light{opacity:0}
+.zeni-arriving .greeting-portal img{opacity:1;transform:translateY(0)}
+.zeni-arrived .greeting-portal{animation:greeting-settle .55s ease-out both}
+@keyframes greeting-settle{0%{box-shadow:inset 0 0 0 1px rgba(123,97,255,.08),0 0 0 0 rgba(123,97,255,.14)}100%{box-shadow:inset 0 0 0 1px rgba(123,97,255,.08),0 0 0 7px rgba(123,97,255,0)}}
+
+/* One continuous memory list. Preferences carry the same weight as context. */
+.memory-card{padding:24px 26px}
+.memory-card .mem-head{margin-bottom:0}
+.memory-card .mem-row{padding:12px 0;align-items:center}
+.memory-card .mem-row:last-of-type{padding-bottom:16px}
+.memory-card .mr-ic{width:33px;height:33px;border-radius:10px;font-size:15px;background:#f0edf9}
+.mem-control-note{padding-top:14px;border-top:1px solid var(--line);color:var(--muted);font-size:11.5px;line-height:1.5}
+
+/* The existing six tabs open an editorial example, not another device mockup. */
+.outcome-shell{max-width:1040px}
+.outcome-panel{display:grid;grid-template-columns:1fr .95fr;align-items:center;gap:40px;padding:38px;min-height:350px;overflow:hidden}
+.oc-copy{min-width:0}
+.outcome-panel .oc-head{align-items:flex-start;gap:14px;margin-bottom:24px}
+.outcome-panel .oc-head h3{font-size:24px;line-height:1.2}
+.outcome-panel .oc-ic{width:42px;height:42px;border-radius:13px;font-size:21px}
+.outcome-panel .oc-list{grid-template-columns:1fr;gap:13px}
+.oc-demo{min-width:0;position:relative;align-self:stretch;display:flex;align-items:center;border-left:1px solid var(--line);padding:20px 0 20px 32px}
+.oc-demo::before{content:"";position:absolute;inset:-38px -38px -38px 0;z-index:0;background:linear-gradient(135deg,#f7f5fc,#eeebf8);pointer-events:none}
+.oc-demo-chat{position:relative;display:flex;flex-direction:column;gap:22px;width:100%;z-index:1}
+.oc-demo-bubble{position:relative;font-size:14px;line-height:1.65;overflow-wrap:break-word;box-shadow:0 3px 10px rgba(27,28,58,.035)}
+.oc-demo-bubble.user{align-self:flex-end;max-width:88%;padding:13px 17px;background:var(--wa-out);color:var(--wa-out-tx);border-radius:17px 17px 4px 17px;border:1px solid rgba(80,124,55,.05)}
+.oc-response{display:flex;align-items:flex-end;gap:9px}
+.oc-response-mark{flex-shrink:0;width:27px;height:27px;display:grid;place-items:center;border:1px solid #fff;border-radius:9px;background:white;box-shadow:var(--shadow-sm)}
+.oc-response-mark img{width:23px;height:23px;object-fit:contain}
+.oc-demo-bubble.zeni{background:white;color:var(--ink2);padding:17px 19px;border:1px solid rgba(27,28,58,.05);border-radius:18px 18px 18px 4px}
+.outcome-panel.anim .oc-demo-bubble.user{animation:example-arrive .45s cubic-bezier(.2,.8,.2,1) both}
+.outcome-panel.anim .oc-response{animation:example-arrive .55s .15s cubic-bezier(.2,.8,.2,1) both}
+@keyframes example-arrive{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+
+/* A dimensional working scene underneath real, readable planning surfaces. */
+.chapter-shell{max-width:1040px}
+.chapter-panel.chapter-with-mascot{isolation:isolate;position:relative;grid-template-columns:1fr 1.05fr;gap:26px;padding:40px 0 0 40px;min-height:490px;overflow:hidden;background:linear-gradient(110deg,#fff 45%,#faf8ff);border-radius:26px}
+.chapter-copy{position:relative;z-index:2;padding-bottom:40px;min-width:0}
+.chapter-with-mascot .ch-title{font-size:30px;line-height:1.16;letter-spacing:-.8px;max-width:360px}
+.chapter-art{position:relative;align-self:stretch;min-height:450px;isolation:isolate}
+.chapter-art::before{content:"";position:absolute;inset:16% -18% -28% -10%;border-radius:50%;background:radial-gradient(ellipse,#e9e2f9,rgba(239,234,250,.1) 69%);z-index:-1}
+.chapter-scene{position:absolute;inset:auto -5% 0 -20%;pointer-events:none;z-index:1}
+.chapter-scene img{display:block;width:100%;height:auto;aspect-ratio:1000/563;object-fit:contain;object-position:bottom}
+.chapter-with-mascot .ch-visual{position:relative;z-index:2;width:55%;margin:27px 23px 0 auto;padding:8px 14px;background:rgba(255,255,255,.92);border:1px solid rgba(123,97,255,.11);border-radius:16px;box-shadow:0 12px 32px rgba(54,42,103,.07);backdrop-filter:blur(8px)}
+.chapter-with-mascot .ch-visual .cv-row{gap:9px;padding:11px 0;align-items:center}
+.chapter-with-mascot .ch-visual .cv-ic{width:28px;height:28px;border-radius:9px;font-size:13px}
+.chapter-with-mascot .ch-visual .cv-t{font-size:11.5px;line-height:1.4}
+.chapter-with-mascot .ch-visual .cv-s{font-size:10.5px;line-height:1.4;margin-top:2px}
+.chapter-panel.anim .chapter-scene{animation:scene-arrive .65s cubic-bezier(.2,.8,.2,1) both}
+.chapter-panel.anim .ch-visual{animation:example-arrive .55s .08s ease-out both}
+@keyframes scene-arrive{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+/* The closing illustration shares the CTA's space and floor, with no image fade. */
+.final-cta-card.mascot-cta{max-width:1040px;padding:46px 44px;min-height:340px;text-align:left;position:relative;isolation:isolate;overflow:hidden;display:grid;grid-template-columns:1fr .55fr;gap:12px;align-items:center;border-radius:26px;background:linear-gradient(120deg,#fff 0%,#f6f2ff 57%,#e8e2f9 100%);border:1px solid rgba(255,255,255,.95);backdrop-filter:none}
+.final-cta-copy{position:relative;z-index:2}
+.mascot-cta h2{font-size:clamp(28px,3.1vw,39px);max-width:610px;line-height:1.16}
+.mascot-cta h2 .g{display:block}
+.mascot-cta p{font-size:14px;margin:17px 0 25px}
+.final-cta-art{position:absolute;z-index:1;right:12px;bottom:0;width:32%;pointer-events:none}
+.final-cta-art::before{content:"";position:absolute;inset:auto 5% 3% 5%;height:13%;border-radius:50%;background:rgba(103,83,151,.08);filter:blur(12px);z-index:-1}
+.final-cta-art img{display:block;width:100%;height:auto;object-fit:contain}
+
+@media(max-width:880px){
+  .outcome-panel{gap:28px;padding:30px;grid-template-columns:1fr 1fr}
+  .oc-demo{padding-left:24px}
+  .oc-demo::before{inset:-30px -30px -30px 0}
+  .chapter-panel.chapter-with-mascot{display:flex;flex-direction:column;padding:30px 28px 0;gap:0;min-height:0}
+  .chapter-copy{padding-bottom:8px;align-self:stretch}
+  .chapter-with-mascot .ch-title{font-size:27px}
+  .chapter-art{width:100%;min-height:390px;max-width:620px;margin:0 auto}
+  .chapter-with-mascot .ch-visual{width:48%;margin:15px 0 0 auto}
+  .chapter-scene{inset:auto 0 -1px 0}
+  .final-cta-card.mascot-cta{padding:34px 30px;grid-template-columns:1fr .48fr;min-height:310px}
+  .final-cta-art{width:34%;right:0}
+}
+@media(max-width:650px){
+  .memory-card{padding:20px}
+  .memory-card .mem-row{gap:11px;padding:11px 0}
+  .outcome-tabs{gap:8px;margin-bottom:24px}
+  .ot-btn{font-size:12.5px;padding:9px 12px 9px 9px;gap:7px}
+  .outcome-panel{display:flex;flex-direction:column;align-items:stretch;padding:25px 22px 0;gap:27px;min-height:0}
+  .outcome-panel .oc-head{margin-bottom:22px}
+  .outcome-panel .oc-head h3{font-size:23px}
+  .outcome-panel .oc-head{flex-direction:row;gap:12px}
+  .outcome-panel .oc-head p{font-size:13px;margin-top:7px}
+  .outcome-panel .oc-ic{width:36px;height:36px;font-size:18px;border-radius:11px}
+  .outcome-panel .oc-list{font-size:13.5px;gap:12px}
+  .oc-demo{border-left:none;border-top:1px solid var(--line);padding:27px 0 29px}
+  .oc-demo::before{inset:0 -22px}
+  .oc-demo-bubble{font-size:13px}
+  .oc-demo-chat{gap:18px}
+  .oc-demo-bubble.user{max-width:90%;padding:11px 14px}
+  .oc-demo-bubble.zeni{padding:15px 16px}
+  .chapter-panel.chapter-with-mascot{display:flex;flex-direction:column;padding:27px 23px 0;gap:0;min-height:0}
+  .chapter-copy{padding-bottom:12px}
+  .chapter-with-mascot .ch-title{font-size:28px;max-width:none}
+  .chapter-art{width:100%;min-height:420px;margin:0 auto;max-width:440px}
+  .chapter-with-mascot .ch-visual{width:100%;margin:14px 0 0;padding:5px 14px;border-radius:14px}
+  .chapter-with-mascot .ch-visual .cv-row{gap:7px;padding:10px 0}
+  .chapter-with-mascot .ch-visual .cv-ic{width:25px;height:25px;font-size:12px}
+  .chapter-with-mascot .ch-visual .cv-t{font-size:11.5px}
+  .chapter-with-mascot .ch-visual .cv-s{font-size:10.5px}
+  .chapter-scene{inset:auto -7% -1px -7%}
+  .final-cta-card.mascot-cta{display:flex;flex-direction:column;align-items:stretch;padding:30px 25px 0;gap:0;min-height:0}
+  .mascot-cta h2{font-size:30px;max-width:390px}
+  .mascot-cta h2 .g{display:block}
+.mascot-cta p{font-size:14px;max-width:280px}
+  .mascot-cta .btn-lg{padding:14px 20px;font-size:14px}
+  .final-cta-art{position:relative;width:210px;right:auto;bottom:auto;align-self:flex-end;margin:-9px -8px 0 0}
+}
+@media(max-width:360px){
+  .chapter-panel.chapter-with-mascot{padding:24px 19px 0}
+  .chapter-art{min-height:390px}
+  .chapter-with-mascot .ch-visual{width:100%;margin-right:0}
+  .chapter-scene{inset:auto -12% 0 -10%}
+  .outcome-panel{padding-left:19px;padding-right:19px}
+  .oc-demo::before{left:-19px;right:-19px}
+}
+@media(prefers-reduced-motion:reduce){
+  .greeting-portal img{opacity:1;transform:none;transition:none}
+  .greeting-light{display:none}
+  .zeni-arrived .greeting-portal,.chapter-panel.anim .chapter-scene,.chapter-panel.anim .ch-visual,.outcome-panel.anim .oc-response,.outcome-panel.anim .oc-demo-bubble.user{animation:none}
+}
