@@ -647,6 +647,46 @@
 @media(max-width:880px){.chapter-with-mascot .chapter-figure.figure-run{right:-15px;width:min(100%,420px)}.final-cta-card.mascot-cta{grid-template-columns:minmax(0,1fr) minmax(220px,.55fr);padding:34px 28px;min-height:280px}.mascot-cta .final-cta-art{width:min(43%,350px);right:0}.mascot-cta h2{font-size:clamp(27px,3.5vw,36px)}}
 @media(max-width:650px){.chapter-with-mascot .chapter-figure.figure-run{width:328px;right:-44px;bottom:-2px}.final-cta-card.mascot-cta{display:flex;flex-direction:column;align-items:stretch;padding:29px 25px 0;min-height:0;text-align:left;border-radius:25px}.mascot-cta .final-cta-copy{padding-right:0}.mascot-cta h2{font-size:clamp(27px,6.8vw,35px)}.mascot-cta p{margin:13px 0 22px}.mascot-cta .final-cta-art{position:relative;right:auto;bottom:auto;width:min(89%,340px);max-height:260px;margin:-3px -8px 0 auto;align-self:flex-end}.mascot-cta .final-cta-art img{max-height:260px}}
 @media(prefers-reduced-motion:reduce){.mascot-cta .final-cta-art img{animation:none!important;transition:none!important}}
+
+/* PREVIEW QUALITY PASS */
+.eyebrow{position:relative;overflow:visible;isolation:isolate}
+.hero-peek{position:absolute;z-index:3;right:-72px;bottom:17px;width:118px;height:auto;pointer-events:none;transform-origin:52% 100%;filter:drop-shadow(0 8px 12px rgba(64,45,104,.12));animation:heroPeekIn .55s .72s cubic-bezier(.2,.8,.2,1) both,heroPeekHello .9s 1.35s ease-in-out 1}
+@keyframes heroPeekIn{from{opacity:0;transform:translateY(9px) scale(.96)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes heroPeekHello{0%,100%{transform:rotate(0)}45%{transform:rotate(1.8deg)}70%{transform:rotate(-.8deg)}}
+.chapter-panel.chapter-with-mascot{min-height:500px;padding:38px 42px 0;grid-template-columns:minmax(0,.94fr) minmax(0,1.06fr);background:linear-gradient(118deg,#fff 0%,#fff 50%,#f8f5ff 100%)}
+.chapter-with-mascot .chapter-copy{padding:0 8px 42px 0}
+.chapter-with-mascot .chapter-art{min-height:455px;overflow:visible}
+.chapter-with-mascot .chapter-art:before{width:410px;height:410px;right:-85px;bottom:-108px;background:radial-gradient(circle at 52% 46%,rgba(234,226,255,.92) 0%,rgba(246,241,255,.78) 46%,rgba(248,245,255,0) 72%)}
+.chapter-with-mascot .chapter-figure{right:-8px;bottom:-8px;width:365px;height:auto;aspect-ratio:auto;filter:drop-shadow(0 18px 26px rgba(68,47,108,.11))}
+.chapter-with-mascot .chapter-figure.figure-setup{width:356px;right:0;bottom:-14px}
+.chapter-with-mascot .chapter-figure.figure-run{width:405px;right:-22px;bottom:-7px;aspect-ratio:auto}
+.chapter-with-mascot .chapter-figure img{width:100%;height:auto;max-height:430px;object-fit:contain;object-position:bottom right}
+.chapter-with-mascot .ch-visual{left:0;top:46px;width:min(54%,238px);z-index:4;gap:9px}
+.chapter-with-mascot .ch-visual .cv-row{padding:11px 12px;border-radius:16px;background:rgba(255,255,255,.94);border:1px solid rgba(123,97,255,.12);box-shadow:0 12px 28px rgba(66,45,112,.085);backdrop-filter:blur(12px)}
+.chapter-with-mascot .ch-visual .cv-row:nth-child(2){margin-left:8px}
+.chapter-with-mascot .ch-visual .cv-row:nth-child(3){margin-left:16px}
+.chapter-with-mascot .ch-visual .cv-t{font-size:11.5px}.chapter-with-mascot .ch-visual .cv-s{font-size:10px}
+.oc-demo{position:relative;isolation:isolate;padding:18px 12px;border:0;background:transparent}
+.oc-demo:before{content:"";position:absolute;z-index:-1;width:92%;height:82%;inset:9% 4%;border-radius:42px;background:radial-gradient(circle at 58% 48%,rgba(222,213,250,.62),rgba(242,238,252,.28) 55%,rgba(245,242,252,0) 78%);filter:blur(8px)}
+.oc-demo-phone{width:min(100%,322px);padding:7px;overflow:visible;border-radius:39px;border:1px solid rgba(255,255,255,.95);background:linear-gradient(155deg,rgba(255,255,255,.95),rgba(236,232,247,.82));box-shadow:0 24px 54px rgba(64,48,120,.18),0 0 0 1px rgba(181,170,229,.18),inset 0 1px 2px rgba(255,255,255,.92)}
+.oc-demo-screen{overflow:hidden;border-radius:31px;background:var(--wa-body);box-shadow:0 0 0 1px rgba(27,28,58,.045)}
+.oc-demo-status{height:26px;padding:7px 16px 1px;background:#fff;font-size:10.5px}
+.oc-demo-top{padding:8px 12px 10px;background:#fff;gap:8px;border-bottom:1px solid rgba(27,28,58,.06)}
+.oc-demo-back{font-size:15px;color:var(--muted);flex-shrink:0}
+.oc-demo-avatar{width:33px;height:33px;border-radius:50%;background:#fff;border:0;box-shadow:0 1px 5px rgba(0,0,0,.11)}
+.oc-demo-identity{gap:2px}.oc-demo-identity b{font-size:13px}.oc-demo-identity small{font-size:10px}
+.oc-demo-actions{margin-left:auto;display:flex;align-items:center;gap:11px;color:var(--muted);font-size:14px}
+.oc-demo-chat{min-height:250px;padding:16px 11px 11px;gap:10px;justify-content:flex-start;background:linear-gradient(180deg,#F0EDF7 0%,#F3F0F8 100%)}
+.oc-demo-bubble{max-width:91%;padding:10px 11px 17px;border-radius:13px;font-size:12.4px;line-height:1.48;box-shadow:0 1px 3px rgba(36,30,74,.07)}
+.oc-demo-bubble.user{border-top-right-radius:4px}.oc-demo-bubble.zeni{border-top-left-radius:4px}
+.oc-demo-composer{margin-top:auto;height:34px;border-radius:18px;padding:0 9px;display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.94);border:1px solid rgba(27,28,58,.055);box-shadow:0 1px 3px rgba(36,30,74,.045)}
+.oc-compose-face{font-size:16px;color:var(--faint);line-height:1;transform:translateY(-1px)}.oc-compose-line{height:6px;flex:1;border-radius:6px;background:linear-gradient(90deg,rgba(99,101,138,.18),rgba(99,101,138,.07))}.oc-compose-dot{width:20px;height:20px;border-radius:50%;background:var(--grad);box-shadow:0 3px 8px rgba(123,97,255,.24)}
+@keyframes ocPolishIn{from{transform:translateY(4px);opacity:.92}to{transform:none;opacity:1}}
+.outcome-panel.anim .oc-demo-bubble{animation:ocPolishIn .34s ease-out both}.outcome-panel.anim .oc-demo-bubble.zeni{animation-delay:.08s}
+@media(max-width:880px){.hero-peek{width:106px;right:-64px;bottom:17px}.chapter-panel.chapter-with-mascot{padding:30px 26px 0}.chapter-with-mascot .chapter-art{min-height:400px}.chapter-with-mascot .chapter-figure.figure-setup{width:330px;right:-8px}.chapter-with-mascot .chapter-figure.figure-run{width:370px;right:-24px}.chapter-with-mascot .ch-visual{top:30px;width:min(54%,220px)}.oc-demo{padding:12px 4px}}
+@media(max-width:520px){.hero-peek{width:88px;right:-52px;bottom:17px}.chapter-panel.chapter-with-mascot{padding:24px 20px 0}.chapter-with-mascot .chapter-art{min-height:338px}.chapter-with-mascot .chapter-figure.figure-setup{width:274px;right:-30px;bottom:-6px}.chapter-with-mascot .chapter-figure.figure-run{width:306px;right:-42px;bottom:-2px}.chapter-with-mascot .ch-visual{top:16px;width:56%;max-width:190px}.chapter-with-mascot .ch-visual .cv-row{padding:8px}.chapter-with-mascot .ch-visual .cv-row:nth-child(2){margin-left:4px}.chapter-with-mascot .ch-visual .cv-row:nth-child(3){margin-left:8px}.oc-demo-phone{max-width:310px;padding:6px;border-radius:35px}.oc-demo-screen{border-radius:28px}.oc-demo-chat{min-height:232px;padding:13px 10px 10px}}
+@media(prefers-reduced-motion:reduce){.hero-peek{animation:none!important;opacity:1!important}.outcome-panel.anim .oc-demo-bubble{animation:none!important}}
+
 </style>
 </head>
 <body>
@@ -688,7 +728,7 @@
   </div>
   <div class="wrap"><div class="hero-in">
     <div>
-      <div class="eyebrow"><span class="pulse"></span> <span id="typeText"></span><span class="type-cursor" id="typeCursor"></span></div>
+      <div class="eyebrow"><span class="pulse"></span> <span id="typeText"></span><span class="type-cursor" id="typeCursor"></span><img class="hero-peek" src="/assets/mascot/zeni3-hero-peek.webp" width="300" height="224" alt="" decoding="async"></div>
       <h1>Your business operator on <span class="g2">WhatsApp.</span></h1>
       <p class="hero-sub">I help you set up and run your business in Canada, then expand into the U.S. when you’re ready — all through WhatsApp.</p>
       <div class="trust">
@@ -1695,8 +1735,8 @@ function renderChapter(id){
       return '<li style="animation-delay:'+(i*0.08)+'s"><span class="ic" data-ic="check"></span><span>'+item+'</span></li>';
     }).join('')+'</ul></div>'+
     '<div class="chapter-art" data-mode="'+id+'">'+
-      '<div class="chapter-figure figure-setup" aria-hidden="true"><img src="/assets/mascot/zeni3-setup-2ears.webp" alt="" decoding="async"></div>'+
-      '<div class="chapter-figure figure-run" aria-hidden="true"><img src="/assets/mascot/zeni3-operator-laptop.webp" alt="" decoding="async"></div>'+
+      '<div class="chapter-figure figure-setup" aria-hidden="true"><img src="/assets/mascot/zeni3-setup-premium.webp" alt="" decoding="async"></div>'+
+      '<div class="chapter-figure figure-run" aria-hidden="true"><img src="/assets/mascot/zeni3-operator-premium.webp" alt="" decoding="async"></div>'+
       '<div class="ch-visual">'+c.visual.map(chVisualRow).join('')+'</div>'+
     '</div>';
   var panel = document.getElementById('chapterPanel');
@@ -1761,12 +1801,13 @@ var OUTCOME_DEMOS = {
 function outcomeDemo(id){
   var d=OUTCOME_DEMOS[id]||OUTCOME_DEMOS.money;
   return '<div class="oc-demo" aria-label="Example conversation with Zeni">'+
-    '<div class="oc-demo-phone">'+
+    '<div class="oc-demo-phone"><div class="oc-demo-screen">'+
       '<div class="oc-demo-status"><span>9:41</span><span class="oc-demo-signals"><span class="ic" data-ic="signal"></span><span class="ic" data-ic="wifi"></span><span class="ic" data-ic="battery"></span></span></div>'+
-      '<div class="oc-demo-top"><div class="oc-demo-avatar"><img src="/logo.png" alt="" loading="lazy" decoding="async"></div><div class="oc-demo-identity"><b>Zeni</b><small>online</small></div></div>'+
+      '<div class="oc-demo-top"><span class="oc-demo-back ic" data-ic="back"></span><div class="oc-demo-avatar"><img src="/logo.png" alt="" loading="lazy" decoding="async"></div><div class="oc-demo-identity"><b>Zeni</b><small>online</small></div><div class="oc-demo-actions"><span class="ic" data-ic="call"></span><span class="ic" data-ic="more"></span></div></div>'+
       '<div class="oc-demo-chat"><div class="oc-demo-bubble user">'+d.question+'<span class="oc-demo-time">9:41 ✓✓</span></div>'+
-      '<div class="oc-demo-bubble zeni">'+d.answer+'<span class="oc-demo-time">9:42</span></div></div>'+
-    '</div></div>';
+      '<div class="oc-demo-bubble zeni">'+d.answer+'<span class="oc-demo-time">9:42</span></div>'+
+      '<div class="oc-demo-composer" aria-hidden="true"><span class="oc-compose-face">◡</span><span class="oc-compose-line"></span><span class="oc-compose-dot"></span></div></div>'+
+    '</div></div></div>';
 }
 
 var ocActive = 'money';
