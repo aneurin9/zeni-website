@@ -118,7 +118,8 @@
   .wa-top .nm{font-size:13.5px;font-weight:700;line-height:1.15;display:flex;align-items:center;gap:5px;white-space:nowrap}
   .wa-top .nm .vf{color:var(--mist);font-size:14px}
   .wa-top .role{font-size:10.5px;color:#2fa360;font-weight:600;white-space:nowrap;transition:color .2s}
-  .wa-top .role.typing{color:var(--muted);font-weight:400}
+  #heroStatus{width:64px;height:16.8px;line-height:16.8px}
+  .wa-top .role.status-typing{color:var(--muted);font-weight:400}
   .wa-top .p-icons{margin-left:auto;display:flex;gap:12px;color:var(--muted);font-size:15px}
   .wa-body{height:398px;padding:12px 11px;display:flex;flex-direction:column;gap:7px;overflow:hidden;background:var(--wa-body)}
   .day{align-self:center;background:#fff;color:var(--muted);font-size:10px;font-weight:600;padding:3px 11px;border-radius:8px;box-shadow:var(--shadow-sm);margin-bottom:3px}
@@ -979,12 +980,12 @@ async function heroPlayScene(box,status,scene){
   for(var idx=0; idx<scene.length; idx++){
     var m=scene[idx];
     if(m.from==='z'){
-      status.textContent='typing…'; status.classList.add('typing');
+      status.textContent='typing…'; status.classList.add('status-typing');
       var t=document.createElement('div'); t.className='typing'; t.innerHTML='<i></i><i></i><i></i>';
       box.appendChild(t); box.scrollTop=box.scrollHeight;
       await heroSleep(1100);
       t.remove();
-      status.textContent='online'; status.classList.remove('typing');
+      status.textContent='online'; status.classList.remove('status-typing');
     } else {
       await heroSleep(650);
     }
