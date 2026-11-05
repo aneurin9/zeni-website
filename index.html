@@ -633,6 +633,20 @@
     .chapter-with-mascot .chapter-figure{transition:none!important}
   }
 
+
+/* Staged Zeni visual refinement: natural laptop and document CTA only. */
+.chapter-with-mascot .chapter-figure.figure-run{width:min(105%,470px);right:-34px;bottom:-12px;aspect-ratio:492/368}
+.chapter-with-mascot .operator-screen-plain{display:none!important}
+.final-cta-card.mascot-cta{position:relative;isolation:isolate;overflow:hidden;display:grid;grid-template-columns:minmax(0,1.38fr) minmax(280px,.62fr);align-items:center;max-width:1060px;min-height:315px;padding:43px 44px;text-align:left;background:linear-gradient(112deg,#f4f0ff,#ede7ff 51%,#e8e0ff);border:1px solid #e9dffc;border-radius:30px;box-shadow:0 16px 48px rgba(63,45,112,.075);backdrop-filter:none}
+.mascot-cta .final-cta-copy{position:relative;z-index:2;min-width:0}
+.mascot-cta h2{max-width:610px;font-size:clamp(29px,3.45vw,43px);line-height:1.14}
+.mascot-cta p{margin:15px 0 25px;font-size:clamp(14px,1.6vw,16px)}
+.mascot-cta .final-cta-art{position:absolute;z-index:1;bottom:0;right:10px;width:min(41%,430px);max-height:100%;pointer-events:none;display:flex;align-items:flex-end;justify-content:flex-end}
+.mascot-cta .final-cta-art img{display:block;width:100%;height:auto;max-height:305px;object-fit:contain;object-position:bottom right;filter:drop-shadow(0 10px 14px rgba(69,47,110,.09))}
+.mascot-cta .final-cta-art::before,.mascot-cta .final-cta-art::after{display:none!important}
+@media(max-width:880px){.chapter-with-mascot .chapter-figure.figure-run{right:-15px;width:min(100%,420px)}.final-cta-card.mascot-cta{grid-template-columns:minmax(0,1fr) minmax(220px,.55fr);padding:34px 28px;min-height:280px}.mascot-cta .final-cta-art{width:min(43%,350px);right:0}.mascot-cta h2{font-size:clamp(27px,3.5vw,36px)}}
+@media(max-width:650px){.chapter-with-mascot .chapter-figure.figure-run{width:328px;right:-44px;bottom:-2px}.final-cta-card.mascot-cta{display:flex;flex-direction:column;align-items:stretch;padding:29px 25px 0;min-height:0;text-align:left;border-radius:25px}.mascot-cta .final-cta-copy{padding-right:0}.mascot-cta h2{font-size:clamp(27px,6.8vw,35px)}.mascot-cta p{margin:13px 0 22px}.mascot-cta .final-cta-art{position:relative;right:auto;bottom:auto;width:min(89%,340px);max-height:260px;margin:-3px -8px 0 auto;align-self:flex-end}.mascot-cta .final-cta-art img{max-height:260px}}
+@media(prefers-reduced-motion:reduce){.mascot-cta .final-cta-art img{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
@@ -914,10 +928,13 @@
 
 <section class="section">
   <div class="wrap">
-    <div class="final-cta-card">
-      <h2>You build the business. <span class="g">I’ll keep the next step clear.</span></h2>
-      <p>No experience needed. No new software. Cancel anytime.</p>
-      <button class="btn btn-primary btn-lg" onclick="openGetStarted()">Get started with Zeni <span class="ic" data-ic="arrow"></span></button>
+    <div class="final-cta-card mascot-cta">
+      <div class="final-cta-copy">
+        <h2>You build the business. <span class="g">I’ll keep the next step clear.</span></h2>
+        <p>No experience needed. No new software. Cancel anytime.</p>
+        <button class="btn btn-primary btn-lg" onclick="openGetStarted()">Get started with Zeni <span class="ic" data-ic="arrow"></span></button>
+      </div>
+      <div class="final-cta-art" aria-hidden="true"><img src="/assets/mascot/zeni3-document-cta.webp" width="442" height="303" loading="lazy" decoding="async" alt=""></div>
     </div>
   </div>
 </section>
@@ -1679,7 +1696,7 @@ function renderChapter(id){
     }).join('')+'</ul></div>'+
     '<div class="chapter-art" data-mode="'+id+'">'+
       '<div class="chapter-figure figure-setup" aria-hidden="true"><img src="/assets/mascot/zeni3-setup-2ears.webp" alt="" decoding="async"></div>'+
-      '<div class="chapter-figure figure-run" aria-hidden="true"><img src="/assets/mascot/zeni3-operator-2ears.webp" alt="" decoding="async"><span class="operator-screen-plain"></span></div>'+
+      '<div class="chapter-figure figure-run" aria-hidden="true"><img src="/assets/mascot/zeni3-operator-laptop.webp" alt="" decoding="async"></div>'+
       '<div class="ch-visual">'+c.visual.map(chVisualRow).join('')+'</div>'+
     '</div>';
   var panel = document.getElementById('chapterPanel');
