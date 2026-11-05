@@ -1637,6 +1637,19 @@ function outcomeDemo(id){
 }
 
 var ocActive = 'money';
+var outcomePhoneObserver = 'IntersectionObserver' in window ? new IntersectionObserver(function(entries){
+  entries.forEach(function(entry){
+    var panel=document.getElementById('outcomePanel');
+    if(entry.target !== panel.querySelector('.oc-phone')) return;
+    if(entry.isIntersecting){
+      if(!panel.classList.contains('anim')){
+        panel.classList.remove('oc-pending'); void panel.offsetWidth; panel.classList.add('anim');
+      }
+    } else {
+      panel.classList.remove('anim'); panel.classList.add('oc-pending');
+    }
+  });
+},{threshold:0.4}) : null;
 
 function renderOutcomeTabs(){
   document.getElementById('outcomeTabs').innerHTML = OUTCOMES.map(function(o){
@@ -1647,13 +1660,16 @@ function renderOutcomeTabs(){
 function renderOutcomePanel(){
   var o = OUTCOMES.filter(function(x){return x.id===ocActive;})[0];
   var panel = document.getElementById('outcomePanel');
+  var oldPhone=panel.querySelector('.oc-phone');
+  if(outcomePhoneObserver && oldPhone) outcomePhoneObserver.unobserve(oldPhone);
+  panel.classList.remove('anim');
+  if(outcomePhoneObserver) panel.classList.add('oc-pending');
   panel.innerHTML =
     '<div class="oc-copy"><div class="oc-head"><div class="oc-ic">'+ICONS[o.ic]+'</div><div><h3>'+o.title+'</h3><p>'+o.sub+'</p></div></div>'+
     '<ul class="oc-list">'+o.items.map(function(it){return '<li><span class="ic" data-ic="check"></span><span>'+it+'</span></li>';}).join('')+'</ul></div>'+
     outcomeDemo(o.id);
-  panel.classList.remove('anim');
-  var bounds=panel.getBoundingClientRect();
-  if(bounds.top < window.innerHeight && bounds.bottom > 0){ void panel.offsetWidth; panel.classList.add('anim'); }
+  if(outcomePhoneObserver) outcomePhoneObserver.observe(panel.querySelector('.oc-phone'));
+  else { panel.classList.remove('oc-pending'); void panel.offsetWidth; panel.classList.add('anim'); }
   injectIcons(panel);
 }
 function setOutcome(id){
@@ -1663,15 +1679,7 @@ function setOutcome(id){
 }
 renderOutcomeTabs();
 renderOutcomePanel();
-if('IntersectionObserver' in window){
-  var outcomePanelObserver = new IntersectionObserver(function(entries){
-    var panel=entries[0].target;
-    if(entries[0].isIntersecting){
-      if(!panel.classList.contains('anim')){ void panel.offsetWidth; panel.classList.add('anim'); }
-    } else { panel.classList.remove('anim'); }
-  },{threshold:0.12});
-  outcomePanelObserver.observe(document.getElementById('outcomePanel'));
-}
+
 
 </script>
 

@@ -196,3 +196,7 @@
 @media(max-width:880px){.outcome-panel .oc-demo{padding-left:24px}}
 @media(max-width:650px){.outcome-panel .oc-demo{padding:24px 0 28px}.oc-phone{width:min(100%,286px)}}
 @media(prefers-reduced-motion:reduce){.outcome-panel.anim .oc-demo-bubble.user,.outcome-panel.anim .oc-response{animation:none}.outcome-panel.anim .oc-phone-typing,.outcome-panel.anim .oc-phone-typing i{animation:none;opacity:0}}
+
+/* Wait for the phone to enter the viewport before replaying its exchange. */
+.outcome-panel.oc-pending .oc-demo-bubble.user,.outcome-panel.oc-pending .oc-response{opacity:0}
+@media(prefers-reduced-motion:reduce){.outcome-panel.oc-pending .oc-demo-bubble.user,.outcome-panel.oc-pending .oc-response{opacity:1}}
