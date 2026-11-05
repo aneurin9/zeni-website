@@ -8,6 +8,9 @@ on:
       - 'index.html'
       - 'welcome/index.html'
       - 'welcome/welcome.js'
+      - 'welcome/shared.css'
+      - 'getting-started/**'
+      - 'scripts/validate-getting-started.mjs'
       - 'paid-checkout.js'
       - 'api/checkout.js'
       - 'api/welcome.js'
@@ -46,6 +49,7 @@ jobs:
           node --check netlify/functions/checkout.mjs
           node --check netlify/functions/welcome.mjs
           node scripts/validate-netlify-bridges.mjs
+          node scripts/validate-getting-started.mjs
 
       - name: Validate paid checkout integration
         shell: bash

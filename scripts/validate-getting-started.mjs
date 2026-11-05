@@ -1,0 +1,15 @@
+import { readFileSync } from 'node:fs'
+import assert from 'node:assert/strict'
+const read = p => readFileSync(p, 'utf8')
+const page = read('getting-started/index.html')
+const welcome = read('welcome/index.html')
+const script = read('welcome/welcome.js')
+const css = read('welcome/shared.css')
+for (const marker of ['https://wa.me/16475601842?text=Hi%20Zeni', 'https://wa.me/16475032333', 'mailto:support@zeni.business', 'https://billing.stripe.com/p/login/5kQ7sK4eAbbgbrpf421ck00', 'Show setup progress', 'Get me unstuck']) assert.ok(page.includes(marker), `Reference page missing ${marker}`)
+assert.ok(page.includes('href="/welcome/shared.css"'))
+assert.ok(welcome.includes('href="/welcome/shared.css"'))
+assert.ok(welcome.includes('href="/getting-started"'))
+assert.ok(script.includes("fetch('/api/welcome?checkout_session_id='"))
+assert.ok(css.includes('body[data-payment-state]:not([data-payment-state="verified"]) .wrap{display:none}'))
+assert.ok(!/checkout_session_id|payment confirmed|subscription is active|Hi Marcus|welcome\/welcome\.js/i.test(page), 'Public guide contains protected or personalized content')
+console.log('Getting started reference and protected welcome checks passed')
