@@ -157,3 +157,42 @@
   .chapter-with-mascot .ch-visual .cv-row:nth-child(3){margin-left:10px}
 }
 @media(max-width:360px){.chapter-art{min-height:400px}}
+
+/* Compact phone conversations, using the hero's WhatsApp-inspired palette. */
+.outcome-panel .oc-demo{justify-content:center;padding:22px 0 22px 32px}
+.oc-phone{position:relative;z-index:1;width:min(100%,286px);padding:7px;border:1px solid rgba(255,255,255,.95);border-radius:35px;background:linear-gradient(160deg,rgba(255,255,255,.95),rgba(238,235,250,.86));box-shadow:0 23px 48px rgba(70,55,150,.18),0 0 0 1px rgba(180,170,230,.20)}
+.oc-phone-screen{overflow:hidden;border-radius:28px;background:var(--wa-body);box-shadow:0 0 0 1px rgba(27,28,58,.05)}
+.oc-phone-status{display:flex;justify-content:space-between;align-items:center;background:var(--wa-head);color:var(--wa-head-tx);padding:8px 16px 2px;font-size:10px;font-weight:600;line-height:1.3}
+.oc-phone-signals,.oc-phone-actions{display:flex;align-items:center;gap:4px;color:var(--muted)}
+.oc-phone-signals svg{width:12px;height:12px}
+.oc-phone-header{display:flex;align-items:center;gap:8px;padding:7px 12px 10px;background:var(--wa-head);border-bottom:1px solid var(--line)}
+.oc-phone-back{width:14px;height:14px;display:flex;color:var(--muted)}
+.oc-phone-back svg,.oc-phone-actions svg{width:14px;height:14px}
+.oc-phone-avatar{width:30px;height:30px;display:grid;place-items:center;flex:none;overflow:hidden;background:white;border-radius:50%;box-shadow:0 1px 4px rgba(0,0,0,.1)}
+.oc-phone-avatar img{width:30px;height:30px;object-fit:contain}
+.oc-phone-contact{min-width:0;display:flex;flex-direction:column;align-items:flex-start;line-height:1.2}
+.oc-phone-name{display:flex;align-items:center;gap:4px;color:var(--ink);font-size:12px;font-weight:700}
+.oc-phone-verified{display:flex;color:var(--mist)}.oc-phone-verified svg{width:12px;height:12px}
+.oc-phone-online{font-size:10px;font-weight:600;color:#2fa360;line-height:16px}
+.oc-phone-actions{margin-left:auto;gap:10px}
+.oc-demo .oc-demo-chat{display:flex;min-height:246px;flex-direction:column;gap:12px;width:100%;padding:12px 11px 20px}
+.oc-phone-day{align-self:center;border-radius:7px;background:#fff;color:var(--muted);padding:3px 10px;box-shadow:var(--shadow-sm);font-size:10px;font-weight:600;line-height:1.3}
+.oc-demo .oc-demo-bubble{font-size:12px;line-height:1.5;overflow-wrap:break-word}
+.oc-demo .oc-demo-bubble.user{max-width:90%;padding:9px 11px;border-radius:12px 12px 4px 12px}
+.oc-reply-slot{display:grid;align-items:start;justify-items:start}
+.oc-reply-slot>*{grid-area:1/1}
+.oc-demo .oc-response{display:block;max-width:95%;align-self:start}
+.oc-demo .oc-demo-bubble.zeni{padding:10px 11px;border-radius:12px 12px 12px 4px}
+.oc-phone-typing{display:flex;align-items:center;gap:4px;min-height:30px;padding:8px 11px;border-radius:12px 12px 12px 4px;background:#fff;box-shadow:0 1px 1px rgba(0,0,0,.05);opacity:0;pointer-events:none}
+.oc-phone-typing i{width:5px;height:5px;border-radius:50%;background:var(--faint)}
+.outcome-panel.anim .oc-demo-bubble.user{animation:oc-message-in .45s .18s both}
+.outcome-panel.anim .oc-phone-typing{animation:oc-typing-show 1.8s .55s both}
+.outcome-panel.anim .oc-phone-typing i{animation:blink 1.1s infinite}
+.outcome-panel.anim .oc-phone-typing i:nth-child(2){animation-delay:.18s}
+.outcome-panel.anim .oc-phone-typing i:nth-child(3){animation-delay:.36s}
+.outcome-panel.anim .oc-response{animation:oc-message-in .5s 2.15s both}
+@keyframes oc-message-in{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+@keyframes oc-typing-show{0%,100%{opacity:0}12%,82%{opacity:1}}
+@media(max-width:880px){.outcome-panel .oc-demo{padding-left:24px}}
+@media(max-width:650px){.outcome-panel .oc-demo{padding:24px 0 28px}.oc-phone{width:min(100%,286px)}}
+@media(prefers-reduced-motion:reduce){.outcome-panel.anim .oc-demo-bubble.user,.outcome-panel.anim .oc-response{animation:none}.outcome-panel.anim .oc-phone-typing,.outcome-panel.anim .oc-phone-typing i{animation:none;opacity:0}}

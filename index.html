@@ -1626,10 +1626,14 @@ var OUTCOME_DEMOS = {
 function outcomeDemo(id){
   var d=OUTCOME_DEMOS[id]||OUTCOME_DEMOS.money;
   return '<div class="oc-demo" aria-label="Example conversation with Zeni">'+
-    '<div class="oc-demo-chat">'+
-      '<div class="oc-demo-bubble user">'+d.question+'</div>'+
-      '<div class="oc-response"><span class="oc-response-mark" aria-hidden="true"><img src="/logo.png" width="24" height="24" alt=""></span><div class="oc-demo-bubble zeni">'+d.answer+'</div></div>'+
-    '</div></div>';
+    '<div class="oc-phone"><div class="oc-phone-screen">'+
+      '<div class="oc-phone-status" aria-hidden="true"><span>9:41</span><span class="oc-phone-signals">'+ICONS.signal+ICONS.wifi+ICONS.battery+'</span></div>'+
+      '<div class="oc-phone-header"><span class="oc-phone-back" aria-hidden="true">'+ICONS.back+'</span><span class="oc-phone-avatar" aria-hidden="true"><img src="/logo.png" alt=""></span><span class="oc-phone-contact"><span class="oc-phone-name">Zeni <span class="oc-phone-verified" aria-hidden="true">'+ICONS.verified+'</span></span><span class="oc-phone-online">online</span></span><span class="oc-phone-actions" aria-hidden="true">'+ICONS.call+ICONS.more+'</span></div>'+
+      '<div class="oc-demo-chat"><div class="oc-phone-day">Today</div>'+
+        '<div class="oc-demo-bubble user">'+d.question+'</div>'+
+        '<div class="oc-reply-slot"><div class="oc-phone-typing" aria-hidden="true"><i></i><i></i><i></i></div><div class="oc-response"><div class="oc-demo-bubble zeni">'+d.answer+'</div></div></div>'+
+      '</div>'+
+    '</div></div></div>';
 }
 
 var ocActive = 'money';
@@ -1647,7 +1651,9 @@ function renderOutcomePanel(){
     '<div class="oc-copy"><div class="oc-head"><div class="oc-ic">'+ICONS[o.ic]+'</div><div><h3>'+o.title+'</h3><p>'+o.sub+'</p></div></div>'+
     '<ul class="oc-list">'+o.items.map(function(it){return '<li><span class="ic" data-ic="check"></span><span>'+it+'</span></li>';}).join('')+'</ul></div>'+
     outcomeDemo(o.id);
-  panel.classList.remove('anim'); void panel.offsetWidth; panel.classList.add('anim');
+  panel.classList.remove('anim');
+  var bounds=panel.getBoundingClientRect();
+  if(bounds.top < window.innerHeight && bounds.bottom > 0){ void panel.offsetWidth; panel.classList.add('anim'); }
   injectIcons(panel);
 }
 function setOutcome(id){
@@ -1657,6 +1663,15 @@ function setOutcome(id){
 }
 renderOutcomeTabs();
 renderOutcomePanel();
+if('IntersectionObserver' in window){
+  var outcomePanelObserver = new IntersectionObserver(function(entries){
+    var panel=entries[0].target;
+    if(entries[0].isIntersecting){
+      if(!panel.classList.contains('anim')){ void panel.offsetWidth; panel.classList.add('anim'); }
+    } else { panel.classList.remove('anim'); }
+  },{threshold:0.12});
+  outcomePanelObserver.observe(document.getElementById('outcomePanel'));
+}
 
 </script>
 
