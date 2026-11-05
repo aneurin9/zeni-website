@@ -23,7 +23,8 @@
     --violet:#7B61FF; --violet-d:#6A4FF0; --mist:#5AA9FF; --glow:#B98BFF;
     --line:rgba(27,28,58,.09); --line2:rgba(27,28,58,.14);
     --grad:linear-gradient(135deg,#7B61FF 0%,#7A6EF2 55%,#6C86EC 100%);
-    --grad-word:linear-gradient(90deg,#FF7AC6 0%,#B968E8 42%,#7B61FF 68%,#4FA8FF 100%);
+    --grad-control:linear-gradient(135deg,#6748d7 0%,#6257cb 55%,#5067b9 100%);
+    --grad-word:linear-gradient(90deg,#b13b88 0%,#9142a7 42%,#6748d7 68%,#5067b9 100%);
     --glass:rgba(255,255,255,.62); --glass-brd:rgba(255,255,255,.8);
     --wa-head:#FFFFFF; --wa-head-tx:#1B1C3A; --wa-body:#F0EDF7;
     --wa-in:#FFFFFF; --wa-out:#DCF7C5; --wa-out-tx:#173321;
@@ -56,7 +57,7 @@
   .nav-links a,.nav-links button{font-size:14px;color:var(--muted);font-weight:500;transition:color .2s;background:none;border:none;padding:0}
   .nav-links a:hover,.nav-links button:hover{color:var(--ink)}
   .btn{border:none;border-radius:13px;font-weight:600;transition:transform .18s,box-shadow .18s,opacity .18s;display:inline-flex;align-items:center;gap:8px;justify-content:center}
-  .btn-primary{background:var(--grad);color:#fff;padding:11px 22px;font-size:14.5px;box-shadow:0 8px 22px rgba(123,97,255,.32)}
+  .btn-primary{background:var(--grad-control);color:#fff;padding:11px 22px;font-size:14.5px;box-shadow:0 8px 22px rgba(123,97,255,.32)}
   .btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(123,97,255,.42)}
   .btn-ghost{background:rgba(255,255,255,.55);color:var(--ink);border:1px solid rgba(255,255,255,.75);padding:10px 20px;font-size:14.5px;box-shadow:0 6px 20px rgba(90,70,160,.1);backdrop-filter:blur(14px) saturate(1.3);-webkit-backdrop-filter:blur(14px) saturate(1.3)}
   .btn-ghost:hover{transform:translateY(-2px)}
@@ -117,8 +118,9 @@
   .wa-top .av img{width:34px;height:34px;object-fit:contain}
   .wa-top .nm{font-size:13.5px;font-weight:700;line-height:1.15;display:flex;align-items:center;gap:5px;white-space:nowrap}
   .wa-top .nm .vf{color:var(--mist);font-size:14px}
-  .wa-top .role{font-size:10.5px;color:#2fa360;font-weight:600;white-space:nowrap;transition:color .2s}
-  .wa-top .role.typing{color:var(--muted);font-weight:400}
+  .wa-top .role{font-size:10.5px;color:#26703c;font-weight:600;white-space:nowrap;transition:color .2s}
+  #heroStatus{width:64px;height:16.8px;line-height:16.8px}
+  .wa-top .role.status-typing{color:var(--muted);font-weight:400}
   .wa-top .p-icons{margin-left:auto;display:flex;gap:12px;color:var(--muted);font-size:15px}
   .wa-body{height:398px;padding:12px 11px;display:flex;flex-direction:column;gap:7px;overflow:hidden;background:var(--wa-body)}
   .day{align-self:center;background:#fff;color:var(--muted);font-size:10px;font-weight:600;padding:3px 11px;border-radius:8px;box-shadow:var(--shadow-sm);margin-bottom:3px}
@@ -127,7 +129,7 @@
   .bub.in{background:var(--wa-in);color:var(--ink);align-self:flex-start;border-top-left-radius:4px}
   .bub.out{background:var(--wa-out);color:var(--wa-out-tx);align-self:flex-end;border-top-right-radius:4px}
   .bub .t{font-size:9px;color:var(--faint);float:right;margin:5px 0 -2px 8px}
-  .bub.out .t{color:#5c8a63}
+  .bub.out .t{color:#48684d}
   .bub.gone,.rlist.gone{transition:opacity .4s ease,transform .4s ease;opacity:0!important;transform:translateY(-14px)!important;animation:none!important}
   .rlist{background:var(--wa-in);border-radius:12px;border-top-left-radius:4px;align-self:flex-start;max-width:94%;padding:9px;display:flex;flex-direction:column;gap:9px;box-shadow:0 1px 1px rgba(0,0,0,.05);opacity:0;transform:translateY(8px);animation:rise .45s forwards}
   .ritem{display:flex;gap:9px;align-items:flex-start}
@@ -161,20 +163,20 @@
   @keyframes fade{from{opacity:0}to{opacity:1}}
   .modal-card{width:min(880px,100%);max-height:92vh;background:var(--card);border:1px solid var(--glass-brd);border-radius:26px;box-shadow:var(--shadow-lg);display:flex;flex-direction:column;overflow:hidden;position:relative;animation:pop .32s cubic-bezier(.2,.9,.3,1.1)}
   @keyframes pop{from{opacity:0;transform:translateY(16px) scale(.97)}to{opacity:1;transform:none}}
-  .modal-head{padding:18px 24px;display:flex;align-items:center;gap:11px;border-bottom:1px solid var(--line)}
+  .modal-head{padding:18px 24px;display:flex;align-items:center;gap:11px;border-bottom:1px solid var(--line);flex-shrink:0}
   .modal-head .av{width:34px;height:34px;border-radius:50%;overflow:hidden;background:linear-gradient(135deg,#efeafd,#e4f0fb);display:grid;place-items:center}
   .modal-head .av img{width:34px;height:34px;object-fit:contain}
   .modal-head .mt{font-size:14.5px;font-weight:700}
   .modal-head .ms{font-size:11.5px;color:var(--muted)}
   .modal-x{margin-left:auto;width:36px;height:36px;border-radius:10px;border:1px solid var(--line2);background:var(--pearl);color:var(--muted);display:grid;place-items:center;font-size:15px}
   .modal-x:hover{color:var(--ink)}
-  .modal-body{padding:32px 40px;overflow-y:auto;flex:1;min-height:356px}
-  .modal-foot{display:flex;align-items:center;gap:14px;padding:15px 26px;border-top:1px solid var(--line)}
+  .modal-body{padding:32px 40px;overflow-y:auto;flex:1;min-height:0}
+  .modal-foot{display:flex;align-items:center;gap:14px;padding:15px 26px;border-top:1px solid var(--line);flex-shrink:0}
   .steps{display:flex;gap:5px;margin:0 auto;flex-wrap:wrap;justify-content:center}
   .stepdot{display:inline-flex;align-items:center;gap:7px;font-size:11.5px;font-weight:600;color:var(--faint);background:none;border:none;padding:5px 8px;border-radius:100px}
   .stepdot .n{width:20px;height:20px;border-radius:50%;background:var(--pearl2);color:var(--muted);display:grid;place-items:center;font-size:10.5px;font-weight:700}
   .stepdot .n .ic{font-size:12px}
-  .stepdot.active{color:var(--ink)}.stepdot.active .n{background:var(--grad);color:#fff}
+  .stepdot.active{color:var(--ink)}.stepdot.active .n{background:var(--grad-control);color:#fff}
   .stepdot.done .n{background:rgba(123,97,255,.16);color:var(--violet)}
   .stepdot .lbl{display:none}
   @media(min-width:680px){.stepdot .lbl{display:inline}}
@@ -182,7 +184,7 @@
   .navbtn:hover{transform:translateY(-1px)}
   .navbtn.ghost{border:none;box-shadow:none;background:none;color:var(--muted)}
 
-  .wt-eye{font-size:12px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--violet);margin-bottom:11px}
+  .wt-eye{font-size:12px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--violet-d);margin-bottom:11px}
   .wt-title{font-size:clamp(22px,2.8vw,29px);font-weight:800;letter-spacing:-.7px;line-height:1.16;text-wrap:balance}
   .wt-sub{color:var(--muted);font-size:15px;margin-top:11px;max-width:540px}
   .wt-lead{display:flex;align-items:center;gap:12px;margin-bottom:10px}
@@ -193,7 +195,7 @@
   .opt .oi{width:40px;height:40px;border-radius:11px;display:grid;place-items:center;font-size:20px;margin-bottom:13px;color:var(--violet);background:linear-gradient(135deg,rgba(123,97,255,.14),rgba(90,169,255,.12))}
   .opt h4{font-size:15.5px;font-weight:700;letter-spacing:-.3px}
   .opt p{font-size:13px;color:var(--muted);margin-top:5px}
-  .opt-arrow{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:13px;font-weight:700;color:var(--violet)}
+  .opt-arrow{display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:13px;font-weight:700;color:var(--violet-d)}
 
   .ov-cards{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:22px}
   .ovc{background:var(--pearl);border:1px solid var(--line);border-radius:16px;padding:20px}
@@ -215,6 +217,13 @@
   .feat li .ic{color:var(--mist);font-size:13px;margin-top:1px;flex-shrink:0}
   .feat-note{text-align:center;color:var(--muted);font-size:13px;margin-top:18px}
   .feat-note b{color:var(--ink2)}
+  #wtBody:has(.feat-grid){min-height:0}
+  @media(max-width:520px) and (max-height:400px){
+    #demoModal:has(#wtBody .feat-grid) .modal-foot{flex-wrap:nowrap;gap:4px;padding:8px 12px}
+    #demoModal:has(#wtBody .feat-grid) .steps{order:0;width:auto;flex-wrap:nowrap;gap:0;min-width:0}
+    #demoModal:has(#wtBody .feat-grid) .stepdot{padding:3px 2px}
+    #demoModal:has(#wtBody .feat-grid) .navbtn{font-size:12px;padding:7px 8px}
+  }
 
   .simwrap{margin-top:20px;display:flex;justify-content:center}
   .simchat{width:100%;max-width:440px;background:var(--wa-body);border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:var(--shadow)}
@@ -223,8 +232,20 @@
   .sim-top .av img{width:32px;height:32px;object-fit:contain}
   .sim-top .nm{font-size:13.5px;font-weight:700;display:flex;align-items:center;gap:5px}
   .sim-top .nm .vf{color:var(--mist);font-size:13px}
-  .sim-top .role{font-size:10.5px;color:#37b24d}
-  .sim-body{height:344px;padding:14px 13px;display:flex;flex-direction:column;gap:8px;overflow:hidden;background:var(--wa-body)}
+  .sim-top .role{font-size:10.5px;color:#26703c}
+  .sim-body{height:344px;padding:14px 13px;display:flex;flex-direction:column;gap:8px;overflow-y:auto;overscroll-behavior:contain;background:var(--wa-body);transition:opacity .45s ease}
+  .sim-body.sim-restarting{opacity:0}
+  .sim-body .sim-draft{width:94%;max-width:94%;padding:10px 11px}
+  .sim-draft-label{font-size:11px;letter-spacing:.25px;font-weight:700;color:var(--violet-d);margin-bottom:5px}
+  .sim-draft-meta{font-size:10px;line-height:1.4;color:var(--muted);overflow-wrap:anywhere}
+  .sim-draft-content{border-top:1px solid var(--line);margin-top:7px;padding-top:7px;line-height:1.45}
+  #wtBody:has(.simchat){min-height:0}
+  @media(max-width:520px) and (max-height:400px){
+    #demoModal:has(#wtBody .simchat) .modal-foot{flex-wrap:nowrap;gap:4px;padding:8px 12px}
+    #demoModal:has(#wtBody .simchat) .steps{order:0;width:auto;flex-wrap:nowrap;gap:0;min-width:0}
+    #demoModal:has(#wtBody .simchat) .stepdot{padding:3px 2px}
+    #demoModal:has(#wtBody .simchat) .navbtn{font-size:12px;padding:7px 8px}
+  }
   .sim-body .bub{font-size:12.5px}
   .sim-cap{text-align:center;color:var(--muted);font-size:13px;margin-top:14px}
 
@@ -267,7 +288,7 @@
   .wl-error{font-size:12.5px;color:#c0392b;margin-top:2px}
   .wl-done{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600;color:#1a8f5a}
   .wl-done .ic{background:rgba(26,143,90,.14);border-radius:50%;width:26px;height:26px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
-  .wl-back{margin-top:14px;background:none;border:none;color:var(--violet);font-size:13px;font-weight:700;display:inline-flex;align-items:center;gap:6px}
+  .wl-back{margin-top:14px;background:none;border:none;color:var(--violet-d);font-size:13px;font-weight:700;display:inline-flex;align-items:center;gap:6px}
 
   .plan-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px}
   .plan-card{text-align:left;background:var(--pearl);border:1.5px solid var(--line2);border-radius:20px;padding:22px;transition:transform .16s,border-color .16s,box-shadow .16s;position:relative;display:flex;flex-direction:column}
@@ -321,7 +342,7 @@
   /* ---------- SHARED SECTION SHELL ---------- */
   .section{position:relative;z-index:1;padding:86px 0}
   .sec-head{max-width:620px;margin:0 auto 44px;text-align:center}
-  .sec-eye{font-size:12.5px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--violet);margin-bottom:14px}
+  .sec-eye{font-size:12.5px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--violet-d);margin-bottom:14px}
   .sec-head h2{font-size:clamp(27px,3.3vw,38px);font-weight:800;letter-spacing:-1px;line-height:1.16;text-wrap:balance}
   .sec-head p{color:var(--muted);font-size:16px;margin-top:14px;line-height:1.6}
 
@@ -332,7 +353,7 @@
   .reveal-card.revealed{border-color:var(--violet);background:linear-gradient(160deg,rgba(123,97,255,.07),rgba(90,169,255,.05))}
   .rc-ic{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,rgba(123,97,255,.14),rgba(90,169,255,.12));color:var(--violet);display:flex;align-items:center;justify-content:center;font-size:19px;margin-bottom:14px}
   .rc-front h4{font-size:15px;font-weight:700;letter-spacing:-.2px;margin-bottom:8px}
-  .rc-tap{font-size:12px;font-weight:600;color:var(--violet)}
+  .rc-tap{font-size:12px;font-weight:600;color:var(--violet-d)}
   .rc-back{display:none}
   .reveal-card.revealed .rc-front .rc-tap{display:none}
   .reveal-card.revealed .rc-back{display:block;animation:rcfade .3s ease}
@@ -352,7 +373,7 @@
   .chapter-toggle{position:relative;display:flex;background:var(--pearl2);border:1px solid var(--line);border-radius:100px;padding:5px;max-width:420px;margin:0 auto 34px}
   .ct-btn{position:relative;z-index:2;flex:1;background:none;border:none;padding:11px 18px;font-size:14px;font-weight:700;color:var(--muted);border-radius:100px;transition:color .25s}
   .ct-btn.active{color:#fff}
-  .ct-thumb{position:absolute;top:5px;left:5px;bottom:5px;width:calc(50% - 5px);background:var(--grad);border-radius:100px;transition:transform .32s cubic-bezier(.3,.9,.3,1.1);z-index:1;box-shadow:0 6px 16px rgba(123,97,255,.32)}
+  .ct-thumb{position:absolute;top:5px;left:5px;bottom:5px;width:calc(50% - 5px);background:var(--grad-control);border-radius:100px;transition:transform .32s cubic-bezier(.3,.9,.3,1.1);z-index:1;box-shadow:0 6px 16px rgba(123,97,255,.32)}
   .ct-thumb.pos-1{transform:translateX(100%)}
 
   .chapter-panel{background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);padding:40px;display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:center;min-height:300px}
@@ -389,7 +410,7 @@
   .outcome-tabs{display:flex;flex-wrap:wrap;justify-content:center;gap:9px;margin-bottom:30px}
   .ot-btn{display:inline-flex;align-items:center;gap:9px;background:var(--card);border:1px solid var(--line2);border-radius:100px;padding:11px 18px 11px 12px;font-size:13.5px;font-weight:600;color:var(--ink2);transition:all .18s;box-shadow:var(--shadow-sm)}
   .ot-btn .oti{width:26px;height:26px;border-radius:50%;background:var(--pearl2);color:var(--violet);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;transition:all .18s}
-  .ot-btn.active{background:var(--grad);color:#fff;border-color:transparent;box-shadow:0 8px 20px rgba(123,97,255,.28)}
+  .ot-btn.active{background:var(--grad-control);color:#fff;border-color:transparent;box-shadow:0 8px 20px rgba(123,97,255,.28)}
   .ot-btn.active .oti{background:rgba(255,255,255,.24);color:#fff}
   .outcome-panel{background:var(--card);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);padding:40px}
   .outcome-panel.anim{animation:chfade .36s ease}
@@ -402,6 +423,7 @@
   .oc-list li .ic{color:var(--mist);font-size:15px;margin-top:2px;flex-shrink:0}
   .outcome-note{text-align:center;color:var(--muted);font-size:13.5px;margin-top:24px}
   .outcome-note b{color:var(--ink2)}
+
 
   /* ---------- MEMORY & CONTINUITY ---------- */
   .memory-shell{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
@@ -434,7 +456,7 @@
   .pricing-card{background:var(--card);border:1.5px solid var(--line2);border-radius:26px;padding:34px 32px;box-shadow:var(--shadow-sm);display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s}
   .pricing-card:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
   .pricing-card.feature{border-color:var(--violet);box-shadow:0 16px 40px rgba(123,97,255,.16);position:relative}
-  .pricing-card.feature::before{content:'Best value';position:absolute;top:-13px;left:32px;background:var(--grad);color:#fff;font-size:11px;font-weight:700;letter-spacing:.3px;padding:5px 14px;border-radius:100px;box-shadow:0 6px 14px rgba(123,97,255,.35)}
+  .pricing-card.feature::before{content:'Best value';position:absolute;top:-13px;left:32px;background:var(--grad-control);color:#fff;font-size:11px;font-weight:700;letter-spacing:.3px;padding:5px 14px;border-radius:100px;box-shadow:0 6px 14px rgba(123,97,255,.35)}
   .pc-tag{font-size:11.5px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--violet-d);margin-bottom:12px}
   .pricing-card h3{font-size:23px;font-weight:800;letter-spacing:-.5px}
   .pricing-card .pc-price{font-size:38px;font-weight:800;letter-spacing:-1px;margin:14px 0 4px}
@@ -500,7 +522,10 @@
   .foot-copy{font-size:12.5px;color:var(--faint)}
   @media(max-width:560px){.foot-brand-row{flex-direction:column;align-items:flex-start}}
 
+
+  /* Purpose-built visual scenes; component styles are scoped in visual-refresh.css. */
 </style>
+  <link rel="stylesheet" href="/assets/visual-refresh.css">
 </head>
 <body>
 
@@ -541,7 +566,7 @@
   </div>
   <div class="wrap"><div class="hero-in">
     <div>
-      <div class="eyebrow"><span class="pulse"></span> <span id="typeText"></span><span class="type-cursor" id="typeCursor"></span></div>
+      <div class="eyebrow"><span class="pulse" aria-hidden="true"></span><span class="greeting-mascot-stage" aria-hidden="true"><img src="/assets/mascot/zeni-welcome-v2.webp" width="96" height="96" decoding="async" fetchpriority="high" alt=""></span><span class="greeting-text"><span id="typeText"></span><span class="type-cursor" id="typeCursor"></span></span></div>
       <h1>Your business operator on <span class="g2">WhatsApp.</span></h1>
       <p class="hero-sub">I help you set up and run your business in Canada, then expand into the U.S. when you’re ready — all through WhatsApp.</p>
       <div class="trust">
@@ -652,8 +677,8 @@
     </div>
     <div class="chapter-shell">
       <div class="chapter-toggle">
-        <button class="ct-btn active" id="ctSetup" onclick="setChapter('setup')">Getting started</button>
-        <button class="ct-btn" id="ctRun" onclick="setChapter('run')">Every day after</button>
+        <button class="ct-btn active" id="ctSetup" aria-pressed="true" onclick="setChapter('setup')">Getting started</button>
+        <button class="ct-btn" id="ctRun" aria-pressed="false" onclick="setChapter('run')">Every day after</button>
         <span class="ct-thumb" id="ctThumb"></span>
       </div>
       <div class="chapter-panel" id="chapterPanel"></div>
@@ -693,6 +718,8 @@
         <div class="mem-row"><div class="mr-ic"><span class="ic" data-ic="target"></span></div><div><div class="mr-t">Current priority</div><div class="mr-s">Overdue invoice, INV-1042</div></div></div>
         <div class="mem-row"><div class="mr-ic"><span class="ic" data-ic="calendar"></span></div><div><div class="mr-t">Next deadline</div><div class="mr-s">Annual return, 21 days</div></div></div>
         <div class="mem-row"><div class="mr-ic"><span class="ic" data-ic="globe"></span></div><div><div class="mr-t">U.S. expansion</div><div class="mr-s">Saved for later</div></div></div>
+        <div class="mem-row mem-preference"><div class="mr-ic"><span class="ic" data-ic="book"></span></div><div><div class="mr-t">How you prefer to work</div><div class="mr-s">Brief answers and two practical options</div></div></div>
+        <p class="mem-control-note">Preferences stay yours to review, correct or forget.</p>
       </div>
     </div>
   </div>
@@ -779,10 +806,13 @@
 
 <section class="section">
   <div class="wrap">
-    <div class="final-cta-card">
-      <h2>You build the business. <span class="g">I’ll keep the next step clear.</span></h2>
-      <p>No experience needed. No new software. Cancel anytime.</p>
-      <button class="btn btn-primary btn-lg" onclick="openGetStarted()">Get started with Zeni <span class="ic" data-ic="arrow"></span></button>
+    <div class="final-cta-card mascot-cta">
+      <div class="final-cta-copy">
+        <h2>You build the business. <span class="g">I’ll keep the next step clear.</span></h2>
+        <p>No experience needed. No new software. Cancel anytime.</p>
+        <button class="btn btn-primary btn-lg" onclick="openGetStarted()">Get started with Zeni <span class="ic" data-ic="arrow"></span></button>
+      </div>
+      <div class="final-cta-art" aria-hidden="true"><img src="/assets/mascot/zeni-manage-documents-v3.webp" width="900" height="822" loading="lazy" decoding="async" alt=""></div>
     </div>
   </div>
 </section>
@@ -825,7 +855,7 @@
       <div><div class="mt">See how Zeni works</div><div class="ms">A quick guided tour · about 60 seconds</div></div>
       <button class="modal-x" onclick="closeDemo()" aria-label="Close"><span class="ic" data-ic="close"></span></button>
     </div>
-    <div class="modal-body" id="wtBody"></div>
+    <div class="modal-body" id="wtBody" tabindex="0" role="region" aria-label="Tour content"></div>
     <div class="modal-foot">
       <button class="navbtn ghost" id="wtBack" onclick="wtGo(wtStep-1)"><span class="ic" data-ic="back"></span> Back</button>
       <div class="steps" id="wtSteps"></div>
@@ -841,7 +871,7 @@
       <div><div class="mt">Get started with Zeni</div><div class="ms">Takes about a minute</div></div>
       <button class="modal-x" onclick="closeGS()" aria-label="Close"><span class="ic" data-ic="close"></span></button>
     </div>
-    <div class="modal-body" id="gsBody"></div>
+    <div class="modal-body" id="gsBody" tabindex="0" role="region" aria-label="Signup content"></div>
     <div class="modal-foot">
       <button class="navbtn ghost" id="gsBack" onclick="gsGo(gsStep-1)"><span class="ic" data-ic="back"></span> Back</button>
       <div class="steps" id="gsSteps"></div>
@@ -927,10 +957,18 @@ var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
   var el=document.getElementById('typeText'), cursor=document.getElementById('typeCursor');
   var text="Hello, I'm Zeni.";
   if(!el) return;
-  if(reduce){ el.textContent=text; return; }
+  var greeting=el.closest('.eyebrow');
+  if(reduce){ el.textContent=text; if(greeting) greeting.classList.add('zeni-arriving','zeni-arrived'); if(cursor) cursor.classList.add('done'); return; }
   var i=0;
   function tick(){
-    if(i<=text.length){ el.textContent=text.slice(0,i); i++; setTimeout(tick,68); }
+    if(i<=text.length){
+      el.textContent=text.slice(0,i);
+      if(i===text.length && greeting){
+        setTimeout(function(){ greeting.classList.add('zeni-arriving'); },180);
+        setTimeout(function(){ greeting.classList.add('zeni-arrived'); },980);
+      }
+      i++; setTimeout(tick,68);
+    }
     else { setTimeout(function(){ if(cursor) cursor.classList.add('done'); },900); }
   }
   tick();
@@ -962,12 +1000,12 @@ async function heroPlayScene(box,status,scene){
   for(var idx=0; idx<scene.length; idx++){
     var m=scene[idx];
     if(m.from==='z'){
-      status.textContent='typing…'; status.classList.add('typing');
+      status.textContent='typing…'; status.classList.add('status-typing');
       var t=document.createElement('div'); t.className='typing'; t.innerHTML='<i></i><i></i><i></i>';
       box.appendChild(t); box.scrollTop=box.scrollHeight;
       await heroSleep(1100);
       t.remove();
-      status.textContent='online'; status.classList.remove('typing');
+      status.textContent='online'; status.classList.remove('status-typing');
     } else {
       await heroSleep(650);
     }
@@ -1072,12 +1110,12 @@ function screen(step){
     return '<div class="wt-eye">What\'s included</div><div class="wt-title">Everything running your business needs.</div>'+
       '<p class="wt-sub">One operator, doing the work of a whole back-office — all through WhatsApp.</p>'+
       '<div class="feat-grid">'+
-        feat('dollar','Money &amp; finances',['Invoice records','Income &amp; expense records','CAD + USD tracking','Finance summaries','Subscription records','Banking &amp; key contacts'])+
-        feat('sun','Every day',['Automatic morning briefing','Reminders that reach you','Tasks &amp; day planner','Client &amp; contact lookup','Weekly &amp; monthly reviews','Shipment records'])+
-        feat('shield','Deadlines &amp; compliance',['GST/HST threshold tracking','Annual return &amp; renewals','Compliance in your briefing','Business mail explained','Registration numbers &amp; EINs'])+
-        feat('eye','Protection',['Current rules, fees &amp; policies checked','Suspicious mail &amp; email checked','Changes explained for your business','Safe next step explained'])+
-        feat('doc','Documents &amp; drafts',['Service agreements &amp; NDAs','Proposals &amp; contracts','Late-payment notices','Emails &amp; messages','Receipt, image &amp; PDF review'])+
-        feat('target','Planning &amp; strategy',['Revenue goals &amp; tracking','90-day roadmap from your data','&ldquo;What should I focus on?&rdquo;','Guidance from your real numbers'])+
+        feat('dollar','Money &amp; finances',['Income &amp; expense tracking','Invoices &amp; who owes you money','Overdue invoice follow-ups','CAD + USD tracking','Financial summaries &amp; reports','Subscriptions &amp; renewal tracking'])+
+        feat('sun','Every day',['Automatic Morning Brief','What needs attention now','Tasks &amp; day planner','Reminders &amp; recurring follow-ups','Weekly &amp; monthly business reviews','Remembers your business, preferences &amp; past decisions'])+
+        feat('envelope','Email &amp; inbox',['Search &amp; understand your business Email','Unanswered Email &amp; follow-up reminders','Important Email surfaced automatically','Suspicious Email &amp; payment-change checks','Draft replies using your business context','Send Email only after you approve it'])+
+        feat('shield','Deadlines &amp; protection',['GST/HST threshold tracking','Annual returns, renewals &amp; filing deadlines','Compliance calendar &amp; advance reminders','Government &amp; business mail explained','Current rules, fees &amp; policies checked','Suspicious mail, scams &amp; risky requests checked'])+
+        feat('doc','Documents &amp; drafts',['PDFs, photos, scans &amp; receipts understood','Key dates, amounts, parties &amp; terms extracted','Contracts, quotes &amp; versions compared','Agreements, proposals, invoices &amp; notices created','Branded documents using your business details','Revise, save, view &amp; send after approval'])+
+        feat('target','Planning &amp; strategy',['Revenue goals &amp; progress tracking','90-day business roadmap','&ldquo;What should I focus on?&rdquo; prioritization','Business Journey &amp; milestone tracking','Repeatable business processes &amp; playbooks','Plans based on your real business data'])+
       '</div>'+
       '<p class="feat-note">Every feature comes with <b>every plan</b> — no tiers, no add-ons.</p>';
   }
@@ -1086,7 +1124,7 @@ function screen(step){
       '<p class="wt-sub">You ask in plain language. I answer, and I prepare the next step — you stay in control.</p>'+
       '<div class="simwrap"><div class="simchat">'+
         '<div class="sim-top"><div class="av"><img src="/logo.png" alt=""></div><div><div class="nm">Zeni <span class="vf ic" data-ic="verified"></span></div><div class="role">online</div></div></div>'+
-        '<div class="sim-body" id="simBody"><div class="day">Today</div></div>'+
+        '<div class="sim-body" id="simBody" role="log" aria-label="Example WhatsApp conversation" aria-live="polite"><div class="day">Today</div></div>'+
       '</div></div>'+
       '<p class="sim-cap">Zeni drafts and prepares — nothing is sent until you approve.</p>';
   }
@@ -1097,36 +1135,36 @@ function screen(step){
 }
 
 function playSim(){
+  stopSim();
   var box=document.getElementById('simBody');if(!box)return;
-  function add(h){var n=el(h);box.appendChild(n);box.scrollTop=box.scrollHeight;return n;}
-  function typing(){return add('<div class="typing"><i></i><i></i><i></i></div>');}
-  var seq=[
-    [0,function(){box.innerHTML='<div class="day">Today</div>';}],
-    [400,function(){add('<div class="bub in">Good morning, Marcus. I\'ve reviewed your business — here\'s what needs attention today.<span class="t">9:00</span></div>');}],
-    [1500,function(){add(RLIST());}],
-    [3300,function(){add('<div class="bub out">What should I focus on first?<span class="t">9:01</span></div>');}],
-    [4000,function(){simT=typing();}],
-    [5300,function(){if(simT)simT.remove();add('<div class="bub in">Start with the overdue invoice — <b>INV-1042, $1,200</b>, now 9 days late. Want me to prepare a follow-up?<span class="t">9:01</span></div>');}],
-    [7000,function(){add('<div class="bub out">Yes please.<span class="t">9:02</span></div>');}],
-    [7600,function(){simT=typing();}],
-    [9100,function(){if(simT)simT.remove();add('<div class="bub in">Done. I\'ve drafted a polite follow-up for you to review, and I\'ll remind you in 7 days if it\'s still unpaid.<span class="t">9:02</span></div>');}]
-  ];
-  var simT;
-  if(reduce){seq.forEach(function(s){if(s[0]!==4000&&s[0]!==7600)s[1]();});return;}
-  simTimers.forEach(clearTimeout);simTimers=[];
-  seq.forEach(function(s){simTimers.push(setTimeout(s[1],s[0]));});
-  simTimers.push(setTimeout(playSim,11500));
+  box.classList.remove('sim-restarting');
+  box.innerHTML='<div class="day">Today</div>';
+  box.scrollTop=0;
+  var messages=[[500,"<div class=\"bub in\">Good morning, Marcus. I’ve checked what needs attention today.<br><br>A customer emailed last night asking about your pricing and how to get started.<br><br>Your software subscription renews Friday, but that can wait. I’d respond to the customer first.<span class=\"t\">9:00</span></div>"],[10300,"<div class=\"bub out\">Can you handle that?<span class=\"t\">9:01</span></div>"],[12100,"<div class=\"bub in\">Of course. I’ve used the pricing and details we worked out earlier. Here’s the reply I’ve prepared:<span class=\"t\">9:01</span></div>"],[12800,"<div class=\"bub in sim-draft\"><div class=\"sim-draft-label\">Draft Email</div><div class=\"sim-draft-meta\">To: Sarah &lt;sarah@example.com&gt;<br>From: marcus@example.com</div><div class=\"sim-draft-content\">Hi Sarah,<br><br>Thanks for your enquiry. Our Starter option is CAD $120. You can find the details and next steps here: [link].<br><br>Regards,<br>Marcus</div></div>"],[24000,"<div class=\"bub out\">Make it a little warmer.<span class=\"t\">9:02</span></div>"],[25700,"<div class=\"bub in\">How about this?<span class=\"t\">9:02</span></div>"],[26400,"<div class=\"bub in sim-draft\"><div class=\"sim-draft-label\">Updated draft</div><div class=\"sim-draft-meta\">To: Sarah &lt;sarah@example.com&gt;<br>From: marcus@example.com</div><div class=\"sim-draft-content\">Hi Sarah,<br><br>Thanks for reaching out! Our Starter option is CAD $120, and here’s a quick link with everything included and how to get started: [link].<br><br>Happy to answer any questions!</div></div>"],[36500,"<div class=\"bub in\">Would you like me to send this from your connected business Email? I can also remind you to follow up on Friday at 9 AM.<span class=\"t\">9:03</span></div>"],[40200,"<div class=\"bub out\">Perfect. Send it and remind me Friday at 9 AM.<span class=\"t\">9:03</span></div>"],[42100,"<div class=\"bub in\">Sent to Sarah, and your Friday 9 AM reminder is set.<br><br>Your website update is next on today’s plan.<span class=\"t\">9:04</span></div>"]];
+  function add(html){
+    var node=el(html);box.appendChild(node);
+    if(!reduce)box.scrollTo({top:box.scrollHeight,behavior:'smooth'});
+  }
+  if(reduce){messages.forEach(function(message){add(message[1]);});box.scrollTop=0;return;}
+  messages.forEach(function(message){
+    simTimers.push(setTimeout(function(){add(message[1]);},message[0]));
+  });
+  simTimers.push(setTimeout(function(){box.classList.add('sim-restarting');},53000));
+  simTimers.push(setTimeout(playSim,53500));
 }
 function stopSim(){simTimers.forEach(clearTimeout);simTimers=[];}
 
 var wtBody=document.getElementById('wtBody'),wtSteps=document.getElementById('wtSteps');
 var wtBack=document.getElementById('wtBack'),wtNext=document.getElementById('wtNext');
 function renderSteps(){
+  var focused=document.activeElement && document.activeElement.closest('#wtSteps .stepdot');
+  var focusedStep=focused && focused.dataset.step;
   wtSteps.innerHTML=STEP_LABELS.map(function(l,i){
     var n=i+1,cls=n===wtStep?'active':(n<wtStep?'done':'');
     var inner=n<wtStep?'<span class="ic">'+ICONS.check+'</span>':n;
-    return '<button class="stepdot '+cls+'" onclick="wtGo('+n+')"><span class="n">'+inner+'</span><span class="lbl">'+l+'</span></button>';
+    return '<button class="stepdot '+cls+'" data-step="'+n+'" aria-label="'+l+'"'+(n===wtStep?' aria-current="step"':'')+' onclick="wtGo('+n+')"><span class="n" aria-hidden="true">'+inner+'</span><span class="lbl">'+l+'</span></button>';
   }).join('');
+  if(focusedStep) wtSteps.querySelector('[data-step="'+focusedStep+'"]').focus();
 }
 function wtGo(n){
   if(n<1)n=1;if(n>5)n=5;
@@ -1218,8 +1256,8 @@ function gsScreen(step){
           '<div class="wl-head"><div class="wl-ic"><span class="ic" data-ic="pin"></span></div><div><h5>Not in your province yet</h5></div></div>'+
           '<p>Zeni currently supports Ontario, British Columbia and Alberta. Join the waitlist and I’ll let you know the moment we expand.</p>'+
           '<div class="wl-form">'+
-            '<input class="gs-input" id="gsWaitlistEmail" type="email" placeholder="you@email.com" value="'+gsEsc(gsData.waitlistEmail)+'">'+
-            '<input class="gs-input" id="gsWaitlistProvince" type="text" placeholder="Which province? (optional) e.g. Quebec" value="'+gsEsc(gsData.waitlistProvince)+'">'+
+            '<input class="gs-input" id="gsWaitlistEmail" type="email" aria-label="Email address" placeholder="you@email.com" value="'+gsEsc(gsData.waitlistEmail)+'">'+
+            '<input class="gs-input" id="gsWaitlistProvince" type="text" aria-label="Province (optional)" placeholder="Which province? (optional) e.g. Quebec" value="'+gsEsc(gsData.waitlistProvince)+'">'+
             '<button class="btn btn-primary" id="gsWaitlistBtn" onclick="gsJoinWaitlist()" style="width:100%">Join waitlist</button>'+
             '<p class="wl-error" id="gsWaitlistError" style="display:none"></p>'+
           '</div>'+
@@ -1232,7 +1270,7 @@ function gsScreen(step){
       '<div class="prov-grid">'+
         PROVINCES.map(function(p){
           var sel = gsData.province===p.code ? ' sel' : '';
-          return '<button class="prov-card'+sel+'" onclick="gsSelectProvince(\''+p.code+'\')">'+
+          return '<button class="prov-card'+sel+'" data-province="'+p.code+'" aria-pressed="'+(gsData.province===p.code)+'" onclick="gsSelectProvince(\''+p.code+'\')">'+
             '<span class="pv-check">'+ICONS.check+'</span>'+
             '<div class="pv-badge">'+p.code+'</div><h5>'+p.name+'</h5>'+
           '</button>';
@@ -1264,7 +1302,7 @@ function gsScreen(step){
 
 function gsPlanCard(id, plan){
   var sel = gsData.plan===id ? ' sel' : '';
-  return '<button class="plan-card'+sel+'" onclick="gsSelectPlan(\''+id+'\')">'+
+  return '<button class="plan-card'+sel+'" data-plan="'+id+'" aria-pressed="'+(gsData.plan===id)+'" onclick="gsSelectPlan(\''+id+'\')">'+
     '<span class="pc-check"></span>'+
     '<div class="plan-tag">'+plan.tag+'</div>'+
     '<h4>'+plan.name+'</h4>'+
@@ -1274,12 +1312,16 @@ function gsPlanCard(id, plan){
 }
 
 function gsRenderSteps(){
-  document.getElementById('gsSteps').innerHTML = GS_STEP_LABELS.map(function(l,i){
+  var steps=document.getElementById('gsSteps');
+  var focused=document.activeElement && document.activeElement.closest('#gsSteps .stepdot');
+  var focusedStep=focused && focused.dataset.step;
+  steps.innerHTML = GS_STEP_LABELS.map(function(l,i){
     var n=i+1, cls = n===gsStep ? 'active' : (n<gsStep ? 'done' : '');
     var inner = n<gsStep ? '<span class="ic">'+ICONS.check+'</span>' : n;
     var clickable = n<=gsFurthest ? ' onclick="gsGo('+n+')"' : '';
-    return '<button class="stepdot '+cls+'"'+clickable+'><span class="n">'+inner+'</span><span class="lbl">'+l+'</span></button>';
+    return '<button class="stepdot '+cls+'" data-step="'+n+'" aria-label="'+l+'"'+(n===gsStep?' aria-current="step"':'')+(n>gsFurthest?' disabled':'')+clickable+'><span class="n" aria-hidden="true">'+inner+'</span><span class="lbl">'+l+'</span></button>';
   }).join('');
+  if(focusedStep){var next=steps.querySelector('[data-step="'+focusedStep+'"]');if(next && !next.disabled)next.focus();}
 }
 
 function gsValid(step){
@@ -1354,6 +1396,7 @@ function gsHideWaitlistError(){
 function gsSelectProvince(code){
   gsData.province=code; gsData.otherProvince=false; gsData.waitlisted=false;
   gsRenderBody();
+  document.querySelector('[data-province="'+code+'"]').focus();
 }
 function gsShowOtherProvince(){
   gsData.otherProvince=true; gsData.province='';
@@ -1395,6 +1438,7 @@ function gsJoinWaitlist(){
 function gsSelectPlan(id){
   gsData.plan=id;
   gsRenderBody();
+  document.querySelector('[data-plan="'+id+'"]').focus();
 }
 
 function gsRenderBody(){
@@ -1536,14 +1580,18 @@ function chVisualRow(row){
 function renderChapter(id){
   var c = CHAPTERS[id];
   var html =
-    '<div><div class="ch-kicker">'+c.kicker+'</div>'+
+    '<div class="chapter-copy"><div class="ch-kicker">'+c.kicker+'</div>'+
     '<div class="ch-title">'+c.title+'</div>'+
     '<p class="ch-desc">'+c.desc+'</p>'+
     '<ul class="ch-list">'+c.list.map(function(item,i){
       return '<li style="animation-delay:'+(i*0.08)+'s"><span class="ic" data-ic="check"></span><span>'+item+'</span></li>';
     }).join('')+'</ul></div>'+
-    '<div class="ch-visual">'+c.visual.map(chVisualRow).join('')+'</div>';
+    '<div class="chapter-art" data-mode="'+id+'">'+
+      '<div class="chapter-scene" aria-hidden="true"><img src="/assets/mascot/zeni-chapter-'+(id==='setup'?'plan':'laptop')+'-v3.webp" width="1200" height="800" decoding="async" alt=""></div>'+
+      '<div class="ch-visual">'+c.visual.map(chVisualRow).join('')+'</div>'+
+    '</div>';
   var panel = document.getElementById('chapterPanel');
+  panel.classList.add('chapter-with-mascot');
   panel.innerHTML = html;
   panel.classList.remove('anim'); void panel.offsetWidth; panel.classList.add('anim');
   injectIcons(panel);
@@ -1552,6 +1600,8 @@ function renderChapter(id){
 function setChapter(id){
   document.getElementById('ctSetup').classList.toggle('active', id==='setup');
   document.getElementById('ctRun').classList.toggle('active', id==='run');
+  document.getElementById('ctSetup').setAttribute('aria-pressed',id==='setup');
+  document.getElementById('ctRun').setAttribute('aria-pressed',id==='run');
   document.getElementById('ctThumb').classList.toggle('pos-1', id==='run');
   renderChapter(id);
 }
@@ -1573,30 +1623,95 @@ var OUTCOMES = [
   { id:'plan', ic:'target', tab:'Planning', title:'Guidance based on your numbers, not generic tips.', sub:'Advice that actually knows your business.',
     items:['Monthly goals, tracked automatically','A 90-day roadmap, built from your real data','&ldquo;What should I focus on right now?&rdquo; — answered','Weekly and monthly reviews, without a spreadsheet'] }
 ];
+
+/* Small, self-contained examples. These are sample conversations, not live account data. */
+var OUTCOME_DEMOS = {
+  money: {
+    question: 'Which invoices need attention?',
+    answer: 'Two invoices are overdue. I can prepare friendly payment reminders for your review before sending.'
+  },
+  daily: {
+    question: 'What actually needs me today?',
+    answer: 'Two priorities: a supplier reply due today and an overdue invoice. The routine updates can wait. Want to handle the reply first?'
+  },
+  deadlines: {
+    question: 'Anything important coming up?',
+    answer: 'Your Ontario annual return is due in 21 days. I can help you prepare and remind you before the deadline.'
+  },
+  protect: {
+    question: 'This supplier emailed new payment details. Is it safe?',
+    answer: 'The change is unusual for this supplier. Verify it through a trusted contact before paying or updating any details.'
+  },
+  docs: {
+    question: 'Can you prepare a branded proposal for my new client?',
+    answer: 'I can use your confirmed business details and brand. You can review the PDF and recipient before approving any send.'
+  },
+  plan: {
+    question: 'What should I focus on for my 10-order goal?',
+    answer: 'You’re at 3 of 10 orders. Based on your goal and saved preferences, I’d suggest two next actions. Want the short plan?'
+  }
+};
+function outcomeDemo(id){
+  var d=OUTCOME_DEMOS[id]||OUTCOME_DEMOS.money;
+  return '<div class="oc-demo" aria-label="Example conversation with Zeni">'+
+    '<div class="oc-phone"><div class="oc-phone-screen">'+
+      '<div class="oc-phone-status" aria-hidden="true"><span>9:41</span><span class="oc-phone-signals">'+ICONS.signal+ICONS.wifi+ICONS.battery+'</span></div>'+
+      '<div class="oc-phone-header"><span class="oc-phone-back" aria-hidden="true">'+ICONS.back+'</span><span class="oc-phone-avatar" aria-hidden="true"><img src="/logo.png" alt=""></span><span class="oc-phone-contact"><span class="oc-phone-name">Zeni <span class="oc-phone-verified" aria-hidden="true">'+ICONS.verified+'</span></span><span class="oc-phone-online">online</span></span><span class="oc-phone-actions" aria-hidden="true">'+ICONS.call+ICONS.more+'</span></div>'+
+      '<div class="oc-demo-chat"><div class="oc-phone-day">Today</div>'+
+        '<div class="oc-demo-bubble user">'+d.question+'</div>'+
+        '<div class="oc-reply-slot"><div class="oc-phone-typing" aria-hidden="true"><i></i><i></i><i></i></div><div class="oc-response"><div class="oc-demo-bubble zeni">'+d.answer+'</div></div></div>'+
+      '</div>'+
+    '</div></div></div>';
+}
+
 var ocActive = 'money';
+var outcomePhoneObserver = 'IntersectionObserver' in window ? new IntersectionObserver(function(entries){
+  entries.forEach(function(entry){
+    var panel=document.getElementById('outcomePanel');
+    if(entry.target !== panel.querySelector('.oc-phone')) return;
+    if(entry.isIntersecting){
+      if(!panel.classList.contains('anim')){
+        panel.classList.remove('oc-pending'); void panel.offsetWidth; panel.classList.add('anim');
+      }
+    } else {
+      panel.classList.remove('anim'); panel.classList.add('oc-pending');
+    }
+  });
+},{threshold:0.4}) : null;
 
 function renderOutcomeTabs(){
   document.getElementById('outcomeTabs').innerHTML = OUTCOMES.map(function(o){
-    return '<button class="ot-btn'+(o.id===ocActive?' active':'')+'" onclick="setOutcome(\''+o.id+'\')"><span class="oti"><span class="ic" data-ic="'+o.ic+'"></span></span>'+o.tab+'</button>';
+    return '<button class="ot-btn'+(o.id===ocActive?' active':'')+'" data-outcome="'+o.id+'" aria-pressed="'+(o.id===ocActive)+'" onclick="setOutcome(\''+o.id+'\')"><span class="oti"><span class="ic" data-ic="'+o.ic+'"></span></span>'+o.tab+'</button>';
   }).join('');
   injectIcons(document.getElementById('outcomeTabs'));
 }
 function renderOutcomePanel(){
   var o = OUTCOMES.filter(function(x){return x.id===ocActive;})[0];
   var panel = document.getElementById('outcomePanel');
+  var oldPhone=panel.querySelector('.oc-phone');
+  if(outcomePhoneObserver && oldPhone) outcomePhoneObserver.unobserve(oldPhone);
+  panel.classList.remove('anim');
+  if(outcomePhoneObserver) panel.classList.add('oc-pending');
   panel.innerHTML =
-    '<div class="oc-head"><div class="oc-ic">'+ICONS[o.ic]+'</div><div><h3>'+o.title+'</h3><p>'+o.sub+'</p></div></div>'+
-    '<ul class="oc-list">'+o.items.map(function(it){return '<li><span class="ic" data-ic="check"></span><span>'+it+'</span></li>';}).join('')+'</ul>';
-  panel.classList.remove('anim'); void panel.offsetWidth; panel.classList.add('anim');
+    '<div class="oc-copy"><div class="oc-head"><div class="oc-ic">'+ICONS[o.ic]+'</div><div><h3>'+o.title+'</h3><p>'+o.sub+'</p></div></div>'+
+    '<ul class="oc-list">'+o.items.map(function(it){return '<li><span class="ic" data-ic="check"></span><span>'+it+'</span></li>';}).join('')+'</ul></div>'+
+    outcomeDemo(o.id);
+  if(outcomePhoneObserver) outcomePhoneObserver.observe(panel.querySelector('.oc-phone'));
+  else { panel.classList.remove('oc-pending'); void panel.offsetWidth; panel.classList.add('anim'); }
   injectIcons(panel);
 }
 function setOutcome(id){
   ocActive = id;
-  renderOutcomeTabs();
+  document.querySelectorAll('#outcomeTabs .ot-btn').forEach(function(button){
+    var active=button.dataset.outcome===id;
+    button.classList.toggle('active',active);
+    button.setAttribute('aria-pressed',active);
+  });
   renderOutcomePanel();
 }
 renderOutcomeTabs();
 renderOutcomePanel();
+
 
 </script>
 

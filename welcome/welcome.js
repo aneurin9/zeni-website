@@ -111,11 +111,11 @@
     addNaturalCommandNote()
   }
 
-  function alignFirstMessagePreview() {
+  function alignFirstMessagePreview(firstName) {
     var bubble = document.querySelector('.bub.in')
     if (bubble) {
       bubble.textContent = ''
-      bubble.appendChild(document.createTextNode('Hi Marcus, I’m Zeni — your WhatsApp business operator.'))
+      bubble.appendChild(document.createTextNode('Hi' + (firstName ? ' ' + firstName : '') + ', I’m Zeni — your WhatsApp business operator.'))
       bubble.appendChild(document.createElement('br'))
       bubble.appendChild(document.createElement('br'))
       bubble.appendChild(document.createTextNode('I’ll help you build and run your business, one clear step at a time.'))
@@ -166,7 +166,10 @@
       }
       var payload = await response.json()
       var firstName = safeFirstName(payload && payload.firstName)
-      if (firstName) personalize(firstName)
+      if (firstName) {
+        personalize(firstName)
+        alignFirstMessagePreview(firstName)
+      }
       setPaymentState('verified')
     } catch (_) {
       setPaymentState('unverified')
