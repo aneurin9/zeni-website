@@ -5,11 +5,24 @@
 .greeting-mascot-stage,.greeting-paws-stage{position:absolute;right:4px;bottom:calc(100% - 5px);width:88px;height:78px;pointer-events:none}
 .greeting-mascot-stage{z-index:1;overflow:hidden}
 .greeting-paws-stage{z-index:4;overflow:visible;clip-path:inset(67% 8% 0 8%)}
-.greeting-mascot-stage img,.greeting-paws-stage img{display:block;position:absolute;width:88px;height:88px;max-width:none;left:0;bottom:-5px;object-fit:contain;opacity:0;transform-origin:50% 100%;filter:saturate(1.08) brightness(1.025) drop-shadow(0 7px 10px rgba(63,45,112,.10))}
-.greeting-mascot-stage img{transform:translateY(72px) scale(.94)}
-.greeting-paws-stage img{transform:translateY(18px) scale(.99)}
+.greeting-mascot-art{position:absolute;inset:0;opacity:0;transform:translateY(72px) scale(.94);transform-origin:50% 100%;filter:saturate(1.08) brightness(1.025) drop-shadow(0 7px 10px rgba(63,45,112,.10))}
+.greeting-mascot-stage img,.greeting-paws-stage img{display:block;position:absolute;width:88px;height:88px;max-width:none;left:0;bottom:-5px;object-fit:contain}
+.greeting-paws-stage img{opacity:0;transform:translateY(18px) scale(.99);transform-origin:50% 100%;filter:saturate(1.08) brightness(1.025) drop-shadow(0 7px 10px rgba(63,45,112,.10))}
 .zeni-arriving .greeting-paws-stage img{animation:zeni-paws-hook .34s cubic-bezier(.2,.82,.28,1.08) both}
-.zeni-arriving .greeting-mascot-stage img{animation:zeni-pull-up .72s .14s cubic-bezier(.18,.84,.24,1.10) both}
+.zeni-arriving .greeting-mascot-art{animation:zeni-pull-up .72s .14s cubic-bezier(.18,.84,.24,1.10) both}
+
+/* Face correction: direct eye contact plus a warmer, visibly more excited expression. */
+.hero-eye{position:absolute;z-index:3;top:25px;width:7px;height:7px;border-radius:50%;background:#191525;box-shadow:inset 0 0 0 1px rgba(0,0,0,.22),0 0 0 1px rgba(255,255,255,.08)}
+.hero-eye::after{content:"";position:absolute;width:2px;height:2px;left:1px;top:1px;border-radius:50%;background:#fff;opacity:.95}
+.hero-eye-l{left:27px}.hero-eye-r{left:49px}
+.hero-mouth{position:absolute;z-index:3;left:37px;top:43px;width:17px;height:11px;border-radius:45% 45% 55% 55%;background:#4a201f;box-shadow:inset 0 2px 0 rgba(255,255,255,.72)}
+.hero-mouth::after{content:"";position:absolute;left:4px;right:4px;bottom:1px;height:4px;border-radius:50%;background:#e77776}
+.hero-excite{position:absolute;z-index:2;right:-4px;top:4px;width:25px;height:22px}
+.hero-excite i{position:absolute;display:block;width:4px;height:11px;border-radius:4px;background:linear-gradient(180deg,#8b6dff,#6f4eea);transform-origin:50% 100%;box-shadow:0 2px 7px rgba(123,97,255,.15)}
+.hero-excite i:nth-child(1){left:3px;top:5px;transform:rotate(-28deg)}
+.hero-excite i:nth-child(2){left:11px;top:0;transform:rotate(2deg)}
+.hero-excite i:nth-child(3){left:19px;top:6px;transform:rotate(31deg)}
+
 .zeni-arrived .greeting-mascot-stage::after{content:"";position:absolute;left:25px;right:19px;bottom:0;height:7px;border-radius:50%;background:rgba(56,42,92,.10);filter:blur(5px);opacity:.5}
 @keyframes zeni-paws-hook{
   0%{opacity:0;transform:translateY(18px) scale(.99)}
@@ -25,6 +38,9 @@
 @media(max-width:650px){
   .greeting-mascot-stage,.greeting-paws-stage{right:3px;bottom:calc(100% - 4px);width:74px;height:66px}
   .greeting-mascot-stage img,.greeting-paws-stage img{width:74px;height:74px;bottom:-4px}
+  .hero-eye{top:21px;width:6px;height:6px}.hero-eye-l{left:23px}.hero-eye-r{left:41px}
+  .hero-mouth{left:31px;top:36px;width:14px;height:9px}
+  .hero-excite{right:-3px;top:3px;transform:scale(.86);transform-origin:100% 0}
 }
 
 /* One continuous memory list. Preferences carry the same weight as context. */
@@ -141,7 +157,7 @@
   .oc-demo::before{left:-19px;right:-19px}
 }
 @media(prefers-reduced-motion:reduce){
-  .greeting-mascot-stage img,.greeting-paws-stage img{opacity:1;transform:none;animation:none!important}
+  .greeting-mascot-art,.greeting-paws-stage img{opacity:1;transform:none;animation:none!important}
   .zeni-arrived .greeting-mascot-stage::after{opacity:.45}
   .chapter-panel.anim .chapter-scene,.chapter-panel.anim .ch-visual,.outcome-panel.anim .oc-response,.outcome-panel.anim .oc-demo-bubble.user{animation:none}
 }
