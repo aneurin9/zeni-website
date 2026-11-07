@@ -140,6 +140,8 @@
     var copy = document.getElementById('paidGateCopy')
     var back = document.getElementById('paidGateReturn')
     if (title) title.textContent = 'We couldn’t verify a completed checkout.'
+    var memberSupport = document.getElementById('paidGateSupport')
+    if (memberSupport) memberSupport.hidden = false
     if (copy) copy.textContent = 'Use the checkout-success link from Stripe, or return to Zeni and contact support if you believe your subscription is already active.'
     if (back) back.style.display = 'inline-block'
   }

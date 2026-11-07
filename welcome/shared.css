@@ -31,6 +31,7 @@ body{font-family:var(--sans);background:var(--pearl);color:var(--ink);line-heigh
 .paid-gate-card h1{font-size:25px;line-height:1.2;margin-bottom:10px}
 .paid-gate-card p{font-size:14px;color:var(--muted);line-height:1.65}
 .paid-gate-card a{display:none;margin-top:18px;color:var(--violet-d);font-weight:700;text-decoration:underline;text-underline-offset:3px}
+.paid-gate-card #paidGateSupport a{display:inline;margin-top:0}
 body[data-payment-state="verified"] .paid-gate{display:none}
 body[data-payment-state]:not([data-payment-state="verified"]) .wrap{display:none}
 a{color:inherit;text-decoration:none}
