@@ -566,7 +566,7 @@
   </div>
   <div class="wrap"><div class="hero-in">
     <div>
-      <div class="eyebrow"><span class="pulse" aria-hidden="true"></span><span class="greeting-mascot-stage" aria-hidden="true"><img src="/assets/mascot/zeni-welcome-v2.webp" width="96" height="96" decoding="async" fetchpriority="high" alt=""></span><span class="greeting-text"><span id="typeText"></span><span class="type-cursor" id="typeCursor"></span></span></div>
+      <div class="eyebrow"><span class="pulse" aria-hidden="true"></span><span class="greeting-mascot-stage" aria-hidden="true"><span class="greeting-mascot-art"><img src="/assets/mascot/zeni-welcome-v2.webp" width="96" height="96" decoding="async" fetchpriority="high" alt=""><svg class="greeting-mascot-blink" viewBox="0 0 192 192" focusable="false" aria-hidden="true"><defs><radialGradient id="zeni-lid"><stop offset="55%" stop-color="#f99d42"/><stop offset="100%" stop-color="#f5943b"/></radialGradient></defs><ellipse cx="76.5" cy="61" rx="9.7" ry="10.5" fill="url(#zeni-lid)"/><ellipse cx="121.5" cy="57.5" rx="10" ry="10.8" fill="url(#zeni-lid)"/><path d="M69.5 61.5 Q76.5 67.5 83.5 61 M114.5 58 Q121.5 64 128.5 57.5" fill="none" stroke="#70401e" stroke-width="1.5" stroke-linecap="round"/></svg></span></span><span class="greeting-text"><span id="typeText"></span><span class="type-cursor" id="typeCursor"></span></span></div>
       <h1>Your business operator on <span class="g2">WhatsApp.</span></h1>
       <p class="hero-sub">I help you set up and run your business in Canada, then expand into the U.S. when you’re ready — all through WhatsApp.</p>
       <div class="trust">
@@ -959,19 +959,45 @@ var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
   if(!el) return;
   var greeting=el.closest('.eyebrow');
   if(reduce){ el.textContent=text; if(greeting) greeting.classList.add('zeni-arriving','zeni-arrived'); if(cursor) cursor.classList.add('done'); return; }
+  if(greeting){ greeting.classList.add('zeni-arriving'); setTimeout(function(){ greeting.classList.add('zeni-arrived'); },820); }
   var i=0;
   function tick(){
     if(i<=text.length){
       el.textContent=text.slice(0,i);
-      if(i===text.length && greeting){
-        setTimeout(function(){ greeting.classList.add('zeni-arriving'); },180);
-        setTimeout(function(){ greeting.classList.add('zeni-arrived'); },980);
-      }
       i++; setTimeout(tick,68);
     }
     else { setTimeout(function(){ if(cursor) cursor.classList.add('done'); },900); }
   }
   tick();
+})();
+
+
+// Keep the small eye overlay idle whenever motion is reduced or the hero is hidden.
+(function(){
+  var stage=document.querySelector('.greeting-mascot-stage');
+  if(!stage) return;
+  var lids=stage.querySelector('.greeting-mascot-blink');
+  var motion=matchMedia('(prefers-reduced-motion: reduce)');
+  var visible=true, first=true, timer;
+  function stop(){ clearTimeout(timer); timer=null; lids.classList.remove('is-blinking'); }
+  function schedule(){
+    stop();
+    if(motion.matches || document.hidden || !visible) return;
+    timer=setTimeout(function(){
+      timer=null;
+      if(motion.matches || document.hidden || !visible) return;
+      first=false;
+      lids.classList.add('is-blinking');
+    },first ? 1000 : 7000 + Math.random()*5000);
+  }
+  lids.addEventListener('animationend',function(){ lids.classList.remove('is-blinking'); schedule(); });
+  document.addEventListener('visibilitychange',schedule);
+  if(motion.addEventListener) motion.addEventListener('change',schedule);
+  else if(motion.addListener) motion.addListener(schedule);
+  if('IntersectionObserver' in window){
+    var observer=new IntersectionObserver(function(entries){ visible=entries[0].isIntersecting; schedule(); },{threshold:0});
+    observer.observe(stage);
+  } else schedule();
 })();
 
 
