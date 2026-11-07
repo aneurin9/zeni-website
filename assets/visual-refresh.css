@@ -4,8 +4,15 @@
 .eyebrow .pulse{position:relative;z-index:5;flex:0 0 auto}
 .greeting-text{position:relative;z-index:5;display:inline-flex;align-items:center;min-width:123px;gap:2px}
 .greeting-mascot-stage{position:absolute;z-index:4;right:4px;bottom:calc(100% - 6px);width:88px;height:88px;overflow:hidden;pointer-events:none}
-.greeting-mascot-stage img{position:absolute;display:block;left:0;bottom:-3px;width:88px;height:88px;max-width:none;object-fit:contain;opacity:0;transform:translate3d(0,67px,0) scale(.96);transform-origin:50% 100%;backface-visibility:hidden;filter:none}
-.zeni-arriving .greeting-mascot-stage img{animation:zeni-greeting-rise .82s cubic-bezier(.2,.82,.24,1.06) both}
+.greeting-mascot-art{position:absolute;display:block;left:0;bottom:-3px;width:88px;height:88px;opacity:0;transform:translate3d(0,67px,0) scale(.96);transform-origin:50% 100%;backface-visibility:hidden}
+.greeting-mascot-gesture{position:absolute;inset:0;display:block;transform-origin:50% 82%}
+.greeting-mascot-gesture.is-acknowledging{animation:zeni-acknowledge 600ms ease-in-out}
+@keyframes zeni-acknowledge{0%,100%{transform:rotate(0)}27%,45%{transform:rotate(.65deg)}}
+.greeting-mascot-art img,.greeting-mascot-blink{position:absolute;inset:0;display:block;width:100%;height:100%;max-width:none}
+.greeting-mascot-blink{opacity:0}
+.greeting-mascot-blink.is-blinking{animation:zeni-blink 160ms ease-in-out}
+@keyframes zeni-blink{0%,100%{opacity:0}35%,65%{opacity:1}}
+.zeni-arriving .greeting-mascot-art{animation:zeni-greeting-rise .82s cubic-bezier(.2,.82,.24,1.06) both}
 @keyframes zeni-greeting-rise{
   0%{opacity:0;transform:translate3d(0,67px,0) scale(.96)}
   14%{opacity:1}
@@ -15,7 +22,7 @@
 }
 @media(max-width:650px){
   .greeting-mascot-stage{right:3px;bottom:calc(100% - 5px);width:74px;height:74px}
-  .greeting-mascot-stage img{width:74px;height:74px;bottom:-2px}
+  .greeting-mascot-art{width:74px;height:74px;bottom:-2px}
 }
 
 /* One continuous memory list. Preferences carry the same weight as context. */
@@ -132,7 +139,9 @@
   .oc-demo::before{left:-19px;right:-19px}
 }
 @media(prefers-reduced-motion:reduce){
-  .greeting-mascot-stage img{opacity:1;transform:none;animation:none!important}
+  .greeting-mascot-art{opacity:1;transform:none;animation:none!important}
+  .greeting-mascot-gesture{animation:none!important;transform:none!important}
+  .greeting-mascot-blink{display:none}
   .zeni-arrived .greeting-mascot-stage::after{opacity:.45}
   .chapter-panel.anim .chapter-scene,.chapter-panel.anim .ch-visual,.outcome-panel.anim .oc-response,.outcome-panel.anim .oc-demo-bubble.user{animation:none}
 }
