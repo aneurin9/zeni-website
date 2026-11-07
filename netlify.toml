@@ -1,4 +1,5 @@
 [build]
+  command = "node scripts/validate-customer-surfaces.mjs"
   publish = "."
 
 [functions]
